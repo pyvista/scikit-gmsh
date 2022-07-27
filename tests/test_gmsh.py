@@ -13,7 +13,7 @@ def test_tutorial1():
 
     surf["points group number"] = np.array([1, 1, 1])
     surf["surface group number"] = np.array([2])
-surf["lc"] = np.array([1e-2, 1e-2, 1e-2])
+    surf["lc"] = np.array([1e-2, 1e-2, 1e-2])
 
     surf.add_physical_group(["points group number", "surface group number"])
     mesh = surf.generate_mesh()
