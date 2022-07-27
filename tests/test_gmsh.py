@@ -9,14 +9,15 @@ def test_tutorial1():
 
     faces = np.hstack([[4, 0, 1, 2, 3]])
 
-    surf = pvgmsh.PolyData(vertices, faces, lc=1e-2)
+    surf = pvgmsh.PolyData(vertices, faces)
 
     surf["points group number"] = np.array([1, 1, 1])
     surf["surface group number"] = np.array([2])
+surf["lc"] = np.array([1e-2, 1e-2, 1e-2])
 
     surf.add_physical_group(["points group number", "surface group number"])
-    surf.generate(2)
+    mesh = surf.generate_mesh()
 
-    surf.save("t1.msh")
+    mesh.save("t1.msh")
 
-    surf.plot()
+    mesh.plot()
