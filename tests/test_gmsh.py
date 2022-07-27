@@ -13,5 +13,8 @@ def test_tutorial1():
     # pvgmsh does not support PhysicalGroup; group configuration can be easily done with PyVista.
 
     mesh = pvgmsh.generate_mesh(surf)
+    assert mesh.n_pts > surf.n_pts
+    assert mesh.n_cells > surf.n_cells
+
     mesh.save("t1.msh")
     mesh.plot()
