@@ -1,4 +1,5 @@
 import pvgmsh
+import pyvista
 
 
 def test_tutorial1():
@@ -7,10 +8,10 @@ def test_tutorial1():
 
     vertices = np.array([[0, 0, 0], [0.1, 0, 0], [0.1, 0.3, 0], [0.3, 0, 0]])
     faces = np.hstack([[4, 0, 1, 2, 3]])
-    surf = pvgmsh.PolyData(vertices, faces)
+    surf = pyvista.PolyData(vertices, faces)
 
     # pvgmsh does not support PhysicalGroup; group configuration can be easily done with PyVista.
 
-    mesh = surf.generate_mesh()
+    mesh = pvgmsh.generate_mesh(surf)
     mesh.save("t1.msh")
     mesh.plot()
