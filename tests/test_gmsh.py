@@ -1,4 +1,4 @@
-import ..pvgmsh
+from .. import pvgmsh
 import pyvista
 
 
