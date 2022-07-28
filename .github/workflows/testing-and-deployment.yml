@@ -62,4 +62,4 @@ jobs:
 
       - name: Unit Testing
         run: |
-          xvfb-run pytest
+          export PYTHONPATH=. && xvfb-run pytest
