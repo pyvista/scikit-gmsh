@@ -54,19 +54,6 @@ jobs:
           restore-keys: |
             Python-${{ runner.os }}-${{ matrix.python-version }}
 
-      - uses: actions/cache@v3
-        with:
-          path: ~/.local/share/pyvista/examples
-          key: Examples-1-${{ hashFiles('*') }}
-          restore-keys: |
-            Examples-1-
-
-      - name: Build wheel and install pyvista
-        run: |
-          pip install wheel
-          python setup.py bdist_wheel
-          pip install dist/pyvista*.whl
-
       - name: Set up vtk
         if: ${{ matrix.vtk-version != 'latest' }}
         run: pip install vtk==${{ matrix.vtk-version }}
@@ -79,17 +66,6 @@ jobs:
       - name: Install Testing Requirements
         run: pip install -r requirements_test.txt
 
-      - name: Software Report
-        run: |
-          xvfb-run python -c "import pyvista; print(pyvista.Report())"
-          xvfb-run python -c "import pyvista; print(pyvista.EXAMPLES_PATH)"
-          which python
-          pip list
-
       - name: Unit Testing
         run: |
           xvfb-run pytest -v --cov pyvista --cov-report xml --fail_extra_image_cache
-
-      - uses: codecov/codecov-action@v3
-        if: matrix.python-version == '3.9'
-        name: 'Upload coverage to CodeCov'
