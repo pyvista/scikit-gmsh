@@ -11,5 +11,5 @@ def test_tutorial1():
     surf = pyvista.PolyData(vertices, faces)
     # pvgmsh does not support PhysicalGroup; group configuration can be easily done with PyVista.
     mesh = pvgmsh.generate_mesh(surf)
-    assert mesh.n_pts > surf.n_pts
-    assert mesh.n_cells > surf.n_cells
+    assert mesh.number_of_points > surf.number_of_points
+    assert mesh.number_of_cells > surf.number_of_cells
