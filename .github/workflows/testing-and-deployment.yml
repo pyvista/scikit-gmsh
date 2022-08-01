@@ -57,6 +57,10 @@ jobs:
           packages: libgl1-mesa-glx xvfb python-tk
           version: 1.0
 
+      - name: Install gmsh
+        run: |
+          sudo apt-get install -y python3-gmsh
+
       - name: Install Testing Requirements
         run: pip install -r requirements_test.txt
 
