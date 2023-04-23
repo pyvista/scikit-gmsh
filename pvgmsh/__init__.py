@@ -39,12 +39,12 @@ def generate_mesh(surf):
     #
     # We can then define some additional points. All points should have different
     # tags:
-    gmsh.model.geo.addPoint(.1, 0, 0, lc, 2)
-    gmsh.model.geo.addPoint(.1, .3, 0, lc, 3)
+    gmsh.model.geo.addPoint(0.1, 0, 0, lc, 2)
+    gmsh.model.geo.addPoint(0.1, 0.3, 0, lc, 3)
 
     # If the tag is not provided explicitly, a new tag is automatically created, and
     # returned by the function:
-    p4 = gmsh.model.geo.addPoint(0, .3, 0, lc)
+    p4 = gmsh.model.geo.addPoint(0, 0.3, 0, lc)
 
     # Curves are Gmsh's second type of elementery entities, and, amongst curves,
     # straight lines are the simplest. The API to create straight line segments with
@@ -105,7 +105,7 @@ def generate_mesh(surf):
     # in a single group (with prescribed tag 5); and a physical surface with name
     # "My surface" (with an automatic tag) containing the geometrical surface 1:
     gmsh.model.addPhysicalGroup(1, [1, 2, 4], 5)
-    gmsh.model.addPhysicalGroup(2, [1], name = "My surface")
+    gmsh.model.addPhysicalGroup(2, [1], name="My surface")
 
     # We can then generate a 2D mesh...
     gmsh.model.mesh.generate(2)
