@@ -58,8 +58,7 @@ jobs:
           version: 1.0
 
       - name: Install gmsh
-        run: |
-          sudo apt-get install -y python3-gmsh
+        run: pip install gmsh
 
       - name: Install Testing Requirements
         run: pip install -r requirements_test.txt
