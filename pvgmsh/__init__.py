@@ -4,12 +4,18 @@ import tempfile
 from pvgmsh._version import __version__  # noqa: F401
 
 
-def delaunay_2d(poly_data, size=1e-2):
+def delaunay_2d(edge_source, size=1e-2):
     """
     Parameters
     ----------
-    poly_data : pv.PolyData
-        Poly data to generate delaunay 2d mesh.
+    edge_source : pyvista.PolyData
+        Specify the source object used to specify constrained
+        edges and loops. If set, and lines/polygons are defined, a
+        constrained triangulation is created. The lines/polygons
+        are assumed to reference points in the input point set
+        (i.e. point ids are identical in the input and
+        source).
+
 
     size : float, optional
         Target mesh size close to the point.
@@ -33,8 +39,8 @@ def delaunay_2d(poly_data, size=1e-2):
 
     >>> vertices = np.array([[0, 0, 0], [0.1, 0, 0], [0.1, 0.3, 0], [0, 0.3, 0]])
     >>> faces = np.hstack([[4, 0, 1, 2, 3]])
-    >>> poly_data = pv.PolyData(vertices, faces)
-    >>> poly_data
+    >>> edge_source = pv.PolyData(vertices, faces)
+    >>> edge_source
     PolyData (...)
       N Cells:    1
       N Points:   4
@@ -46,7 +52,7 @@ def delaunay_2d(poly_data, size=1e-2):
 
     Generate mesh using gmsh.
 
-    >>> mesh = pvgmsh.delaunay_2d(poly_data)
+    >>> mesh = pvgmsh.delaunay_2d(edge_source)
     <BLANKLINE>
     >>> mesh
     UnstructuredGrid (...)
@@ -58,7 +64,7 @@ def delaunay_2d(poly_data, size=1e-2):
       N Arrays:   2
     """
     meshes = []
-    for cell in poly_data.cell:
+    for cell in edge_source.cell:
         if cell.type == pv.CellType.QUAD:
             gmsh.initialize()
             for i, point in enumerate(cell.points):
@@ -76,7 +82,7 @@ def delaunay_2d(poly_data, size=1e-2):
             ) as fp:
                 gmsh.write(fp.name)
                 mesh = pv.read(fp.name)
-                if poly_data.number_of_cells == 1:
+                if edge_source.number_of_cells == 1:
                     gmsh.clear()
                     gmsh.finalize()
                     return mesh
