@@ -10,7 +10,7 @@ def generate_mesh(surf, lc=1e-2, dimension=2):
         if cell.type == pv.CellType.QUAD:
             gmsh.initialize()
             for i, point in enumerate(cell.points):
-                gmsh.model.geo.addPoint(point[0], point[1], point[2], lc, i)
+                gmsh.model.geo.addPoint(point[0], point[1], point[2], lc, i + 1)
             gmsh.model.geo.addLine(1, 2, 1)
             gmsh.model.geo.addLine(2, 3, 2)
             gmsh.model.geo.addLine(3, 4, 3)
@@ -25,6 +25,8 @@ def generate_mesh(surf, lc=1e-2, dimension=2):
                 gmsh.write(fp.name)
                 mesh = pv.read(fp.name)
                 if surf.number_of_cells == 1:
+                    gmsh.clear()
+                    gmsh.finalize()
                     return mesh
             gmsh.clear()
             gmsh.finalize()
