@@ -54,7 +54,6 @@ def delaunay_2d(poly_data, size=1e-2):
       X Bounds:   0.000e+00, 1.000e-01
       Y Bounds:   0.000e+00, 3.000e-01
       Z Bounds:   0.000e+00, 0.000e+00
-      N Arrays:   2
     """
     meshes = []
     for cell in poly_data.cell:
