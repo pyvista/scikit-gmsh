@@ -1,5 +1,6 @@
 import gmsh
 import pyvista as pv
+from pvgmsh._version import __version__  # noqa: F401
 
 
 def generate_mesh(surf):
