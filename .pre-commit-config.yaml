@@ -6,3 +6,8 @@ repos:
   rev: 23.3.0
   hooks:
   - id: black
+- repo: https://github.com/keewis/blackdoc
+  rev: v0.3.9
+  hooks:
+  - id: blackdoc
+    files: '\.py$'
