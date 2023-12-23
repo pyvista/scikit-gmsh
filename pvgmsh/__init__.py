@@ -4,7 +4,7 @@ import tempfile
 from pvgmsh._version import __version__  # noqa: F401
 
 
-def delaunay_2d(edge_source, size=1e-2):
+def delaunay_2d(edge_source, mesh_size=1e-2):
     """
     Parameters
     ----------
@@ -17,8 +17,8 @@ def delaunay_2d(edge_source, size=1e-2):
         source).
 
 
-    size : float, optional
-        Target mesh size close to the point.
+    mesh_size : float, optional
+        Target mesh mesh_size close to the point.
         Defalut 1e-2.
 
     Returns
@@ -28,65 +28,62 @@ def delaunay_2d(edge_source, size=1e-2):
 
     Examples
     --------
-    This example is inspired by Gmsh Python tutorial 1.
-    See https://gmsh.info/doc/texinfo/gmsh.html#t1 .
+    Use the ``edge_source`` parameter to create a constrained delaunay
+    triangulation.
 
-    >>> import pvgmsh
-    >>> import pyvista as pv
-    >>> import numpy as np
-
-    Define poly data using PyVista.
-
-    >>> vertices = np.array([[0, 0, 0], [0.1, 0, 0], [0.1, 0.3, 0], [0, 0.3, 0]])
-    >>> faces = np.hstack([[4, 0, 1, 2, 3]])
-    >>> edge_source = pv.PolyData(vertices, faces)
-    >>> edge_source
+    >>> squar = pv.Polygon(n_sides=4, radius=8, fill=False)
+    >>> squar = squar.rotate_z(45, inplace=False)
+    >>> squar
     PolyData (...)
       N Cells:    1
       N Points:   4
       N Strips:   0
-      X Bounds:   0.000e+00, 1.000e-01
-      Y Bounds:   0.000e+00, 3.000e-01
+      X Bounds:   -5.657e+00, 5.657e+00
+      Y Bounds:   -5.657e+00, 5.657e+00
+      Z Bounds:   0.000e+00, 0.000e+00
+      N Arrays:   0
+    >>> squar.points
+    pyvista_ndarray([[-5.656854,  5.656854,  0.      ],
+                     [ 5.656854,  5.656854,  0.      ],
+                     [ 5.656854, -5.656854,  0.      ],
+                     [-5.656854, -5.656854,  0.      ]], dtype=float32)
+    >>> squar.faces
+    array([], dtype=int64)
+    >>> squar.lines
+    array([5, 0, 1, 2, 3, 0])
+
+    >>> tess = delaunay_2d(edge_source=squar, mesh_size=1.0)
+    <BLANKLINE>
+
+    >>> tess.clear_data()
+    >>> tess
+    UnstructuredGrid (...)
+      N Cells:    398
+      N Points:   198
+      X Bounds:   -5.657e+00, 5.657e+00
+      Y Bounds:   -5.657e+00, 5.657e+00
       Z Bounds:   0.000e+00, 0.000e+00
       N Arrays:   0
 
-    Generate mesh using gmsh.
-
-    >>> mesh = pvgmsh.delaunay_2d(edge_source)
-    <BLANKLINE>
-    >>> mesh
-    UnstructuredGrid (...)
-      N Cells:    816
-      N Points:   407
-      X Bounds:   0.000e+00, 1.000e-01
-      Y Bounds:   0.000e+00, 3.000e-01
-      Z Bounds:   0.000e+00, 0.000e+00
-      N Arrays:   2
+    >>> plotter = pv.Plotter(off_screen=True)
+    >>> _ = plotter.add_mesh(tess, show_edges=True)
+    >>> plotter.show(cpos="xy", screenshot="delaunay_2d_01.png")
     """
-    meshes = []
-    for cell in edge_source.cell:
-        if cell.type == pv.CellType.QUAD:
-            gmsh.initialize()
-            for i, point in enumerate(cell.points):
-                gmsh.model.geo.addPoint(point[0], point[1], point[2], size, i + 1)
-            gmsh.model.geo.addLine(1, 2, 1)
-            gmsh.model.geo.addLine(2, 3, 2)
-            gmsh.model.geo.addLine(3, 4, 3)
-            gmsh.model.geo.addLine(4, 1, 4)
-            gmsh.model.geo.addCurveLoop([1, 2, 3, 4], 1)
-            gmsh.model.geo.addPlaneSurface([1], 1)
-            gmsh.model.geo.synchronize()
-            gmsh.model.mesh.generate(2)
-            with tempfile.NamedTemporaryFile(
-                mode="w+", encoding="utf-8", newline="\n", suffix=".msh"
-            ) as fp:
-                gmsh.write(fp.name)
-                mesh = pv.read(fp.name)
-                if edge_source.number_of_cells == 1:
-                    gmsh.clear()
-                    gmsh.finalize()
-                    return mesh
-            gmsh.clear()
-            gmsh.finalize()
-            meshes.append(mesh)
-    return meshes
+    gmsh.initialize()
+    for i, point in enumerate(edge_source.points):
+        gmsh.model.geo.addPoint(point[0], point[1], point[2], mesh_size, i + 1)
+    lines = edge_source.lines
+    for i in range(lines[0] - 1):
+        gmsh.model.geo.addLine(lines[i + 1] + 1, lines[i + 2] + 1, i + 1)
+    gmsh.model.geo.addCurveLoop(range(1, lines[0]), 1)
+    gmsh.model.geo.addPlaneSurface([1], 1)
+    gmsh.model.geo.synchronize()
+    gmsh.model.mesh.generate(2)
+    with tempfile.NamedTemporaryFile(
+        mode="w+", encoding="utf-8", newline="\n", suffix=".msh"
+    ) as fp:
+        gmsh.write(fp.name)
+        mesh = pv.read(fp.name)
+    gmsh.clear()
+    gmsh.finalize()
+    return mesh
