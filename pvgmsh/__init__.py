@@ -3,7 +3,7 @@ import pyvista as pv
 from pvgmsh._version import __version__  # noqa: F401
 
 
-def generate_mesh(surf, lc = 1e-2):
+def generate_mesh(surf, lc=1e-2):
     gmsh.initialize()
     for i, point in enumerate(surf.points):
         gmsh.model.geo.addPoint(point[0], point[1], point[2], lc, i + 1)
