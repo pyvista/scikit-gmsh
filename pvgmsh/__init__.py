@@ -71,12 +71,12 @@ def delaunay_2d(edge_source, mesh_size=1e-2):
     """
     gmsh.initialize()
     for i, point in enumerate(edge_source.points):
-        gmsh.model.geo.addPoint(point[0], point[1], point[2], mesh_size, i + 1)
+        gmsh.model.geo.add_point(point[0], point[1], point[2], mesh_size, i + 1)
     lines = edge_source.lines
     for i in range(lines[0] - 1):
-        gmsh.model.geo.addLine(lines[i + 1] + 1, lines[i + 2] + 1, i + 1)
-    gmsh.model.geo.addCurveLoop(range(1, lines[0]), 1)
-    gmsh.model.geo.addPlaneSurface([1], 1)
+        gmsh.model.geo.add_line(lines[i + 1] + 1, lines[i + 2] + 1, i + 1)
+    gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
+    gmsh.model.geo.add_plane_surface([1], 1)
     gmsh.model.geo.synchronize()
     gmsh.model.mesh.generate(2)
     with tempfile.NamedTemporaryFile(
