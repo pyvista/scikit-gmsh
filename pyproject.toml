@@ -1,0 +1,20 @@
+[build-system]
+requires = [
+  'gmsh',
+  'meshio',
+  'pyvista',
+  'setuptools',
+]
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = "pyvista-gmsh"
+dynamic = ['version']
+dependencies = [
+  'gmsh',
+  'meshio',
+  'pyvista',
+]
+
+[tool.setuptools.dynamic]
+version = {attr = 'pvgmsh.__version__'}
