@@ -25,12 +25,11 @@ def delaunay_2d(poly_data, size=1e-2):
     This example is inspired by Gmsh Python tutorial 1.
     See https://gmsh.info/doc/texinfo/gmsh.html#t1 .
 
-
     >>> import pvgmsh
     >>> import pyvista as pv
     >>> import numpy as np
 
-    Define poly_data using PyVista.
+    Define poly data using PyVista.
 
     >>> vertices = np.array([[0, 0, 0], [0.1, 0, 0], [0.1, 0.3, 0], [0, 0.3, 0]])
     >>> faces = np.hstack([[4, 0, 1, 2, 3]])
