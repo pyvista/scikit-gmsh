@@ -4,7 +4,7 @@ import tempfile
 from pvgmsh._version import __version__  # noqa: F401
 
 
-def delaunay_2d(edge_source, mesh_size=1e-2):
+def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
     """
     Parameters
     ----------
@@ -52,7 +52,7 @@ def delaunay_2d(edge_source, mesh_size=1e-2):
     >>> squar.lines
     array([5, 0, 1, 2, 3, 0])
 
-    >>> tess = delaunay_2d(edge_source=squar, mesh_size=1.0)
+    >>> tess = frontal_delaunay_2d(edge_source=squar, mesh_size=1.0)
     <BLANKLINE>
 
     >>> tess.clear_data()
@@ -70,6 +70,7 @@ def delaunay_2d(edge_source, mesh_size=1e-2):
     >>> plotter.show(cpos="xy", screenshot="delaunay_2d_01.png")
     """
     gmsh.initialize()
+    gmsh.option.set_number("Mesh.Algorithm", 6)
     for i, point in enumerate(edge_source.points):
         gmsh.model.geo.add_point(point[0], point[1], point[2], mesh_size, i + 1)
     lines = edge_source.lines
