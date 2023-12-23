@@ -22,7 +22,9 @@ def delaunay_2d(poly_data, size=1e-2):
 
     Examples
     --------
-    This example is inspired by `Gmsh Python tutorial 1 <https://gitlab.onelab.info/gmsh/gmsh/blob/gmsh_4_10_5/tutorials/python/t1.py>`_.
+    This example is inspired by Gmsh Python tutorial 1.
+    See https://gmsh.info/doc/texinfo/gmsh.html#t1 .
+
 
     >>> import pvgmsh
     >>> import pyvista as pv
