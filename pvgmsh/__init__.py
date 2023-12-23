@@ -7,10 +7,10 @@ from pvgmsh._version import __version__  # noqa: F401
 def generate_mesh(surf, lc=1e-2, dimension=2):
     meshes = []
     for cell in surf.cell:
-        gmsh.initialize()
-        for i, point in enumerate(surf.points):
-            gmsh.model.geo.addPoint(point[0], point[1], point[2], lc, i + 1)
         if cell.type == pv.CellType.QUAD:
+            gmsh.initialize()
+            for i, point in enumerate(cell.points):
+                gmsh.model.geo.addPoint(point[0], point[1], point[2], lc, i)
             gmsh.model.geo.addLine(1, 2, 1)
             gmsh.model.geo.addLine(2, 3, 2)
             gmsh.model.geo.addLine(3, 4, 3)
