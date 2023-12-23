@@ -19,7 +19,9 @@ def generate_mesh(surf, lc=1e-2, dimension=2):
             gmsh.model.geo.addPlaneSurface([1], 1)
             gmsh.model.geo.synchronize()
             gmsh.model.mesh.generate(dimension)
-            with tempfile.NamedTemporaryFile(mode="w+", encoding="utf-8", newline="\n", suffix='.msh') as fp:
+            with tempfile.NamedTemporaryFile(
+                mode="w+", encoding="utf-8", newline="\n", suffix=".msh"
+            ) as fp:
                 gmsh.write(fp.name)
                 mesh = pv.read(fp.name)
                 if surf.number_of_cells == 1:
