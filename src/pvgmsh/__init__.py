@@ -36,9 +36,9 @@ def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
 
     >>> import pyvista as pv
     >>> import pvgmsh
-    >>> squar = pv.Polygon(n_sides=4, radius=8, fill=False)
-    >>> squar = squar.rotate_z(45, inplace=False)
-    >>> squar
+    >>> geometry = pv.Polygon(n_sides=4, radius=8, fill=False)
+    >>> geometry = geometry.rotate_z(45, inplace=False)
+    >>> geometry
     PolyData (...)
       N Cells:    1
       N Points:   4
@@ -47,20 +47,20 @@ def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
       Y Bounds:   -5.657e+00, 5.657e+00
       Z Bounds:   0.000e+00, 0.000e+00
       N Arrays:   0
-    >>> squar.points
+    >>> geometry.points
     pyvista_ndarray([[-5.656854,  5.656854,  0.      ],
                      [ 5.656854,  5.656854,  0.      ],
                      [ 5.656854, -5.656854,  0.      ],
                      [-5.656854, -5.656854,  0.      ]], dtype=float32)
-    >>> squar.faces
+    >>> geometry.faces
     array([], dtype=int64)
-    >>> squar.lines
+    >>> geometry.lines
     array([5, 0, 1, 2, 3, 0])
 
-    >>> tess = pvgmsh.frontal_delaunay_2d(edge_source=squar, mesh_size=1.0)
+    >>> mesh = pvgmsh.frontal_delaunay_2d(geometry, mesh_size=1.0)
     <BLANKLINE>
 
-    >>> tess
+    >>> mesh
     UnstructuredGrid (...)
       N Cells:    398
       N Points:   198
@@ -70,10 +70,10 @@ def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
       N Arrays:   0
 
     >>> plotter = pv.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(tess, show_edges=True, line_width=4, color="white")
-    >>> _ = plotter.add_mesh(squar, show_edges=True, line_width=4, color="blue")
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white")
+    >>> _ = plotter.add_mesh(geometry, show_edges=True, line_width=4, color="blue")
     >>> _ = plotter.add_points(
-    ...     squar.points, style="points", point_size=20, color="blue"
+    ...     geometry.points, style="points", point_size=20, color="blue"
     ... )
     >>> plotter.show(cpos="xy", screenshot="frontal_delaunay_2d_01.png")
     """
