@@ -3,15 +3,6 @@ Motivation
 
 `PyVista`_ accessors for `Gmsh`_ to generate 3D finite element mesh.
 
-`PyVista`_ is:
-
-* mesh data structures and filtering methods for spatial datasets
-* 3D plotting made simple and built for large/complex data geometries
-
-`Gmsh`_ is:
-
-* A 3D finite element mesh generator with built-in pre- and post-processing facilities
-
 .. _PyVista: https://docs.pyvista.org/version/stable/
 .. _Gmsh: https://gmsh.info/
 
