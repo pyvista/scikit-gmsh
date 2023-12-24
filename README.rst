@@ -31,7 +31,7 @@ We can define the surface using PyVista.
 .. code-block:: python
 
     >>> geometry = pv.Polygon(n_sides=4, radius=8, fill=False)
-    >>> geometry = square.rotate_z(45, inplace=False)
+    >>> geometry = geometry.rotate_z(45, inplace=False)
 
 We can then generate a 2D mesh.
 
