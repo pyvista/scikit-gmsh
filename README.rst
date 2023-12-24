@@ -29,4 +29,4 @@ Usage
     >>> _ = plotter.add_mesh(tess, show_edges=True)
     >>> plotter.show(cpos="xy")
 
-.. image:: frontal_delaunay_2d_01.png
+.. image:: https://github.com/pyvista/pyvista-gmsh/raw/main/frontal_delaunay_2d_01.png
