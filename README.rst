@@ -2,7 +2,7 @@
 Motivation
 ##########
 
-`PyVista`_ accessors for `Gmsh`_ to generate three-dimensional finite element mesh.
+`PyVista`_ accessors for `Gmsh`_ to generate 3D finite element mesh.
 
 `PyVista`_ is:
 
@@ -11,11 +11,9 @@ Motivation
 
 `Gmsh`_ is:
 
-* A three-dimensional finite element mesh generator with built-in pre- and post-processing facilities
+* A 3D finite element mesh generator with built-in pre- and post-processing facilities
 
 .. _PyVista: https://docs.pyvista.org/version/stable/
-.. _delaunay_2d: https://docs.pyvista.org/version/stable/api/core/_autosummary/pyvista.PolyDataFilters.delaunay_2d.html
-.. _delaunay_3d: https://docs.pyvista.org/version/stable/api/core/_autosummary/pyvista.PointSet.delaunay_3d.html
 .. _Gmsh: https://gmsh.info/
 
 Usage
@@ -26,11 +24,22 @@ Usage
     >>> import pyvista as pv
     >>> import pvgmsh
 
+We can define the surface using PyVista.
+
+.. code-block:: python
+
     >>> squar = pv.Polygon(n_sides=4, radius=8, fill=False)
     >>> squar = squar.rotate_z(45, inplace=False)
 
+We can then generate a 2D mesh.
+
+.. code-block:: python
+
     >>> tess = pvgmsh.frontal_delaunay_2d(edge_source=squar, mesh_size=1.0)
-    >>> tess.clear_data()
+
+To visualize the model we can use PyVista.
+
+.. code-block:: python
 
     >>> plotter = pv.Plotter()
     >>> _ = plotter.add_mesh(tess, show_edges=True)
