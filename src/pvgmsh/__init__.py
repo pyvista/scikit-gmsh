@@ -1,3 +1,5 @@
+"""PvGmsh package for 3D mesh generation."""
+
 import gmsh
 import pyvista as pv
 import tempfile
@@ -5,7 +7,8 @@ from pvgmsh._version import __version__  # noqa: F401
 
 
 def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
-    """
+    """The Frontal-Delaunay 2D mesh algorithm.
+
     Parameters
     ----------
     edge_source : pyvista.PolyData

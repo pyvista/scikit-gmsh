@@ -11,3 +11,19 @@ repos:
   hooks:
   - id: blackdoc
     files: '\.py$'
+
+- repo: https://github.com/DanielNoord/pydocstringformatter
+  rev: v0.7.3
+  hooks:
+    - id: pydocstringformatter
+      args: [
+        "--style {numpydoc,pep257}",
+        "--no-strip-whitespace",
+        "--no-capitalize-first-letter",
+      ]
+
+- repo: https://github.com/numpy/numpydoc
+  rev: v1.6.0
+  hooks:
+  - id: numpydoc-validation
+    files: ^src/pvgmsh/
