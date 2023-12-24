@@ -3,6 +3,8 @@ import pyvista as pv
 import tempfile
 from pvgmsh._version import __version__  # noqa: F401
 
+FRONTAL_DELAUNAY_2D = 6
+
 
 def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
     """
@@ -71,7 +73,7 @@ def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
     >>> plotter.show(cpos="xy", screenshot="frontal_delaunay_2d_01.png")
     """
     gmsh.initialize()
-    gmsh.option.set_number("Mesh.Algorithm", 6)
+    gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
 
     for i, point in enumerate(edge_source.points):
         gmsh.model.geo.add_point(point[0], point[1], point[2], mesh_size, i + 1)
@@ -95,3 +97,65 @@ def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
     gmsh.clear()
     gmsh.finalize()
     return mesh
+
+
+def delaunay_3d():
+    """The Delaunay 3D mesh algorithm.
+
+    Examples
+    --------
+    >>> import gmsh
+    >>> gmsh.initialize()
+    >>> lc = 1e-2
+    >>> _ = gmsh.model.geo.add_point(0, 0, 0, lc, 1)
+    >>> _ = gmsh.model.geo.add_point(0.1, 0, 0, lc, 2)
+    >>> _ = gmsh.model.geo.add_point(0.1, 0.3, 0, lc, 3)
+    >>> _ = gmsh.model.geo.add_point(0, 0.3, 0, lc, 4)
+    >>> _ = gmsh.model.geo.add_line(1, 2, 1)
+    >>> _ = gmsh.model.geo.add_line(3, 2, 2)
+    >>> _ = gmsh.model.geo.add_line(3, 4, 3)
+    >>> _ = gmsh.model.geo.add_line(4, 1, 4)
+    >>> _ = gmsh.model.geo.add_curve_loop([4, 1, -2, 3], 1)
+    >>> _ = gmsh.model.geo.add_plane_surface([1], 1)
+
+    We change the mesh size to generate a coarser mesh
+
+    >>> lc = lc * 4
+    >>> gmsh.model.geo.mesh.set_size([(0, 1), (0, 2), (0, 3), (0, 4)], lc)
+
+    We define a new point
+
+    >>> _ = gmsh.model.geo.add_point(0.02, 0.02, 0.0, lc, 5)
+
+    We have to synchronize before embedding entites:
+
+    >>> gmsh.model.geo.synchronize()
+
+    One can force this point to be included ("embedded") in the 2D mesh, using the
+    `embed()' function:
+
+    >>> gmsh.model.mesh.embed(0, [5], 2, 1)
+
+    In the same way, one can use `embed()' to force a curve to be embedded in the
+    2D mesh:
+
+    >>> _ = gmsh.model.geo.add_point(0.02, 0.12, 0.0, lc, 6)
+    >>> _ = gmsh.model.geo.add_point(0.04, 0.18, 0.0, lc, 7)
+    >>> _ = gmsh.model.geo.add_line(6, 7, 5)
+
+    >>> gmsh.model.geo.synchronize()
+    >>> gmsh.model.mesh.embed(1, [5], 2, 1)
+
+    Points and curves can also be embedded in volumes
+
+    >>> gmsh.model.geo.extrude([(2, 1)], 0, 0, 0.1)
+    [(2, 27), (3, 1), (2, 14), (2, 18), (2, 22), (2, 26)]
+
+    >>> p = gmsh.model.geo.add_point(0.07, 0.15, 0.025, lc)
+
+    >>> gmsh.model.geo.synchronize()
+    >>> gmsh.model.mesh.embed(0, [p], 3, 1)
+
+    >>> gmsh.finalize()
+    """
+    pass
