@@ -4,9 +4,10 @@ import gmsh
 import pyvista as pv
 import tempfile
 from pvgmsh._version import __version__  # noqa: F401
+import numpy as np
 
 
-def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
+def frontal_delaunay_2d(edge_source, target_size=None):
     """The Frontal-Delaunay 2D mesh algorithm.
 
     Parameters
@@ -20,9 +21,9 @@ def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
         source).
 
 
-    mesh_size : float, optional
-        Target mesh mesh_size close to the point.
-        Defalut 1e-2.
+    target_size : float, optional
+        Target mesh size close to the points.
+        Defalut max size of edge_source in each direction.
 
     Returns
     -------
@@ -57,7 +58,7 @@ def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
     >>> geometry.lines
     array([5, 0, 1, 2, 3, 0])
 
-    >>> mesh = pvgmsh.frontal_delaunay_2d(geometry, mesh_size=1.0)
+    >>> mesh = pvgmsh.frontal_delaunay_2d(geometry, target_size=1.0)
     <BLANKLINE>
 
     >>> mesh
@@ -81,7 +82,20 @@ def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
     gmsh.option.set_number("Mesh.Algorithm", 6)
 
     for i, point in enumerate(edge_source.points):
-        gmsh.model.geo.add_point(point[0], point[1], point[2], mesh_size, i + 1)
+        if target_size is None:
+            gmsh.model.geo.add_point(
+                point[0],
+                point[1],
+                point[2],
+                np.max(
+                    np.abs(geometry.bounds[1] - geometry.bounds[0]),
+                    np.abs(geometry.bounds[3] - geometry.bounds[2]),
+                    np.abs(geometry.bounds[5] - geometry.bounds[4]),
+                ),
+                i + 1,
+            )
+        else:
+            gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, i + 1)
 
     lines = edge_source.lines
     for i in range(lines[0] - 1):
