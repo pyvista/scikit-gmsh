@@ -3,6 +3,17 @@ Motivation
 
 `PyVista`_ accessors for `Gmsh`_ to generate 3D finite element mesh.
 
+The motivation is that PyVista is the solution to the following.
+
+Overview of Gmsh (https://gmsh.info/doc/texinfo/gmsh.html)
+
+    … and what Gmsh is not so good at
+    Here are some known weaknesses of Gmsh:
+
+    * Gmsh is not a multi-bloc mesh generator: all meshes produced by Gmsh are conforming in the sense of finite element meshes;
+    * Gmsh’s graphical user interface is only exposing a limited number of the available features, and many aspects of the interface could be enhanced (especially manipulators).
+    * Your complaints about Gmsh here :-)
+
 .. _PyVista: https://docs.pyvista.org/version/stable/
 .. _Gmsh: https://gmsh.info/
 
