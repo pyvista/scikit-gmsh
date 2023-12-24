@@ -1,6 +1,5 @@
-##########
 Motivation
-##########
+==========
 
 `PyVista`_ accessors for `Gmsh`_ to generate 3D finite element mesh.
 
