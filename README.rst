@@ -5,7 +5,7 @@ Motivation
 
 The motivation is that PyVista is the solution to the following.
 
-Overview of Gmsh (https://gmsh.info/doc/texinfo/gmsh.html)
+`Overview of Gmsh`_
 
     … and what Gmsh is not so good at
     Here are some known weaknesses of Gmsh:
@@ -16,6 +16,7 @@ Overview of Gmsh (https://gmsh.info/doc/texinfo/gmsh.html)
 
 .. _PyVista: https://docs.pyvista.org/version/stable/
 .. _Gmsh: https://gmsh.info/
+.. _Overview of Gmsh: https://gmsh.info/doc/texinfo/gmsh.html#Overview-of-Gmsh
 
 Usage
 =====
