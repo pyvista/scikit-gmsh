@@ -18,14 +18,14 @@ We can define the surface using PyVista.
 
 .. code-block:: python
 
-    >>> squar = pv.Polygon(n_sides=4, radius=8, fill=False)
-    >>> squar = squar.rotate_z(45, inplace=False)
+    >>> square = pv.Polygon(n_sides=4, radius=8, fill=False)
+    >>> square = square.rotate_z(45, inplace=False)
 
 We can then generate a 2D mesh.
 
 .. code-block:: python
 
-    >>> tess = pvgmsh.frontal_delaunay_2d(edge_source=squar, mesh_size=1.0)
+    >>> tess = pvgmsh.frontal_delaunay_2d(edge_source=square, mesh_size=1.0)
 
 To visualize the model we can use PyVista.
 
