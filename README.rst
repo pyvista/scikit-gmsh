@@ -25,12 +25,12 @@ Usage
 
     >>> import pyvista as pv
     >>> import pvgmsh
+
     >>> squar = pv.Polygon(n_sides=4, radius=8, fill=False)
     >>> squar = squar.rotate_z(45, inplace=False)
     >>> tess = pvgmsh.frontal_delaunay_2d(edge_source=squar, mesh_size=1.0)
-    <BLANKLINE>
-
     >>> tess.clear_data()
+
     >>> plotter = pv.Plotter()
     >>> _ = plotter.add_mesh(tess, show_edges=True)
     >>> plotter.show(cpos="xy")
