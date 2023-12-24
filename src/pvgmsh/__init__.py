@@ -70,7 +70,11 @@ def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
       N Arrays:   0
 
     >>> plotter = pv.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(tess, show_edges=True)
+    >>> _ = plotter.add_mesh(tess, show_edges=True, line_width=4, color="white")
+    >>> _ = plotter.add_mesh(squar, show_edges=True, line_width=4, color="blue")
+    >>> _ = plotter.add_points(
+    ...     squar.points, style="points", point_size=20, color="blue"
+    ... )
     >>> plotter.show(cpos="xy", screenshot="frontal_delaunay_2d_01.png")
     """
     gmsh.initialize()
