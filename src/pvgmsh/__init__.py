@@ -31,6 +31,8 @@ def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
     Use the ``edge_source`` parameter to create a constrained delaunay
     triangulation.
 
+    >>> import pyvista as pv
+    >>> import pvgmsh
     >>> squar = pv.Polygon(n_sides=4, radius=8, fill=False)
     >>> squar = squar.rotate_z(45, inplace=False)
     >>> squar
@@ -52,10 +54,9 @@ def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
     >>> squar.lines
     array([5, 0, 1, 2, 3, 0])
 
-    >>> tess = frontal_delaunay_2d(edge_source=squar, mesh_size=1.0)
+    >>> tess = pvgmsh.frontal_delaunay_2d(edge_source=squar, mesh_size=1.0)
     <BLANKLINE>
 
-    >>> tess.clear_data()
     >>> tess
     UnstructuredGrid (...)
       N Cells:    398
@@ -67,24 +68,30 @@ def frontal_delaunay_2d(edge_source, mesh_size=1e-2):
 
     >>> plotter = pv.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(tess, show_edges=True)
-    >>> plotter.show(cpos="xy", screenshot="delaunay_2d_01.png")
+    >>> plotter.show(cpos="xy", screenshot="frontal_delaunay_2d_01.png")
     """
     gmsh.initialize()
     gmsh.option.set_number("Mesh.Algorithm", 6)
+
     for i, point in enumerate(edge_source.points):
         gmsh.model.geo.add_point(point[0], point[1], point[2], mesh_size, i + 1)
+
     lines = edge_source.lines
     for i in range(lines[0] - 1):
         gmsh.model.geo.add_line(lines[i + 1] + 1, lines[i + 2] + 1, i + 1)
+
     gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
     gmsh.model.geo.add_plane_surface([1], 1)
     gmsh.model.geo.synchronize()
     gmsh.model.mesh.generate(2)
+
     with tempfile.NamedTemporaryFile(
         mode="w+", encoding="utf-8", newline="\n", suffix=".msh"
     ) as fp:
         gmsh.write(fp.name)
         mesh = pv.read(fp.name)
+        mesh.clear_data()
+
     gmsh.clear()
     gmsh.finalize()
     return mesh
