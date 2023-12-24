@@ -52,3 +52,5 @@ To visualize the model we can use PyVista.
     >>> plotter.show(cpos="xy")
 
 .. image:: https://github.com/pyvista/pyvista-gmsh/raw/main/frontal_delaunay_2d_01.png
+
+TODO Let's use Surface Loop
