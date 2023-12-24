@@ -127,56 +127,53 @@ def delaunay_3d():
     --------
     >>> import gmsh
     >>> gmsh.initialize()
-    >>> lc = 1e-2
-    >>> _ = gmsh.model.geo.add_point(0, 0, 0, lc, 1)
-    >>> _ = gmsh.model.geo.add_point(0.1, 0, 0, lc, 2)
-    >>> _ = gmsh.model.geo.add_point(0.1, 0.3, 0, lc, 3)
-    >>> _ = gmsh.model.geo.add_point(0, 0.3, 0, lc, 4)
-    >>> _ = gmsh.model.geo.add_line(1, 2, 1)
-    >>> _ = gmsh.model.geo.add_line(3, 2, 2)
-    >>> _ = gmsh.model.geo.add_line(3, 4, 3)
-    >>> _ = gmsh.model.geo.add_line(4, 1, 4)
-    >>> _ = gmsh.model.geo.add_curve_loop([4, 1, -2, 3], 1)
-    >>> _ = gmsh.model.geo.add_plane_surface([1], 1)
-
-    We change the mesh size to generate a coarser mesh
-
-    >>> lc = lc * 4
-    >>> gmsh.model.geo.mesh.set_size([(0, 1), (0, 2), (0, 3), (0, 4)], lc)
-
-    We define a new point
-
-    >>> _ = gmsh.model.geo.add_point(0.02, 0.02, 0.0, lc, 5)
-
-    We have to synchronize before embedding entites:
-
+    >>> _ = gmsh.model.geo.add_point(X, X, X, X, X)
+    >>> _ = gmsh.model.geo.add_point(X, X, X, X, X)
+    >>> _ = gmsh.model.geo.add_point(X, X, X, X, X)
+    >>> _ = gmsh.model.geo.add_point(X, X, X, X, X)
+    >>> _ = gmsh.model.geo.add_point(X, X, X, X, X)
+    >>> _ = gmsh.model.geo.add_point(X, X, X, X, X)
+    >>> _ = gmsh.model.geo.add_point(X, X, X, X, X)
+    >>> _ = gmsh.model.geo.add_point(X, X, X, X, X)
+    >>> _ = gmsh.model.geo.add_point(X, X, X, X, X)
+    >>> _ = gmsh.model.geo.add_line(X, X, X)
+    >>> _ = gmsh.model.geo.add_line(X, X, X)
+    >>> _ = gmsh.model.geo.add_line(X, X, X)
+    >>> _ = gmsh.model.geo.add_line(X, X, X)
+    >>> _ = gmsh.model.geo.add_line(X, X, X)
+    >>> _ = gmsh.model.geo.add_line(X, X, X)
+    >>> _ = gmsh.model.geo.add_line(X, X, X)
+    >>> _ = gmsh.model.geo.add_line(X, X, X)
+    >>> _ = gmsh.model.geo.add_line(X, X, X)
+    >>> _ = gmsh.model.geo.add_line(X, X, X)
+    >>> _ = gmsh.model.geo.add_line(X, X, X)
+    >>> _ = gmsh.model.geo.add_line(X, X, X)
+    >>> _ = gmsh.model.geo.add_curve_loop([X, X, X, X], X)
+    >>> _ = gmsh.model.geo.add_curve_loop([X, X, X, X], X)
+    >>> _ = gmsh.model.geo.add_curve_loop([X, X, X, X], X)
+    >>> _ = gmsh.model.geo.add_curve_loop([X, X, X, X], X)
+    >>> _ = gmsh.model.geo.add_curve_loop([X, X, X, X], X)
+    >>> _ = gmsh.model.geo.add_curve_loop([X, X, X, X], X)
+    >>> _ = gmsh.model.geo.add_plane_surface([X], X)
+    >>> _ = gmsh.model.geo.add_plane_surface([X], X)
+    >>> _ = gmsh.model.geo.add_plane_surface([X], X)
+    >>> _ = gmsh.model.geo.add_plane_surface([X], X)
+    >>> _ = gmsh.model.geo.add_plane_surface([X], X)
+    >>> _ = gmsh.model.geo.add_plane_surface([X], X)
+    >>> _ = gmsh.model.geo.add_surface_loop([X], X)
+    >>> _ = gmsh.model.geo.add_volume([X], X)
     >>> gmsh.model.geo.synchronize()
-
-    One can force this point to be included ("embedded") in the 2D mesh, using the
-    `embed()' function:
-
-    >>> gmsh.model.mesh.embed(0, [5], 2, 1)
-
-    In the same way, one can use `embed()' to force a curve to be embedded in the
-    2D mesh:
-
-    >>> _ = gmsh.model.geo.add_point(0.02, 0.12, 0.0, lc, 6)
-    >>> _ = gmsh.model.geo.add_point(0.04, 0.18, 0.0, lc, 7)
-    >>> _ = gmsh.model.geo.add_line(6, 7, 5)
-
-    >>> gmsh.model.geo.synchronize()
-    >>> gmsh.model.mesh.embed(1, [5], 2, 1)
-
-    Points and curves can also be embedded in volumes
-
-    >>> gmsh.model.geo.extrude([(2, 1)], 0, 0, 0.1)
-    [(2, 27), (3, 1), (2, 14), (2, 18), (2, 22), (2, 26)]
-
-    >>> p = gmsh.model.geo.add_point(0.07, 0.15, 0.025, lc)
-
-    >>> gmsh.model.geo.synchronize()
-    >>> gmsh.model.mesh.embed(0, [p], 3, 1)
-
+    >>> gmsh.model.mesh.generate(3)
+    >>> with tempfile.NamedTemporaryFile(
+    ...     mode="w+", encoding="utf-8", newline="\n", suffix=".msh"
+    ... ) as fp:
+    ...     gmsh.write(fp.name)
+    ...     mesh = pv.read(fp.name)
+    ...     mesh.clear_data()
+    >>> gmsh.clear()
     >>> gmsh.finalize()
+    >>> plotter = pv.Plotter(off_screen=True)
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white")
+    >>> plotter.show(screenshot="delaunay_3d_01.png")
     """
     pass
