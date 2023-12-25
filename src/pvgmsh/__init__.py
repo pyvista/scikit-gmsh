@@ -165,17 +165,17 @@ def delaunay_3d():
     >>> gmsh.model.geo.synchronize()
     >>> gmsh.model.mesh.generate(3)
 
-    # >>> with tempfile.NamedTemporaryFile(
-    # ...    mode="w+", encoding="utf-8", newline="\n", suffix=".msh"
-    # ... ) as fp:
-    # ...    gmsh.write(fp.name)
-    # ...    mesh = pv.read(fp.name)
-    # ...    mesh.clear_data()
+    >>> fp = tempfile.NamedTemporaryFile(mode="w+", suffix=".msh")
+    >>> gmsh.write(fp.name)
+    >>> mesh = pv.read(fp.name)
+    <BLANKLINE>
+    >>> fp.close()
+    >>> mesh.clear_data()
     >>> gmsh.clear()
     >>> gmsh.finalize()
 
-    # >>> plotter = pv.Plotter(off_screen=True)
-    # >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white")
-    # >>> plotter.show(screenshot="delaunay_3d_01.png")
+    >>> plotter = pv.Plotter(off_screen=True)
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white")
+    >>> plotter.show(screenshot="delaunay_3d_01.png")
     """
     pass
