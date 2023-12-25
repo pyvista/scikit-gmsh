@@ -154,6 +154,14 @@ def delaunay_3d():
     >>> fp.close()
     >>> mesh.clear_data()
     >>> mesh
+    UnstructuredGrid (0x7f618914a7a0)
+      N Cells:    69
+      N Points:   15
+      X Bounds:   0.000e+00, 1.000e+00
+      Y Bounds:   0.000e+00, 1.000e+00
+      Z Bounds:   0.000e+00, 1.000e+00
+      N Arrays:   0
+
     >>> gmsh.clear()
     >>> gmsh.finalize()
 
