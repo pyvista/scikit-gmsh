@@ -38,12 +38,12 @@ def frontal_delaunay_2d(edge_source, target_size=None):
     triangulation.
 
     >>> import pyvista as pv
-    >>> import pvgmsh
+    >>> import pvgmsh as pg
 
     >>> geometry = pv.Polygon(n_sides=4, radius=8, fill=False)
     >>> geometry = geometry.rotate_z(45, inplace=False)
 
-    >>> mesh = pvgmsh.frontal_delaunay_2d(geometry, target_size=1.0)
+    >>> mesh = pg.frontal_delaunay_2d(geometry, target_size=1.0)
     <BLANKLINE>
     >>> mesh
     UnstructuredGrid (...)
