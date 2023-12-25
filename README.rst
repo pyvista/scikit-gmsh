@@ -24,7 +24,7 @@ Usage
 .. code-block:: python
 
     >>> import pyvista as pv
-    >>> import pvgmsh
+    >>> import pvgmsh as pg
 
 We can define the surface using PyVista.
 
@@ -37,7 +37,7 @@ We can then generate a 2D mesh.
 
 .. code-block:: python
 
-    >>> mesh = pvgmsh.frontal_delaunay_2d(geometry, target_size=1.0)
+    >>> mesh = pg.frontal_delaunay_2d(geometry, target_size=1.0)
 
 To visualize the model we can use PyVista.
 
