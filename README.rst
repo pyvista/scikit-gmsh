@@ -7,7 +7,6 @@ PyVista is the solution to the following.
 
 `Overview of Gmsh`_
 
-    … and what Gmsh is not so good at
     Here are some known weaknesses of Gmsh:
 
     * Gmsh is not a multi-bloc mesh generator: all meshes produced by Gmsh are conforming in the sense of finite element meshes;
