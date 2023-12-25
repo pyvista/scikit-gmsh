@@ -65,21 +65,15 @@ def frontal_delaunay_2d(edge_source, target_size=None):
     gmsh.initialize()
     gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
 
+    if target_size is None:
+        target_size = np.max(
+                np.abs(geometry.bounds[1] - geometry.bounds[0]),
+                np.abs(geometry.bounds[3] - geometry.bounds[2]),
+                np.abs(geometry.bounds[5] - geometry.bounds[4]),
+        )
+
     for i, point in enumerate(edge_source.points):
-        if target_size is None:
-            gmsh.model.geo.add_point(
-                point[0],
-                point[1],
-                point[2],
-                np.max(
-                    np.abs(geometry.bounds[1] - geometry.bounds[0]),
-                    np.abs(geometry.bounds[3] - geometry.bounds[2]),
-                    np.abs(geometry.bounds[5] - geometry.bounds[4]),
-                ),
-                i + 1,
-            )
-        else:
-            gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, i + 1)
+        gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, i + 1)
 
     lines = edge_source.lines
     for i in range(lines[0] - 1):
