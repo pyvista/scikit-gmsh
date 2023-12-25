@@ -67,9 +67,9 @@ def frontal_delaunay_2d(edge_source, target_size=None):
 
     if target_size is None:
         target_size = np.max(
-                np.abs(geometry.bounds[1] - geometry.bounds[0]),
-                np.abs(geometry.bounds[3] - geometry.bounds[2]),
-                np.abs(geometry.bounds[5] - geometry.bounds[4]),
+            np.abs(geometry.bounds[1] - geometry.bounds[0]),
+            np.abs(geometry.bounds[3] - geometry.bounds[2]),
+            np.abs(geometry.bounds[5] - geometry.bounds[4]),
         )
 
     for i, point in enumerate(edge_source.points):
