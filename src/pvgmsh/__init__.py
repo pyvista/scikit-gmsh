@@ -153,6 +153,7 @@ def delaunay_3d():
     <BLANKLINE>
     >>> fp.close()
     >>> mesh.clear_data()
+    >>> mesh
     >>> gmsh.clear()
     >>> gmsh.finalize()
 
