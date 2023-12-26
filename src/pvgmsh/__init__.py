@@ -140,6 +140,12 @@ def delaunay_3d():
     >>> _ = gmsh.model.geo.add_volume([1], 1)
     >>> gmsh.model.geo.synchronize()
     >>> gmsh.model.mesh.generate(3)
+    >>> element_types, element_tags, node_tags = gmsh.model.mesh.getElements()
+    >>> element_types
+    array([ 1,  2,  4, 15], dtype=int32)
+    >>> element_tags
+
+    >>> node_tags
 
     >>> fp = tempfile.NamedTemporaryFile(mode="w+", suffix=".msh")
     >>> gmsh.write(fp.name)
