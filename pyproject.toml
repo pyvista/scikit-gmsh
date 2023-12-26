@@ -33,3 +33,15 @@ checks = [
     "EX01",  # Examples: Will eventually enforce
     "YD01",  # Yields: No plan to enforce
 ]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D203",
+    "D212",
+]
+
+[tool.ruff.format]

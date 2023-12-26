@@ -27,3 +27,10 @@ repos:
   hooks:
   - id: numpydoc-validation
     files: ^src/pvgmsh/
+
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.1.4
+  hooks:
+    - id: ruff
+      args: [ --fix ]
+    - id: ruff-format

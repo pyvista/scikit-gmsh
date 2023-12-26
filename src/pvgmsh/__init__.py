@@ -1,16 +1,23 @@
 """PvGmsh package for 3D mesh generation."""
+from __future__ import annotations
+
+import tempfile
 
 import gmsh
-import pyvista as pv
-import tempfile
-from pvgmsh._version import __version__  # noqa: F401
 import numpy as np
+import pyvista as pv
+
+from pvgmsh._version import __version__  # noqa: F401
 
 FRONTAL_DELAUNAY_2D = 6
 
 
-def frontal_delaunay_2d(edge_source, target_size=None):
-    """The Frontal-Delaunay 2D mesh algorithm.
+def frontal_delaunay_2d(
+    edge_source: pv.PolyData,
+    target_size: float | None,
+) -> pv.UnstructuredGrid:
+    """
+    Frontal-Delaunay 2D mesh algorithm.
 
     Parameters
     ----------
@@ -67,9 +74,9 @@ def frontal_delaunay_2d(edge_source, target_size=None):
 
     if target_size is None:
         target_size = np.max(
-            np.abs(geometry.bounds[1] - geometry.bounds[0]),
-            np.abs(geometry.bounds[3] - geometry.bounds[2]),
-            np.abs(geometry.bounds[5] - geometry.bounds[4]),
+            np.abs(edge_source.bounds[1] - edge_source.bounds[0]),
+            np.abs(edge_source.bounds[3] - edge_source.bounds[2]),
+            np.abs(edge_source.bounds[5] - edge_source.bounds[4]),
         )
 
     for i, point in enumerate(edge_source.points):
@@ -85,7 +92,10 @@ def frontal_delaunay_2d(edge_source, target_size=None):
     gmsh.model.mesh.generate(2)
 
     with tempfile.NamedTemporaryFile(
-        mode="w+", encoding="utf-8", newline="\n", suffix=".msh"
+        mode="w+",
+        encoding="utf-8",
+        newline="\n",
+        suffix=".msh",
     ) as fp:
         gmsh.write(fp.name)
         mesh = pv.read(fp.name)
@@ -96,8 +106,9 @@ def frontal_delaunay_2d(edge_source, target_size=None):
     return mesh
 
 
-def delaunay_3d():
-    """The Delaunay 3D mesh algorithm.
+def delaunay_3d() -> pv.UnstructuredGrid:
+    """
+    Delaunay 3D mesh algorithm.
 
     Examples
     --------
@@ -169,4 +180,3 @@ def delaunay_3d():
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white")
     >>> plotter.show(screenshot="delaunay_3d_01.png")
     """
-    pass
