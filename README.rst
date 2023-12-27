@@ -7,6 +7,8 @@
 Motivation
 ==========
 
+See discussion: https://github.com/pyvista/pyvista/discussions/2133#discussioncomment-2107992
+
 `PyVista`_ accessors for `Gmsh`_ to generate 3D finite element mesh.
 
 PyVista is the solution to the following.
