@@ -2,6 +2,7 @@
 requires = [
   'gmsh',
   'meshio',
+  'numpy',
   'pyvista',
   'setuptools',
 ]
