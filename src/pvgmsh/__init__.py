@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import tempfile
+import os
 
 import gmsh
 import numpy as np
@@ -94,10 +95,13 @@ def frontal_delaunay_2d(
         encoding="utf-8",
         newline="\n",
         suffix=".msh",
+        delete=False,
     ) as fp:
         gmsh.write(fp.name)
-        mesh = pv.read(fp.name)
-        mesh.clear_data()
+
+    mesh = pv.read(fp.name)
+    mesh.clear_data()
+    os.unlink(fp.name)
 
     gmsh.clear()
     gmsh.finalize()
