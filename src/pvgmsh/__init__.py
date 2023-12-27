@@ -1,15 +1,14 @@
 """PvGmsh package for 3D mesh generation."""
 from __future__ import annotations
 
-import os
 import tempfile
+from pathlib import Path
 
 import gmsh
 import numpy as np
 import pyvista as pv
 
 from pvgmsh._version import __version__  # noqa: F401
-from pathlib import Path
 
 FRONTAL_DELAUNAY_2D = 6
 
