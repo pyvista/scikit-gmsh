@@ -9,6 +9,7 @@ import numpy as np
 import pyvista as pv
 
 from pvgmsh._version import __version__  # noqa: F401
+from pathlib import Path
 
 FRONTAL_DELAUNAY_2D = 6
 
@@ -101,7 +102,7 @@ def frontal_delaunay_2d(
 
     mesh = pv.read(fp.name)
     mesh.clear_data()
-    os.unlink(fp.name)
+    Path(fp.name).unlink()
 
     gmsh.clear()
     gmsh.finalize()
