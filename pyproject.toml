@@ -13,6 +13,7 @@ dynamic = ['version']
 dependencies = [
   'gmsh',
   'meshio',
+  'numpy',
   'pyvista',
 ]
 
