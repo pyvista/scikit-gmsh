@@ -41,17 +41,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: Python-${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.vtk-version }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements_test.txt') }}
-          restore-keys: |
-            Python-${{ runner.os }}-${{ matrix.python-version }}
-
-      - name: Set up vtk
-        if: ${{ matrix.vtk-version != 'latest' }}
-        run: pip install vtk==${{ matrix.vtk-version }}
-
       - name: Install packages
         run: |
           sudo apt -y install libgl1-mesa-glx xvfb python-tk libglu1 libxcursor-dev libxft2 libxinerama1 libfltk1.3-dev libfreetype6-dev libgl1-mesa-dev libocct-foundation-dev libocct-data-exchange-dev
