@@ -47,6 +47,7 @@ def frontal_delaunay_2d(
 
     >>> import pyvista as pv
     >>> import pvgmsh as pg
+    >>> from pathlib import Path
 
     >>> geometry = pv.Polygon(n_sides=4, radius=8, fill=False)
     >>> geometry = geometry.rotate_z(45, inplace=False)
@@ -154,12 +155,13 @@ def delaunay_3d() -> pv.UnstructuredGrid:
     >>> gmsh.model.geo.synchronize()
     >>> gmsh.model.mesh.generate(3)
     >>> # element_types, element_tags, node_tags = gmsh.model.mesh.getElements()
-    >>> fp = tempfile.NamedTemporaryFile(mode="w+", suffix=".msh")
+    >>> fp = tempfile.NamedTemporaryFile(mode="w+", suffix=".msh", delete=False)
     >>> gmsh.write(fp.name)
+    >>> fp.close()
     >>> mesh = pv.read(fp.name)
     <BLANKLINE>
-    >>> fp.close()
     >>> mesh.clear_data()
+    >>> Path(fp.name).unlink()
     >>> mesh
     UnstructuredGrid (...)
       N Cells:    69
