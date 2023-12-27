@@ -64,4 +64,4 @@ jobs:
 
       - name: Unit Testing
         run: |
-          export PYTHONPATH=. && xvfb-run python -m pytest -v --doctest-modules src/pvgmsh
+          python -m pytest -v --doctest-modules src/pvgmsh
