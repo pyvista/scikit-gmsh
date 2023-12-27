@@ -42,8 +42,20 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install packages
-        run: |
-          sudo apt -y install libgl1-mesa-glx xvfb python-tk libglu1 libxcursor-dev libxft2 libxinerama1 libfltk1.3-dev libfreetype6-dev libgl1-mesa-dev libocct-foundation-dev libocct-data-exchange-dev
+        run: >
+          sudo apt -y install
+          libgl1-mesa-glx
+          xvfb
+          python-tk
+          libglu1
+          libxcursor-dev
+          libxft2
+          libxinerama1
+          libfltk1.3-dev
+          libfreetype6-dev
+          libgl1-mesa-dev
+          libocct-foundation-dev
+          libocct-data-exchange-dev
 
       - name: Install Testing Requirements
         run: |
