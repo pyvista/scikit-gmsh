@@ -63,3 +63,4 @@ To visualize the model we can use PyVista.
 TODO Let's use Surface Loop
 TODO Let's use embed
 TODO Remove temporary file use.
+TODO https://commons.wikimedia.org/wiki/File:Face_or_vase_ata_01.svg
