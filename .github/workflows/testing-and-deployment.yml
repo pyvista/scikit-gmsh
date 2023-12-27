@@ -84,21 +84,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: Python-${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.vtk-version }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements_test.txt') }}
-          restore-keys: |
-            Python-${{ runner.os }}-${{ matrix.python-version }}
-
-      - name: Set up vtk
-        if: ${{ matrix.vtk-version != 'latest' }}
-        run: pip install vtk==${{ matrix.vtk-version }}
-
-      - name: Install gmsh
-        run: |
-          pip install gmsh
-
       - name: Install Testing Requirements
         run: pip install -r requirements_test.txt
 
