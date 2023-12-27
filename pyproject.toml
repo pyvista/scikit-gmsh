@@ -44,6 +44,7 @@ select = ["ALL"]
 ignore = [
     "D203",
     "D212",
+    "ISC001",
 ]
 
 [tool.ruff.format]

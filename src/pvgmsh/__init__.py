@@ -46,13 +46,13 @@ def frontal_delaunay_2d(
     triangulation.
 
     >>> import pyvista as pv
-    >>> import pvgmsh as pg
+    >>> import pvgmsh as pm
     >>> from pathlib import Path
 
-    >>> geometry = pv.Polygon(n_sides=4, radius=8, fill=False)
-    >>> geometry = geometry.rotate_z(45, inplace=False)
+    >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
+    >>> edge_source = edge_source.rotate_z(45, inplace=False)
 
-    >>> mesh = pg.frontal_delaunay_2d(geometry, target_size=1.0)
+    >>> mesh = pm.frontal_delaunay_2d(edge_source, target_size=1.0)
     <BLANKLINE>
     >>> mesh
     UnstructuredGrid (...)
@@ -65,8 +65,8 @@ def frontal_delaunay_2d(
 
     >>> plotter = pv.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white")
-    >>> _ = plotter.add_mesh(geometry, show_edges=True, line_width=4, color="blue")
-    >>> _ = plotter.add_points(geometry.points, style="points", point_size=20, color="blue")
+    >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="blue")
+    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color="blue")
     >>> plotter.show(cpos="xy", screenshot="frontal_delaunay_2d_01.png")
     """
     gmsh.initialize()
