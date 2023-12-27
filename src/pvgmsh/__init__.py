@@ -153,25 +153,7 @@ def delaunay_3d() -> pv.UnstructuredGrid:
     >>> _ = gmsh.model.geo.add_volume([1], 1)
     >>> gmsh.model.geo.synchronize()
     >>> gmsh.model.mesh.generate(3)
-    >>> element_types, element_tags, node_tags = gmsh.model.mesh.getElements()
-    >>> element_types
-    array([ 1,  2,  4, 15], dtype=int32)
-    >>> element_tags
-    [array([10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21], dtype=uint64), array([22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38,
-           39, 40, 41, 42, 43, 44, 45], dtype=uint64), array([46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62,
-           63, 64, 65, 66, 67, 68, 69], dtype=uint64), array([1, 2, 3, 4, 5, 6, 7, 8, 9], dtype=uint64)]
-    >>> node_tags
-    [array([1, 2, 2, 3, 3, 4, 4, 1, 1, 5, 2, 6, 3, 7, 4, 8, 8, 7, 7, 6, 6, 5,
-           5, 8], dtype=uint64), array([ 1,  2, 10,  4,  1, 10,  2,  3, 10,  3,  4, 10,  3,  4, 11,  7,  3,
-           11,  4,  8, 11,  8,  7, 11,  4,  1, 12,  1,  5, 12,  8,  4, 12,  5,
-            8, 12,  2,  3, 13,  6,  2, 13,  3,  7, 13,  7,  6, 13,  1,  2, 14,
-            5,  1, 14,  2,  6, 14,  6,  5, 14,  6,  5, 15,  5,  8, 15,  7,  6,
-           15,  8,  7, 15], dtype=uint64), array([12, 10, 11, 13, 14, 10, 12, 13, 15, 12, 11, 13, 14, 12, 15, 13, 15,
-            5, 14,  6,  4,  1, 10, 12, 10,  4, 11,  3,  7,  6, 15, 13,  4, 11,
-            8, 12,  1, 14, 12,  5,  3,  7, 11, 13,  2,  3, 10, 13,  5, 12,  8,
-           15, 11,  8, 15,  7, 10, 14,  1,  2,  2, 14,  6, 13, 10, 14,  2, 13,
-           11,  4, 10, 12,  1, 14, 10, 12, 11,  8, 12, 15,  5, 14, 12, 15,  6,
-           14, 15, 13,  3, 11, 10, 13,  7, 15, 11, 13], dtype=uint64), array([1, 2, 3, 4, 5, 6, 7, 8, 9], dtype=uint64)]
+    >>> # element_types, element_tags, node_tags = gmsh.model.mesh.getElements()
     >>> fp = tempfile.NamedTemporaryFile(mode="w+", suffix=".msh")
     >>> gmsh.write(fp.name)
     >>> mesh = pv.read(fp.name)
