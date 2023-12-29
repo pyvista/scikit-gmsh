@@ -1,5 +1,7 @@
 """PvGmsh package for 3D mesh generation."""
 
+from __future__ import annotations
+
 import tempfile
 
 import gmsh
@@ -7,7 +9,6 @@ import numpy as np
 import pyvista as pv
 
 from pvgmsh._version import __version__  # noqa: F401
-from __future__ import annotations
 
 
 def frontal_delaunay_2d(
