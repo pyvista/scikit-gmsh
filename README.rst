@@ -62,3 +62,4 @@ To visualize the model we can use PyVista.
 
 TODO Let's use embed
 TODO Let's return pv.PolyData
+TODO Let's add GUI in module
