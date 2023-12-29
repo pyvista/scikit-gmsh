@@ -78,6 +78,13 @@ def frontal_delaunay_2d(
             np.abs(edge_source.bounds[5] - edge_source.bounds[4]),
         )
 
+    if target_size is None:
+        target_size = np.max(
+            np.abs(edge_source.bounds[1] - edge_source.bounds[0]),
+            np.abs(edge_source.bounds[3] - edge_source.bounds[2]),
+            np.abs(edge_source.bounds[5] - edge_source.bounds[4]),
+        )
+
     for i, point in enumerate(edge_source.points):
         gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, i + 1)
 
