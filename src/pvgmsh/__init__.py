@@ -10,6 +10,8 @@ import pyvista as pv
 
 from pvgmsh._version import __version__  # noqa: F401
 
+FRONTAL_DELAUNAY_2D = 6
+
 
 def frontal_delaunay_2d(
     edge_source: pv.PolyData,
@@ -85,7 +87,7 @@ def frontal_delaunay_2d(
     >>> plotter.show(cpos="xy", screenshot="frontal_delaunay_2d_01.png")
     """
     gmsh.initialize()
-    gmsh.option.set_number("Mesh.Algorithm", 6)
+    gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
 
     if target_size is None:
         target_size = np.max(
