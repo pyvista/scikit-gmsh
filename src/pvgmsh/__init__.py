@@ -9,7 +9,10 @@ import pyvista as pv
 from pvgmsh._version import __version__  # noqa: F401
 
 
-def frontal_delaunay_2d(edge_source, target_size=None):
+def frontal_delaunay_2d(
+    edge_source: pv.PolyData,
+    target_size: float | None,
+) -> pv.UnstructuredGrid:
     """
     The Frontal-Delaunay 2D mesh algorithm.
 
