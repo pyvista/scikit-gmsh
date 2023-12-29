@@ -4,6 +4,10 @@ from __future__ import annotations
 import tempfile
 from pathlib import Path
 
+from __future__ import annotations
+
+import tempfile
+
 import gmsh
 import numpy as np
 import pyvista as pv
@@ -11,7 +15,6 @@ import pyvista as pv
 from pvgmsh._version import __version__  # noqa: F401
 
 FRONTAL_DELAUNAY_2D = 6
-
 
 def frontal_delaunay_2d(
     edge_source: pv.PolyData,
