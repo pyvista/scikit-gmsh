@@ -1,4 +1,5 @@
 """PvGmsh package for 3D mesh generation."""
+
 from __future__ import annotations
 
 import tempfile
