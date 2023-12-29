@@ -2,15 +2,6 @@ ci:
     autofix_prs: true
     autoupdate_schedule: weekly
 repos:
-- repo: https://github.com/psf/black
-  rev: 23.12.1
-  hooks:
-  - id: black
-- repo: https://github.com/keewis/blackdoc
-  rev: v0.3.9
-  hooks:
-  - id: blackdoc
-    files: '\.py$'
 
 - repo: https://github.com/DanielNoord/pydocstringformatter
   rev: v0.7.3
@@ -27,3 +18,10 @@ repos:
   hooks:
   - id: numpydoc-validation
     files: ^src/pvgmsh/
+
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.1.9
+  hooks:
+    - id: ruff
+      args: [ --fix ]
+    - id: ruff-format
