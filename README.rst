@@ -10,10 +10,9 @@ Motivation
 See discussion: https://github.com/pyvista/pyvista/discussions/2133#discussioncomment-2107992
 
 `PyVista`_ accessors for `Gmsh`_ to generate 3D finite element mesh.
+PyVista is the solution to known weaknesses of Gmsh.
 
-PyVista is the solution to the following.
-
-`Overview of Gmsh`_
+**Overview of Gmsh** in `Gmsh reference manual`_:
 
     Here are some known weaknesses of Gmsh:
 
@@ -23,7 +22,7 @@ PyVista is the solution to the following.
 
 .. _PyVista: https://docs.pyvista.org/version/stable/
 .. _Gmsh: https://gmsh.info/
-.. _Overview of Gmsh: https://gmsh.info/doc/texinfo/gmsh.html#Overview-of-Gmsh
+.. _Gmsh reference manual: https://gmsh.info/doc/texinfo/gmsh.html
 
 Usage
 =====
