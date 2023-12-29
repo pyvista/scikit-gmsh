@@ -47,27 +47,9 @@ def frontal_delaunay_2d(
 
     >>> import pyvista as pv
     >>> import pvgmsh as pm
+
     >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
     >>> edge_source = edge_source.rotate_z(45, inplace=False)
-    >>> edge_source
-    PolyData (...)
-      N Cells:    1
-      N Points:   4
-      N Strips:   0
-      X Bounds:   -5.657e+00, 5.657e+00
-      Y Bounds:   -5.657e+00, 5.657e+00
-      Z Bounds:   0.000e+00, 0.000e+00
-      N Arrays:   0
-    >>> edge_source.points
-    pyvista_ndarray([[-5.656854,  5.656854,  0.      ],
-                     [ 5.656854,  5.656854,  0.      ],
-                     [ 5.656854, -5.656854,  0.      ],
-                     [-5.656854, -5.656854,  0.      ]], dtype=float32)
-    >>> edge_source.faces
-    array([], dtype=int64)
-    >>> edge_source.lines
-    array([5, 0, 1, 2, 3, 0])
-
     >>> mesh = pm.frontal_delaunay_2d(edge_source, target_size=1.0)
     <BLANKLINE>
 
