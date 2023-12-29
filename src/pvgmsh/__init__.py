@@ -16,7 +16,7 @@ def frontal_delaunay_2d(
     target_size: float | None,
 ) -> pv.UnstructuredGrid:
     """
-    The Frontal-Delaunay 2D mesh algorithm.
+    Frontal-Delaunay 2D mesh algorithm.
 
     Parameters
     ----------
