@@ -54,6 +54,7 @@ def frontal_delaunay_2d(
 
     >>> mesh = pm.frontal_delaunay_2d(edge_source, target_size=1.0)
     <BLANKLINE>
+
     >>> mesh
     UnstructuredGrid (...)
       N Cells:    398
