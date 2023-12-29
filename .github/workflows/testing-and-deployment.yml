@@ -29,7 +29,7 @@ jobs:
       # see discussion at https://github.com/pyvista/pyvista/issues/2867
       matrix:
         include:
-          - python-version: '3.11'
+          - python-version: '3.12'
             vtk-version: 'latest'
     steps:
       - uses: actions/checkout@v3
@@ -41,24 +41,26 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: Python-${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.vtk-version }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements_test.txt') }}
-          restore-keys: |
-            Python-${{ runner.os }}-${{ matrix.python-version }}
-
-      - name: Set up vtk
-        if: ${{ matrix.vtk-version != 'latest' }}
-        run: pip install vtk==${{ matrix.vtk-version }}
-
-      - name: Install gmsh
-        run: |
-          sudo apt -y install libgl1-mesa-glx xvfb python-tk libglu1 libxcursor-dev libxft2 libxinerama1 libfltk1.3-dev libfreetype6-dev libgl1-mesa-dev libocct-foundation-dev libocct-data-exchange-dev
-          pip install gmsh
+      - name: Install packages
+        run: >
+          sudo apt -y install
+          libgl1-mesa-glx
+          xvfb
+          python-tk
+          libglu1
+          libxcursor-dev
+          libxft2
+          libxinerama1
+          libfltk1.3-dev
+          libfreetype6-dev
+          libgl1-mesa-dev
+          libocct-foundation-dev
+          libocct-data-exchange-dev
 
       - name: Install Testing Requirements
-        run: pip install -r requirements_test.txt
+        run: |
+          pip install -e .
+          pip install -r requirements_test.txt
 
       - name: Unit Testing
         run: |
