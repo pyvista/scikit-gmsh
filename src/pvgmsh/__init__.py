@@ -48,9 +48,9 @@ def frontal_delaunay_2d(
 
     >>> import pyvista as pv
     >>> import pvgmsh as pm
+
     >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
     >>> edge_source = edge_source.rotate_z(45, inplace=False)
-
     >>> mesh = pm.frontal_delaunay_2d(edge_source, target_size=1.0)
     <BLANKLINE>
 
