@@ -1,9 +1,8 @@
 [build-system]
 requires = [
-  'gmsh',
-  'meshio',
-  'numpy',
-  'pyvista',
+  'gmsh==4.12.0',
+  'meshio==5.3.4',
+  'pyvista==0.43.1',
   'setuptools',
 ]
 build-backend = 'setuptools.build_meta'
@@ -12,10 +11,9 @@ build-backend = 'setuptools.build_meta'
 name = "pyvista-gmsh"
 dynamic = ['version']
 dependencies = [
-  'gmsh',
-  'meshio',
-  'numpy',
-  'pyvista',
+  'gmsh==4.12.0',
+  'meshio==5.3.4',
+  'pyvista==0.43.1',
 ]
 
 [tool.setuptools.dynamic]
