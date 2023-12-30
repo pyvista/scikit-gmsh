@@ -104,8 +104,8 @@ def delaunay_3d() -> pv.UnstructuredGrid:
 
     Examples
     --------
-    >>> import pyvista as pv
     >>> import gmsh
+    >>> import pyvista as pv
     >>> from pygmsh.helpers import extract_to_meshio
     >>> from pyvista.core.utilities import fileio
     >>> gmsh.initialize()
