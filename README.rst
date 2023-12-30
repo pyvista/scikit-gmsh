@@ -43,7 +43,7 @@ To visualize the model we can use PyVista.
 
 .. code-block:: python
 
-    >>> plotter = pv.Plotter(off_screen=True)
+    >>> plotter = pv.Plotter()
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white")
     >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="blue")
     >>> _ = plotter.add_points(
