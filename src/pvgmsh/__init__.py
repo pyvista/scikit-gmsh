@@ -2,13 +2,19 @@
 
 from __future__ import annotations
 
-import tempfile
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import pyvista as pv
 
 import gmsh
 import numpy as np
-import pyvista as pv
+from pygmsh.helpers import extract_to_meshio
+from pyvista.core.utilities import fileio
 
 from pvgmsh._version import __version__  # noqa: F401
+
+FRONTAL_DELAUNAY_2D = 6
 
 
 def frontal_delaunay_2d(
@@ -45,29 +51,10 @@ def frontal_delaunay_2d(
 
     >>> import pyvista as pv
     >>> import pvgmsh as pm
+
     >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
     >>> edge_source = edge_source.rotate_z(45, inplace=False)
-    >>> edge_source
-    PolyData (...)
-      N Cells:    1
-      N Points:   4
-      N Strips:   0
-      X Bounds:   -5.657e+00, 5.657e+00
-      Y Bounds:   -5.657e+00, 5.657e+00
-      Z Bounds:   0.000e+00, 0.000e+00
-      N Arrays:   0
-    >>> edge_source.points
-    pyvista_ndarray([[-5.656854,  5.656854,  0.      ],
-                     [ 5.656854,  5.656854,  0.      ],
-                     [ 5.656854, -5.656854,  0.      ],
-                     [-5.656854, -5.656854,  0.      ]], dtype=float32)
-    >>> edge_source.faces
-    array([], dtype=int64)
-    >>> edge_source.lines
-    array([5, 0, 1, 2, 3, 0])
-
     >>> mesh = pm.frontal_delaunay_2d(edge_source, target_size=1.0)
-    <BLANKLINE>
 
     >>> mesh
     UnstructuredGrid (...)
@@ -85,7 +72,7 @@ def frontal_delaunay_2d(
     >>> plotter.show(cpos="xy", screenshot="frontal_delaunay_2d_01.png")
     """
     gmsh.initialize()
-    gmsh.option.set_number("Mesh.Algorithm", 6)
+    gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
 
     if target_size is None:
         target_size = np.max(
@@ -105,17 +92,7 @@ def frontal_delaunay_2d(
     gmsh.model.geo.add_plane_surface([1], 1)
     gmsh.model.geo.synchronize()
     gmsh.model.mesh.generate(2)
-
-    with tempfile.NamedTemporaryFile(
-        mode="w+",
-        encoding="utf-8",
-        newline="\n",
-        suffix=".msh",
-    ) as fp:
-        gmsh.write(fp.name)
-        mesh = pv.read(fp.name)
-        mesh.clear_data()
-
+    mesh = fileio.from_meshio(extract_to_meshio())
     gmsh.clear()
     gmsh.finalize()
     return mesh
