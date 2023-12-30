@@ -15,7 +15,7 @@ FRONTAL_DELAUNAY_2D = 6
 def frontal_delaunay_2d(
     edge_source: pv.PolyData,
     target_size: float | None,
-) -> pv.UnstructuredGrid:
+) -> pv.PolyData | None:
     """
     Frontal-Delaunay 2D mesh algorithm.
 
