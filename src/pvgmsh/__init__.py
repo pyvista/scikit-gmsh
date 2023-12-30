@@ -143,13 +143,8 @@ def delaunay_3d() -> pv.UnstructuredGrid:
     >>> _ = gmsh.model.geo.add_volume([1], 1)
     >>> gmsh.model.geo.synchronize()
     >>> gmsh.model.mesh.generate(3)
-    >>> fp = tempfile.NamedTemporaryFile(mode="w+", suffix=".msh", delete=False)
-    >>> gmsh.write(fp.name)
-    >>> fp.close()
-    >>> mesh = pv.read(fp.name)
-    <BLANKLINE>
+    >>> mesh = fileio.from_meshio(extract_to_meshio())
     >>> mesh.clear_data()
-    >>> Path(fp.name).unlink()
     >>> mesh
     UnstructuredGrid (...)
       N Cells:    69
