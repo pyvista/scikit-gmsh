@@ -105,6 +105,8 @@ def delaunay_3d() -> pv.UnstructuredGrid:
     Examples
     --------
     >>> import gmsh
+    >>> from pygmsh.helpers import extract_to_meshio
+    >>> from pyvista.core.utilities import fileio
     >>> gmsh.initialize()
     >>> _ = gmsh.model.geo.add_point(0, 0, 0, 1.0, 1)
     >>> _ = gmsh.model.geo.add_point(1, 0, 0, 1.0, 2)
