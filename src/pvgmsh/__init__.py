@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
-import tempfile
-from pathlib import Path
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import pyvista as pv
 
 import gmsh
 import numpy as np
-import pyvista as pv
+from pygmsh.helpers import extract_to_meshio
+from pyvista.core.utilities import fileio
 
 from pvgmsh._version import __version__  # noqa: F401
 
@@ -52,7 +55,6 @@ def frontal_delaunay_2d(
     >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
     >>> edge_source = edge_source.rotate_z(45, inplace=False)
     >>> mesh = pm.frontal_delaunay_2d(edge_source, target_size=1.0)
-    <BLANKLINE>
 
     >>> mesh
     UnstructuredGrid (...)
@@ -90,20 +92,7 @@ def frontal_delaunay_2d(
     gmsh.model.geo.add_plane_surface([1], 1)
     gmsh.model.geo.synchronize()
     gmsh.model.mesh.generate(2)
-
-    with tempfile.NamedTemporaryFile(
-        mode="w+",
-        encoding="utf-8",
-        newline="\n",
-        suffix=".msh",
-        delete=False,
-    ) as fp:
-        gmsh.write(fp.name)
-
-    mesh = pv.read(fp.name)
-    mesh.clear_data()
-    Path(fp.name).unlink()
-
+    mesh = fileio.from_meshio(extract_to_meshio())
     gmsh.clear()
     gmsh.finalize()
     return mesh
