@@ -36,7 +36,7 @@ def frontal_delaunay_2d(
 
     Returns
     -------
-    pyvista.UnstructuredGrid
+    pv.PolyData
         Mesh from the 2D delaunay generation.
 
     Examples
@@ -98,7 +98,7 @@ def frontal_delaunay_2d(
     return None
 
 
-def delaunay_3d() -> pv.UnstructuredGrid:
+def delaunay_3d() -> pv.PolyData:
     """
     Delaunay 3D mesh algorithm.
 
