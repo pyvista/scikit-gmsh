@@ -2,15 +2,10 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    import pyvista as pv
-
 import gmsh
 import numpy as np
+import pyvista as pv
 from pygmsh.helpers import extract_to_meshio
-from pyvista.core.utilities import fileio
 
 from pvgmsh._version import __version__  # noqa: F401
 
@@ -20,7 +15,7 @@ FRONTAL_DELAUNAY_2D = 6
 def frontal_delaunay_2d(
     edge_source: pv.PolyData,
     target_size: float | None,
-) -> pv.UnstructuredGrid:
+) -> pv.PolyData | None:
     """
     Frontal-Delaunay 2D mesh algorithm.
 
@@ -57,9 +52,10 @@ def frontal_delaunay_2d(
     >>> mesh = pm.frontal_delaunay_2d(edge_source, target_size=1.0)
 
     >>> mesh
-    UnstructuredGrid (...)
-      N Cells:    398
+    PolyData (...)
+      N Cells:    346
       N Points:   198
+      N Strips:   0
       X Bounds:   -5.657e+00, 5.657e+00
       Y Bounds:   -5.657e+00, 5.657e+00
       Z Bounds:   0.000e+00, 0.000e+00
@@ -92,7 +88,11 @@ def frontal_delaunay_2d(
     gmsh.model.geo.add_plane_surface([1], 1)
     gmsh.model.geo.synchronize()
     gmsh.model.mesh.generate(2)
-    mesh = fileio.from_meshio(extract_to_meshio())
+    mesh = extract_to_meshio()
     gmsh.clear()
     gmsh.finalize()
-    return mesh
+
+    for cell in mesh.cells:
+        if cell.type == "triangle":
+            return pv.PolyData.from_regular_faces(mesh.points, cell.data)
+    return None
