@@ -1,9 +1,6 @@
-======
-PVGmsh
-======
-
 .. image:: branding/logo/logomark/pvgmsh_logo_icon.svg
-   :width: 10%
+   :align: center
+   :width: 20%
 
 `PyVista`_ accessors for `Gmsh`_ to generate 3D finite element mesh.
 
