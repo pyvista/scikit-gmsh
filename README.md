@@ -40,9 +40,9 @@ To visualize the model we can use PyVista.
 ```python
     >>> plotter = pv.Plotter()
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white")
-    >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="blue")
+    >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="red")
     >>> _ = plotter.add_points(
-    ...     edge_source.points, style="points", point_size=20, color="blue"
+    ...     edge_source.points, style="points", point_size=20, color="red"
     ... )
     >>> plotter.show(cpos="xy")
 ```
