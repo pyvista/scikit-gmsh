@@ -1,20 +1,20 @@
-.. |Ruff| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
-   :target: https://github.com/astral-sh/ruff
-   :alt: Ruff
-
-.. image:: branding/logo/logomark/pvgmsh_logo_icon.svg
-   :width: 10%
-
 ======
 PVGmsh
 ======
 
-|Ruff|
+.. image:: branding/logo/logomark/pvgmsh_logo_icon.svg
+   :width: 10%
 
 `PyVista`_ accessors for `Gmsh`_ to generate 3D finite element mesh.
 
 .. _PyVista: https://docs.pyvista.org/version/stable/
 .. _Gmsh: https://gmsh.info/
+
+|Ruff|
+
+.. |Ruff| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
+   :target: https://github.com/astral-sh/ruff
+   :alt: Ruff
 
 Motivation
 ==========
