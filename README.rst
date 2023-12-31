@@ -2,9 +2,9 @@
    :target: https://github.com/astral-sh/ruff
    :alt: Ruff
 
-============
-PyVista-Gmsh
-============
+======
+PVGmsh
+======
 
 |Ruff|
 
