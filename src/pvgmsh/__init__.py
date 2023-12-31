@@ -108,6 +108,21 @@ def delaunay_3d() -> pv.PolyData:
     >>> import pyvista as pv
     >>> from pygmsh.helpers import extract_to_meshio
     >>> from pyvista.core.utilities import fileio
+    >>> edge_source = pv.Cube()
+    >>> edge_source.points
+    pyvista_ndarray([[-0.5, -0.5, -0.5],
+                     [-0.5, -0.5,  0.5],
+                     [-0.5,  0.5,  0.5],
+                     [-0.5,  0.5, -0.5],
+                     [ 0.5, -0.5, -0.5],
+                     [ 0.5,  0.5, -0.5],
+                     [ 0.5,  0.5,  0.5],
+                     [ 0.5, -0.5,  0.5]], dtype=float32)
+    >>> edge_source.faces
+    array([4, 0, 1, 2, 3, 4, 4, 5, 6, 7, 4, 0, 4, 7, 1, 4, 3, 2, 6, 5, 4, 0,
+           3, 5, 4, 4, 1, 7, 6, 2])
+    >>> for i in range(10):
+    ...     continue
     >>> gmsh.initialize()
     >>> _ = gmsh.model.geo.add_point(0, 0, 0, 1.0, 1)
     >>> _ = gmsh.model.geo.add_point(1, 0, 0, 1.0, 2)
