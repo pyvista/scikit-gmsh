@@ -2,6 +2,9 @@
    :target: https://github.com/astral-sh/ruff
    :alt: Ruff
 
+.. image:: branding/logo/logomark/pvgmsh_logo_icon.svg
+   :width: 10%
+
 ======
 PVGmsh
 ======
