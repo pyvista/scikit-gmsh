@@ -121,6 +121,8 @@ def delaunay_3d() -> pv.PolyData:
     >>> edge_source.faces
     array([4, 0, 1, 2, 3, 4, 4, 5, 6, 7, 4, 0, 4, 7, 1, 4, 3, 2, 6, 5, 4, 0,
            3, 5, 4, 4, 1, 7, 6, 2])
+    >>> edge_source.lines
+    array([], dtype=int64)
     >>> for i in range(10):
     ...     continue
     >>> gmsh.initialize()
