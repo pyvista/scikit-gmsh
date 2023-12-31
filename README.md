@@ -1,48 +1,43 @@
-.. image:: branding/logo/logomark/pvgmsh_logo_icon.svg
-   :align: center
-   :width: 20%
+<h1 align="center">
+  <a href="https://github.com/pyvista/pvgmsh#--------">
+    <img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/branding/logo/logomark/pvgmsh_logo_icon.svg"
+         alt="PVGmsh"
+         width="200"></a>
+</h1>
 
-`PyVista`_ accessors for `Gmsh`_ to generate 3D finite element mesh.
+<h3 align="center">
+[PyVista](https://docs.pyvista.org/version/stable/) accessors for [Gmsh](https://gmsh.info/) to generate 3D finite element mesh.
+</h3>
 
-.. _PyVista: https://docs.pyvista.org/version/stable/
-.. _Gmsh: https://gmsh.info/
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
-|Ruff|
-
-.. |Ruff| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
-   :target: https://github.com/astral-sh/ruff
-   :alt: Ruff
-
-Motivation
-==========
+## Motivation
 
 See discussion: https://github.com/pyvista/pyvista/discussions/2133#discussioncomment-2107992
 
-Usage
-=====
+## Usage
 
-.. code-block:: python
-
+```python
     >>> import pyvista as pv
     >>> import pvgmsh as pm
+```
 
 We can define the surface using PyVista.
 
-.. code-block:: python
-
+```python
     >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
     >>> edge_source = edge_source.rotate_z(45, inplace=False)
+```
 
 We can then generate a 2D mesh.
 
-.. code-block:: python
-
+```python
     >>> mesh = pm.frontal_delaunay_2d(edge_source, target_size=1.0)
+```
 
 To visualize the model we can use PyVista.
 
-.. code-block:: python
-
+```python
     >>> plotter = pv.Plotter()
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white")
     >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="blue")
@@ -50,5 +45,6 @@ To visualize the model we can use PyVista.
     ...     edge_source.points, style="points", point_size=20, color="blue"
     ... )
     >>> plotter.show(cpos="xy")
+```
 
-.. image:: https://github.com/pyvista/pyvista-gmsh/raw/main/frontal_delaunay_2d_01.png
+![frontal_delaunay_2d_01](https://github.com/pyvista/pyvista-gmsh/raw/main/frontal_delaunay_2d_01.png)
