@@ -2,27 +2,21 @@
    :target: https://github.com/astral-sh/ruff
    :alt: Ruff
 
+============
+PyVista-Gmsh
+============
+
 |Ruff|
+
+`PyVista`_ accessors for `Gmsh`_ to generate 3D finite element mesh.
+
+.. _PyVista: https://docs.pyvista.org/version/stable/
+.. _Gmsh: https://gmsh.info/
 
 Motivation
 ==========
 
 See discussion: https://github.com/pyvista/pyvista/discussions/2133#discussioncomment-2107992
-
-`PyVista`_ accessors for `Gmsh`_ to generate 3D finite element mesh.
-PyVista is the solution to known weaknesses of Gmsh.
-
-**Overview of Gmsh** in `Gmsh reference manual`_:
-
-    Here are some known weaknesses of Gmsh:
-
-    * Gmsh is not a multi-bloc mesh generator: all meshes produced by Gmsh are conforming in the sense of finite element meshes;
-    * Gmsh’s graphical user interface is only exposing a limited number of the available features, and many aspects of the interface could be enhanced (especially manipulators).
-    * Your complaints about Gmsh here :-)
-
-.. _PyVista: https://docs.pyvista.org/version/stable/
-.. _Gmsh: https://gmsh.info/
-.. _Gmsh reference manual: https://gmsh.info/doc/texinfo/gmsh.html
 
 Usage
 =====
@@ -49,7 +43,7 @@ To visualize the model we can use PyVista.
 
 .. code-block:: python
 
-    >>> plotter = pv.Plotter(off_screen=True)
+    >>> plotter = pv.Plotter()
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white")
     >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="blue")
     >>> _ = plotter.add_points(
