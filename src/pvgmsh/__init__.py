@@ -148,14 +148,13 @@ def delaunay_3d(
     """
     points = edge_source.points
     faces = edge_source.regular_faces
-    bounds = edge_source.bounds
 
     gmsh.initialize()
     gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
 
     for i, point in enumerate(points):
         id_ = i + 1
-        gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, i + 1)
+        gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
 
     surface_loop = []
     for i, face in enumerate(faces):
