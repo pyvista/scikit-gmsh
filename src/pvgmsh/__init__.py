@@ -10,6 +10,7 @@ from pygmsh.helpers import extract_to_meshio
 from pvgmsh._version import __version__  # noqa: F401
 
 FRONTAL_DELAUNAY_2D = 6
+DELAUNAY_3D = 1
 
 
 def frontal_delaunay_2d(
@@ -28,7 +29,6 @@ def frontal_delaunay_2d(
         are assumed to reference points in the input point set
         (i.e. point ids are identical in the input and
         source).
-
 
     target_size : float, optional
         Target mesh size close to the points.
@@ -99,86 +99,85 @@ def frontal_delaunay_2d(
     return None
 
 
-def delaunay_3d() -> pv.PolyData:
+def delaunay_3d(
+    edge_source: pv.PolyData,
+    target_size: float | None,
+) -> pv.PolyData | None:
     """
     Delaunay 3D mesh algorithm.
 
+    Parameters
+    ----------
+    edge_source : pyvista.PolyData
+        Specify the source object used to specify constrained
+        edges and loops. If set, and lines/polygons are defined, a
+        constrained triangulation is created. The lines/polygons
+        are assumed to reference points in the input point set
+        (i.e. point ids are identical in the input and
+        source).
+
+    target_size : float
+        Target mesh size close to the points.
+
+    Returns
+    -------
+    pyvista.PolyData
+        Mesh from the 3D delaunay generation.
+
     Examples
     --------
-    >>> import gmsh
     >>> import pyvista as pv
-    >>> from pygmsh.helpers import extract_to_meshio
-    >>> from pyvista.core.utilities import fileio
-    >>> edge_source = pv.Cube()
-    >>> edge_source.points
-    pyvista_ndarray([[-0.5, -0.5, -0.5],
-                     [-0.5, -0.5,  0.5],
-                     [-0.5,  0.5,  0.5],
-                     [-0.5,  0.5, -0.5],
-                     [ 0.5, -0.5, -0.5],
-                     [ 0.5,  0.5, -0.5],
-                     [ 0.5,  0.5,  0.5],
-                     [ 0.5, -0.5,  0.5]], dtype=float32)
-    >>> edge_source.faces
-    array([4, 0, 1, 2, 3, 4, 4, 5, 6, 7, 4, 0, 4, 7, 1, 4, 3, 2, 6, 5, 4, 0,
-           3, 5, 4, 4, 1, 7, 6, 2])
-    >>> edge_source.lines
-    array([], dtype=int64)
-    >>> for i in range(10):
-    ...     continue
-    >>> gmsh.initialize()
-    >>> _ = gmsh.model.geo.add_point(0, 0, 0, 1.0, 1)
-    >>> _ = gmsh.model.geo.add_point(1, 0, 0, 1.0, 2)
-    >>> _ = gmsh.model.geo.add_point(1, 1, 0, 1.0, 3)
-    >>> _ = gmsh.model.geo.add_point(0, 1, 0, 1.0, 4)
-    >>> _ = gmsh.model.geo.add_point(0, 0, 1, 1.0, 5)
-    >>> _ = gmsh.model.geo.add_point(1, 0, 1, 1.0, 6)
-    >>> _ = gmsh.model.geo.add_point(1, 1, 1, 1.0, 7)
-    >>> _ = gmsh.model.geo.add_point(0, 1, 1, 1.0, 8)
-    >>> _ = gmsh.model.geo.add_point(1, 1, 1, 1.0, 9)
-    >>> _ = gmsh.model.geo.add_line(1, 2, 1)
-    >>> _ = gmsh.model.geo.add_line(2, 3, 2)
-    >>> _ = gmsh.model.geo.add_line(3, 4, 3)
-    >>> _ = gmsh.model.geo.add_line(4, 1, 4)
-    >>> _ = gmsh.model.geo.add_line(1, 5, 5)
-    >>> _ = gmsh.model.geo.add_line(2, 6, 6)
-    >>> _ = gmsh.model.geo.add_line(3, 7, 7)
-    >>> _ = gmsh.model.geo.add_line(4, 8, 8)
-    >>> _ = gmsh.model.geo.add_line(8, 7, 9)
-    >>> _ = gmsh.model.geo.add_line(7, 6, 10)
-    >>> _ = gmsh.model.geo.add_line(6, 5, 11)
-    >>> _ = gmsh.model.geo.add_line(5, 8, 12)
-    >>> _ = gmsh.model.geo.add_curve_loop([1, 2, 3, 4], 1)
-    >>> _ = gmsh.model.geo.add_curve_loop([3, 8, 9, -7], 3)
-    >>> _ = gmsh.model.geo.add_curve_loop([4, 5, 12, -8], 5)
-    >>> _ = gmsh.model.geo.add_curve_loop([7, 10, -6, 2], 7)
-    >>> _ = gmsh.model.geo.add_curve_loop([1, 6, 11, -5], 9)
-    >>> _ = gmsh.model.geo.add_curve_loop([9, 10, 11, 12], 11)
-    >>> _ = gmsh.model.geo.add_plane_surface([1], 1)
-    >>> _ = gmsh.model.geo.add_plane_surface([3], 2)
-    >>> _ = gmsh.model.geo.add_plane_surface([5], 3)
-    >>> _ = gmsh.model.geo.add_plane_surface([7], 4)
-    >>> _ = gmsh.model.geo.add_plane_surface([9], 5)
-    >>> _ = gmsh.model.geo.add_plane_surface([11], 6)
-    >>> _ = gmsh.model.geo.add_surface_loop([6, 2, 4, 5, 1, 3], 1)
-    >>> _ = gmsh.model.geo.add_volume([1], 1)
-    >>> gmsh.model.geo.synchronize()
-    >>> gmsh.model.mesh.generate(3)
-    >>> mesh = fileio.from_meshio(extract_to_meshio())
-    >>> mesh.clear_data()
-    >>> mesh
-    UnstructuredGrid (...)
-      N Cells:    69
-      N Points:   15
-      X Bounds:   0.000e+00, 1.000e+00
-      Y Bounds:   0.000e+00, 1.000e+00
-      Z Bounds:   0.000e+00, 1.000e+00
-      N Arrays:   0
+    >>> import pvgmsh as pm
 
-    >>> gmsh.clear()
-    >>> gmsh.finalize()
+    >>> edge_source = pv.Cube()
+    >>> mesh = pm.delaunay_3d(edge_source, target_size=1.0)
+
+    >>> mesh
+    PolyData (...)
+      N Cells:    24
+      N Points:   14
+      N Strips:   0
+      X Bounds:   -5.000e-01, 5.000e-01
+      Y Bounds:   -5.000e-01, 5.000e-01
+      Z Bounds:   -5.000e-01, 5.000e-01
+      N Arrays:   0
 
     >>> plotter = pv.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white")
     >>> plotter.show(screenshot="delaunay_3d_01.png")
     """
+    points = edge_source.points
+    faces = edge_source.regular_faces
+    bounds = edge_source.bounds
+
+    gmsh.initialize()
+    gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
+
+    for i, point in enumerate(points):
+        id_ = i + 1
+        gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, i + 1)
+
+    surface_loop = []
+    for i, face in enumerate(faces):
+        gmsh.model.geo.add_line(face[0] + 1, face[1] + 1, i * 4 + 0)
+        gmsh.model.geo.add_line(face[1] + 1, face[2] + 1, i * 4 + 1)
+        gmsh.model.geo.add_line(face[2] + 1, face[3] + 1, i * 4 + 2)
+        gmsh.model.geo.add_line(face[3] + 1, face[0] + 1, i * 4 + 3)
+        gmsh.model.geo.add_curve_loop([i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1)
+        gmsh.model.geo.add_plane_surface([i + 1], i + 1)
+        surface_loop.append(i + 1)
+
+    gmsh.model.geo.add_surface_loop(surface_loop, 1)
+    gmsh.model.geo.add_volume([1], 1)
+
+    gmsh.model.geo.synchronize()
+    gmsh.model.mesh.generate(3)
+
+    mesh = extract_to_meshio()
+    gmsh.clear()
+    gmsh.finalize()
+
+    for cell in mesh.cells:
+        if cell.type == "tetra":
+            return pv.PolyData.from_regular_faces(mesh.points, cell.data)
+    return None
