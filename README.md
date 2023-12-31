@@ -6,7 +6,7 @@
 </h1>
 
 <h3 align="center">
-[PyVista](https://docs.pyvista.org/version/stable/) accessors for [Gmsh](https://gmsh.info/) to generate 3D finite element mesh.
+PyVista accessors for Gmsh to generate 3D finite element mesh.
 </h3>
 
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
