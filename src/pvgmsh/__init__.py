@@ -36,7 +36,7 @@ def frontal_delaunay_2d(
 
     Returns
     -------
-    pv.PolyData
+    pyvista.PolyData
         Mesh from the 2D delaunay generation.
 
     Examples
