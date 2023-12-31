@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 500 469.52531"
+   fill="#ffffff"
+   fill-rule="evenodd"
+   stroke="#000000"
+   stroke-linecap="round"
+   stroke-linejoin="round"
+   font-family="Roboto"
+   font-size="14px"
+   text-anchor="middle"
+   version="1.1"
+   id="svg242"
+   sodipodi:docname="pvgmsh_logo_icon.svg"
+   width="500"
+   height="469.5253"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs246" />
+  <sodipodi:namedview
+     id="namedview244"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     showgrid="false" />
+  <path
+     style="fill:#808080;fill-opacity:1;stroke:none;stroke-width:2.9453"
+     d="M 76.253402,392.16036 215.68813,294.55601 424.84037,392.16036 Z"
+     id="path4116" />
+  <path
+     style="fill:#f2f2f2;fill-opacity:1;stroke:none;stroke-width:2.9453"
+     d="M 76.253402,392.16036 250.54682,311.11389 V 43.573387 Z"
+     id="path4118" />
+  <path
+     style="fill:#333333;fill-opacity:1;stroke:none;stroke-width:2.9453"
+     d="M 424.84031,392.16036 250.54682,311.11389 V 43.573387 Z"
+     id="path4120" />
+  <g
+     transform="matrix(9.7817774,0,0,9.7817774,425.36504,352.14399)"
+     id="g398-5"
+     style="fill:#808080;stroke:none">
+    <path
+       d="M 5.71,-34.08 H 1.06 V -36 H 7.63 V 12 H 1.06 v -1.92 h 4.65 z"
+       fill="#404040"
+       id="path396-3"
+       style="fill:#808080;stroke:none" />
+  </g>
+  <g
+     transform="matrix(9.7817774,0,0,9.7817774,-55.36486,352.14399)"
+     id="g509-5"
+     style="fill:#808080;stroke:none">
+    <path
+       d="M 12.24,12 H 5.66 v -48 h 6.58 v 1.92 H 7.58 v 44.16 h 4.66 z"
+       fill="#404040"
+       id="path507-6"
+       style="fill:#808080;stroke:none" />
+  </g>
+</svg>
