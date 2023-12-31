@@ -63,26 +63,27 @@ def frontal_delaunay_2d(
 
     >>> plotter = pv.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white")
-    >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="blue")
-    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color="blue")
+    >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="red")
+    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color="red")
     >>> plotter.show(cpos="xy", screenshot="frontal_delaunay_2d_01.png")
     """
+    points = edge_source.points
+    lines = edge_source.lines
+    bounds = edge_source.bounds
+
     gmsh.initialize()
     gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
 
     if target_size is None:
-        target_size = np.max(
-            np.abs(edge_source.bounds[1] - edge_source.bounds[0]),
-            np.abs(edge_source.bounds[3] - edge_source.bounds[2]),
-            np.abs(edge_source.bounds[5] - edge_source.bounds[4]),
-        )
+        target_size = np.max(np.abs(bounds[1] - bounds[0]), np.abs(bounds[3] - bounds[2]), np.abs(bounds[5] - bounds[4]))
 
-    for i, point in enumerate(edge_source.points):
-        gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, i + 1)
+    for i, point in enumerate(points):
+        id_ = i + 1
+        gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
 
-    lines = edge_source.lines
     for i in range(lines[0] - 1):
-        gmsh.model.geo.add_line(lines[i + 1] + 1, lines[i + 2] + 1, i + 1)
+        id_ = i + 1
+        gmsh.model.geo.add_line(lines[i + 1] + 1, lines[i + 2] + 1, id_)
 
     gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
     gmsh.model.geo.add_plane_surface([1], 1)

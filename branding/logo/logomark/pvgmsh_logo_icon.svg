@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   viewBox="0 0 500 469.52531"
+   viewBox="0 0 500 600"
    fill="#ffffff"
    fill-rule="evenodd"
    stroke="#000000"
@@ -11,20 +11,12 @@
    text-anchor="middle"
    version="1.1"
    id="svg242"
-   sodipodi:docname="pvgmsh_logo_icon.svg"
    width="500"
-   height="469.5253"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   height="600"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
      id="defs246" />
-  <sodipodi:namedview
-     id="namedview244"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     showgrid="false" />
   <path
      style="fill:#808080;fill-opacity:1;stroke:none;stroke-width:2.9453"
      d="M 76.253402,392.16036 215.68813,294.55601 424.84037,392.16036 Z"
@@ -57,4 +49,14 @@
        id="path507-6"
        style="fill:#808080;stroke:none" />
   </g>
+  <text
+     xml:space="preserve"
+     style="font-size:133.333px;font-family:Z003;-inkscape-font-specification:Z003;fill:#000000"
+     x="248.5788"
+     y="580.49976"
+     id="text170"><tspan
+       id="tspan168"
+       x="248.57878"
+       y="580.49976"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:133.333px;font-family:Roboto;-inkscape-font-specification:Roboto">PVGmsh</tspan></text>
 </svg>
