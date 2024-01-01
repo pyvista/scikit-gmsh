@@ -6,6 +6,7 @@ import gmsh
 import numpy as np
 import pyvista as pv
 from pygmsh.helpers import extract_to_meshio
+from pyvista.core.utilities import fileio
 
 from pvgmsh._version import __version__  # noqa: F401
 
@@ -133,10 +134,9 @@ def delaunay_3d(
     >>> mesh = pm.delaunay_3d(edge_source, target_size=1.0)
 
     >>> mesh
-    PolyData (...)
-      N Cells:    24
+    UnstructuredGrid (...)
+      N Cells:    80
       N Points:   14
-      N Strips:   0
       X Bounds:   -5.000e-01, 5.000e-01
       Y Bounds:   -5.000e-01, 5.000e-01
       Z Bounds:   -5.000e-01, 5.000e-01
@@ -172,11 +172,8 @@ def delaunay_3d(
     gmsh.model.geo.synchronize()
     gmsh.model.mesh.generate(3)
 
-    mesh = extract_to_meshio()
+    mesh = fileio.from_meshio(extract_to_meshio())
     gmsh.clear()
     gmsh.finalize()
 
-    for cell in mesh.cells:
-        if cell.type == "tetra":
-            return pv.PolyData.from_regular_faces(mesh.points, cell.data)
-    return None
+    return mesh
