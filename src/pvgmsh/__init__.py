@@ -6,10 +6,12 @@ import gmsh
 import numpy as np
 import pyvista as pv
 from pygmsh.helpers import extract_to_meshio
+from pyvista.core.utilities import fileio
 
 from pvgmsh._version import __version__  # noqa: F401
 
 FRONTAL_DELAUNAY_2D = 6
+DELAUNAY_3D = 1
 
 
 def frontal_delaunay_2d(
@@ -96,3 +98,96 @@ def frontal_delaunay_2d(
         if cell.type == "triangle":
             return pv.PolyData.from_regular_faces(mesh.points, cell.data)
     return None
+
+
+def delaunay_3d(
+    edge_source: pv.PolyData,
+    target_size: float | None,
+) -> pv.UnstructuredGrid | None:
+    """
+    Delaunay 3D mesh algorithm.
+
+    Parameters
+    ----------
+    edge_source : pyvista.PolyData
+        Specify the source object used to specify constrained
+        edges and loops. If set, and lines/polygons are defined, a
+        constrained triangulation is created. The lines/polygons
+        are assumed to reference points in the input point set
+        (i.e. point ids are identical in the input and
+        source).
+
+    target_size : float
+        Target mesh size close to the points.
+
+    Returns
+    -------
+    pyvista.UnstructuredGrid
+        Mesh from the 3D delaunay generation.
+
+    Examples
+    --------
+    >>> import pyvista as pv
+    >>> import pvgmsh as pm
+
+    >>> edge_source = pv.Cube()
+    >>> mesh = pm.delaunay_3d(edge_source, target_size=10.0)
+
+    >>> mesh
+    UnstructuredGrid (...)
+      N Cells:    24
+      N Points:   14
+      X Bounds:   -5.000e-01, 5.000e-01
+      Y Bounds:   -5.000e-01, 5.000e-01
+      Z Bounds:   -5.000e-01, 5.000e-01
+      N Arrays:   0
+
+    >>> mesh = mesh.rotate_z(30)
+    >>> plotter = pv.Plotter(off_screen=True)
+    >>> _ = plotter.add_mesh(mesh, opacity=0.5)
+    >>> edges = mesh.extract_all_edges()
+    >>> _ = plotter.add_mesh(mesh.extract_all_edges(), line_width=5, color="k", render_lines_as_tubes=True)
+    >>> _ = plotter.add_points(mesh, render_points_as_spheres=True, point_size=30, color="r")
+    >>> plotter.enable_anti_aliasing()
+    >>> plotter.show(screenshot="delaunay_3d_01.png")
+    """
+    points = edge_source.points
+    faces = edge_source.regular_faces
+
+    gmsh.initialize()
+    gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
+
+    for i, point in enumerate(points):
+        id_ = i + 1
+        gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
+
+    surface_loop = []
+    for i, face in enumerate(faces):
+        gmsh.model.geo.add_line(face[0] + 1, face[1] + 1, i * 4 + 0)
+        gmsh.model.geo.add_line(face[1] + 1, face[2] + 1, i * 4 + 1)
+        gmsh.model.geo.add_line(face[2] + 1, face[3] + 1, i * 4 + 2)
+        gmsh.model.geo.add_line(face[3] + 1, face[0] + 1, i * 4 + 3)
+        gmsh.model.geo.add_curve_loop([i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1)
+        gmsh.model.geo.add_plane_surface([i + 1], i + 1)
+        gmsh.model.geo.remove_all_duplicates()
+        gmsh.model.geo.synchronize()
+        surface_loop.append(i + 1)
+
+    gmsh.model.geo.add_surface_loop(surface_loop, 1)
+    gmsh.model.geo.add_volume([1], 1)
+
+    gmsh.model.geo.synchronize()
+    gmsh.model.mesh.generate(3)
+
+    mesh = fileio.from_meshio(extract_to_meshio())
+    gmsh.clear()
+    gmsh.finalize()
+
+    ind = []
+    for i, cell in enumerate(mesh.cell):
+        if cell.type != pv.CellType.TETRA:
+            ind.append(i)
+    mesh = mesh.remove_cells(ind)
+    mesh.clear_data()
+
+    return mesh
