@@ -142,7 +142,7 @@ def delaunay_3d(
       Z Bounds:   -5.000e-01, 5.000e-01
       N Arrays:   0
 
-    >>> mesh = mesh.rotate_z(45)
+    >>> mesh = mesh.rotate_z(30)
     >>> plotter = pv.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, opacity=0.5)
     >>> edges = mesh.extract_all_edges()
