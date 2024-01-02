@@ -131,11 +131,11 @@ def delaunay_3d(
     >>> import pvgmsh as pm
 
     >>> edge_source = pv.Cube()
-    >>> mesh = pm.delaunay_3d(edge_source, target_size=1.0)
+    >>> mesh = pm.delaunay_3d(edge_source, target_size=10.0)
 
     >>> mesh
     UnstructuredGrid (...)
-      N Cells:    80
+      N Cells:    24
       N Points:   14
       X Bounds:   -5.000e-01, 5.000e-01
       Y Bounds:   -5.000e-01, 5.000e-01
@@ -143,7 +143,12 @@ def delaunay_3d(
       N Arrays:   0
 
     >>> plotter = pv.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white")
+    >>> _ = plotter.add_mesh(mesh, opacity=0.5)
+    >>> edges = mesh.extract_all_edges()
+    >>> if edges.n_cells:
+    ...     _ = plotter.add_mesh(mesh.extract_all_edges(), line_width=5, color="k", render_lines_as_tubes=True)
+    >>> _ = plotter.add_points(mesh, render_points_as_spheres=True, point_size=30, color="r")
+    >>> plotter.enable_anti_aliasing()
     >>> plotter.show(screenshot="delaunay_3d_01.png")
     """
     points = edge_source.points
@@ -164,6 +169,8 @@ def delaunay_3d(
         gmsh.model.geo.add_line(face[3] + 1, face[0] + 1, i * 4 + 3)
         gmsh.model.geo.add_curve_loop([i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1)
         gmsh.model.geo.add_plane_surface([i + 1], i + 1)
+        gmsh.model.geo.remove_all_duplicates()
+        gmsh.model.geo.synchronize()
         surface_loop.append(i + 1)
 
     gmsh.model.geo.add_surface_loop(surface_loop, 1)
@@ -175,5 +182,12 @@ def delaunay_3d(
     mesh = fileio.from_meshio(extract_to_meshio())
     gmsh.clear()
     gmsh.finalize()
+
+    ind = []
+    for i, cell in enumerate(mesh.cell):
+        if cell.type != pv.CellType.TETRA:
+            ind.append(i)
+    mesh = mesh.remove_cells(ind)
+    mesh.clear_data()
 
     return mesh
