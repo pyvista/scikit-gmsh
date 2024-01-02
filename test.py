@@ -2,6 +2,7 @@
 import gmsh
 import pyvista as pv
 from pygmsh.helpers import extract_to_meshio
+from pyvista import examples
 from pyvista.core.utilities import fileio
 
 edge_source = pv.Cube()
@@ -11,7 +12,7 @@ faces = edge_source.regular_faces
 gmsh.initialize()
 
 for i, point in enumerate(points):
-    _ = gmsh.model.geo.add_point(point[0], point[1], point[2], 1.0, i + 1)
+    _ = gmsh.model.geo.add_point(point[0], point[1], point[2], 10.0, i + 1)
 
 surface_loop = []
 for i, face in enumerate(faces):
@@ -34,6 +35,11 @@ gmsh.clear()
 gmsh.finalize()
 
 output = fileio.from_meshio(mesh)
+ind = []
+for i, cell in enumerate(output.cell):
+    if cell.type != pv.CellType.TETRA:
+        ind.append(i)
+output = output.remove_cells(ind)
 
 plotter = pv.Plotter(shape=(1, 2))
 plotter.link_views()
@@ -41,6 +47,8 @@ plotter.add_mesh(edge_source, show_edges=True)
 plotter.add_point_labels(edge_source.points, labels=range(1, 9))
 plotter.add_point_labels(edge_source.cell_centers().points, labels=range(1, 6 + 1))
 plotter.subplot(0, 1)
-plotter.add_mesh(output, show_edges=True)
-plotter.add_point_labels(output.points, labels=range(1, 15))
+plotter.add_mesh(output, show_edges=True, opacity=0.5)
+plotter.add_point_labels(output.points, labels=range(14))
+plotter.add_point_labels(output.points, labels=range(14))
 plotter.show()
+examples.plot_cell(output)
