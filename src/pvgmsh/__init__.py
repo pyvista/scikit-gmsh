@@ -103,7 +103,7 @@ def frontal_delaunay_2d(
 def delaunay_3d(
     edge_source: pv.PolyData,
     target_size: float | None,
-) -> pv.PolyData | None:
+) -> pv.UnstructuredGrid | None:
     """
     Delaunay 3D mesh algorithm.
 
@@ -122,7 +122,7 @@ def delaunay_3d(
 
     Returns
     -------
-    pyvista.PolyData
+    pyvista.UnstructuredGrid
         Mesh from the 3D delaunay generation.
 
     Examples
