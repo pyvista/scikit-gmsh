@@ -145,8 +145,7 @@ def delaunay_3d(
     >>> plotter = pv.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, opacity=0.5)
     >>> edges = mesh.extract_all_edges()
-    >>> if edges.n_cells:
-    ...     _ = plotter.add_mesh(mesh.extract_all_edges(), line_width=5, color="k", render_lines_as_tubes=True)
+    >>> _ = plotter.add_mesh(mesh.extract_all_edges(), line_width=5, color="k", render_lines_as_tubes=True)
     >>> _ = plotter.add_points(mesh, render_points_as_spheres=True, point_size=30, color="r")
     >>> plotter.enable_anti_aliasing()
     >>> plotter.show(screenshot="delaunay_3d_01.png")
