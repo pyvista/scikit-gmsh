@@ -33,7 +33,7 @@ def frontal_delaunay_2d(
 
     target_size : float, optional
         Target mesh size close to the points.
-        Defalut max size of edge_source in each direction.
+        Default max size of edge_source in each direction.
 
     Returns
     -------
