@@ -63,9 +63,9 @@ def frontal_delaunay_2d(
       N Arrays:   0
 
     >>> plotter = pv.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False)
-    >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="red")
-    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color="red")
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=2, color="white", lighting=False)
+    >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=2, color="red")
+    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=10, color="red")
     >>> plotter.show(cpos="xy", screenshot="frontal_delaunay_2d_01.png")
     """
     points = edge_source.points
