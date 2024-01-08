@@ -48,3 +48,24 @@ To visualize the model we can use PyVista.
 ```
 
 ![frontal_delaunay_2d_01](https://github.com/pyvista/pvgmsh/raw/main/frontal_delaunay_2d_01.png)
+
+We can also generate a 3D mesh.
+
+```python
+    >>> import pyvista as pv
+    >>> import pvgmsh as pm
+
+    >>> edge_source = pv.Cube()
+    >>> mesh = pm.delaunay_3d(edge_source, target_size=10.0)
+    >>> mesh = mesh.rotate_z(15)
+    >>> plotter = pv.Plotter(off_screen=True)
+    >>> _ = plotter.add_mesh(mesh, opacity=0.5)
+    >>> edges = mesh.extract_all_edges()
+    >>> _ = plotter.add_mesh(mesh.extract_all_edges(), line_width=5, color="k", render_lines_as_tubes=True)
+    >>> _ = plotter.add_points(mesh, render_points_as_spheres=True, point_size=30, color="r")
+    >>> plotter.enable_anti_aliasing()
+    >>> plotter.enable_parallel_projection()
+    >>> plotter.show()
+```
+
+![delaunay_3d_01](https://github.com/pyvista/pvgmsh/raw/main/delaunay_3d_01.png)

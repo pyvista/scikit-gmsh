@@ -150,6 +150,7 @@ def delaunay_3d(
     >>> _ = plotter.add_mesh(mesh.extract_all_edges(), line_width=5, color="k", render_lines_as_tubes=True)
     >>> _ = plotter.add_points(mesh, render_points_as_spheres=True, point_size=30, color="r")
     >>> plotter.enable_anti_aliasing()
+    >>> plotter.enable_parallel_projection()
     >>> plotter.show(screenshot="delaunay_3d_01.png")
     """
     points = edge_source.points
