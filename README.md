@@ -47,4 +47,4 @@ To visualize the model we can use PyVista.
     >>> plotter.show(cpos="xy")
 ```
 
-![frontal_delaunay_2d_01](https://github.com/pyvista/pyvista-gmsh/raw/main/frontal_delaunay_2d_01.png)
+![frontal_delaunay_2d_01](https://github.com/pyvista/pvgmsh/raw/main/frontal_delaunay_2d_01.png)
