@@ -26,20 +26,19 @@ We can define the surface using PyVista.
 
 ```python
     >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
-    >>> edge_source = edge_source.rotate_z(45, inplace=False)
 ```
 
 We can then generate a 2D mesh.
 
 ```python
-    >>> mesh = pm.frontal_delaunay_2d(edge_source, target_size=1.0)
+    >>> mesh = pm.frontal_delaunay_2d(edge_source, target_size=2.0)
 ```
 
 To visualize the model we can use PyVista.
 
 ```python
     >>> plotter = pv.Plotter()
-    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white")
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False)
     >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="red")
     >>> _ = plotter.add_points(
     ...     edge_source.points, style="points", point_size=20, color="red"
@@ -56,13 +55,12 @@ We can also generate a 3D mesh.
     >>> import pvgmsh as pm
 
     >>> edge_source = pv.Cube()
-    >>> mesh = pm.delaunay_3d(edge_source, target_size=10.0)
-    >>> mesh = mesh.rotate_z(15)
-    >>> plotter = pv.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, opacity=0.5)
-    >>> edges = mesh.extract_all_edges()
-    >>> _ = plotter.add_mesh(mesh.extract_all_edges(), line_width=5, color="k", render_lines_as_tubes=True)
-    >>> _ = plotter.add_points(mesh, render_points_as_spheres=True, point_size=30, color="r")
+    >>> mesh = pm.delaunay_3d(edge_source, target_size=0.5)
+
+    >>> plotter = pv.Plotter()
+    >>> _ = plotter.add_mesh(mesh.shrink(0.95), show_edges=True, line_width=4, color="white", lighting=False)
+    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="red")
+    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color="red")
     >>> plotter.enable_anti_aliasing()
     >>> plotter.enable_parallel_projection()
     >>> plotter.show()
