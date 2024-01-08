@@ -9,7 +9,7 @@ requires = [
 build-backend = 'setuptools.build_meta'
 
 [project]
-name = "pyvista-gmsh"
+name = "pvgmsh"
 dynamic = ['version']
 dependencies = [
   'gmsh==4.12.0',
