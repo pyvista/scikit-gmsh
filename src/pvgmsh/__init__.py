@@ -132,23 +132,21 @@ def delaunay_3d(
     >>> import pvgmsh as pm
 
     >>> edge_source = pv.Cube()
-    >>> mesh = pm.delaunay_3d(edge_source, target_size=10.0)
+    >>> mesh = pm.delaunay_3d(edge_source, target_size=0.5)
 
     >>> mesh
     UnstructuredGrid (...)
-      N Cells:    6
-      N Points:   8
+      N Cells:    23
+      N Points:   20
       X Bounds:   -5.000e-01, 5.000e-01
       Y Bounds:   -5.000e-01, 5.000e-01
       Z Bounds:   -5.000e-01, 5.000e-01
       N Arrays:   0
 
-    >>> mesh = mesh.rotate_z(115)
     >>> plotter = pv.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, lighting=False)
-    >>> edges = mesh.extract_all_edges()
-    >>> _ = plotter.add_mesh(mesh.extract_all_edges(), line_width=5, color="k", render_lines_as_tubes=True)
-    >>> _ = plotter.add_points(mesh, render_points_as_spheres=True, point_size=30, color="r")
+    >>> _ = plotter.add_mesh(mesh.shrink(0.95), show_edges=True, line_width=4, color="white", lighting=False)
+    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="red")
+    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color="red")
     >>> plotter.enable_anti_aliasing()
     >>> plotter.enable_parallel_projection()
     >>> plotter.show(screenshot="delaunay_3d_01.png")
