@@ -50,16 +50,15 @@ def frontal_delaunay_2d(
     >>> import pvgmsh as pm
 
     >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
-    >>> edge_source = edge_source.rotate_z(45, inplace=False)
-    >>> mesh = pm.frontal_delaunay_2d(edge_source, target_size=1.0)
+    >>> mesh = pm.frontal_delaunay_2d(edge_source, target_size=2.0)
 
     >>> mesh
     PolyData (...)
-      N Cells:    346
-      N Points:   198
+      N Cells:    90
+      N Points:   58
       N Strips:   0
-      X Bounds:   -5.657e+00, 5.657e+00
-      Y Bounds:   -5.657e+00, 5.657e+00
+      X Bounds:   -8.000e+00, 8.000e+00
+      Y Bounds:   -8.000e+00, 8.000e+00
       Z Bounds:   0.000e+00, 0.000e+00
       N Arrays:   0
 
