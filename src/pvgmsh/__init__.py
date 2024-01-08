@@ -64,7 +64,7 @@ def frontal_delaunay_2d(
       N Arrays:   0
 
     >>> plotter = pv.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white")
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False)
     >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="red")
     >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color="red")
     >>> plotter.show(cpos="xy", screenshot="frontal_delaunay_2d_01.png")
@@ -143,9 +143,9 @@ def delaunay_3d(
       Z Bounds:   -5.000e-01, 5.000e-01
       N Arrays:   0
 
-    >>> mesh = mesh.rotate_z(15)
+    >>> mesh = mesh.rotate_z(115)
     >>> plotter = pv.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, opacity=0.5)
+    >>> _ = plotter.add_mesh(mesh, lighting=False)
     >>> edges = mesh.extract_all_edges()
     >>> _ = plotter.add_mesh(mesh.extract_all_edges(), line_width=5, color="k", render_lines_as_tubes=True)
     >>> _ = plotter.add_points(mesh, render_points_as_spheres=True, point_size=30, color="r")
