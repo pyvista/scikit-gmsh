@@ -10,6 +10,7 @@ from pyvista.core.utilities import fileio
 
 from pvgmsh._version import __version__  # noqa: F401
 
+INITIAL_MESH_ONLY_2D = 3
 FRONTAL_DELAUNAY_2D = 6
 DELAUNAY_3D = 1
 
@@ -135,14 +136,14 @@ def delaunay_3d(
 
     >>> mesh
     UnstructuredGrid (...)
-      N Cells:    24
-      N Points:   14
+      N Cells:    6
+      N Points:   8
       X Bounds:   -5.000e-01, 5.000e-01
       Y Bounds:   -5.000e-01, 5.000e-01
       Z Bounds:   -5.000e-01, 5.000e-01
       N Arrays:   0
 
-    >>> mesh = mesh.rotate_z(30)
+    >>> mesh = mesh.rotate_z(15)
     >>> plotter = pv.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, opacity=0.5)
     >>> edges = mesh.extract_all_edges()
@@ -156,6 +157,7 @@ def delaunay_3d(
     faces = edge_source.regular_faces
 
     gmsh.initialize()
+    gmsh.option.set_number("Mesh.Algorithm", INITIAL_MESH_ONLY_2D)
     gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
 
     for i, point in enumerate(points):
