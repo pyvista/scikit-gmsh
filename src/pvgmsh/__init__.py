@@ -135,7 +135,7 @@ def delaunay_3d(
 
     >>> mesh
     UnstructuredGrid (...)
-      N Cells:    24
+      N Cells:    23
       N Points:   20
       X Bounds:   -5.000e-01, 5.000e-01
       Y Bounds:   -5.000e-01, 5.000e-01
