@@ -143,7 +143,7 @@ def delaunay_3d(
       N Arrays:   0
 
     >>> plotter = pv.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh.shrink(0.95), show_edges=True, line_width=4, color="white", lighting=False)
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False)
     >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="red")
     >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color="red")
     >>> plotter.enable_anti_aliasing()
