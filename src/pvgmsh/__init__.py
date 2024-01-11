@@ -179,7 +179,7 @@ def delaunay_3d(
     gmsh.model.geo.synchronize()
     gmsh.model.mesh.generate(3)
 
-    mesh = fileio.from_meshio(extract_to_meshio())
+    mesh = pv.wrap(extract_to_meshio())
     gmsh.clear()
     gmsh.finalize()
 
