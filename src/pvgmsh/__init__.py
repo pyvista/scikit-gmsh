@@ -6,7 +6,6 @@ import gmsh
 import numpy as np
 import pyvista as pv
 from pygmsh.helpers import extract_to_meshio
-from pyvista.core.utilities import fileio
 
 from pvgmsh._version import __version__  # noqa: F401
 
