@@ -6,7 +6,6 @@ import gmsh
 import numpy as np
 import pyvista as pv
 from pygmsh.helpers import extract_to_meshio
-from pyvista.core.utilities import fileio
 
 from pvgmsh._version import __version__  # noqa: F401
 
@@ -179,7 +178,7 @@ def delaunay_3d(
     gmsh.model.geo.synchronize()
     gmsh.model.mesh.generate(3)
 
-    mesh = fileio.from_meshio(extract_to_meshio())
+    mesh = pv.wrap(extract_to_meshio())
     gmsh.clear()
     gmsh.finalize()
 
