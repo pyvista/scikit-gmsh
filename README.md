@@ -36,6 +36,9 @@ mesh = pm.frontal_delaunay_2d(edge_source, target_size=2.0)
 
 To visualize the model we can use PyVista.
 
+<details>
+<summary>🗒 </summary>
+
 ```python
 plotter = pv.Plotter()
 _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False)
@@ -46,6 +49,7 @@ _ = plotter.add_points(
 plotter.enable_parallel_projection()
 plotter.show(cpos="xy")
 ```
+</details>
 
 ![frontal_delaunay_2d_01](https://github.com/pyvista/pvgmsh/raw/main/frontal_delaunay_2d_01.png)
 
