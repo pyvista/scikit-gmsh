@@ -46,7 +46,7 @@ _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="red")
 _ = plotter.add_points(
     edge_source.points, style="points", point_size=20, color="red"
 )
-plotter.enable_parallel_projection()
+_ = plotter.add_legend([[" source", "red"], [" mesh ", "black"]], bcolor="white", face="r")
 plotter.show(cpos="xy")
 ```
 </details>
