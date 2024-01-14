@@ -51,6 +51,9 @@ plotter.show(cpos="xy")
 
 We can also generate a 3D mesh.
 
+<details>
+<summary>🗒 </summary>
+
 ```python
 import pyvista as pv
 import pvgmsh as pm
@@ -68,5 +71,6 @@ _ = plotter.add_axes(
 )
 plotter.show()
 ```
+</details>
 
 ![delaunay_3d_01](https://github.com/pyvista/pvgmsh/raw/main/delaunay_3d_01.png)
