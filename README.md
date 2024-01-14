@@ -55,16 +55,15 @@ plotter.show(cpos="xy")
 
 We can also generate a 3D mesh.
 
+```python
+edge_source = pv.Cube()
+mesh = pm.delaunay_3d(edge_source, target_size=0.5)
+```
+
 <details>
 <summary>🗒 </summary>
 
 ```python
-import pyvista as pv
-import pvgmsh as pm
-
-edge_source = pv.Cube()
-mesh = pm.delaunay_3d(edge_source, target_size=0.5)
-
 plotter = pv.Plotter()
 _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False)
 _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="red")
