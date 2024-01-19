@@ -53,3 +53,6 @@ docstring-code-format = true
 
 [tool.repo-review]
 ignore = ["PY", "PP", "MY", "RF", "RTD"]
+
+[tool.mypy]
+ignore_missing_imports = True
