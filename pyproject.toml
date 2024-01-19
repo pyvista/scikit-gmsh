@@ -55,7 +55,7 @@ docstring-code-format = true
 
 [tool.ruff.lint.per-file-ignores]
 "docs/**" = ["INP001"]
-"tests/**" = ["S101"]
+"tests/**" = ["INP001", "S101"]
 
 [tool.repo-review]
 ignore = ["PY"]
