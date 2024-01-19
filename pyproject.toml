@@ -55,4 +55,4 @@ docstring-code-format = true
 ignore = ["PY", "PP", "MY", "RF", "RTD"]
 
 [tool.mypy]
-ignore_missing_imports = True
+ignore_missing_imports = true
