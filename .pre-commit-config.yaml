@@ -52,3 +52,8 @@ repos:
     - id: mypy
       files: src
       args: []
+- repo: https://github.com/codespell-project/codespell
+  rev: "v2.2.6"
+  hooks:
+    - id: codespell
+      args: ["-L", "sur,nd"]
