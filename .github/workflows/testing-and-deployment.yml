@@ -25,12 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-
-      # see discussion at https://github.com/pyvista/pyvista/issues/2867
       matrix:
-        include:
-          - python-version: "3.12"
-            vtk-version: "latest"
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
     steps:
       - uses: actions/checkout@v4
         with:
