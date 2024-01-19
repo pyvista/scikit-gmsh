@@ -49,6 +49,7 @@ _ = plotter.add_legend(
 )
 plotter.show(cpos="xy")
 ```
+
 </details>
 
 ![frontal_delaunay_2d_01](https://github.com/pyvista/pvgmsh/raw/main/frontal_delaunay_2d_01.png)
@@ -81,6 +82,7 @@ _ = plotter.add_axes(
 )
 plotter.show()
 ```
+
 </details>
 
 ![delaunay_3d_01](https://github.com/pyvista/pvgmsh/raw/main/delaunay_3d_01.png)
