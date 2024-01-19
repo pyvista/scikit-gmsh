@@ -53,6 +53,9 @@ ignore = [
 [tool.ruff.format]
 docstring-code-format = true
 
+[tool.ruff.lint.per-file-ignores]
+"docs/conf.py" = ["INP001"]
+
 [tool.repo-review]
 ignore = ["PY", "PP", "MY"]
 
