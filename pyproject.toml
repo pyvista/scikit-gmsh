@@ -70,7 +70,7 @@ enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 minversion = "6.0"
 addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
 xfail_strict = true
-filterwarnings = ["error", 'ignore:DeprecationWarning: datetime.datetime.utcfromtimestamp\(\) is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp\(timestamp, datetime.UTC\).',]
+filterwarnings = ["error", 'ignore:DeprecationWarning: datetime.datetime.utcfromtimestamp\(\)']
 log_cli_level = "info"
 testpaths = [
   "tests",
