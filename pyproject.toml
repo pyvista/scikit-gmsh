@@ -52,4 +52,4 @@ ignore = [
 docstring-code-format = true
 
 [tool.repo-review]
-ignore = ["PP", "PC", "GH212", "MY", "RF", "RTD"]
+ignore = ["PP", "PC", "MY", "RF", "RTD"]
