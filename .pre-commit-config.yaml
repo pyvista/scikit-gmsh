@@ -31,4 +31,4 @@ repos:
   hooks:
     - id: sp-repo-review
       additional_dependencies: ["repo-review[cli]"]
-      args: ["--ignore=PY,PP,PC,GH,MY,RF,RTD", "--show=errskip"]
+      args: ["--ignore=PY,PP,PC,GH212,MY,RF,RTD", "--show=errskip"]
