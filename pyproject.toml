@@ -63,4 +63,4 @@ ignore = ["PY", "PP"]
 ignore_missing_imports = true
 strict = true
 warn_unreachable = true
-enable_error_code = ["ignore-without-code"]
+enable_error_code = ["ignore-without-code", "redundant-expr"]
