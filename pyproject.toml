@@ -57,10 +57,13 @@ docstring-code-format = true
 "docs/conf.py" = ["INP001"]
 
 [tool.repo-review]
-ignore = ["PY", "MY"]
+ignore = ["PY"]
 
 [tool.mypy]
 ignore_missing_imports = true
+strict = true
+warn_unreachable = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 
 [tool.pytest.ini_options]
 minversion = "6.0"
