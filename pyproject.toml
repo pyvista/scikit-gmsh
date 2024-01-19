@@ -62,3 +62,4 @@ ignore = ["PY", "PP"]
 [tool.mypy]
 ignore_missing_imports = true
 strict = true
+warn_unreachable = true 
