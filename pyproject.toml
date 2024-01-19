@@ -38,6 +38,8 @@ checks = [
 
 [tool.ruff]
 line-length = 150
+target-version = "py38"
+src = ["src"]
 
 [tool.ruff.lint]
 select = ["ALL"]
@@ -51,8 +53,11 @@ ignore = [
 [tool.ruff.format]
 docstring-code-format = true
 
+[tool.ruff.lint.per-file-ignores]
+"docs/conf.py" = ["INP001"]
+
 [tool.repo-review]
-ignore = ["PY", "MY", "RF", "RTD"]
+ignore = ["PY", "MY"]
 
 [tool.mypy]
 ignore_missing_imports = true
