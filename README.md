@@ -43,10 +43,10 @@ To visualize the model we can use PyVista.
 plotter = pv.Plotter()
 _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False)
 _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="red")
-_ = plotter.add_points(
-    edge_source.points, style="points", point_size=20, color="red"
+_ = plotter.add_points(edge_source.points, style="points", point_size=20, color="red")
+_ = plotter.add_legend(
+    [[" source", "red"], [" mesh ", "black"]], bcolor="white", face="r"
 )
-_ = plotter.add_legend([[" source", "red"], [" mesh ", "black"]], bcolor="white", face="r")
 plotter.show(cpos="xy")
 ```
 </details>
@@ -70,7 +70,14 @@ _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="red")
 _ = plotter.add_points(edge_source.points, style="points", point_size=20, color="red")
 plotter.enable_parallel_projection()
 _ = plotter.add_axes(
-    box=True, box_args={"opacity": 0.5, "color_box": True, "x_face_color": "white", "y_face_color": "white", "z_face_color": "white"}
+    box=True,
+    box_args={
+        "opacity": 0.5,
+        "color_box": True,
+        "x_face_color": "white",
+        "y_face_color": "white",
+        "z_face_color": "white",
+    },
 )
 plotter.show()
 ```
