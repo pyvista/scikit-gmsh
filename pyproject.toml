@@ -57,9 +57,6 @@ docstring-code-format = true
 "docs/**" = ["INP001"]
 "tests/**" = ["INP001", "S101"]
 
-[tool.repo-review]
-ignore = ["PY"]
-
 [tool.mypy]
 ignore_missing_imports = true
 strict = true
