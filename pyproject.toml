@@ -57,7 +57,7 @@ docstring-code-format = true
 "docs/conf.py" = ["INP001"]
 
 [tool.repo-review]
-ignore = ["PY", "PP", "MY"]
+ignore = ["PP", "MY"]
 
 [tool.mypy]
 ignore_missing_imports = true
