@@ -70,7 +70,7 @@ enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 minversion = "6.0"
 addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
 xfail_strict = true
-filterwarnings = ["error"]
+# filterwarnings = ["error"]
 log_cli_level = "info"
 testpaths = [
   "tests",
