@@ -50,3 +50,7 @@ ignore = [
 
 [tool.ruff.format]
 docstring-code-format = true
+
+[tool.repo-review]
+select = ["A", "B", "C100"]
+ignore = ["A100"]
