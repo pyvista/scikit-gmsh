@@ -17,7 +17,7 @@ concurrency:
 
 env:
   ALLOW_PLOTTING: true
-  SHELLOPTS: 'errexit:pipefail'
+  SHELLOPTS: "errexit:pipefail"
 
 jobs:
   Linux:
@@ -29,8 +29,8 @@ jobs:
       # see discussion at https://github.com/pyvista/pyvista/issues/2867
       matrix:
         include:
-          - python-version: '3.12'
-            vtk-version: 'latest'
+          - python-version: "3.12"
+            vtk-version: "latest"
     steps:
       - uses: actions/checkout@v4
         with:
