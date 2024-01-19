@@ -30,5 +30,3 @@ repos:
   rev: 2023.12.21
   hooks:
     - id: sp-repo-review
-      additional_dependencies: ["repo-review[cli]"]
-      args: ["--ignore=PY,PP,PC,GH212,MY,RF,RTD", "--show=errskip"]
