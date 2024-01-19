@@ -52,5 +52,5 @@ ignore = [
 docstring-code-format = true
 
 [tool.repo-review]
-select = ["A", "B", "C100"]
-ignore = ["A100"]
+select = []
+ignore = ["PY", "PP", "PC", "GH212", "MY", "RF", "RTD"]
