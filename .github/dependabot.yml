@@ -15,3 +15,7 @@ updates:
     labels:
       - "maintenance"
       - "dependencies"
+    groups:
+      actions:
+        patterns:
+          - "*"

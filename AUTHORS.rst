@@ -3,8 +3,8 @@
 Authors
 -------
 
-.. image:: https://img.shields.io/github/contributors/pyvista/pyvista-gmsh.svg?logo=github&logoColor=white
-   :target: https://github.com/pyvista/pyvista-gmsh/graphs/contributors/
+.. image:: https://img.shields.io/github/contributors/pyvista/pvgmsh.svg?logo=github&logoColor=white
+   :target: https://github.com/pyvista/pvgmsh/graphs/contributors/
 
 
 The following is a list of authors who have made substantial contributions to
