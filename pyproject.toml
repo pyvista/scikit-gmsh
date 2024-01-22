@@ -1,21 +1,21 @@
 [build-system]
 requires = [
-  'gmsh==4.12.0',
+  'gmsh==4.12.1',
   'meshio==5.3.4',
   'pygmsh==7.1.17',
-  'pyvista==0.43.1',
+  'pyvista==0.43.2',
   'setuptools',
 ]
 build-backend = 'setuptools.build_meta'
 
 [project]
-name = "pyvista-gmsh"
+name = "pvgmsh"
 dynamic = ['version']
 dependencies = [
-  'gmsh==4.12.0',
+  'gmsh==4.12.1',
   'meshio==5.3.4',
   'pygmsh==7.1.17',
-  'pyvista==0.43.1',
+  'pyvista==0.43.2',
 ]
 
 [tool.setuptools.dynamic]
@@ -38,10 +38,13 @@ checks = [
 
 [tool.ruff]
 line-length = 150
+target-version = "py38"
+src = ["src"]
 
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
+    "COM812",
     "D203",
     "D212",
     "ISC001",
@@ -49,3 +52,23 @@ ignore = [
 
 [tool.ruff.format]
 docstring-code-format = true
+
+[tool.ruff.lint.per-file-ignores]
+"docs/**" = ["INP001"]
+"tests/**" = ["INP001", "S101"]
+
+[tool.mypy]
+ignore_missing_imports = true
+strict = true
+warn_unreachable = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
+xfail_strict = true
+filterwarnings = ["error", 'ignore::DeprecationWarning']
+log_cli_level = "info"
+testpaths = [
+  "tests",
+]
