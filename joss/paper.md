@@ -1,5 +1,5 @@
 ---
-title: 'Gala: A Python package for galactic dynamics'
+title: "Gala: A Python package for galactic dynamics"
 tags:
   - Python
   - astronomy
@@ -22,12 +22,12 @@ authors:
     surname: Beethoven
     affiliation: 3
 affiliations:
- - name: Lyman Spitzer, Jr. Fellow, Princeton University, USA
-   index: 1
- - name: Institution Name, Country
-   index: 2
- - name: Independent Researcher, Country
-   index: 3
+  - name: Lyman Spitzer, Jr. Fellow, Princeton University, USA
+    index: 1
+  - name: Institution Name, Country
+    index: 2
+  - name: Independent Researcher, Country
+    index: 3
 date: 13 August 2017
 bibliography: paper.bib
 
@@ -68,7 +68,7 @@ used in a number of scientific publications [@Pearson:2017] and has also been
 used in graduate courses on Galactic dynamics to, e.g., provide interactive
 visualizations of textbook material [@Binney:2008]. The combination of speed,
 design, and support for Astropy functionality in `Gala` will enable exciting
-scientific explorations of forthcoming data releases from the *Gaia* mission
+scientific explorations of forthcoming data releases from the _Gaia_ mission
 [@gaia] by students and experts alike.
 
 # Mathematics
@@ -77,14 +77,16 @@ Single dollars ($) are required for inline mathematics e.g. $f(x) = e^{\pi/x}$
 
 Double dollars make self-standing equations:
 
-$$\Theta(x) = \left\{\begin{array}{l}
+$$
+\Theta(x) = \left\{\begin{array}{l}
 0\textrm{ if } x < 0\cr
 1\textrm{ else}
-\end{array}\right.$$
+\end{array}\right.
+$$
 
 You can also use plain \LaTeX for equations
 \begin{equation}\label{eq:fourier}
-\hat f(\omega) = \int_{-\infty}^{\infty} f(x) e^{i\omega x} dx
+\hat f(\omega) = \int\_{-\infty}^{\infty} f(x) e^{i\omega x} dx
 \end{equation}
 and refer to \autoref{eq:fourier} from text.
 
@@ -98,7 +100,8 @@ If you want to cite a software repository URL (e.g. something on GitHub without 
 citation) then you can do it with the example BibTeX entry below for @fidgit.
 
 For a quick reference, the following citation commands can be used:
-- `@author:2001`  ->  "Author et al. (2001)"
+
+- `@author:2001` -> "Author et al. (2001)"
 - `[@author:2001]` -> "(Author et al., 2001)"
 - `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)"
 
