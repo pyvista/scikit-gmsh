@@ -62,10 +62,10 @@ def frontal_delaunay_2d(
       N Arrays:   0
 
     >>> plotter = pv.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=2, color="white", lighting=False)
-    >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="red")
-    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color="red")
-    >>> _ = plotter.add_legend([[" source", "red"], [" mesh ", "black"]], bcolor="white", face="r")
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False, edge_color=[153, 153, 153])
+    >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
+    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
+    >>> _ = plotter.add_legend([[" source", [214, 39, 40]], [" mesh ", [153, 153, 153]]], bcolor="white", face="r")
     >>> plotter.show(cpos="xy", screenshot="frontal_delaunay_2d_01.png")
     """
     points = edge_source.points
@@ -143,13 +143,19 @@ def delaunay_3d(
       N Arrays:   0
 
     >>> plotter = pv.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False)
-    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=8, color="red")
-    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=40, color="red")
-    >>> plotter.enable_anti_aliasing()
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False, edge_color=[153, 153, 153])
+    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
+    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
     >>> plotter.enable_parallel_projection()
     >>> _ = plotter.add_axes(
-    ...     box=True, box_args={"opacity": 0.5, "color_box": True, "x_face_color": "white", "y_face_color": "white", "z_face_color": "white"}
+    ...     box=True,
+    ...     box_args={
+    ...         "opacity": 0.5,
+    ...         "color_box": True,
+    ...         "x_face_color": "white",
+    ...         "y_face_color": "white",
+    ...         "z_face_color": "white",
+    ...     },
     ... )
     >>> plotter.show(screenshot="delaunay_3d_01.png")
     """

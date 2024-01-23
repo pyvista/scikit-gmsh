@@ -43,11 +43,20 @@ To visualize the model we can use PyVista.
 
 ```python
 plotter = pv.Plotter()
-_ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False)
-_ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="red")
-_ = plotter.add_points(edge_source.points, style="points", point_size=20, color="red")
+_ = plotter.add_mesh(
+    mesh,
+    show_edges=True,
+    line_width=4,
+    color="white",
+    lighting=False,
+    edge_color=[153, 153, 153],
+)
+_ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
+_ = plotter.add_points(
+    edge_source.points, style="points", point_size=20, color=[214, 39, 40]
+)
 _ = plotter.add_legend(
-    [[" source", "red"], [" mesh ", "black"]], bcolor="white", face="r"
+    [[" source", [214, 39, 40]], [" mesh ", [153, 153, 153]]], bcolor="white", face="r"
 )
 plotter.show(cpos="xy")
 ```
@@ -68,9 +77,18 @@ mesh = pm.delaunay_3d(edge_source, target_size=0.5)
 
 ```python
 plotter = pv.Plotter()
-_ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False)
-_ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="red")
-_ = plotter.add_points(edge_source.points, style="points", point_size=20, color="red")
+_ = plotter.add_mesh(
+    mesh,
+    show_edges=True,
+    line_width=4,
+    color="white",
+    lighting=False,
+    edge_color=[153, 153, 153],
+)
+_ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
+_ = plotter.add_points(
+    edge_source.points, style="points", point_size=20, color=[214, 39, 40]
+)
 plotter.enable_parallel_projection()
 _ = plotter.add_axes(
     box=True,
