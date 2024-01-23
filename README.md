@@ -114,5 +114,5 @@ plotter.show()
   <a href="https://raw.githubusercontent.com/pyvista/pvgmsh/maint/png-to-svg/delaunay_3d_01.svg">
     <img src="https://raw.githubusercontent.com/pyvista/pvgmsh/maint/png-to-svg/delaunay_3d_01.svg"
          alt="delaunay_3d_01"
-         width="800"></a>
+         width="400"></a>
 </h1>
