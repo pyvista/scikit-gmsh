@@ -7,11 +7,15 @@ import numpy as np
 import pyvista as pv
 from pygmsh.helpers import extract_to_meshio
 
-from pvgmsh._version import __version__  # noqa: F401
-
 INITIAL_MESH_ONLY_2D = 3
 FRONTAL_DELAUNAY_2D = 6
 DELAUNAY_3D = 1
+
+# major, minor, patch
+version_info = 0, 0, "dev0"
+
+# Nice string for the version
+__version__ = ".".join(map(str, version_info))
 
 
 def frontal_delaunay_2d(
