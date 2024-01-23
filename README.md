@@ -2,7 +2,7 @@
   <a href="https://github.com/pyvista/pvgmsh#--------">
     <img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/branding/logo/logomark/pvgmsh_logo_icon.svg"
          alt="PVGmsh"
-         width="200"></a>
+         width="400"></a>
 </h1>
 
 <h3 align="center">
@@ -67,7 +67,7 @@ plotter.show(cpos="xy")
   <a href="https://raw.githubusercontent.com/pyvista/pvgmsh/maint/png-to-svg/frontal_delaunay_2d_01.svg">
     <img src="https://raw.githubusercontent.com/pyvista/pvgmsh/maint/png-to-svg/frontal_delaunay_2d_01.svg"
          alt="frontal_delaunay_2d_01"
-         width="800"></a>
+         width="400"></a>
 </h1>
 
 We can also generate a 3D mesh.
