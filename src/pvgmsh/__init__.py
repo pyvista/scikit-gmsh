@@ -66,7 +66,9 @@ def frontal_delaunay_2d(
     >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="red")
     >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color="red")
     >>> _ = plotter.add_legend([[" source", "red"], [" mesh ", "black"]], bcolor="white", face="r")
-    >>> plotter.show(cpos="xy", screenshot="frontal_delaunay_2d_01.png")
+    >>> plotter.view_xy()
+    >>> plotter.save_graphic("frontal_delaunay_2d_01.svg")
+    >>> plotter.close()
     """
     points = edge_source.points
     lines = edge_source.lines
@@ -151,7 +153,8 @@ def delaunay_3d(
     >>> _ = plotter.add_axes(
     ...     box=True, box_args={"opacity": 0.5, "color_box": True, "x_face_color": "white", "y_face_color": "white", "z_face_color": "white"}
     ... )
-    >>> plotter.show(screenshot="delaunay_3d_01.png")
+    >>> plotter.save_graphic("delaunay_3d_01.svg")
+    >>> plotter.close()
     """
     points = edge_source.points
     faces = edge_source.regular_faces

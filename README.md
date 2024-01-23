@@ -53,7 +53,12 @@ plotter.show(cpos="xy")
 
 </details>
 
-![frontal_delaunay_2d_01](https://github.com/pyvista/pvgmsh/raw/main/frontal_delaunay_2d_01.png)
+<h1 align="center">
+  <a href="https://raw.githubusercontent.com/pyvista/pvgmsh/maint/png-to-svg/frontal_delaunay_2d_01.svg">
+    <img src="https://raw.githubusercontent.com/pyvista/pvgmsh/maint/png-to-svg/frontal_delaunay_2d_01.svg"
+         alt="frontal_delaunay_2d_01"
+         width="800"></a>
+</h1>
 
 We can also generate a 3D mesh.
 
@@ -86,4 +91,9 @@ plotter.show()
 
 </details>
 
-![delaunay_3d_01](https://github.com/pyvista/pvgmsh/raw/main/delaunay_3d_01.png)
+<h1 align="center">
+  <a href="https://raw.githubusercontent.com/pyvista/pvgmsh/maint/png-to-svg/delaunay_3d_01.svg">
+    <img src="https://raw.githubusercontent.com/pyvista/pvgmsh/maint/png-to-svg/delaunay_3d_01.svg"
+         alt="delaunay_3d_01"
+         width="800"></a>
+</h1>
