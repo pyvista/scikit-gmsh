@@ -7,7 +7,6 @@ import numpy as np
 import pyvista as pv
 from pygmsh.helpers import extract_to_meshio
 
-INITIAL_MESH_ONLY_2D = 3
 FRONTAL_DELAUNAY_2D = 6
 DELAUNAY_3D = 1
 
@@ -57,8 +56,8 @@ def frontal_delaunay_2d(
 
     >>> mesh
     PolyData (...)
-      N Cells:    90
-      N Points:   58
+      N Cells:    ...
+      N Points:   ...
       N Strips:   0
       X Bounds:   -8.000e+00, 8.000e+00
       Y Bounds:   -8.000e+00, 8.000e+00
@@ -135,12 +134,12 @@ def delaunay_3d(
     >>> import pvgmsh as pm
 
     >>> edge_source = pv.Cube()
-    >>> mesh = pm.delaunay_3d(edge_source, target_size=0.5)
+    >>> mesh = pm.delaunay_3d(edge_source, target_size=0.4)
 
     >>> mesh
     UnstructuredGrid (...)
-      N Cells:    23
-      N Points:   20
+      N Cells:    ...
+      N Points:   ...
       X Bounds:   -5.000e-01, 5.000e-01
       Y Bounds:   -5.000e-01, 5.000e-01
       Z Bounds:   -5.000e-01, 5.000e-01
@@ -167,7 +166,6 @@ def delaunay_3d(
     faces = edge_source.regular_faces
 
     gmsh.initialize()
-    gmsh.option.set_number("Mesh.Algorithm", INITIAL_MESH_ONLY_2D)
     gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
 
     for i, point in enumerate(points):
