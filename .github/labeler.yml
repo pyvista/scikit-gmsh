@@ -1,7 +1,7 @@
 documentation:
   - any:
       - changed-files:
-          - any-glob-to-any-file: "doc/**/*"
+          - any-glob-to-any-file: "docs/**/*"
           - any-glob-to-any-file: "examples/**/*"
           - any-glob-to-any-file: "examples_trame/**/*"
           - any-glob-to-any-file: "./*.md"
