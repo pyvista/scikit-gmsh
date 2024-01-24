@@ -57,8 +57,8 @@ def frontal_delaunay_2d(
 
     >>> mesh
     PolyData (...)
-      N Cells:    ...
-      N Points:   ...
+      N Cells:    90
+      N Points:   58
       N Strips:   0
       X Bounds:   -8.000e+00, 8.000e+00
       Y Bounds:   -8.000e+00, 8.000e+00
@@ -139,8 +139,8 @@ def delaunay_3d(
 
     >>> mesh
     UnstructuredGrid (...)
-      N Cells:    ...
-      N Points:   ...
+      N Cells:    23
+      N Points:   20
       X Bounds:   -5.000e-01, 5.000e-01
       Y Bounds:   -5.000e-01, 5.000e-01
       Z Bounds:   -5.000e-01, 5.000e-01
