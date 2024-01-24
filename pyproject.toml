@@ -1,6 +1,6 @@
 [build-system]
 requires = [
-  'gmsh==4.12.1',
+  'gmsh==4.12.2',
   'meshio==5.3.4',
   'pygmsh==7.1.17',
   'pyvista==0.43.2',
@@ -12,7 +12,7 @@ build-backend = 'setuptools.build_meta'
 name = "pvgmsh"
 dynamic = ['version']
 dependencies = [
-  'gmsh==4.12.1',
+  'gmsh==4.12.2',
   'meshio==5.3.4',
   'pygmsh==7.1.17',
   'pyvista==0.43.2',

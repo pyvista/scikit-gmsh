@@ -13,6 +13,8 @@ PyVista accessors for Gmsh to generate 3D finite element mesh.
 [![Documentation Status](https://readthedocs.org/projects/pvgmsh/badge/?version=latest)](https://pvgmsh.readthedocs.io/en/latest/?badge=latest)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/pyvista/pvgmsh/main.svg)](https://results.pre-commit.ci/latest/github/pyvista/pvgmsh/main)
 [![NEP29](https://raster.shields.io/badge/follows-NEP29-orange.png)](https://numpy.org/neps/nep-0029-deprecation_policy.html)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg)](https://github.com/bjlittle/geovista/blob/main/CODE_OF_CONDUCT.md)
 
 ## Motivation
 
@@ -60,6 +62,7 @@ _ = plotter.add_legend(
     [[" edge source", [214, 39, 40]], [" mesh ", [153, 153, 153]]],
     bcolor="white",
     face="r",
+    size=(0.3, 0.3),
 )
 plotter.show(cpos="xy")
 ```
@@ -74,7 +77,7 @@ We can also generate a 3D mesh.
 
 ```python
 edge_source = pv.Cube()
-mesh = pm.delaunay_3d(edge_source, target_size=0.5)
+mesh = pm.delaunay_3d(edge_source, target_size=0.4)
 ```
 
 <details>
