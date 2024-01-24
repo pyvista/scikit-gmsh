@@ -12,6 +12,7 @@ PyVista accessors for Gmsh to generate 3D finite element mesh.
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Documentation Status](https://readthedocs.org/projects/pvgmsh/badge/?version=latest)](https://pvgmsh.readthedocs.io/en/latest/?badge=latest)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/pyvista/pvgmsh/main.svg)](https://results.pre-commit.ci/latest/github/pyvista/pvgmsh/main)
+[![NEP29](https://raster.shields.io/badge/follows-NEP29-orange.png)](https://numpy.org/neps/nep-0029-deprecation_policy.html)
 
 ## Motivation
 
