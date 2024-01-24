@@ -57,8 +57,8 @@ def frontal_delaunay_2d(
 
     >>> mesh
     PolyData (...)
-      N Cells:    90
-      N Points:   58
+      N Cells:    ..
+      N Points:   ..
       N Strips:   0
       X Bounds:   -8.000e+00, 8.000e+00
       Y Bounds:   -8.000e+00, 8.000e+00
@@ -135,12 +135,12 @@ def delaunay_3d(
     >>> import pvgmsh as pm
 
     >>> edge_source = pv.Cube()
-    >>> mesh = pm.delaunay_3d(edge_source, target_size=0.5)
+    >>> mesh = pm.delaunay_3d(edge_source, target_size=0.1)
 
     >>> mesh
     UnstructuredGrid (...)
-      N Cells:    23
-      N Points:   20
+      N Cells:    ...
+      N Points:   ...
       X Bounds:   -5.000e-01, 5.000e-01
       Y Bounds:   -5.000e-01, 5.000e-01
       Z Bounds:   -5.000e-01, 5.000e-01

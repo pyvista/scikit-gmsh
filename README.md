@@ -74,7 +74,7 @@ We can also generate a 3D mesh.
 
 ```python
 edge_source = pv.Cube()
-mesh = pm.delaunay_3d(edge_source, target_size=0.5)
+mesh = pm.delaunay_3d(edge_source, target_size=0.1)
 ```
 
 <details>
