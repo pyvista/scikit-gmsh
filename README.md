@@ -56,7 +56,9 @@ _ = plotter.add_points(
     edge_source.points, style="points", point_size=20, color=[214, 39, 40]
 )
 _ = plotter.add_legend(
-    [[" source", [214, 39, 40]], [" mesh ", [153, 153, 153]]], bcolor="white", face="r"
+    [[" edge source", [214, 39, 40]], [" mesh ", [153, 153, 153]]],
+    bcolor="white",
+    face="r",
 )
 plotter.show(cpos="xy")
 ```
