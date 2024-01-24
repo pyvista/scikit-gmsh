@@ -60,6 +60,7 @@ _ = plotter.add_legend(
     [[" edge source", [214, 39, 40]], [" mesh ", [153, 153, 153]]],
     bcolor="white",
     face="r",
+    size=(0.3, 0.3),
 )
 plotter.show(cpos="xy")
 ```
