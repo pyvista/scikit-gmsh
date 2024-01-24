@@ -10,7 +10,7 @@ jobs:
     name: PR comment
     if: github.event.issue.pull_request &&
       contains(github.event.comment.body, 'github-actions LGTM') && (
-        github.event.comment.user.login == 'tkoyama010' ||
+      github.event.comment.user.login == 'tkoyama010' ||
       )
     permissions:
       pull-requests: write
