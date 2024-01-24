@@ -57,8 +57,8 @@ def frontal_delaunay_2d(
 
     >>> mesh
     PolyData (...)
-      N Cells:    ..
-      N Points:   ..
+      N Cells:    ...
+      N Points:   ...
       N Strips:   0
       X Bounds:   -8.000e+00, 8.000e+00
       Y Bounds:   -8.000e+00, 8.000e+00
