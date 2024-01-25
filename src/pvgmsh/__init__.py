@@ -207,9 +207,6 @@ def delaunay_3d(
     return mesh
 
 
-# type aliases
-PackageLike = ModuleType | str
-
 #: The core packages of pvgmsh to include in the environment report.
 PACKAGES_CORE: list[str] = [
     "click",
