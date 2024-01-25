@@ -129,8 +129,7 @@ plotter.show()
   <img src="https://github.com/pyvista/pvgmsh/raw/main/delaunay_3d_01.png" width="500">
 </h1>
 
-Authors
-=======
+# Authors
 
 <a href="https://github.com/pyvista/pvgmsh/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=pyvista/pvgmsh" />
