@@ -205,7 +205,6 @@ def delaunay_3d(
     return mesh
 
 
-#: The core packages of pvgmsh to include in the environment report.
 PACKAGES_CORE: list[str] = [
     "click",
     "click-default-group",
@@ -227,7 +226,6 @@ PACKAGES_CORE: list[str] = [
     "pyvista",
 ]
 
-#: The optional packages of pvgmsh to include in the environment report.
 PACKAGES_OPTIONAL: list[str] = [
     "IPython",
     "PyQt5",
