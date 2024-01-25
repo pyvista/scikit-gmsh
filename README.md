@@ -27,6 +27,7 @@ See discussion: https://github.com/pyvista/pyvista/discussions/2133#discussionco
 
 If you simply can't wait for the next release to play with the latest hot features, then you can easily
 install the `main` development branch from GitHub:
+
 ```shell
 pip install git+https://github.com/pyvista/pvgmsh@main
 ```
