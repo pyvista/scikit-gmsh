@@ -1,10 +1,11 @@
 [build-system]
 requires = [
-  'gmsh==4.12.2',
-  'meshio==5.3.4',
-  'pygmsh==7.1.17',
-  'pyvista==0.43.2',
-  'setuptools',
+  'gmsh<4.12.3',
+  'meshio<5.3.5',
+  'pygmsh<7.1.18',
+  'pyvista<0.43.3',
+  'scooby<0.9.3',
+  'setuptools<69.0.4',
 ]
 build-backend = 'setuptools.build_meta'
 
@@ -12,10 +13,11 @@ build-backend = 'setuptools.build_meta'
 name = "pvgmsh"
 dynamic = ['version']
 dependencies = [
-  'gmsh==4.12.2',
-  'meshio==5.3.4',
-  'pygmsh==7.1.17',
-  'pyvista==0.43.2',
+  'gmsh<4.12.3',
+  'meshio<5.3.5',
+  'pygmsh<7.1.18',
+  'pyvista<0.43.3',
+  'scooby<0.9.3',
 ]
 
 [tool.setuptools.dynamic]
@@ -27,6 +29,8 @@ checks = [
     "GL01",  # Contradicts numpydoc examples
     "GL02",  # Permit a blank line after the end of our docstring
     "GL03",  # Considering enforcing
+    "GL06",  # Found unknown section
+    "GL07",  # "Sections are in the wrong order. Correct order is: {correct_sections}",
     "GL09",  # Deprecation warning should precede extended summary (check broken)
     "SA01",  # Not all docstrings need a see also
     "SA04",  # See also section does not need descriptions
