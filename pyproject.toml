@@ -4,6 +4,7 @@ requires = [
   'meshio<5.3.5',
   'pygmsh<7.1.18',
   'pyvista<0.43.3',
+  'scooby<0.9.3',
   'setuptools<69.0.4',
 ]
 build-backend = 'setuptools.build_meta'
@@ -16,6 +17,7 @@ dependencies = [
   'meshio<5.3.5',
   'pygmsh<7.1.18',
   'pyvista<0.43.3',
+  'scooby<0.9.3',
 ]
 
 [tool.setuptools.dynamic]
