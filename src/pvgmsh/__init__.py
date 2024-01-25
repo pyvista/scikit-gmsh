@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+from types import ModuleType
+
 import gmsh
 import numpy as np
 import pyvista as pv
+import scooby
 from pygmsh.helpers import extract_to_meshio
 
 FRONTAL_DELAUNAY_2D = 6
@@ -202,3 +205,85 @@ def delaunay_3d(
     mesh.clear_data()
 
     return mesh
+
+
+# type aliases
+PackageLike = ModuleType | str
+
+#: The core packages of pvgmsh to include in the environment report.
+PACKAGES_CORE: list[str] = [
+    "click",
+    "click-default-group",
+    "cmocean",
+    "colorcet",
+    "matplotlib",
+    "netcdf4",
+    "numpy",
+    "platformdirs",
+    "pooch",
+    "pykdtree",
+    "pyproj",
+    "pyvista",
+    "scooby",
+    "vtk",
+    "gmsh",
+    "meshio",
+    "pygmsh",
+    "pyvista",
+]
+
+#: The optional packages of pvgmsh to include in the environment report.
+PACKAGES_OPTIONAL: list[str] = [
+    "IPython",
+    "PyQt5",
+    "fastparquet",
+    "imageio",
+    "jupyter_server_proxy",
+    "jupyterlab",
+    "meshio",
+    "nest_asyncio",
+    "pandas",
+    "pyvistaqt",
+    "scipy",
+    "trame",
+    "trame_client",
+    "trame_server",
+    "trame_vtk",
+    "tqdm",
+]
+
+
+class Report(scooby.Report):  # type: ignore[misc]
+    """
+    Generate an environment package and hardware report.
+
+    Parameters
+    ----------
+    ncol : int, default: 3
+        Number of package-columns in html table; only has effect if
+        ``mode='HTML'`` or ``mode='html'``.
+
+    text_width : int, default: 80
+        The text width for non-HTML display modes.
+
+    """
+
+    def __init__(self: Report, ncol: int = 3, text_width: int = 80) -> None:  # numpydoc ignore=PR01
+        """Generate a :class:`scooby.Report` instance."""
+        # mandatory packages
+        core = PACKAGES_CORE
+
+        # optional packages
+        optional = PACKAGES_OPTIONAL
+
+        extra_meta = [
+            ("GPU Details", "None"),
+        ]
+
+        super().__init__(
+            core=core,
+            optional=optional,
+            ncol=ncol,
+            text_width=text_width,
+            extra_meta=extra_meta,
+        )
