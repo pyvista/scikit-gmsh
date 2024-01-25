@@ -136,3 +136,7 @@ plotter.show()
 </a>
 
 Made with [contrib.rocks](https://contrib.rocks).
+
+## License
+
+pvgmsh is distributed under the terms of the [GNU General Public License v3.0 or later](https://spdx.org/licenses/GPL-3.0-or-later.html) license.
