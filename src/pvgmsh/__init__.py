@@ -212,17 +212,9 @@ PackageLike = ModuleType | str
 
 #: The core packages of pvgmsh to include in the environment report.
 PACKAGES_CORE: list[str] = [
-    "click",
-    "click-default-group",
-    "cmocean",
-    "colorcet",
     "matplotlib",
-    "netcdf4",
     "numpy",
-    "platformdirs",
     "pooch",
-    "pykdtree",
-    "pyproj",
     "pyvista",
     "scooby",
     "vtk",
@@ -234,22 +226,24 @@ PACKAGES_CORE: list[str] = [
 
 #: The optional packages of pvgmsh to include in the environment report.
 PACKAGES_OPTIONAL: list[str] = [
-    "IPython",
-    "PyQt5",
-    "fastparquet",
     "imageio",
-    "jupyter_server_proxy",
-    "jupyterlab",
-    "meshio",
-    "nest_asyncio",
-    "pandas",
     "pyvistaqt",
+    "PyQt5",
+    "IPython",
+    "colorcet",
+    "cmocean",
+    "ipywidgets",
     "scipy",
+    "tqdm",
+    "jupyterlab",
+    "pytest_pyvista",
     "trame",
     "trame_client",
     "trame_server",
     "trame_vtk",
-    "tqdm",
+    "trame_vuetify",
+    "jupyter_server_proxy",
+    "nest_asyncio",
 ]
 
 
