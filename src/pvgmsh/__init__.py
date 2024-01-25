@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from types import ModuleType
-
 import gmsh
 import numpy as np
 import pyvista as pv
@@ -207,10 +205,6 @@ def delaunay_3d(
     return mesh
 
 
-# type aliases
-PackageLike = ModuleType | str
-
-#: The core packages of pvgmsh to include in the environment report.
 PACKAGES_CORE: list[str] = [
     "matplotlib",
     "numpy",
@@ -224,7 +218,6 @@ PACKAGES_CORE: list[str] = [
     "pyvista",
 ]
 
-#: The optional packages of pvgmsh to include in the environment report.
 PACKAGES_OPTIONAL: list[str] = [
     "imageio",
     "pyvistaqt",
