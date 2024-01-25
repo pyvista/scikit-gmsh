@@ -1,0 +1,60 @@
+name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    tags:
+      - "*"
+    branches:
+      - main
+      - "release/*"
+permissions:
+  id-token: write
+jobs:
+  build-n-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - name: Install packages
+        run: >
+          sudo apt -y install
+          libgl1-mesa-glx
+          xvfb
+          python-tk
+          libglu1
+          libxcursor-dev
+          libxft2
+          libxinerama1
+          libfltk1.3-dev
+          libfreetype6-dev
+          libgl1-mesa-dev
+          libocct-foundation-dev
+          libocct-data-exchange-dev
+      - name: Install pypa/build
+        run: >-
+          python3 -m
+          pip install
+          build
+          --user
+      - name: Build a binary wheel and a source tarball
+        run: >-
+          python3 -m
+          build
+          --sdist
+          --wheel
+          --outdir dist/
+      - name: Publish distribution  to Test PyPI
+        if: contains(github.ref, 'main')
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository-url: https://test.pypi.org/legacy/
+      - name: Publish distribution  to PyPI
+        if: startsWith(github.ref, 'refs/tags')
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
