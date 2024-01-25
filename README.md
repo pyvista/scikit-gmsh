@@ -14,12 +14,22 @@ PyVista accessors for Gmsh to generate 3D finite element mesh.
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/pyvista/pvgmsh/main.svg)](https://results.pre-commit.ci/latest/github/pyvista/pvgmsh/main)
 [![NEP29](https://raster.shields.io/badge/follows-NEP29-orange.png)](https://numpy.org/neps/nep-0029-deprecation_policy.html)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg)](https://github.com/bjlittle/geovista/blob/main/CODE_OF_CONDUCT.md)
+[![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg)](https://github.com/pyvista/pvgmsh/blob/main/CODE_OF_CONDUCT.md)
 [![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/pvgmsh)](https://github.com/pyvista/pvgmsh/stargazers)
 
 ## Motivation
 
 See discussion: https://github.com/pyvista/pyvista/discussions/2133#discussioncomment-2107992
+
+## Installation
+
+### Developer
+
+If you simply can't wait for the next release to play with the latest hot features, then you can easily
+install the `main` development branch from GitHub:
+```shell
+pip install git+https://github.com/pyvista/pvgmsh@main
+```
 
 ## Usage
 
