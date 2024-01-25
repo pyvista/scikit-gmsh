@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from types import ModuleType
-
 import gmsh
 import numpy as np
 import pyvista as pv
