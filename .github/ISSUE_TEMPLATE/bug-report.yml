@@ -38,8 +38,8 @@ body:
         This report helps us track down bugs and will be critical to addressing your bug.
         ```python
         # Get system info
-        import pyvista as pv
-        print(pv.Report())
+        import pmmsh as pm
+        print(pm.Report())
         ```
       render: shell
     validations:
