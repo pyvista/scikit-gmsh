@@ -11,7 +11,10 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = "pvgmsh"
-dynamic = ['version']
+dynamic = [
+   "readme",
+   "version",
+]
 dependencies = [
   'gmsh<4.12.3',
   'meshio<5.3.5',
