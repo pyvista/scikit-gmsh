@@ -11,9 +11,6 @@ on:
     branches:
       - main
 
-permissions:
-  id-token: write
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -60,13 +57,6 @@ jobs:
         run: |
           pip install -e .
           pip install -r requirements_test.txt
-
-      - name: Publish distribution  to Test PyPI
-        if: contains(github.ref, 'main')
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-          repository-url: https://test.pypi.org/legacy/
 
       - name: Unit Testing
         run: |
