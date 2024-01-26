@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import datetime
+
 import gmsh
 import numpy as np
 import pyvista as pv
@@ -11,8 +13,10 @@ from pygmsh.helpers import extract_to_meshio
 FRONTAL_DELAUNAY_2D = 6
 DELAUNAY_3D = 1
 
+now = datetime.datetime.now(tz=datetime.timezone.utc)
+
 # major, minor, patch
-version_info = 0, 0, "dev0"
+version_info = 0, 0, 0, now.year, now.month, now.day, now.hour, now.minute, now.second
 
 # Nice string for the version
 __version__ = ".".join(map(str, version_info))
