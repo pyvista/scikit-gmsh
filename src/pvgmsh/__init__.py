@@ -80,9 +80,11 @@ def frontal_delaunay_2d(
 
     if target_sizes is None:
         target_sizes = np.max(
-            np.abs(bounds[1] - bounds[0]),
-            np.abs(bounds[3] - bounds[2]),
-            np.abs(bounds[5] - bounds[4]),
+            [
+                np.abs(bounds[1] - bounds[0]),
+                np.abs(bounds[3] - bounds[2]),
+                np.abs(bounds[5] - bounds[4]),
+            ]
         )
 
     if isinstance(target_sizes, float):
@@ -171,9 +173,11 @@ def delaunay_3d(
 
     if target_sizes is None:
         target_sizes = np.max(
-            np.abs(bounds[1] - bounds[0]),
-            np.abs(bounds[3] - bounds[2]),
-            np.abs(bounds[5] - bounds[4]),
+            [
+                np.abs(bounds[1] - bounds[0]),
+                np.abs(bounds[3] - bounds[2]),
+                np.abs(bounds[5] - bounds[4]),
+            ]
         )
 
     if isinstance(target_sizes, float):
