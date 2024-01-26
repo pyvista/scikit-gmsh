@@ -12,7 +12,6 @@ build-backend = 'setuptools.build_meta'
 [project]
 name = "pvgmsh"
 dynamic = [
-   "dependencies",
    "readme",
    "version",
 ]
