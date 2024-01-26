@@ -8,14 +8,18 @@ import pyvista as pv
 import scooby
 from pygmsh.helpers import extract_to_meshio
 
+import datetime
+
 FRONTAL_DELAUNAY_2D = 6
 DELAUNAY_3D = 1
 
+now = datetime.datetime.now()
+
 # major, minor, patch
-version_info = 0, 0, "dev0"
+version_info = 0, 0, "dev0", now.year, now.month, now.day, now.hour, now.minute, now.second
 
 # Nice string for the version
-__version__ = ".".join(map(str, version_info))
+__version__ = '.'.join(map(str, version_info))
 
 
 def frontal_delaunay_2d(
