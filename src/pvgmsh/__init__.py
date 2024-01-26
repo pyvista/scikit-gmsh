@@ -13,7 +13,7 @@ from pygmsh.helpers import extract_to_meshio
 FRONTAL_DELAUNAY_2D = 6
 DELAUNAY_3D = 1
 
-now = datetime.datetime.now()
+now = datetime.datetime.now(tz=datetime.timezone.utc)
 
 # major, minor, patch
 version_info = 0, 0, 0, now.year, now.month, now.day, now.hour, now.minute, now.second
