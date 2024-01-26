@@ -193,7 +193,9 @@ def delaunay_3d(
         gmsh.model.geo.add_line(face[1] + 1, face[2] + 1, i * 4 + 1)
         gmsh.model.geo.add_line(face[2] + 1, face[3] + 1, i * 4 + 2)
         gmsh.model.geo.add_line(face[3] + 1, face[0] + 1, i * 4 + 3)
-        gmsh.model.geo.add_curve_loop([i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1)
+        gmsh.model.geo.add_curve_loop(
+            [i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1
+        )
         gmsh.model.geo.add_plane_surface([i + 1], i + 1)
         gmsh.model.geo.remove_all_duplicates()
         gmsh.model.geo.synchronize()
@@ -269,7 +271,9 @@ class Report(scooby.Report):  # type: ignore[misc]
 
     """
 
-    def __init__(self: Report, ncol: int = 3, text_width: int = 80) -> None:  # numpydoc ignore=PR01
+    def __init__(
+        self: Report, ncol: int = 3, text_width: int = 80
+    ) -> None:  # numpydoc ignore=PR01
         """Generate a :class:`scooby.Report` instance."""
         # mandatory packages
         core = PACKAGES_CORE

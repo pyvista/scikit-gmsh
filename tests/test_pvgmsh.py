@@ -26,7 +26,9 @@ def test_frontal_delaunay_2d(target_sizes: float | Sequence[float] | None) -> No
     # https://github.com/pyvista/pvgmsh/pull/125
 
 
-@pytest.mark.parametrize("target_sizes", [0.5, [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8], None])
+@pytest.mark.parametrize(
+    "target_sizes", [0.5, [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8], None]
+)
 def test_delaunay_3d(target_sizes: float | Sequence[float] | None) -> None:
     """Delaunay 3D mesh algorithm test code."""
     edge_source = pv.Cube()
