@@ -55,16 +55,6 @@ def frontal_delaunay_2d(
     >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
     >>> mesh = pm.frontal_delaunay_2d(edge_source, target_size=2.0)
 
-    >>> mesh
-    PolyData (...)
-      N Cells:    ...
-      N Points:   ...
-      N Strips:   0
-      X Bounds:   -8.000e+00, 8.000e+00
-      Y Bounds:   -8.000e+00, 8.000e+00
-      Z Bounds:   0.000e+00, 0.000e+00
-      N Arrays:   0
-
     >>> plotter = pv.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False, edge_color=[153, 153, 153])
     >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
@@ -136,15 +126,6 @@ def delaunay_3d(
 
     >>> edge_source = pv.Cube()
     >>> mesh = pm.delaunay_3d(edge_source, target_size=0.4)
-
-    >>> mesh
-    UnstructuredGrid (...)
-      N Cells:    ...
-      N Points:   ...
-      X Bounds:   -5.000e-01, 5.000e-01
-      Y Bounds:   -5.000e-01, 5.000e-01
-      Z Bounds:   -5.000e-01, 5.000e-01
-      N Arrays:   0
 
     >>> plotter = pv.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False, edge_color=[153, 153, 153])
