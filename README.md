@@ -48,7 +48,7 @@ edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
 We can then generate a 2D mesh.
 
 ```python
-mesh = pm.frontal_delaunay_2d(edge_source, target_size=2.0)
+mesh = pm.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 ```
 
 To visualize the model we can use PyVista.
@@ -89,7 +89,7 @@ We can also generate a 3D mesh.
 
 ```python
 edge_source = pv.Cube()
-mesh = pm.delaunay_3d(edge_source, target_size=0.4)
+mesh = pm.delaunay_3d(edge_source, target_sizes=0.4)
 ```
 
 <details>
