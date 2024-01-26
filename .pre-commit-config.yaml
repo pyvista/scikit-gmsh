@@ -80,7 +80,7 @@ repos:
             "--no-capitalize-first-letter",
           ]
   - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: "v1.10.0"
+    rev: v1.10.0
     hooks:
       - id: rst-backticks
       - id: rst-directive-colons
