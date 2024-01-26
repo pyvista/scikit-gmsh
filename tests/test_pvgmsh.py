@@ -12,7 +12,8 @@ def test_frontal_delaunay_2d() -> None:
     assert mesh.number_of_points > edge_source.number_of_points
     assert mesh.number_of_cells > edge_source.number_of_cells
     assert np.allclose(mesh.volume, edge_source.volume)
-    # TODO @tkoyama010: Compare cell type. (https://github.com/pyvista/pvgmsh/pull/125)
+    # TODO @tkoyama010: Compare cell type.
+    # https://github.com/pyvista/pvgmsh/pull/125
 
 
 def test_delaunay_3d() -> None:
@@ -22,4 +23,5 @@ def test_delaunay_3d() -> None:
     assert mesh.number_of_points > edge_source.number_of_points
     assert mesh.number_of_cells > edge_source.number_of_cells
     assert np.allclose(mesh.volume, edge_source.volume)
-    # TODO @tkoyama010: Compare cell type. (https://github.com/pyvista/pvgmsh/pull/125)
+    # TODO @tkoyama010: Compare cell type.
+    # https://github.com/pyvista/pvgmsh/pull/125
