@@ -131,6 +131,37 @@ plotter.show()
   <img src="https://github.com/pyvista/pvgmsh/raw/main/docs/_static/delaunay_3d_01.png" width="500">
 </h1>
 
+<details>
+<summary>🗒 </summary>
+
+```python
+plotter = pv.Plotter()
+_ = plotter.add_mesh(
+    mesh.explode(2.0),
+    show_edges=True,
+    line_width=4,
+    color="white",
+    lighting=False,
+    edge_color=[153, 153, 153],
+)
+_ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
+_ = plotter.add_points(
+    edge_source.points, style="points", point_size=20, color=[214, 39, 40]
+)
+plotter.enable_parallel_projection()
+_ = plotter.add_axes(
+    box=True,
+    box_args={
+        "opacity": 0.5,
+        "color_box": True,
+        "x_face_color": "white",
+        "y_face_color": "white",
+        "z_face_color": "white",
+    },
+)
+plotter.show()
+```
+
 # Authors
 
 <a href="https://github.com/pyvista/pvgmsh/graphs/contributors">
