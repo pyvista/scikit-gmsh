@@ -137,7 +137,7 @@ plotter.show()
 ```python
 plotter = pv.Plotter()
 _ = plotter.add_mesh(
-    mesh.explode(1.0),
+    mesh.explode(0.5),
     show_edges=True,
     line_width=4,
     color="white",
