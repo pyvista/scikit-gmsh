@@ -131,7 +131,7 @@ plotter.show()
   <img src="https://github.com/pyvista/pvgmsh/raw/main/docs/_static/delaunay_3d_01.png" width="500">
 </h1>
 
-:construction: [constructive solid geometry](https://gmsh.info/doc/course/general_overview.pdf)
+🚧 [constructive solid geometry](https://gmsh.info/doc/course/general_overview.pdf)
 
 <h1 align="center">
   <img src="https://github.com/pyvista/pvgmsh/raw/main/docs/_static/csg_tree/csg_tree.png" width="500">
