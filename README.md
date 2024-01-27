@@ -141,7 +141,7 @@ _ = plotter.add_mesh(
     show_edges=True,
     line_width=4,
     color="white",
-    lighting=False,
+    lighting=True,
     edge_color=[153, 153, 153],
 )
 plotter.enable_parallel_projection()
