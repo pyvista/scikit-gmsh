@@ -137,16 +137,12 @@ plotter.show()
 ```python
 plotter = pv.Plotter()
 _ = plotter.add_mesh(
-    mesh.explode(2.0),
+    mesh.explode(0.5),
     show_edges=True,
     line_width=4,
     color="white",
-    lighting=False,
-    edge_color=[153, 153, 153],
-)
-_ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
-_ = plotter.add_points(
-    edge_source.points, style="points", point_size=20, color=[214, 39, 40]
+    lighting=True,
+    edge_color=[0, 0, 0],
 )
 plotter.enable_parallel_projection()
 _ = plotter.add_axes(
