@@ -162,6 +162,8 @@ _ = plotter.add_axes(
 plotter.show()
 ```
 
+</details>
+
 # Authors
 
 <a href="https://github.com/pyvista/pvgmsh/graphs/contributors">
