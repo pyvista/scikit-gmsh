@@ -160,6 +160,12 @@ plotter.show()
 
 </details>
 
+:construction: [constructive solid geometry](https://en.wikipedia.org/wiki/Constructive_solid_geometry)
+
+<h1 align="center">
+  <img src="https://github.com/pyvista/pvgmsh/raw/main/docs/_static/csg_tree/csg_tree.png" width="500">
+</h1>
+
 # Authors
 
 <a href="https://github.com/pyvista/pvgmsh/graphs/contributors">
