@@ -142,7 +142,7 @@ _ = plotter.add_mesh(
     line_width=4,
     color="white",
     lighting=True,
-    edge_color=[255, 255, 255],
+    edge_color=[0, 0, 0],
 )
 plotter.enable_parallel_projection()
 _ = plotter.add_axes(
