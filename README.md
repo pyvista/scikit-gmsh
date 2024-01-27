@@ -144,10 +144,6 @@ _ = plotter.add_mesh(
     lighting=False,
     edge_color=[153, 153, 153],
 )
-_ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
-_ = plotter.add_points(
-    edge_source.points, style="points", point_size=20, color=[214, 39, 40]
-)
 plotter.enable_parallel_projection()
 _ = plotter.add_axes(
     box=True,
