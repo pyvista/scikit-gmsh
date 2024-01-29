@@ -1,20 +1,4 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [PyVista accessors for Gmsh](#pyvista-accessors-for-gmsh)
-  - [About](#about)
-  - [Motivation](#motivation)
-  - [Installation](#installation)
-    - [Developer](#developer)
-  - [Usage](#usage)
-- [Authors](#authors)
-  - [License](#license)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # PyVista accessors for Gmsh
-
-## About
 
 PyVista accessors for Gmsh to generate 3D finite element mesh.
 
@@ -28,13 +12,25 @@ PyVista accessors for Gmsh to generate 3D finite element mesh.
 [![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg)](https://github.com/pyvista/pvgmsh/blob/main/CODE_OF_CONDUCT.md)
 [![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/pvgmsh)](https://github.com/pyvista/pvgmsh/stargazers)
 
-## Motivation
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Motivation](#motivation)
+- [Installation](#installation)
+  - [Developer](#developer)
+- [Usage](#usage)
+- [Authors](#authors)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# Motivation
 
 See discussion: https://github.com/pyvista/pyvista/discussions/2133#discussioncomment-2107992
 
-## Installation
+# Installation
 
-### Developer
+## Developer
 
 If you simply can't wait for the next release to play with the latest hot features, then you can easily
 install the `main` development branch from GitHub:
@@ -43,7 +39,7 @@ install the `main` development branch from GitHub:
 pip install git+https://github.com/pyvista/pvgmsh@main
 ```
 
-## Usage
+# Usage
 
 ```python
 import pyvista as pv
@@ -131,6 +127,6 @@ plotter.show()
 ![contributors]("https://contrib.rocks/image?repo=pyvista/pvgmsh")
 Made with [contrib.rocks](https://contrib.rocks).
 
-## License
+# License
 
 pvgmsh is distributed under the terms of the [GNU General Public License v3.0 or later](https://spdx.org/licenses/GPL-3.0-or-later.html) license.
