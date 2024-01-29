@@ -14,6 +14,8 @@ PyVista accessors for Gmsh to generate 3D finite element mesh.
 [![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg)](https://github.com/pyvista/pvgmsh/blob/main/CODE_OF_CONDUCT.md)
 [![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/pvgmsh)](https://github.com/pyvista/pvgmsh/stargazers)
 
+## Table of Contents
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
