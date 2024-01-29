@@ -1,13 +1,22 @@
-<h1 align="center">
-  <a href="https://github.com/pyvista/pvgmsh#--------">
-    <img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/pvgmsh_logo_icon.svg"
-         alt="PVGmsh"
-         width="200"></a>
-</h1>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-<h3 align="center">
+- [PyVista accessors for Gmsh](#pyvista-accessors-for-gmsh)
+  - [About](#about)
+  - [Motivation](#motivation)
+  - [Installation](#installation)
+    - [Developer](#developer)
+  - [Usage](#usage)
+- [Authors](#authors)
+  - [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# PyVista accessors for Gmsh
+
+## About
+
 PyVista accessors for Gmsh to generate 3D finite element mesh.
-</h3>
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
@@ -55,9 +64,6 @@ mesh = pm.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 
 To visualize the model we can use PyVista.
 
-<details>
-<summary>🗒 </summary>
-
 ```python
 plotter = pv.Plotter()
 _ = plotter.add_mesh(
@@ -81,11 +87,7 @@ _ = plotter.add_legend(
 plotter.show(cpos="xy")
 ```
 
-</details>
-
-<h1 align="center">
-  <img src="https://github.com/pyvista/pvgmsh/raw/main/docs/_static/frontal_delaunay_2d_01.png" width="500">
-</h1>
+![2D mesh]("https://github.com/pyvista/pvgmsh/raw/main/docs/_static/frontal_delaunay_2d_01.png")
 
 We can also generate a 3D mesh.
 
@@ -93,9 +95,6 @@ We can also generate a 3D mesh.
 edge_source = pv.Cube()
 mesh = pm.delaunay_3d(edge_source, target_sizes=0.4)
 ```
-
-<details>
-<summary>🗒 </summary>
 
 ```python
 plotter = pv.Plotter()
@@ -125,18 +124,11 @@ _ = plotter.add_axes(
 plotter.show()
 ```
 
-</details>
-
-<h1 align="center">
-  <img src="https://github.com/pyvista/pvgmsh/raw/main/docs/_static/delaunay_3d_01.png" width="500">
-</h1>
+![3D mesh]("https://github.com/pyvista/pvgmsh/raw/main/docs/_static/delaunay_3d_01.png")
 
 # Authors
 
-<a href="https://github.com/pyvista/pvgmsh/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=pyvista/pvgmsh" />
-</a>
-
+![contributors]("https://contrib.rocks/image?repo=pyvista/pvgmsh")
 Made with [contrib.rocks](https://contrib.rocks).
 
 ## License

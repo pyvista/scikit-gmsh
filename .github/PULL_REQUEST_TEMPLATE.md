@@ -1,3 +1,11 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Overview](#overview)
+- [Details](#details)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ### Overview
 
 <!-- Please insert a high-level description of this pull request here. -->
