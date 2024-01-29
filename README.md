@@ -1,5 +1,7 @@
 # PyVista accessors for Gmsh
 
+[<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/pvgmsh_logo_icon.svg" align="right" width="100">](https://github.com/pyvista/pvgmsh#--------)
+
 PyVista accessors for Gmsh to generate 3D finite element mesh.
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
