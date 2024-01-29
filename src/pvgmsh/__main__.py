@@ -1,4 +1,5 @@
 """The pyvista-gmsh main module for PyVista accessors for Gmsh."""
+
 # Setting the Qt bindings for QtPy
 import os
 import sys

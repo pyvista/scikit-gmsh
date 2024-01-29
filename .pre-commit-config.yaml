@@ -3,6 +3,72 @@ ci:
   autofix_prs: true
   autoupdate_schedule: weekly
 repos:
+  - repo: https://github.com/psf/black-pre-commit-mirror
+    rev: 24.1.0
+    hooks:
+      - id: black
+  - repo: https://github.com/adamchainz/blacken-docs
+    rev: 1.16.0
+    hooks:
+      - id: blacken-docs
+        additional_dependencies: [black==23.*]
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.27.3
+    hooks:
+      - id: check-github-workflows
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+        additional_dependencies:
+          ["flake8-black==0.3.6", "flake8-isort==6.0.0", "flake8-quotes==3.3.2"]
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.6
+    hooks:
+      - id: codespell
+        args: ["-L", ""]
+  - repo: https://github.com/pycqa/pydocstyle
+    rev: 6.3.0
+    hooks:
+      - id: pydocstyle
+        additional_dependencies: [tomli==2.0.1]
+        files: ^src/pvgmsh/
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        files: src
+        additional_dependencies:
+          ["mypy-extensions==1.0.0", "toml==0.10.2", "typing-extensions==4.5.0"]
+        args:
+          [
+            "--disallow-untyped-calls",
+            "--disallow-untyped-defs",
+            "--disallow-incomplete-defs",
+            "--check-untyped-defs",
+            "--disallow-untyped-decorators",
+            "--no-implicit-optional",
+            "--no-strict-optional",
+          ]
+  - repo: https://github.com/numpy/numpydoc
+    rev: v1.6.0
+    hooks:
+      - id: numpydoc-validation
+        files: ^src/pvgmsh/
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        types_or: [yaml, markdown, html, css, scss, javascript, json]
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.15.0
+    hooks:
+      - id: pyupgrade
+        args: [--py37-plus, --keep-runtime-typing]
   - repo: https://github.com/DanielNoord/pydocstringformatter
     rev: v0.7.3
     hooks:
@@ -13,23 +79,23 @@ repos:
             "--no-strip-whitespace",
             "--no-capitalize-first-letter",
           ]
-  - repo: https://github.com/numpy/numpydoc
-    rev: v1.6.0
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
     hooks:
-      - id: numpydoc-validation
-        files: ^src/pvgmsh/
+      - id: rst-backticks
+      - id: rst-directive-colons
+      - id: rst-inline-touching-normal
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.1.14
     hooks:
       - id: ruff
         args: ["--fix", "--show-fixes"]
-      - id: ruff-format
   - repo: https://github.com/scientific-python/cookie
     rev: 2023.12.21
     hooks:
       - id: sp-repo-review
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: "v4.5.0"
+    rev: v4.5.0
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -41,32 +107,7 @@ repos:
       - id: mixed-line-ending
       - id: name-tests-test
         args: ["--pytest-test-first"]
+      - id: no-commit-to-branch
+        args: [--branch, main]
       - id: requirements-txt-fixer
       - id: trailing-whitespace
-  - repo: https://github.com/adamchainz/blacken-docs
-    rev: "1.16.0"
-    hooks:
-      - id: blacken-docs
-        additional_dependencies: [black==23.*]
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.8.0"
-    hooks:
-      - id: mypy
-        files: src
-        args: []
-  - repo: https://github.com/codespell-project/codespell
-    rev: "v2.2.6"
-    hooks:
-      - id: codespell
-        args: ["-L", "sur,nd"]
-  - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: "v1.10.0"
-    hooks:
-      - id: rst-backticks
-      - id: rst-directive-colons
-      - id: rst-inline-touching-normal
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: "v4.0.0-alpha.8"
-    hooks:
-      - id: prettier
-        types_or: [yaml, markdown, html, css, scss, javascript, json]

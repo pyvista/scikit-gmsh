@@ -2,17 +2,25 @@
 
 from __future__ import annotations
 
+import datetime
+from typing import TYPE_CHECKING
+
 import gmsh
 import numpy as np
 import pyvista as pv
 import scooby
 from pygmsh.helpers import extract_to_meshio
 
+if TYPE_CHECKING:
+    from collections.abc import Sequence
+
 FRONTAL_DELAUNAY_2D = 6
 DELAUNAY_3D = 1
 
+now = datetime.datetime.now(tz=datetime.timezone.utc)
+
 # major, minor, patch
-version_info = 0, 0, "dev0"
+version_info = 0, 0, 0, now.year, now.month, now.day, now.hour, now.minute, now.second
 
 # Nice string for the version
 __version__ = ".".join(map(str, version_info))
@@ -20,7 +28,8 @@ __version__ = ".".join(map(str, version_info))
 
 def frontal_delaunay_2d(
     edge_source: pv.PolyData,
-    target_size: float | None,
+    *,
+    target_sizes: float | Sequence[float] | None = None,
 ) -> pv.PolyData | None:
     """
     Frontal-Delaunay 2D mesh algorithm.
@@ -35,7 +44,7 @@ def frontal_delaunay_2d(
         (i.e. point ids are identical in the input and
         source).
 
-    target_size : float, optional
+    target_sizes : float | Sequence[float], optional
         Target mesh size close to the points.
         Default max size of edge_source in each direction.
 
@@ -53,24 +62,14 @@ def frontal_delaunay_2d(
     >>> import pvgmsh as pm
 
     >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
-    >>> mesh = pm.frontal_delaunay_2d(edge_source, target_size=2.0)
-
-    >>> mesh
-    PolyData (...)
-      N Cells:    ...
-      N Points:   ...
-      N Strips:   0
-      X Bounds:   -8.000e+00, 8.000e+00
-      Y Bounds:   -8.000e+00, 8.000e+00
-      Z Bounds:   0.000e+00, 0.000e+00
-      N Arrays:   0
+    >>> mesh = pm.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 
     >>> plotter = pv.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False, edge_color=[153, 153, 153])
     >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
     >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
     >>> _ = plotter.add_legend([[" edge source", [214, 39, 40]], [" mesh ", [153, 153, 153]]], bcolor="white", face="r", size=(0.3, 0.3))
-    >>> plotter.show(cpos="xy", screenshot="frontal_delaunay_2d_01.png")
+    >>> plotter.show(cpos="xy", screenshot="docs/_static/frontal_delaunay_2d_01.png")
     """
     points = edge_source.points
     lines = edge_source.lines
@@ -79,10 +78,19 @@ def frontal_delaunay_2d(
     gmsh.initialize()
     gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
 
-    if target_size is None:
-        target_size = np.max(np.abs(bounds[1] - bounds[0]), np.abs(bounds[3] - bounds[2]), np.abs(bounds[5] - bounds[4]))
+    if target_sizes is None:
+        target_sizes = np.max(
+            [
+                np.abs(bounds[1] - bounds[0]),
+                np.abs(bounds[3] - bounds[2]),
+                np.abs(bounds[5] - bounds[4]),
+            ]
+        )
 
-    for i, point in enumerate(points):
+    if isinstance(target_sizes, float):
+        target_sizes = [target_sizes] * edge_source.number_of_points
+
+    for i, (target_size, point) in enumerate(zip(target_sizes, points)):
         id_ = i + 1
         gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
 
@@ -106,7 +114,8 @@ def frontal_delaunay_2d(
 
 def delaunay_3d(
     edge_source: pv.PolyData,
-    target_size: float | None,
+    *,
+    target_sizes: float | Sequence[float] | None = None,
 ) -> pv.UnstructuredGrid | None:
     """
     Delaunay 3D mesh algorithm.
@@ -121,8 +130,9 @@ def delaunay_3d(
         (i.e. point ids are identical in the input and
         source).
 
-    target_size : float
+    target_sizes : float | Sequence[float], optional
         Target mesh size close to the points.
+        Default max size of edge_source in each direction.
 
     Returns
     -------
@@ -135,16 +145,7 @@ def delaunay_3d(
     >>> import pvgmsh as pm
 
     >>> edge_source = pv.Cube()
-    >>> mesh = pm.delaunay_3d(edge_source, target_size=0.4)
-
-    >>> mesh
-    UnstructuredGrid (...)
-      N Cells:    ...
-      N Points:   ...
-      X Bounds:   -5.000e-01, 5.000e-01
-      Y Bounds:   -5.000e-01, 5.000e-01
-      Z Bounds:   -5.000e-01, 5.000e-01
-      N Arrays:   0
+    >>> mesh = pm.delaunay_3d(edge_source, target_sizes=0.4)
 
     >>> plotter = pv.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False, edge_color=[153, 153, 153])
@@ -161,15 +162,28 @@ def delaunay_3d(
     ...         "z_face_color": "white",
     ...     },
     ... )
-    >>> plotter.show(screenshot="delaunay_3d_01.png")
+    >>> plotter.show(screenshot="docs/_static/delaunay_3d_01.png")
     """
     points = edge_source.points
     faces = edge_source.regular_faces
+    bounds = edge_source.bounds
 
     gmsh.initialize()
     gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
 
-    for i, point in enumerate(points):
+    if target_sizes is None:
+        target_sizes = np.max(
+            [
+                np.abs(bounds[1] - bounds[0]),
+                np.abs(bounds[3] - bounds[2]),
+                np.abs(bounds[5] - bounds[4]),
+            ]
+        )
+
+    if isinstance(target_sizes, float):
+        target_sizes = [target_sizes] * edge_source.number_of_points
+
+    for i, (point, target_size) in enumerate(zip(points, target_sizes)):
         id_ = i + 1
         gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
 
@@ -179,7 +193,9 @@ def delaunay_3d(
         gmsh.model.geo.add_line(face[1] + 1, face[2] + 1, i * 4 + 1)
         gmsh.model.geo.add_line(face[2] + 1, face[3] + 1, i * 4 + 2)
         gmsh.model.geo.add_line(face[3] + 1, face[0] + 1, i * 4 + 3)
-        gmsh.model.geo.add_curve_loop([i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1)
+        gmsh.model.geo.add_curve_loop(
+            [i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1
+        )
         gmsh.model.geo.add_plane_surface([i + 1], i + 1)
         gmsh.model.geo.remove_all_duplicates()
         gmsh.model.geo.synchronize()
@@ -255,7 +271,9 @@ class Report(scooby.Report):  # type: ignore[misc]
 
     """
 
-    def __init__(self: Report, ncol: int = 3, text_width: int = 80) -> None:  # numpydoc ignore=PR01
+    def __init__(
+        self: Report, ncol: int = 3, text_width: int = 80
+    ) -> None:  # numpydoc ignore=PR01
         """Generate a :class:`scooby.Report` instance."""
         # mandatory packages
         core = PACKAGES_CORE
