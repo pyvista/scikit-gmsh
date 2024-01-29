@@ -1,4 +1,4 @@
-# <img src="/docs/\_static/pvgmsh_logo_icon.svg", width="20"> PyVista accessors for Gmsh
+# PyVista accessors for Gmsh
 
 PyVista accessors for Gmsh to generate 3D finite element mesh.
 
