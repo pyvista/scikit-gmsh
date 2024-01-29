@@ -8,6 +8,7 @@ os.environ["QT_API"] = "pyqt5"
 import os
 
 import pyvista as pv
+import qdarktheme
 from pyvistaqt import MainWindow, QtInteractor
 from qtpy import QtWidgets
 
@@ -60,5 +61,6 @@ class MyMainWindow(MainWindow):
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     # app.setStyleSheet(qdarkgraystyle.load_stylesheet())
+    qdarktheme.setup_theme()
     window = MyMainWindow()
     sys.exit(app.exec_())
