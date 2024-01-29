@@ -1,13 +1,6 @@
-<h1 align="center">
-  <a href="https://github.com/pyvista/pvgmsh#--------">
-    <img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/pvgmsh_logo_icon.svg"
-         alt="PVGmsh"
-         width="200"></a>
-</h1>
+# PyVista accessors for Gmsh
 
-<h3 align="center">
 PyVista accessors for Gmsh to generate 3D finite element mesh.
-</h3>
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
@@ -19,13 +12,23 @@ PyVista accessors for Gmsh to generate 3D finite element mesh.
 [![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg)](https://github.com/pyvista/pvgmsh/blob/main/CODE_OF_CONDUCT.md)
 [![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/pvgmsh)](https://github.com/pyvista/pvgmsh/stargazers)
 
-## Motivation
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Motivation](#motivation)
+- [Installation](#installation)
+  - [Developer](#developer)
+- [Usage](#usage)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# Motivation
 
 See discussion: https://github.com/pyvista/pyvista/discussions/2133#discussioncomment-2107992
 
-## Installation
+# Installation
 
-### Developer
+## Developer
 
 If you simply can't wait for the next release to play with the latest hot features, then you can easily
 install the `main` development branch from GitHub:
@@ -34,7 +37,7 @@ install the `main` development branch from GitHub:
 pip install git+https://github.com/pyvista/pvgmsh@main
 ```
 
-## Usage
+# Usage
 
 ```python
 import pyvista as pv
@@ -54,9 +57,6 @@ mesh = pm.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 ```
 
 To visualize the model we can use PyVista.
-
-<details>
-<summary>🗒 </summary>
 
 ```python
 plotter = pv.Plotter()
@@ -81,11 +81,7 @@ _ = plotter.add_legend(
 plotter.show(cpos="xy")
 ```
 
-</details>
-
-<h1 align="center">
-  <img src="https://github.com/pyvista/pvgmsh/raw/main/docs/_static/frontal_delaunay_2d_01.png" width="500">
-</h1>
+![2D mesh](/docs/_static/frontal_delaunay_2d_01.png)
 
 We can also generate a 3D mesh.
 
@@ -93,9 +89,6 @@ We can also generate a 3D mesh.
 edge_source = pv.Cube()
 mesh = pm.delaunay_3d(edge_source, target_sizes=0.4)
 ```
-
-<details>
-<summary>🗒 </summary>
 
 ```python
 plotter = pv.Plotter()
@@ -125,26 +118,4 @@ _ = plotter.add_axes(
 plotter.show()
 ```
 
-</details>
-
-<h1 align="center">
-  <img src="https://github.com/pyvista/pvgmsh/raw/main/docs/_static/delaunay_3d_01.png" width="500">
-</h1>
-
-🚧 [constructive solid geometry](https://gmsh.info/doc/course/general_overview.pdf)
-
-<h1 align="center">
-  <img src="https://github.com/pyvista/pvgmsh/raw/main/docs/_static/csg_tree/csg_tree.png" width="500">
-</h1>
-
-# Authors
-
-<a href="https://github.com/pyvista/pvgmsh/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=pyvista/pvgmsh" />
-</a>
-
-Made with [contrib.rocks](https://contrib.rocks).
-
-## License
-
-pvgmsh is distributed under the terms of the [GNU General Public License v3.0 or later](https://spdx.org/licenses/GPL-3.0-or-later.html) license.
+![3D mesh](/docs/_static/delaunay_3d_01.png)
