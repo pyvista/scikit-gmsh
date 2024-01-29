@@ -1,4 +1,4 @@
-# PyVista accessors for Gmsh
+# ![logo]("/docs/_static/logo.png") PyVista accessors for Gmsh
 
 PyVista accessors for Gmsh to generate 3D finite element mesh.
 
@@ -19,8 +19,6 @@ PyVista accessors for Gmsh to generate 3D finite element mesh.
 - [Installation](#installation)
   - [Developer](#developer)
 - [Usage](#usage)
-- [Authors](#authors)
-- [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -83,7 +81,7 @@ _ = plotter.add_legend(
 plotter.show(cpos="xy")
 ```
 
-![2D mesh]("./docs/_static/frontal_delaunay_2d_01.png")
+![2D mesh]("/docs/_static/frontal_delaunay_2d_01.png")
 
 We can also generate a 3D mesh.
 
@@ -120,17 +118,4 @@ _ = plotter.add_axes(
 plotter.show()
 ```
 
-![3D mesh]("./docs/_static/delaunay_3d_01.png")
-
-[constructive solid geometry](https://gmsh.info/doc/course/general_overview.pdf)
-
-![csg tree]("https://github.com/pyvista/pvgmsh/raw/main/docs/_static/csg_tree/csg_tree.png")
-
-# Authors
-
-![contributors]("https://contrib.rocks/image?repo=pyvista/pvgmsh")
-Made with [contrib.rocks](https://contrib.rocks).
-
-# License
-
-pvgmsh is distributed under the terms of the [GNU General Public License v3.0 or later](https://spdx.org/licenses/GPL-3.0-or-later.html) license.
+![3D mesh]("/docs/_static/delaunay_3d_01.png")
