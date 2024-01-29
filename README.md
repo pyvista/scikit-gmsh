@@ -15,9 +15,6 @@ PyVista accessors for Gmsh to generate 3D finite element mesh.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [
-  
-](#)
 - [Motivation](#motivation)
 - [Installation](#installation)
   - [Developer](#developer)
@@ -125,11 +122,9 @@ plotter.show()
 
 ![3D mesh]("./docs/_static/delaunay_3d_01.png")
 
-🚧 [constructive solid geometry](https://gmsh.info/doc/course/general_overview.pdf)
+[constructive solid geometry](https://gmsh.info/doc/course/general_overview.pdf)
 
-<h1 align="center">
-  <img src="https://github.com/pyvista/pvgmsh/raw/main/docs/_static/csg_tree/csg_tree.png" width="500">
-</h1>
+![csg tree]("https://github.com/pyvista/pvgmsh/raw/main/docs/_static/csg_tree/csg_tree.png")
 
 # Authors
 
