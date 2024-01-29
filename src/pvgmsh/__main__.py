@@ -35,9 +35,9 @@ class MyMainWindow(MainWindow):
         # simple menu to demo functions
         mainMenu = self.menuBar()
         fileMenu = mainMenu.addMenu("File")
-        font = mainMenu.font()
-        font.setPointSize(14)
-        mainMenu.setFont(font)
+        # font = mainMenu.font()
+        # font.setPointSize(14)
+        # mainMenu.setFont(font)
         exitButton = QtWidgets.QAction("Exit", self)
         exitButton.setShortcut("Ctrl+Q")
         exitButton.triggered.connect(self.close)
