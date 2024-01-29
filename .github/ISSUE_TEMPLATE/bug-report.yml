@@ -38,7 +38,7 @@ body:
         This report helps us track down bugs and will be critical to addressing your bug.
         ```python
         # Get system info
-        import pmmsh as pm
+        import pvgmsh as pm
         print(pm.Report())
         ```
       render: shell
