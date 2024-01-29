@@ -83,7 +83,7 @@ _ = plotter.add_legend(
 plotter.show(cpos="xy")
 ```
 
-![2D mesh]("https://github.com/pyvista/pvgmsh/raw/main/docs/_static/frontal_delaunay_2d_01.png")
+![2D mesh]("./docs/_static/frontal_delaunay_2d_01.png")
 
 We can also generate a 3D mesh.
 
@@ -120,7 +120,7 @@ _ = plotter.add_axes(
 plotter.show()
 ```
 
-![3D mesh]("https://github.com/pyvista/pvgmsh/raw/main/docs/_static/delaunay_3d_01.png")
+![3D mesh]("./docs/_static/delaunay_3d_01.png")
 
 # Authors
 
