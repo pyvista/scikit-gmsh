@@ -25,7 +25,6 @@ See discussion: https://github.com/pyvista/pyvista/discussions/2133#discussionco
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Motivation](#motivation)
 - [Installation](#installation)
   - [Developer](#developer)
 - [Usage](#usage)
