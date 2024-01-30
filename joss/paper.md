@@ -1,3 +1,17 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Summary](#summary)
+- [Statement of need](#statement-of-need)
+- [Mathematics](#mathematics)
+- [Citations](#citations)
+- [Figures](#figures)
+- [Acknowledgements](#acknowledgements)
+- [References](#references)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ---
 title: "Gala: A Python package for galactic dynamics"
 tags:
