@@ -1,9 +1,5 @@
 # PyVista accessors for Gmsh
 
-[<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/pvgmsh_logo_icon.svg" align="right" width="100">](https://github.com/pyvista/pvgmsh#--------)
-
-PyVista accessors for Gmsh to generate 3D finite element mesh.
-
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
@@ -13,6 +9,10 @@ PyVista accessors for Gmsh to generate 3D finite element mesh.
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg)](https://github.com/pyvista/pvgmsh/blob/main/CODE_OF_CONDUCT.md)
 [![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/pvgmsh)](https://github.com/pyvista/pvgmsh/stargazers)
+
+[<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/pvgmsh_logo_icon.svg" align="right" width="100">](https://github.com/pyvista/pvgmsh#--------)
+
+PyVista accessors for Gmsh to generate 3D finite element mesh.
 
 ## Table of Contents
 
