@@ -1,4 +1,4 @@
-# PyVista accessors for Gmsh
+# pvgmsh
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
@@ -10,29 +10,30 @@
 [![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg)](https://github.com/pyvista/pvgmsh/blob/main/CODE_OF_CONDUCT.md)
 [![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/pvgmsh)](https://github.com/pyvista/pvgmsh/stargazers)
 
-[<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/pvgmsh_logo_icon.svg" align="right" width="100">](https://github.com/pyvista/pvgmsh#--------)
+[<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/pvgmsh_logo_icon.svg" align="left" width="100">](https://github.com/pyvista/pvgmsh#--------)
 
-PyVista accessors for Gmsh to generate 3D finite element mesh.
+> PyVista accessors for Gmsh to generate 3D finite element mesh.
+
+Also, this list is a collection of 2D and 3D finite element mesh examples.
+
+Contributions _very welcome_ but first see [Contributing](CONTRIBUTING.md).
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+By participating in this project you agree to abide by its terms.
 
 ## Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Motivation](#motivation)
 - [Installation](#installation)
   - [Developer](#developer)
 - [Usage](#usage)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Motivation
+## Installation
 
-See discussion: https://github.com/pyvista/pyvista/discussions/2133#discussioncomment-2107992
-
-# Installation
-
-## Developer
+### Developer
 
 If you simply can't wait for the next release to play with the latest hot features, then you can easily
 install the `main` development branch from GitHub:
@@ -41,7 +42,7 @@ install the `main` development branch from GitHub:
 pip install git+https://github.com/pyvista/pvgmsh@main
 ```
 
-# Usage
+## Usage
 
 ```python
 import pyvista as pv
