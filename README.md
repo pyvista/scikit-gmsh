@@ -14,11 +14,11 @@
 
 > PyVista accessors for Gmsh to generate 3D finite element mesh.
 
-The goal of this project is to use the visualization capabilities of PyVista to make all the features of Gmsh easier to use.
+Also, this list is a collection of 2D and 3D finite element mesh examples.
 
-This project was initiated to enhance PyVista's Delaunay triangulation of the mesh functionality with Gmsh.
-
-See discussion: https://github.com/pyvista/pyvista/discussions/2133#discussioncomment-2107992
+Contributions _very welcome_ but first see [Contributing](CONTRIBUTING.md).
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+By participating in this project you agree to abide by its terms.
 
 ## Table of Contents
 
