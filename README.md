@@ -65,6 +65,8 @@ mesh = pm.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 
 To visualize the model we can use PyVista.
 
+[<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/frontal_delaunay_2d_01.png" align="right" width="500">](https://github.com/pyvista/pvgmsh/main/docs/_static/frontal_delaunay_2d_01.png)
+
 ```python
 plotter = pv.Plotter()
 _ = plotter.add_mesh(
@@ -88,14 +90,14 @@ _ = plotter.add_legend(
 plotter.show(cpos="xy")
 ```
 
-![2D mesh](/docs/_static/frontal_delaunay_2d_01.png)
-
 We can also generate a 3D mesh.
 
 ```python
 edge_source = pv.Cube()
 mesh = pm.delaunay_3d(edge_source, target_sizes=0.4)
 ```
+
+[<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/delaunay_3d_01.png" align="right" width="500">](https://github.com/pyvista/pvgmsh/main/docs/_static/delaunay_3d_01.png)
 
 ```python
 plotter = pv.Plotter()
@@ -124,8 +126,6 @@ _ = plotter.add_axes(
 )
 plotter.show()
 ```
-
-![3D mesh](/docs/_static/delaunay_3d_01.png)
 
 ## Contributions
 
