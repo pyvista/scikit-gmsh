@@ -19,10 +19,7 @@ EDGE_SOURCES = [
 ]
 
 
-@pytest.mark.parametrize(
-    "edge_source",
-    EDGE_SOURCES,
-)
+@pytest.mark.parametrize("edge_source", EDGE_SOURCES)
 @pytest.mark.parametrize("target_sizes", [2.0, [1.0, 2.0, 3.0, 4.0], None])
 def test_frontal_delaunay_2d(
     edge_source: pv.PolyData, target_sizes: float | Sequence[float] | None
