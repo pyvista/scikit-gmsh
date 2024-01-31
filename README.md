@@ -1,7 +1,6 @@
 # pvgmsh
 
 [![Documentation Status](https://readthedocs.org/projects/pvgmsh/badge/?version=latest)](https://pvgmsh.readthedocs.io/en/latest/?badge=latest)
-[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/pvgmsh)](https://github.com/pyvista/pvgmsh/stargazers)
 
 [<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/pvgmsh_logo_icon.svg" align="left" width="100">](https://github.com/pyvista/pvgmsh#--------)
 
@@ -14,6 +13,8 @@ Please note that this project is released with a [Contributor Code of Conduct](C
 By participating in this project you agree to abide by its terms.
 
 ---
+
+[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/pvgmsh)](https://github.com/pyvista/pvgmsh/stargazers)
 
 Enjoying pvgmsh? Show your support with a [Github star](https://github.com/pyvista/pvgmsh) — it’s a simple click that means the world to us and helps others discover it too! ⭐️
 
