@@ -13,9 +13,17 @@ import pyvista as pv
 
 import pvgmsh as pm
 
+EDGE_SOURCES = [
+    pv.Polygon(n_sides=4, radius=8, fill=False),
+    pv.Circle().extract_feature_edges(),
+]
 
+
+@pytest.mark.parametrize("edge_source", EDGE_SOURCES)
 @pytest.mark.parametrize("target_sizes", [2.0, [1.0, 2.0, 3.0, 4.0], None])
-def test_frontal_delaunay_2d(target_sizes: float | Sequence[float] | None) -> None:
+def test_frontal_delaunay_2d(
+    edge_source: pv.PolyData, target_sizes: float | Sequence[float] | None
+) -> None:
     """Frontal-Delaunay 2D mesh algorithm test code."""
     edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
     mesh = pm.frontal_delaunay_2d(edge_source, target_sizes=target_sizes)
