@@ -381,6 +381,7 @@ directive.
     import warnings
     from pvgmsh.core.errors import pvgmshDeprecationWarning
 
+
     def addition(a, b):
         """Add two numbers.
 
@@ -403,8 +404,8 @@ directive.
         """
         # deprecated 0.37.0, convert to error in 0.40.0, remove 0.41.0
         warnings.warn(
-            '`addition` has been deprecated. Use pvgmsh.add instead',
-            pvgmshDeprecationWarning
+            "`addition` has been deprecated. Use pvgmsh.add instead",
+            pvgmshDeprecationWarning,
         )
         add(a, b)
 
@@ -746,7 +747,7 @@ dataset ``pvgmsh/examples/downloads.py``. This might be as easy as:
 
    def download_my_dataset(load=True):
        """Download my new dataset."""
-       return _download_and_read('mydata/my_new_dataset.vtk', load=load)
+       return _download_and_read("mydata/my_new_dataset.vtk", load=load)
 
 
 Which enables:
