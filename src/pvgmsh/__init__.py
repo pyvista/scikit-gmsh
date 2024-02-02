@@ -221,41 +221,6 @@ def delaunay_3d(
     return mesh
 
 
-PACKAGES_CORE: list[str] = [
-    "matplotlib",
-    "numpy",
-    "pooch",
-    "pyvista",
-    "scooby",
-    "vtk",
-    "gmsh",
-    "meshio",
-    "pygmsh",
-    "pyvista",
-]
-
-PACKAGES_OPTIONAL: list[str] = [
-    "imageio",
-    "pyvistaqt",
-    "PyQt5",
-    "IPython",
-    "colorcet",
-    "cmocean",
-    "ipywidgets",
-    "scipy",
-    "tqdm",
-    "jupyterlab",
-    "pytest_pyvista",
-    "trame",
-    "trame_client",
-    "trame_server",
-    "trame_vtk",
-    "trame_vuetify",
-    "jupyter_server_proxy",
-    "nest_asyncio",
-]
-
-
 class Report(scooby.Report):  # type: ignore[misc]
     """
     Generate an environment package and hardware report.
@@ -276,10 +241,40 @@ class Report(scooby.Report):  # type: ignore[misc]
     ) -> None:  # numpydoc ignore=PR01
         """Generate a :class:`scooby.Report` instance."""
         # mandatory packages
-        core = PACKAGES_CORE
+        core: list[str] = [
+            "matplotlib",
+            "numpy",
+            "pooch",
+            "pyvista",
+            "scooby",
+            "vtk",
+            "gmsh",
+            "meshio",
+            "pygmsh",
+            "pyvista",
+        ]
 
         # optional packages
-        optional = PACKAGES_OPTIONAL
+        optional: list[str] = [
+            "imageio",
+            "pyvistaqt",
+            "PyQt5",
+            "IPython",
+            "colorcet",
+            "cmocean",
+            "ipywidgets",
+            "scipy",
+            "tqdm",
+            "jupyterlab",
+            "pytest_pyvista",
+            "trame",
+            "trame_client",
+            "trame_server",
+            "trame_vtk",
+            "trame_vuetify",
+            "jupyter_server_proxy",
+            "nest_asyncio",
+        ]
 
         extra_meta = [
             ("GPU Details", "None"),
