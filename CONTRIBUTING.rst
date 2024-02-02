@@ -4,12 +4,7 @@ Contributing
 .. |Contributor Covenant| image:: https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg
    :target: CODE_OF_CONDUCT.md
 
-.. |codetriage| image:: https://www.codetriage.com/pyvista/pvgmsh/badges/users.svg
-   :target: https://www.codetriage.com/pyvista/pvgmsh
-   :alt: Code Triage
-
 |Contributor Covenant|
-|codetriage|
 
 We absolutely welcome contributions and we hope that this guide will
 facilitate an understanding of the pvgmsh code repository. It is
