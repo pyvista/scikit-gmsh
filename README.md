@@ -127,6 +127,9 @@ plotter.show()
 
 ![3D mesh](/docs/_static/delaunay_3d_01.png)
 
+We can clip a mesh by a plane by specifying the origin and normal.
+See [clip_with_surface_example](https://docs.pyvista.org/examples/01-filter/clipping-with-surface#clip-with-surface-example) for more examples using this filter.
+
 ```python
 clipped = mesh.clip(origin=(0.0, 0.0, 0.0), normal=(0.0, 0.0, 1.0), crinkle=True)
 ```
