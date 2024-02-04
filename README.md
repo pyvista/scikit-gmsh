@@ -72,7 +72,7 @@ _ = plotter.add_mesh(
     show_edges=True,
     line_width=4,
     color="white",
-    lighting=False,
+    lighting=True,
     edge_color=[153, 153, 153],
 )
 _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
@@ -94,7 +94,7 @@ We can also generate a 3D mesh.
 
 ```python
 edge_source = pv.Cube()
-mesh = pm.delaunay_3d(edge_source, target_sizes=0.4)
+mesh = pm.delaunay_3d(edge_source, target_sizes=0.2)
 ```
 
 ```python
@@ -104,7 +104,7 @@ _ = plotter.add_mesh(
     show_edges=True,
     line_width=4,
     color="white",
-    lighting=False,
+    lighting=True,
     edge_color=[153, 153, 153],
 )
 _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
@@ -126,6 +126,12 @@ plotter.show()
 ```
 
 ![3D mesh](/docs/_static/delaunay_3d_01.png)
+
+```python
+clipped = mesh.clip(origin=(0.0, 0.0, 0.0), normal=(0.0, 0.0, 1.0), crinkle=True)
+```
+
+![3D mesh](/docs/_static/delaunay_3d_02.png)
 
 ## Contributions
 
