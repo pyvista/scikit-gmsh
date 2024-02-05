@@ -70,6 +70,7 @@ def frontal_delaunay_2d(
     >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
     >>> _ = plotter.add_legend([[" edge source", [214, 39, 40]], [" mesh ", [153, 153, 153]]], bcolor="white", face="r", size=(0.3, 0.3))
     >>> plotter.show(cpos="xy", screenshot="docs/_static/frontal_delaunay_2d_01.png")
+
     """
     points = edge_source.points
     lines = edge_source.lines
