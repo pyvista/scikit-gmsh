@@ -63,7 +63,7 @@ repos:
     rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
-        types_or: [yaml, markdown, html, css, scss, javascript, json]
+        types_or: [yaml, markdown, html, css, scss, javascript, json, toml]
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.15.0
     hooks:
