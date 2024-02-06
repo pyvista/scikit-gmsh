@@ -8,18 +8,18 @@ build:
   tools:
     python: "3.11"
   apt_packages:
-    - libgl1-mesa-glx
-    - xvfb
-    - python-tk
-    - libglu1
-    - libxcursor-dev
-    - libxft2
-    - libxinerama1
     - libfltk1.3-dev
     - libfreetype6-dev
     - libgl1-mesa-dev
-    - libocct-foundation-dev
+    - libgl1-mesa-glx
+    - libglu1
     - libocct-data-exchange-dev
+    - libocct-foundation-dev
+    - libxcursor-dev
+    - libxft2
+    - libxinerama1
+    - python-tk
+    - xvfb
 
 sphinx:
   configuration: docs/conf.py
