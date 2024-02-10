@@ -65,11 +65,12 @@ def frontal_delaunay_2d(
     >>> mesh = pm.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 
     >>> plotter = pv.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False, edge_color=[153, 153, 153])
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])
     >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
     >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
     >>> _ = plotter.add_legend([[" edge source", [214, 39, 40]], [" mesh ", [153, 153, 153]]], bcolor="white", face="r", size=(0.3, 0.3))
     >>> plotter.show(cpos="xy", screenshot="docs/_static/frontal_delaunay_2d_01.png")
+
     """
     points = edge_source.points
     lines = edge_source.lines
@@ -145,10 +146,10 @@ def delaunay_3d(
     >>> import pvgmsh as pm
 
     >>> edge_source = pv.Cube()
-    >>> mesh = pm.delaunay_3d(edge_source, target_sizes=0.4)
+    >>> mesh = pm.delaunay_3d(edge_source, target_sizes=0.2)
 
     >>> plotter = pv.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False, edge_color=[153, 153, 153])
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])
     >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
     >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
     >>> plotter.enable_parallel_projection()
@@ -163,6 +164,34 @@ def delaunay_3d(
     ...     },
     ... )
     >>> plotter.show(screenshot="docs/_static/delaunay_3d_01.png")
+
+    >>> clipped = mesh.clip(origin = (0.0, 0.0, 0.0), normal = (0.0, 0.0, 1.0), crinkle=True)
+    >>> plotter = pv.Plotter(off_screen=True)
+    >>> _ = plotter.add_mesh(
+    ...     clipped,
+    ...     show_edges=True,
+    ...     line_width=4,
+    ...     color="white",
+    ...     lighting=True,
+    ...     edge_color=[153, 153, 153],
+    ... )
+    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
+    >>> _ = plotter.add_points(
+    ...     edge_source.points, style="points", point_size=20, color=[214, 39, 40]
+    ... )
+    >>> plotter.enable_parallel_projection()
+    >>> _ = plotter.add_axes(
+    ...     box=True,
+    ...     box_args={
+    ...         "opacity": 0.5,
+    ...         "color_box": True,
+    ...         "x_face_color": "white",
+    ...         "y_face_color": "white",
+    ...         "z_face_color": "white",
+    ...     },
+    ... )
+    >>> plotter.show(screenshot="docs/_static/delaunay_3d_02.png")
+
     """
     points = edge_source.points
     faces = edge_source.regular_faces
@@ -221,41 +250,6 @@ def delaunay_3d(
     return mesh
 
 
-PACKAGES_CORE: list[str] = [
-    "matplotlib",
-    "numpy",
-    "pooch",
-    "pyvista",
-    "scooby",
-    "vtk",
-    "gmsh",
-    "meshio",
-    "pygmsh",
-    "pyvista",
-]
-
-PACKAGES_OPTIONAL: list[str] = [
-    "imageio",
-    "pyvistaqt",
-    "PyQt5",
-    "IPython",
-    "colorcet",
-    "cmocean",
-    "ipywidgets",
-    "scipy",
-    "tqdm",
-    "jupyterlab",
-    "pytest_pyvista",
-    "trame",
-    "trame_client",
-    "trame_server",
-    "trame_vtk",
-    "trame_vuetify",
-    "jupyter_server_proxy",
-    "nest_asyncio",
-]
-
-
 class Report(scooby.Report):  # type: ignore[misc]
     """
     Generate an environment package and hardware report.
@@ -276,10 +270,40 @@ class Report(scooby.Report):  # type: ignore[misc]
     ) -> None:  # numpydoc ignore=PR01
         """Generate a :class:`scooby.Report` instance."""
         # mandatory packages
-        core = PACKAGES_CORE
+        core: list[str] = [
+            "matplotlib",
+            "numpy",
+            "pooch",
+            "pyvista",
+            "scooby",
+            "vtk",
+            "gmsh",
+            "meshio",
+            "pygmsh",
+            "pyvista",
+        ]
 
         # optional packages
-        optional = PACKAGES_OPTIONAL
+        optional: list[str] = [
+            "imageio",
+            "pyvistaqt",
+            "PyQt5",
+            "IPython",
+            "colorcet",
+            "cmocean",
+            "ipywidgets",
+            "scipy",
+            "tqdm",
+            "jupyterlab",
+            "pytest_pyvista",
+            "trame",
+            "trame_client",
+            "trame_server",
+            "trame_vtk",
+            "trame_vuetify",
+            "jupyter_server_proxy",
+            "nest_asyncio",
+        ]
 
         extra_meta = [
             ("GPU Details", "None"),

@@ -49,7 +49,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = "sphinx_book_theme"
-html_logo = "_static/logo.svg"
+html_logo = "_static/small_logo.svg"
 
 html_context = {
     "github_url": "https://github.com",

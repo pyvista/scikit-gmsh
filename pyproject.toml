@@ -1,9 +1,9 @@
 [build-system]
 requires = [
   'gmsh<4.12.3',
-  'meshio<5.3.5',
+  'meshio<5.3.6',
   'pygmsh<7.1.18',
-  'pyvista<0.43.3',
+  'pyvista',
   'scooby<0.9.3',
   'setuptools<69.0.4',
 ]
@@ -17,9 +17,9 @@ dynamic = [
 ]
 dependencies = [
   'gmsh<4.12.3',
-  'meshio<5.3.5',
+  'meshio<5.3.6',
   'pygmsh<7.1.18',
-  'pyvista<0.43.3',
+  'pyvista',
   'scooby<0.9.3',
 ]
 
