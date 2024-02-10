@@ -3,7 +3,9 @@ requires = [
   'gmsh<4.12.3',
   'meshio<5.3.6',
   'pygmsh<7.1.18',
+  'pyqt5',
   'pyvista',
+  'pyvistaqt',
   'scooby<0.9.3',
   'setuptools<69.0.4',
 ]
@@ -19,7 +21,9 @@ dependencies = [
   'gmsh<4.12.3',
   'meshio<5.3.6',
   'pygmsh<7.1.18',
+  'pyqt5',
   'pyvista',
+  'pyvistaqt',
   'scooby<0.9.3',
 ]
 

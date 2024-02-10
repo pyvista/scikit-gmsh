@@ -9,14 +9,12 @@ os.environ["QT_API"] = "pyqt5"
 import os
 
 import pyvista as pv
-import qdarktheme
 from pyvistaqt import MainWindow, QtInteractor
 from qtpy import QtWidgets
 
-# import qdarkgraystyle
 
 
-class MyMainWindow(MainWindow):
+class PvgmshWindow(MainWindow):
     def __init__(self, parent=None, show=True):
         QtWidgets.QMainWindow.__init__(self, parent)
 
@@ -33,35 +31,58 @@ class MyMainWindow(MainWindow):
         self.setCentralWidget(self.frame)
 
         # simple menu to demo functions
-        mainMenu = self.menuBar()
-        fileMenu = mainMenu.addMenu("File")
-        # font = mainMenu.font()
+        main_menu = self.menuBar()
+        file_menu = main_menu.addMenu("\U0001F6A7 File")
+        # font = main_menu.font()
         # font.setPointSize(14)
-        # mainMenu.setFont(font)
-        exitButton = QtWidgets.QAction("Exit", self)
-        exitButton.setShortcut("Ctrl+Q")
-        exitButton.triggered.connect(self.close)
-        fileMenu.addAction(exitButton)
+        # main_menu.setFont(font)
+
+        new_button = QtWidgets.QAction("\U0001F6A7 New", self)
+        file_menu.addAction(new_button)
+
+        open_button = QtWidgets.QAction("\U0001F6A7 Open", self)
+        file_menu.addAction(open_button)
+
+        open_recent_button = QtWidgets.QAction("\U0001F6A7 Open Recent", self)
+        file_menu.addAction(open_recent_button)
+
+        import_button = QtWidgets.QAction("\U0001F6A7 Import", self)
+        file_menu.addAction(import_button)
+
+        save_button = QtWidgets.QAction("\U0001F6A7 Save", self)
+        file_menu.addAction(save_button)
+
+        save_as_button = QtWidgets.QAction("\U0001F6A7 Save As", self)
+        file_menu.addAction(save_as_button)
+
+        export_button = QtWidgets.QAction("\U0001F6A7 Export", self)
+        file_menu.addAction(export_button)
+
+        close_results_button = QtWidgets.QAction("\U0001F6A7 Close Results", self)
+        file_menu.addAction(close_results_button)
+
+        exit_button = QtWidgets.QAction("Exit", self)
+        exit_button.setShortcut("Alt+F4")
+        exit_button.triggered.connect(self.close)
+        file_menu.addAction(exit_button)
 
         # allow adding a sphere
-        meshMenu = mainMenu.addMenu("Mesh")
-        self.add_sphere_action = QtWidgets.QAction("Add Sphere", self)
-        self.add_sphere_action.triggered.connect(self.add_sphere)
-        meshMenu.addAction(self.add_sphere_action)
+        # meshMenu = main_menu.addMenu("Mesh")
+        # self.add_sphere_action = QtWidgets.QAction("Add Sphere", self)
+        # self.add_sphere_action.triggered.connect(self.add_sphere)
+        # meshMenu.addAction(self.add_sphere_action)
 
         if show:
             self.show()
 
-    def add_sphere(self):
-        """Add a sphere to the pyqt frame"""
-        sphere = pv.Sphere()
-        self.plotter.add_mesh(sphere, show_edges=True)
-        self.plotter.reset_camera()
+    # def add_sphere(self):
+    #     """Add a sphere to the pyqt frame"""
+    #     sphere = pv.Sphere()
+    #     self.plotter.add_mesh(sphere, show_edges=True)
+    #     self.plotter.reset_camera()
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    # app.setStyleSheet(qdarkgraystyle.load_stylesheet())
-    qdarktheme.setup_theme()
-    window = MyMainWindow()
+    window = PvgmshWindow()
     sys.exit(app.exec_())
