@@ -8,10 +8,8 @@ os.environ["QT_API"] = "pyqt5"
 
 import os
 
-import pyvista as pv
 from pyvistaqt import MainWindow, QtInteractor
 from qtpy import QtWidgets
-
 
 
 class PvgmshWindow(MainWindow):
