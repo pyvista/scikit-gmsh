@@ -1,3 +1,5 @@
+:construction: pvgmsh is in the pre-alpha stage the interface could be subject to important changes soon.
+
 # pvgmsh
 
 [![Documentation Status](https://readthedocs.org/projects/pvgmsh/badge/?version=latest)](https://pvgmsh.readthedocs.io/en/latest/?badge=latest)
