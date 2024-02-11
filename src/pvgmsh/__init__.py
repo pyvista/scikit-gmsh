@@ -17,6 +17,9 @@ if TYPE_CHECKING:
 FRONTAL_DELAUNAY_2D = 6
 DELAUNAY_3D = 1
 
+NUMBER_OF_POINT_OF_SQUARE = 4
+NUMBER_OF_POINT_OF_TRIANGLE = 3
+
 now = datetime.datetime.now(tz=datetime.timezone.utc)
 
 # major, minor, patch
@@ -218,21 +221,26 @@ def delaunay_3d(
 
     surface_loop = []
     for i, face in enumerate(faces):
-        gmsh.model.geo.add_line(face[0] + 1, face[1] + 1, i * 4 + 0)
-        gmsh.model.geo.add_line(face[1] + 1, face[2] + 1, i * 4 + 1)
-        gmsh.model.geo.add_line(face[2] + 1, face[3] + 1, i * 4 + 2)
-        gmsh.model.geo.add_line(face[3] + 1, face[0] + 1, i * 4 + 3)
-        gmsh.model.geo.add_curve_loop(
-            [i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1
-        )
+        if len(face) == NUMBER_OF_POINT_OF_SQUARE:
+            gmsh.model.geo.add_line(face[0] + 1, face[1] + 1, i * 4 + 0)
+            gmsh.model.geo.add_line(face[1] + 1, face[2] + 1, i * 4 + 1)
+            gmsh.model.geo.add_line(face[2] + 1, face[3] + 1, i * 4 + 2)
+            gmsh.model.geo.add_line(face[3] + 1, face[0] + 1, i * 4 + 3)
+            gmsh.model.geo.add_curve_loop(
+                [i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1
+            )
+        elif len(face) == NUMBER_OF_POINT_OF_TRIANGLE:
+            gmsh.model.geo.add_line(face[0] + 1, face[1] + 1, i * 4 + 0)
+            gmsh.model.geo.add_line(face[1] + 1, face[2] + 1, i * 4 + 1)
+            gmsh.model.geo.add_line(face[2] + 1, face[0] + 1, i * 4 + 2)
+            gmsh.model.geo.add_curve_loop([i * 4 + 0, i * 4 + 1, i * 4 + 2], i + 1)
         gmsh.model.geo.add_plane_surface([i + 1], i + 1)
-        gmsh.model.geo.remove_all_duplicates()
-        gmsh.model.geo.synchronize()
         surface_loop.append(i + 1)
 
     gmsh.model.geo.add_surface_loop(surface_loop, 1)
     gmsh.model.geo.add_volume([1], 1)
 
+    gmsh.model.geo.remove_all_duplicates()
     gmsh.model.geo.synchronize()
     gmsh.model.mesh.generate(3)
 

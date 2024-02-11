@@ -13,13 +13,14 @@ import pyvista as pv
 
 import pvgmsh as pm
 
-EDGE_SOURCES = [
+EDGE_SOURCES_2D = [
     pv.Polygon(n_sides=4, radius=8, fill=False),
     pv.Circle().extract_feature_edges(),
 ]
+EDGE_SOURCES_3D = [pv.Cube(), pv.Sphere()]
 
 
-@pytest.mark.parametrize("edge_source", EDGE_SOURCES)
+@pytest.mark.parametrize("edge_source", EDGE_SOURCES_2D)
 @pytest.mark.parametrize("target_sizes", [2.0, [1.0, 2.0, 3.0, 4.0], None])
 def test_frontal_delaunay_2d(
     edge_source: pv.PolyData, target_sizes: float | Sequence[float] | None
@@ -34,12 +35,14 @@ def test_frontal_delaunay_2d(
     # https://github.com/pyvista/pvgmsh/pull/125
 
 
+@pytest.mark.parametrize("edge_source", EDGE_SOURCES_3D)
 @pytest.mark.parametrize(
     "target_sizes", [0.5, [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8], None]
 )
-def test_delaunay_3d(target_sizes: float | Sequence[float] | None) -> None:
+def test_delaunay_3d(
+    edge_source: pv.PolyData, target_sizes: float | Sequence[float] | None
+) -> None:
     """Delaunay 3D mesh algorithm test code."""
-    edge_source = pv.Cube()
     mesh = pm.delaunay_3d(edge_source, target_sizes=target_sizes)
     assert mesh.number_of_points > edge_source.number_of_points
     assert mesh.number_of_cells > edge_source.number_of_cells
