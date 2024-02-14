@@ -23,6 +23,9 @@ dependencies = [
   'scooby<0.9.3',
 ]
 
+[project.optional-dependencies]
+test=[pytest==8.0.0]
+
 [tool.setuptools.dynamic]
 version = {attr = 'pvgmsh.__version__'}
 readme = {file = "README.md", content-type = "text/markdown"}
