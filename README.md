@@ -91,7 +91,9 @@ _ = plotter.add_legend(
 plotter.show(cpos="xy")
 ```
 
-![2D mesh](https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/frontal_delaunay_2d_01.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/frontal_delaunay_2d_01.png" align="center" width=512 >
+</p>
 
 We can also generate a 3D mesh.
 
@@ -128,7 +130,9 @@ _ = plotter.add_axes(
 plotter.show()
 ```
 
-![3D mesh](https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/delaunay_3d_01.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/delaunay_3d_01.png" align="center" width=512 >
+</p>
 
 We can clip a mesh by a plane by specifying the origin and normal.
 See [clip_with_surface_example](https://docs.pyvista.org/examples/01-filter/clipping-with-surface#clip-with-surface-example) for more examples using this filter.
@@ -137,7 +141,9 @@ See [clip_with_surface_example](https://docs.pyvista.org/examples/01-filter/clip
 clipped = mesh.clip(origin=(0.0, 0.0, 0.0), normal=(0.0, 0.0, 1.0), crinkle=True)
 ```
 
-![3D mesh](https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/delaunay_3d_02.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/delaunay_3d_02.png" align="center" width=512 >
+</p>
 
 ## Contributions
 
