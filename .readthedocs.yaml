@@ -7,19 +7,7 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.11"
-  apt_packages:
-    - libfltk1.3-dev
-    - libfreetype6-dev
-    - libgl1-mesa-dev
-    - libgl1-mesa-glx
-    - libglu1
-    - libocct-data-exchange-dev
-    - libocct-foundation-dev
-    - libxcursor-dev
-    - libxft2
-    - libxinerama1
-    - python-tk
-    - xvfb
+  apt_packages: packages.txt
 
 sphinx:
   configuration: docs/conf.py
