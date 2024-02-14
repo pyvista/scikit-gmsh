@@ -31,7 +31,11 @@ version = {attr = 'pvgmsh.__version__'}
 readme = {file = "README.md", content-type = "text/markdown"}
 
 [tool.poetry]
+name = "pvgmsh"
 readme = "README.md"
+authors = ["Tetsuo Koyama"]
+description = "PyVista accessors for Gmsh to generate 3D finite element mesh"
+version = "0.0.0"
 
 [tool.numpydoc_validation]
 checks = [
