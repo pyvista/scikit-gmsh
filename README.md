@@ -3,6 +3,7 @@
 # pvgmsh
 
 [![Documentation Status](https://readthedocs.org/projects/pvgmsh/badge/?version=latest)](https://pvgmsh.readthedocs.io/en/latest/?badge=latest)
+[![pvgmsh examples and documentation](https://img.shields.io/static/v1?label=%20&message=Open%20in%20Community%20Cloud&color=pink&logo=streamlit)](https://pvgmsh.streamlit.app/)
 
 [<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/logo.svg" align="left" width="100">](https://github.com/pyvista/pvgmsh#--------)
 
