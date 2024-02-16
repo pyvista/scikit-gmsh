@@ -22,6 +22,7 @@ dependencies = [
   'pyvista',
   'scooby<0.9.3',
 ]
+requires-python = '>=3.9'
 
 [project.optional-dependencies]
 test = ['pytest==8.0.0']
