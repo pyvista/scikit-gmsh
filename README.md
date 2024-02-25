@@ -4,7 +4,7 @@
 
 [![Documentation Status](https://readthedocs.org/projects/pvgmsh/badge/?version=latest)](https://pvgmsh.readthedocs.io/en/latest/?badge=latest)
 
-[<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/logo.svg" align="left" width="100">](https://github.com/pyvista/pvgmsh#--------)
+[<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/logo.svg" align="left" width="200">](https://github.com/pyvista/pvgmsh#--------)
 
 > PyVista accessors for Gmsh to generate 3D finite element mesh.
 
