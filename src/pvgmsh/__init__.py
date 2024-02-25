@@ -357,6 +357,11 @@ class MshPlotterBase:
         """
         super().__init__(*args, **kwargs)
 
+    def add_generated_mesh(
+        self, mesh: pv.PolyData | None = None, **kwargs: Any | None
+    ) -> None:
+        """Add a generated mesh to the plotter scene."""
+
 
 class MshPlotter(MshPlotterBase, pv.Plotter):  # type: ignore[misc]
     """Plotting object to display vtk meshes or numpy arrays."""
