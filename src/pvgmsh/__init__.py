@@ -318,5 +318,45 @@ class Report(scooby.Report):  # type: ignore[misc]
         )
 
 
-class MshPlotter(pv.Plotter):  # type: ignore[misc]
+class MshPlotterBase:
+    """
+    Base class with common behaviour for a gmsh aware plotter.
+
+    See :class:`pyvista.Plotter`.
+
+    Parameters
+    ----------
+    *args :
+        See :class:`pyvista.Plotter` for further details.
+
+    **kwargs : dict, optional
+        See :class:`pyvista.Plotter` for further details.
+
+    Notes
+    -----
+    .. versionadded:: 0.1.0
+
+    """
+
+    def __init__(self: MshPlotterBase, *args, **kwargs) -> None:  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN003
+        """
+        Create gmsh aware plotter.
+
+        Parameters
+        ----------
+        *args :
+            See :class:`pyvista.Plotter` for further details.
+
+        **kwargs : dict, optional
+            See :class:`pyvista.Plotter` for further details.
+
+        Notes
+        -----
+        .. versionadded:: 0.1.0
+
+        """
+        super().__init__(*args, **kwargs)
+
+
+class MshPlotter(MshPlotterBase, pv.Plotter):  # type: ignore[misc]
     """Plotting object to display vtk meshes or numpy arrays."""
