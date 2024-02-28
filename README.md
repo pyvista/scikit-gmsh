@@ -58,7 +58,7 @@ import skgmsh as sg
 We can define the surface using PyVista.
 
 ```python
-edge_source = pv.Polygon(n_sides=24, radius=8, fill=False)
+edge_source = pv.Polygon(n_sides=12, radius=8, fill=False)
 ```
 
 We can then generate a 2D mesh.
