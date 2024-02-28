@@ -279,7 +279,7 @@ Sample docstring follows:
 
         Returns
         -------
-        scikit-gmsh.PolyData
+        skgmsh.PolyData
             Sliced dataset.
 
         Examples
