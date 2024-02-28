@@ -64,7 +64,7 @@ def frontal_delaunay_2d(
     >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
     >>> mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 
-    >>> plotter = pm.MshPlotter(off_screen=True)
+    >>> plotter = sg.MshPlotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])
     >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
     >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
@@ -148,7 +148,7 @@ def delaunay_3d(
     >>> edge_source = pv.Cube()
     >>> mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 
-    >>> plotter = pm.MshPlotter(off_screen=True)
+    >>> plotter = sg.MshPlotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])
     >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
     >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
@@ -166,7 +166,7 @@ def delaunay_3d(
     >>> plotter.show(screenshot="docs/_static/delaunay_3d_01.png")
 
     >>> clipped = mesh.clip(origin = (0.0, 0.0, 0.0), normal = (0.0, 0.0, 1.0), crinkle=True)
-    >>> plotter = pm.MshPlotter(off_screen=True)
+    >>> plotter = sg.MshPlotter(off_screen=True)
     >>> _ = plotter.add_mesh(
     ...     clipped,
     ...     show_edges=True,

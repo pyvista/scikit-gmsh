@@ -54,7 +54,7 @@ import skgmsh as sg
 We can define the surface using PyVista.
 
 ```python
-edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
+edge_source = sg.Polygon(n_sides=4, radius=8, fill=False)
 ```
 
 We can then generate a 2D mesh.
@@ -66,7 +66,7 @@ mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 To visualize the model we can use PyVista.
 
 ```python
-plotter = pv.Plotter()
+plotter = sg.MshPlotter()
 _ = plotter.add_mesh(
     mesh,
     show_edges=True,
@@ -100,7 +100,7 @@ mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 ```
 
 ```python
-plotter = pv.Plotter()
+plotter = sg.MshPlotter()
 _ = plotter.add_mesh(
     mesh,
     show_edges=True,
@@ -135,9 +135,7 @@ We can clip a mesh by a plane by specifying the origin and normal.
 See [clip_with_surface_example](https://docs.pyvista.org/examples/01-filter/clipping-with-surface#clip-with-surface-example) for more examples using this filter.
 
 ```python
-origin = (0.0, 0.0, 0.0)
-normal = (0.0, 0.0, 1.0)
-clipped = mesh.clip(origin=origin, normal=normal, crinkle=True)
+clipped = mesh.clip(origin=(0.0, 0.0, 0.0), normal=(0.0, 0.0, 1.0), crinkle=True)
 ```
 
 <p align="center">
