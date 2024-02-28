@@ -1,4 +1,4 @@
-🚧 pvgmsh documentation
+🚧 scikit-gmsh documentation
 =======================
 
 .. note::

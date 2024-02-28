@@ -7,8 +7,8 @@ Contributing
 |Contributor Covenant|
 
 We absolutely welcome contributions and we hope that this guide will
-facilitate an understanding of the pvgmsh code repository. It is
-important to note that the pvgmsh software package is maintained on a
+facilitate an understanding of the scikit-gmsh code repository. It is
+important to note that the scikit-gmsh software package is maintained on a
 volunteer basis and thus we need to foster a community that can support
 user questions and develop new features to make this software a useful
 tool for all users.
@@ -29,27 +29,27 @@ Cloning the Source Repository
 -----------------------------
 
 You can clone the source repository from
-`<https://github.com/pyvista/pvgmsh>`_ and install the latest version by
+`<https://github.com/pyvista/scikit-gmsh>`_ and install the latest version by
 running:
 
 .. code:: bash
 
-   git clone https://github.com/pyvista/pvgmsh.git
-   cd pvgmsh
+   git clone https://github.com/pyvista/scikit-gmsh.git
+   cd scikit-gmsh
    python -m pip install -e .
 
 Quick Start Development with Codespaces
 ---------------------------------------
 
 .. |Open in GitHub Codespaces| image:: https://github.com/codespaces/badge.svg
-   :target: https://codespaces.new/pyvista/pvgmsh
+   :target: https://codespaces.new/pyvista/scikit-gmsh
    :alt: Open in GitHub Codespaces
 
 |Open in GitHub Codespaces|
 
 A dev container is provided to quickly get started. The default container
 comes with the repository code checked out on a branch of your choice
-and all pvgmsh dependencies including test dependencies pre-installed.
+and all scikit-gmsh dependencies including test dependencies pre-installed.
 In addition, it uses the
 `desktop-lite feature <https://github.com/devcontainers/features/tree/main/src/desktop-lite>`_
 to provide live interaction windows.  Follow directions
@@ -63,14 +63,14 @@ Questions
 
 For general questions about the project, its applications, or about
 software usage, please create a discussion in the
-`Discussions <https://github.com/pyvista/pvgmsh/discussions>`_
+`Discussions <https://github.com/pyvista/scikit-gmsh/discussions>`_
 repository where the community can collectively address your questions.
 
 For critical, high-level project support and engagement, please email
 tkoyama010@gmail.com - but please do not use this email for technical support.
 
 For all technical conversations, you are welcome to create an issue on the
-`Discussions page <https://github.com/pyvista/pvgmsh/discussions>`_
+`Discussions page <https://github.com/pyvista/scikit-gmsh/discussions>`_
 which we will address promptly. Through posting on the Discussions page,
 your question can be addressed by community members with the needed
 expertise and the information gained will remain available for other
@@ -81,7 +81,7 @@ Reporting Bugs
 
 If you stumble across any bugs, crashes, or concerning quirks while
 using code distributed here, please report it on the `issues
-page <https://github.com/pyvista/pvgmsh/issues>`_ with an appropriate
+page <https://github.com/pyvista/scikit-gmsh/issues>`_ with an appropriate
 label so we can promptly address it. When reporting an issue, please be
 overly descriptive so that we may reproduce it. Whenever possible,
 please provide tracebacks, screenshots, and sample files to help us
@@ -90,9 +90,9 @@ address the issue.
 Feature Requests
 ----------------
 
-We encourage users to submit ideas for improvements to pvgmsh code
+We encourage users to submit ideas for improvements to scikit-gmsh code
 base. Please create an issue on the `issues
-page <https://github.com/pyvista/pvgmsh/issues>`_ with a *Feature
+page <https://github.com/pyvista/scikit-gmsh/issues>`_ with a *Feature
 Request* label to suggest an improvement. Please use a descriptive title
 and provide ample background information to help the community implement
 that functionality. For example, if you would like a reader for a
@@ -104,11 +104,11 @@ provide feedback.
 Contributing New Code
 ---------------------
 
-If you have an idea for how to improve pvgmsh, please first create an
+If you have an idea for how to improve scikit-gmsh, please first create an
 issue as a feature request which we can use as a discussion thread to
 work through how to implement the contribution.
 
-Once you are ready to start coding and develop for pvgmsh, please see
+Once you are ready to start coding and develop for scikit-gmsh, please see
 the `Development Practices <#development-practices>`_ section for more
 details.
 
@@ -127,7 +127,7 @@ Development Practices
 ---------------------
 
 This section provides a guide to how we conduct development in the
-pvgmsh repository. Please follow the practices outlined here when
+scikit-gmsh repository. Please follow the practices outlined here when
 contributing directly to this repository.
 
 Guidelines
@@ -136,7 +136,7 @@ Guidelines
 Through direct access to the Visualization Toolkit (VTK) via direct
 array access and intuitive Python properties, we hope to make the entire
 VTK library easily accessible to researchers of all disciplines. To
-further pvgmsh towards being a valuable Python interface to VTK, we
+further scikit-gmsh towards being a valuable Python interface to VTK, we
 need your help to make it even better.
 
 If you want to add one or two interesting analysis algorithms as
@@ -145,7 +145,7 @@ efforts are welcome.
 
 There are three general coding paradigms that we believe in:
 
-1. **Make it intuitive**. pvgmsh’s goal is to create an intuitive and
+1. **Make it intuitive**. scikit-gmsh’s goal is to create an intuitive and
    easy to use interface back to the VTK library. Any new features
    should have intuitive naming conventions and explicit keyword
    arguments for users to make the bulk of the library accessible to
@@ -169,13 +169,13 @@ There are two important copyright guidelines:
    undermine the license of the whole projects.
 
 Please also take a look at our `Code of
-Conduct <https://github.com/pyvista/pvgmsh/blob/main/CODE_OF_CONDUCT.md>`_.
+Conduct <https://github.com/pyvista/scikit-gmsh/blob/main/CODE_OF_CONDUCT.md>`_.
 
-Contributing to pvgmsh through GitHub
+Contributing to scikit-gmsh through GitHub
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To submit new code to pvgmsh, first fork the `pvgmsh GitHub
-Repository <https://github.com/pyvista/pvgmsh>`_ and then clone the forked
+To submit new code to scikit-gmsh, first fork the `scikit-gmsh GitHub
+Repository <https://github.com/pyvista/scikit-gmsh>`_ and then clone the forked
 repository to your computer. Then, create a new branch based on the
 `Branch Naming Conventions Section <#branch-naming-conventions>`_ in
 your local repository.
@@ -199,7 +199,7 @@ the exception rather than the norm. A uniform code style is enforced
 by `black <https://github.com/psf/black>`_ to prevent energy wasted on
 style disagreements.
 
-As for docstrings, pvgmsh follows the ``numpydoc`` style for its docstrings.
+As for docstrings, scikit-gmsh follows the ``numpydoc`` style for its docstrings.
 Please also take a look at `Docstrings <#docstrings>`_.
 
 Outside of PEP 8, when coding please consider `PEP 20 - The Zen of
@@ -209,18 +209,18 @@ Python <https://www.python.org/dev/peps/pep-0020/>`_. When in doubt:
 
    import this
 
-pvgmsh uses `pre-commit`_ to enforce PEP8 and other styles
+scikit-gmsh uses `pre-commit`_ to enforce PEP8 and other styles
 automatically. Please see the `Style Checking section <#style-checking>`_ for
 further details.
 
 Documentation Style
 ^^^^^^^^^^^^^^^^^^^
 
-pvgmsh follows the `Google Developer Documentation Style
+scikit-gmsh follows the `Google Developer Documentation Style
 <https://developers.google.com/style>`_ with the following exceptions:
 
 - Allow first person pronouns. These pronouns (for example, "We") refer to
-  "pvgmsh Developers", which can be anyone who contributes to pvgmsh.
+  "scikit-gmsh Developers", which can be anyone who contributes to scikit-gmsh.
 - Future tense is permitted.
 
 These rules are enforced for all text files (for example, ``*.md``, ``*.rst``)
@@ -232,7 +232,7 @@ GitHub Actions, and you can run Vale locally with:
 .. code::
 
    pip install vale
-   vale --config doc/.vale.ini doc pvgmsh examples ./*.rst --glob='!*{_build,AUTHORS.rst}*'
+   vale --config doc/.vale.ini doc scikit-gmsh examples ./*.rst --glob='!*{_build,AUTHORS.rst}*'
 
 If you are on Linux or macOS, you can run:
 
@@ -244,17 +244,17 @@ If you are on Linux or macOS, you can run:
 Docstrings
 ^^^^^^^^^^
 
-pvgmsh uses Python docstrings to create reference documentation for our Python
+scikit-gmsh uses Python docstrings to create reference documentation for our Python
 APIs. Docstrings are read by developers, interactive Python users, and readers
 of our online documentation. This section describes how to write these docstrings
-for pvgmsh.
+for scikit-gmsh.
 
-pvgmsh follows the ``numpydoc`` style for its docstrings. Please follow the
+scikit-gmsh follows the ``numpydoc`` style for its docstrings. Please follow the
 `numpydoc Style Guide`_ in all ways except for the following:
 
 * Be sure to describe all ``Parameters`` and ``Returns`` for all public
   methods.
-* We strongly encourage you to add an example section. pvgmsh is a visual
+* We strongly encourage you to add an example section. scikit-gmsh is a visual
   library, so adding examples that show a plot will really help users figure
   out what individual methods do.
 * With optional parameters, use ``default: <value>`` instead of ``optional``
@@ -279,14 +279,14 @@ Sample docstring follows:
 
         Returns
         -------
-        pvgmsh.PolyData
+        skgmsh.PolyData
             Sliced dataset.
 
         Examples
         --------
         Slice the random hills dataset with one orthogonal plane.
 
-        >>> from pvgmsh import examples
+        >>> from skgmsh import examples
         >>> hills = examples.load_random_hills()
         >>> slices = hills.slice_x(5, generate_triangles=False)
         >>> slices.plot(line_width=5)
@@ -349,35 +349,35 @@ See the available validation checks in `numpydoc Validation
 
 Deprecating Features or other Backwards-Breaking Changes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-When implementing backwards-breaking changes within pvgmsh, care must be taken
+When implementing backwards-breaking changes within scikit-gmsh, care must be taken
 to give users the chance to adjust to any new changes. Any non-backwards
 compatible modifications should proceed through the following steps:
 
-#. Retain the old behavior and issue a ``pvgmshDeprecationWarning`` indicating
+#. Retain the old behavior and issue a ``skgmshDeprecationWarning`` indicating
    the new interface you should use.
-#. Retain the old behavior but raise a ``pvgmsh.core.errors.DeprecationError``
+#. Retain the old behavior but raise a ``skgmsh.core.errors.DeprecationError``
    indicating the new interface you must use.
 #. Remove the old behavior.
 
-Whenever possible, pvgmsh developers should seek to have at least three minor
+Whenever possible, scikit-gmsh developers should seek to have at least three minor
 versions of backwards compatibility to give users the ability to update their
 software and scripts.
 
 Here's an example of a soft deprecation of a function. Note the usage of both
-the ``pvgmshDeprecationWarning`` warning and the ``.. deprecated`` Sphinx
+the ``skgmshDeprecationWarning`` warning and the ``.. deprecated`` Sphinx
 directive.
 
 .. code:: python
 
     import warnings
-    from pvgmsh.core.errors import pvgmshDeprecationWarning
+    from skgmsh.core.errors import skgmshDeprecationWarning
 
 
     def addition(a, b):
         """Add two numbers.
 
         .. deprecated:: 0.37.0
-           Since pvgmsh 0.37.0, you can use :func:`pvgmsh.add` instead.
+           Since scikit-gmsh 0.37.0, you can use :func:`skgmsh.add` instead.
 
         Parameters
         ----------
@@ -395,8 +395,8 @@ directive.
         """
         # deprecated 0.37.0, convert to error in 0.40.0, remove 0.41.0
         warnings.warn(
-            "`addition` has been deprecated. Use pvgmsh.add instead",
-            pvgmshDeprecationWarning,
+            "`addition` has been deprecated. Use skgmsh.add instead",
+            skgmshDeprecationWarning,
         )
         add(a, b)
 
@@ -415,7 +415,7 @@ Here's an example of adding error test codes that raise deprecation warning mess
 
 .. code:: python
 
-    with pytest.warns(pvgmshDeprecationWarning):
+    with pytest.warns(skgmshDeprecationWarning):
         addition(a, b)
         if pv._version.version_info >= (0, 40):
             raise RuntimeError("Convert error this function")
@@ -488,7 +488,7 @@ Run the primary test suite and generate coverage report:
 
 .. code:: bash
 
-   python -m pytest -v --cov pvgmsh
+   python -m pytest -v --cov scikit-gmsh
 
 Unit testing can take some time, if you wish to speed it up, set the
 number of processors with the ``-n`` flag. This uses ``pytest-xdist`` to
@@ -496,7 +496,7 @@ leverage multiple processes. Example usage:
 
 .. code:: bash
 
-   python -m pytest -n <NUMCORE> --cov pvgmsh
+   python -m pytest -n <NUMCORE> --cov scikit-gmsh
 
 Documentation Testing
 ~~~~~~~~~~~~~~~~~~~~~
@@ -504,11 +504,11 @@ Run all code examples in the docstrings with:
 
 .. code:: bash
 
-   python -m pytest -v --doctest-modules pvgmsh
+   python -m pytest -v --doctest-modules scikit-gmsh
 
 Style Checking
 ~~~~~~~~~~~~~~
-pvgmsh follows PEP8 standard as outlined in the `Coding Style section
+scikit-gmsh follows PEP8 standard as outlined in the `Coding Style section
 <#coding-style>`_ and implements style checking using `pre-commit`_.
 
 To ensure your code meets minimum code styling standards, run::
@@ -546,7 +546,7 @@ request to manually trigger auto-fixing.
 Notes Regarding Image Regression Testing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Since pvgmsh is primarily a plotting module, it’s imperative we
+Since scikit-gmsh is primarily a plotting module, it’s imperative we
 actually check the images that we generate in some sort of regression
 testing. In practice, this ends up being quite a bit of work because:
 
@@ -560,7 +560,7 @@ As each platform and environment renders different slightly images
 relative to Linux (which these images were built from), so running these
 tests across all OSes isn’t optimal. We need to know if
 something fundamental changed with our plotting without actually looking
-at the plots (like the docs at dev.pvgmsh.com)
+at the plots (like the docs at dev.scikit-gmsh.com)
 
 Based on these points, image regression testing only occurs on Linux CI,
 and multi-sampling is disabled as that seems to be one of the biggest
@@ -599,7 +599,7 @@ the ``verify_image_cache`` fixture can be utilized:
 
        def test_add_background_image_not_global(verify_image_cache):
            verify_image_cache.skip = True  # Turn off caching
-           plotter = pvgmsh.Plotter()
+           plotter = skgmsh.Plotter()
            plotter.add_mesh(sphere)
            plotter.show()
            # Turn on caching for further plotting
@@ -616,10 +616,10 @@ exists, be sure to add the resulting image with
 
 During unit testing, if you get image regression failures and would like to
 compare the images generated locally to the regression test suite, allow
-`pytest-pvgmsh`_ to write all new
+`pytest-pyvista`_ to write all new
 generated images to a local directory using the ``--generated_image_dir`` flag.
 
-.. _pytest-pvgmsh: https://pytest.pvgmsh.org/
+.. _pytest-pyvista: https://pytest.pyvista.org/
 
 For example, the following writes all images generated by ``pytest`` to
 ``debug_images/`` for any tests in ``tests/plotting`` whose function name has
@@ -629,7 +629,7 @@ For example, the following writes all images generated by ``pytest`` to
 
    pytest tests/plotting/ -k volume --generated_image_dir debug_images
 
-See `pytest-pvgmsh`_ for more details.
+See `pytest-pyvista`_ for more details.
 
 Building the Documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -694,9 +694,9 @@ multi-core computers.
 
 Contributing to the Documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Documentation for pvgmsh is generated from three sources:
+Documentation for scikit-gmsh is generated from three sources:
 
-- Docstrings from the classes, functions, and modules of ``pvgmsh`` using
+- Docstrings from the classes, functions, and modules of ``scikit-gmsh`` using
   `sphinx.ext.autodoc
   <https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html>`_.
 - Restructured test from ``doc/``
@@ -708,7 +708,7 @@ the docstrings. Full gallery examples should be placed in ``examples``.
 
 Adding a New Example
 ^^^^^^^^^^^^^^^^^^^^
-pvgmsh's examples come in two formats: basic code snippets demonstrating the
+scikit-gmsh's examples come in two formats: basic code snippets demonstrating the
 functionality of an individual method or a full gallery example displaying one
 or more concepts. Small code samples and snippets are contained in the
 ``doc/api`` directory or within our documentation strings, while the full
@@ -716,8 +716,8 @@ gallery examples, meant to be run as individual downloadable scripts, are
 contained in the ``examples`` directory at the root of this repository.
 
 To add a fully fledged, standalone example, add your example to the
-``examples`` directory in the root directory of the `pvgmsh Repository
-<https://github.com/pyvista/pvgmsh/>`_ within one of the applicable
+``examples`` directory in the root directory of the `scikit-gmsh Repository
+<https://github.com/pyvista/scikit-gmsh/>`_ within one of the applicable
 subdirectories. Should none of the existing directories match the category of
 your example, create a new directory with a ``README.txt`` describing the new
 category. Additionally, as these examples are built using the sphinx gallery
@@ -730,9 +730,9 @@ For more details see :ref:`add_example_example`.
 Add a New Example File
 ^^^^^^^^^^^^^^^^^^^^^^
 If you have a dataset that you need for your gallery example, add it to
-`pvgmsh/vtk-data <https://github.com/pvgmsh/vtk-data/>`_ and follow the
+`scikit-gmsh/vtk-data <https://github.com/pyvista/vtk-data/>`_ and follow the
 directions there. You will then need to add a new function to download the
-dataset ``pvgmsh/examples/downloads.py``. This might be as easy as:
+dataset ``scikit-gmsh/examples/downloads.py``. This might be as easy as:
 
 .. code:: python
 
@@ -745,7 +745,7 @@ Which enables:
 
 .. code::
 
-   >>> from pvgmsh import examples
+   >>> from scikit-gmsh import examples
    >>> dataset = examples.download_my_dataset()
 
 
@@ -753,12 +753,12 @@ Creating a New Pull Request
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once you have tested your branch locally, create a pull request on
-`pvgmsh GitHub <https://github.com/pyvista/pvgmsh>`_ while merging to
+`scikit-gmsh GitHub <https://github.com/pyvista/scikit-gmsh>`_ while merging to
 main. This will automatically run continuous integration (CI) testing
 and verify your changes will work across several platforms.
 
 To ensure someone else reviews your code, at least one other member of
-the pvgmsh contributors group must review and verify your code meets
+the scikit-gmsh contributors group must review and verify your code meets
 our community’s standards. Once approved, if you have write permission
 you may merge the branch. If you don’t have write permission, the
 reviewer or someone else with write permission will merge the branch and
@@ -774,7 +774,7 @@ Preview the Documentation
 Once you have make a Pull Request. You can comment
 ``github-actions preview`` on a pull request to preview documentation.
 Since this command is only available for
-`@pvgmsh/developers <https://github.com/orgs/pvgmsh/teams/developers>`_ ,
+`@scikit-gmsh/developers <https://github.com/orgs/scikit-gmsh/teams/developers>`_ ,
 new contributors kindly request them to comment command.
 This is essential to safeguard the deployment site against
 potentially harmful commits.
@@ -798,10 +798,10 @@ The main features of our branching model are:
    version of the code base that is also reflected on PyPI/. Hotfixes
    from ``fix/`` branches should be merged both to main and to these
    branches. When necessary to create a new patch release these release
-   branches will have their ``pvgmsh/_version.py`` updated and be tagged
+   branches will have their ``scikit-gmsh/_version.py`` updated and be tagged
    with a semantic version (for example ``v0.24.1``). This triggers CI
    to push to PyPI, and allow us to rapidly push hotfixes for past
-   versions of ``pvgmsh`` without having to worry about untested
+   versions of ``scikit-gmsh`` without having to worry about untested
    features.
 -  When a minor release candidate is ready, a new ``release`` branch
    will be created from ``main`` with the next incremented minor version
@@ -817,13 +817,13 @@ Minor Release Steps
 ^^^^^^^^^^^^^^^^^^^
 
 Minor releases are feature and bug releases that improve the
-functionality and stability of ``pvgmsh``. Before a minor release is
+functionality and stability of ``scikit-gmsh``. Before a minor release is
 created the following will occur:
 
 1.  Create a new branch from the ``main`` branch with name
     ``release/MAJOR.MINOR`` (for example ``release/0.25``).
 
-2.  Update the development version numbers in ``pvgmsh/_version.py``
+2.  Update the development version numbers in ``scikit-gmsh/_version.py``
     and commit it (for example ``0, 26, 'dev0'``). Push the branch to GitHub
     and create a new PR for this release that merges it to main.
     Development to main should be limited at this point while effort
@@ -846,7 +846,7 @@ created the following will occur:
 5.  After building the documentation, open the local build and examine
     the examples gallery for any obvious issues.
 
-6.  It is now the responsibility of the ``pvgmsh`` community to
+6.  It is now the responsibility of the ``scikit-gmsh`` community to
     functionally test the new release. It is best to locally install
     this branch and use it in production. Any bugs identified should
     have their hotfixes pushed to this release branch.
@@ -859,7 +859,7 @@ created the following will occur:
 
     .. code:: bash
 
-       git tag v$(python -c "import pvgmsh as pv; print(pv.__version__)")
+       git tag v$(python -c "import scikit-gmsh as pv; print(pv.__version__)")
 
 8.  Please check again that the tag has been created correctly and push the branch and tag.
 
@@ -870,7 +870,7 @@ created the following will occur:
 
 9.  Create a list of all changes for the release. It is often helpful to
     leverage `GitHub’s compare
-    feature <https://github.com/pyvista/pvgmsh/compare>`_ to see the
+    feature <https://github.com/pyvista/scikit-gmsh/compare>`_ to see the
     differences from the last tag and the ``main`` branch. Be sure to
     acknowledge new contributors by their GitHub username and place
     mentions where appropriate if a specific contributor is to thank for
@@ -878,12 +878,12 @@ created the following will occur:
 
 10. Place your release notes from previous step in the description for `the new
     release on
-    GitHub <https://github.com/pyvista/pvgmsh/releases/new>`_.
+    GitHub <https://github.com/pyvista/scikit-gmsh/releases/new>`_.
 
 11. Go grab a beer/coffee/water and wait for
     `@regro-cf-autotick-bot <https://github.com/regro/cf-scripts>`_
-    to open a pull request on the conda-forge `pvgmsh
-    feedstock <https://github.com/conda-forge/pvgmsh-feedstock>`_.
+    to open a pull request on the conda-forge `scikit-gmsh
+    feedstock <https://github.com/conda-forge/scikit-gmsh-feedstock>`_.
     Merge that pull request.
 
 12. Announce the new release in the Discussions page and
@@ -898,9 +898,9 @@ should not wait until a minor release. The steps for a patch release
 1. Push the necessary bugfix(es) to the applicable release branch. This
    will generally be the latest release branch (for example ``release/0.25``).
 
-2. Update ``pvgmsh/_version.py`` with the next patch increment (for example
+2. Update ``scikit-gmsh/_version.py`` with the next patch increment (for example
    ``v0.25.1``), commit it, and open a PR that merge with the release
-   branch. This gives the ``pvgmsh`` community a chance to validate and
+   branch. This gives the ``scikit-gmsh`` community a chance to validate and
    approve the bugfix release. Any additional hotfixes should be outside
    of this PR.
 
