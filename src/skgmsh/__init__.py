@@ -59,10 +59,10 @@ def frontal_delaunay_2d(
     triangulation.
 
     >>> import pyvista as pv
-    >>> import pvgmsh as pm
+    >>> import skgmsh as sg
 
     >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
-    >>> mesh = pm.frontal_delaunay_2d(edge_source, target_sizes=2.0)
+    >>> mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 
     >>> plotter = pm.MshPlotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])
@@ -143,10 +143,10 @@ def delaunay_3d(
     Examples
     --------
     >>> import pyvista as pv
-    >>> import pvgmsh as pm
+    >>> import skgmsh as sg
 
     >>> edge_source = pv.Cube()
-    >>> mesh = pm.delaunay_3d(edge_source, target_sizes=0.2)
+    >>> mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 
     >>> plotter = pm.MshPlotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])

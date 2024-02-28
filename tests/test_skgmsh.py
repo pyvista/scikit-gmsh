@@ -1,4 +1,4 @@
-"""PvGmsh package for 3D mesh generation test."""
+"""scikit-gmsh package for 3D mesh generation test."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ import numpy as np
 import pytest
 import pyvista as pv
 
-import pvgmsh as pm
+import skgmsh as sg
 
 EDGE_SOURCES = [
     pv.Polygon(n_sides=4, radius=8, fill=False),
@@ -26,12 +26,12 @@ def test_frontal_delaunay_2d(
 ) -> None:
     """Frontal-Delaunay 2D mesh algorithm test code."""
     edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
-    mesh = pm.frontal_delaunay_2d(edge_source, target_sizes=target_sizes)
+    mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=target_sizes)
     assert mesh.number_of_points > edge_source.number_of_points
     assert mesh.number_of_cells > edge_source.number_of_cells
     assert np.allclose(mesh.volume, edge_source.volume)
     # TODO @tkoyama010: Compare cell type. # noqa: FIX002
-    # https://github.com/pyvista/pvgmsh/pull/125
+    # https://github.com/pyvista/scikit-gmsh/pull/125
 
 
 @pytest.mark.parametrize(
@@ -40,9 +40,9 @@ def test_frontal_delaunay_2d(
 def test_delaunay_3d(target_sizes: float | Sequence[float] | None) -> None:
     """Delaunay 3D mesh algorithm test code."""
     edge_source = pv.Cube()
-    mesh = pm.delaunay_3d(edge_source, target_sizes=target_sizes)
+    mesh = sg.delaunay_3d(edge_source, target_sizes=target_sizes)
     assert mesh.number_of_points > edge_source.number_of_points
     assert mesh.number_of_cells > edge_source.number_of_cells
     assert np.allclose(mesh.volume, edge_source.volume)
     # TODO @tkoyama010: Compare cell type. # noqa: FIX002
-    # https://github.com/pyvista/pvgmsh/pull/125
+    # https://github.com/pyvista/scikit-gmsh/pull/125
