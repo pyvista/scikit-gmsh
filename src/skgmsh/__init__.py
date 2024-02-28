@@ -62,7 +62,7 @@ def frontal_delaunay_2d(
     >>> import skgmsh as sg
 
     >>> edge_source = pv.Polygon(n_sides=12, radius=8, fill=False)
-    >>> mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=2.0)
+    >>> mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=4.0)
 
     >>> plotter = pv.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])
