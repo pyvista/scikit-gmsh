@@ -355,7 +355,7 @@ compatible modifications should proceed through the following steps:
 
 #. Retain the old behavior and issue a ``skgmshDeprecationWarning`` indicating
    the new interface you should use.
-#. Retain the old behavior but raise a ``scikit-gmsh.core.errors.DeprecationError``
+#. Retain the old behavior but raise a ``skgmsh.core.errors.DeprecationError``
    indicating the new interface you must use.
 #. Remove the old behavior.
 
@@ -377,7 +377,7 @@ directive.
         """Add two numbers.
 
         .. deprecated:: 0.37.0
-           Since scikit-gmsh 0.37.0, you can use :func:`scikit-gmsh.add` instead.
+           Since scikit-gmsh 0.37.0, you can use :func:`skgmsh.add` instead.
 
         Parameters
         ----------
@@ -395,7 +395,7 @@ directive.
         """
         # deprecated 0.37.0, convert to error in 0.40.0, remove 0.41.0
         warnings.warn(
-            "`addition` has been deprecated. Use scikit-gmsh.add instead",
+            "`addition` has been deprecated. Use skgmsh.add instead",
             skgmshDeprecationWarning,
         )
         add(a, b)
