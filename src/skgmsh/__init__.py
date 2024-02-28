@@ -61,7 +61,7 @@ def frontal_delaunay_2d(
     >>> import pyvista as pv
     >>> import skgmsh as sg
 
-    >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
+    >>> edge_source = pv.Polygon(n_sides=24, radius=8, fill=False)
     >>> mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 
     >>> plotter = pv.Plotter(off_screen=True)
