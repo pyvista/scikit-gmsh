@@ -6,11 +6,7 @@
 
 [<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/logo.svg" align="left" width="200">](https://github.com/pyvista/scikit-gmsh#--------)
 
-> PyVista accessors for Gmsh to generate 3D finite element mesh.
-
-💡 We expect that this makes it easy to use Gmsh in a Jupyter environment.
-
-💡 Also, this is a collection of 2D and 3D finite element mesh examples.
+> Scikit for Gmsh to generate 3D finite element mesh.
 
 Contributions _very welcome_ but first see [Contributing](#contributions).
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
