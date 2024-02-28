@@ -89,5 +89,5 @@ ignore = [
 "tests/**" = ["INP001", "S101"]
 
 [tool.setuptools.dynamic]
-version = {attr = 'scikit-gmsh.__version__'}
+version = {attr = 'skgmsh.__version__'}
 readme = {file = "README.md", content-type = "text/markdown"}
