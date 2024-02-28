@@ -58,7 +58,7 @@ import skgmsh as sg
 We can define the surface using PyVista.
 
 ```python
-edge_source = pv.Polygon(n_sides=24, radius=8, fill=False)
+edge_source = pv.Polygon(n_sides=12, radius=8, fill=False)
 ```
 
 We can then generate a 2D mesh.
@@ -80,9 +80,6 @@ _ = plotter.add_mesh(
     edge_color=[153, 153, 153],
 )
 _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
-_ = plotter.add_points(
-    edge_source.points, style="points", point_size=20, color=[214, 39, 40]
-)
 _ = plotter.add_legend(
     [[" edge source", [214, 39, 40]], [" mesh ", [153, 153, 153]]],
     bcolor="white",
