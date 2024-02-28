@@ -353,7 +353,7 @@ When implementing backwards-breaking changes within scikit-gmsh, care must be ta
 to give users the chance to adjust to any new changes. Any non-backwards
 compatible modifications should proceed through the following steps:
 
-#. Retain the old behavior and issue a ``scikit-gmshDeprecationWarning`` indicating
+#. Retain the old behavior and issue a ``skgmshDeprecationWarning`` indicating
    the new interface you should use.
 #. Retain the old behavior but raise a ``scikit-gmsh.core.errors.DeprecationError``
    indicating the new interface you must use.
@@ -364,7 +364,7 @@ versions of backwards compatibility to give users the ability to update their
 software and scripts.
 
 Here's an example of a soft deprecation of a function. Note the usage of both
-the ``scikit-gmshDeprecationWarning`` warning and the ``.. deprecated`` Sphinx
+the ``skgmshDeprecationWarning`` warning and the ``.. deprecated`` Sphinx
 directive.
 
 .. code:: python
