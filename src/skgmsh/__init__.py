@@ -67,7 +67,7 @@ def frontal_delaunay_2d(
     >>> plotter = pv.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])
     >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
-    >>> _ = plotter.add_legend([["source", [214, 39, 40]], ["mesh", [153, 153, 153]]], bcolor="white", face="r", size=(0.3, 0.3))
+    >>> _ = plotter.add_legend([[" source", [214, 39, 40]], [" mesh", [153, 153, 153]]], bcolor="white", face="r", size=(0.1, 0.1))
     >>> plotter.show(cpos="xy", screenshot="docs/_static/frontal_delaunay_2d_01.png")
 
     """

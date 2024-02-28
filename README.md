@@ -81,10 +81,10 @@ _ = plotter.add_mesh(
 )
 _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
 _ = plotter.add_legend(
-    [["source", [214, 39, 40]], ["mesh", [153, 153, 153]]],
+    [[" source", [214, 39, 40]], [" mesh", [153, 153, 153]]],
     bcolor="white",
     face="r",
-    size=(0.3, 0.3),
+    size=(0.1, 0.1),
 )
 plotter.show(cpos="xy")
 ```
