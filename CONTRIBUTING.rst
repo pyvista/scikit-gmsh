@@ -730,7 +730,7 @@ For more details see :ref:`add_example_example`.
 Add a New Example File
 ^^^^^^^^^^^^^^^^^^^^^^
 If you have a dataset that you need for your gallery example, add it to
-`scikit-gmsh/vtk-data <https://github.com/scikit-gmsh/vtk-data/>`_ and follow the
+`scikit-gmsh/vtk-data <https://github.com/pyvista/vtk-data/>`_ and follow the
 directions there. You will then need to add a new function to download the
 dataset ``scikit-gmsh/examples/downloads.py``. This might be as easy as:
 
