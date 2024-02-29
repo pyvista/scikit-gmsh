@@ -64,7 +64,7 @@ def frontal_delaunay_2d(
     >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
     >>> mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 
-    >>> plotter = sg.MshPlotter(off_screen=True)
+    >>> plotter = sg.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])
     >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
     >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
@@ -148,7 +148,7 @@ def delaunay_3d(
     >>> edge_source = pv.Cube()
     >>> mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 
-    >>> plotter = sg.MshPlotter(off_screen=True)
+    >>> plotter = sg.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])
     >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
     >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
@@ -166,7 +166,7 @@ def delaunay_3d(
     >>> plotter.show(screenshot="docs/_static/delaunay_3d_01.png")
 
     >>> clipped = mesh.clip(origin = (0.0, 0.0, 0.0), normal = (0.0, 0.0, 1.0), crinkle=True)
-    >>> plotter = sg.MshPlotter(off_screen=True)
+    >>> plotter = sg.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(
     ...     clipped,
     ...     show_edges=True,
@@ -318,7 +318,7 @@ class Report(scooby.Report):  # type: ignore[misc]
         )
 
 
-class MshPlotterBase:
+class PlotterBase:
     """
     Base class with common behaviour for a gmsh aware plotter.
 
@@ -338,7 +338,7 @@ class MshPlotterBase:
 
     """
 
-    def __init__(self: MshPlotterBase, *args, **kwargs) -> None:  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN003
+    def __init__(self: PlotterBase, *args, **kwargs) -> None:  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN003
         """
         Create gmsh aware plotter.
 
@@ -358,5 +358,5 @@ class MshPlotterBase:
         super().__init__(*args, **kwargs)
 
 
-class MshPlotter(MshPlotterBase, pv.Plotter):  # type: ignore[misc]
+class Plotter(PlotterBase, pv.Plotter):  # type: ignore[misc]
     """Plotting object to display vtk meshes or numpy arrays."""

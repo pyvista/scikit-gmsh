@@ -66,7 +66,7 @@ mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 To visualize the model we can use PyVista.
 
 ```python
-plotter = sg.MshPlotter()
+plotter = sg.Plotter()
 _ = plotter.add_mesh(
     mesh,
     show_edges=True,
@@ -100,7 +100,7 @@ mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 ```
 
 ```python
-plotter = sg.MshPlotter()
+plotter = sg.Plotter()
 _ = plotter.add_mesh(
     mesh,
     show_edges=True,
