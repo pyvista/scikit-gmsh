@@ -16,17 +16,7 @@ versions.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 3.12.x  | :white_check_mark: |
-| 3.11.x  | :white_check_mark: |
-| 3.10.x  | :white_check_mark: |
-| 3.9.x   | :white_check_mark: |
-| 3.8.x   | :x:                |
-| 3.7.x   | :x:                |
-| 3.6.x   | :x:                |
-| 3.5.x   | :x:                |
-| 3.4.x   | :x:                |
-| 3.3.x   | :x:                |
-| < 3.3   | :x:                |
+| 0.0.x   | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
