@@ -47,7 +47,6 @@ pip install git+https://github.com/pyvista/scikit-gmsh@main
 ## Usage
 
 ```python
-import pyvista as pv
 import skgmsh as sg
 ```
 
@@ -95,7 +94,7 @@ plotter.show(cpos="xy")
 We can also generate a 3D mesh.
 
 ```python
-edge_source = pv.Cube()
+edge_source = sg.Cube()
 mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 ```
 

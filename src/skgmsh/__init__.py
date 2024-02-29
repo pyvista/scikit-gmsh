@@ -58,10 +58,9 @@ def frontal_delaunay_2d(
     Use the ``edge_source`` parameter to create a constrained delaunay
     triangulation.
 
-    >>> import pyvista as pv
     >>> import skgmsh as sg
 
-    >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
+    >>> edge_source = sg.Polygon(n_sides=4, radius=8, fill=False)
     >>> mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 
     >>> plotter = sg.Plotter(off_screen=True)
@@ -142,10 +141,9 @@ def delaunay_3d(
 
     Examples
     --------
-    >>> import pyvista as pv
     >>> import skgmsh as sg
 
-    >>> edge_source = pv.Cube()
+    >>> edge_source = sg.Cube()
     >>> mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 
     >>> plotter = sg.Plotter(off_screen=True)
@@ -360,3 +358,17 @@ class PlotterBase:
 
 class Plotter(PlotterBase, pv.Plotter):  # type: ignore[misc]
     """Plotting object to display vtk meshes or numpy arrays."""
+
+
+class PolyData(pv.PolyData):  # type: ignore[misc]
+    """Dataset consisting of surface geometry (e.g. vertices, lines, and polygons)."""
+
+
+def Cube(*args, **kwargs):  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN003, ANN201, N802
+    """Create a cube."""
+    return pv.Cube(*args, **kwargs)
+
+
+def Polygon(*args, **kwargs):  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN003, ANN201, N802
+    """Create a polygon."""
+    return pv.Polygon(*args, **kwargs)
