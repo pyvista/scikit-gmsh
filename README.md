@@ -1,12 +1,19 @@
-🚧 scikit-gmsh is in the pre-alpha stage the interface could be subject to important changes soon.
+🚧 scikit-gmsh is in the pre-alpha stage. The interface could be subject to significant changes soon.
 
 # scikit-gmsh
-
-[![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
 
 [<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/logo.svg" align="left" width="200">](https://github.com/pyvista/scikit-gmsh#--------)
 
 > Scikit for Gmsh to generate 3D finite element mesh.
+
+[![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest&style=for-the-badge)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
+[![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg?style=for-the-badge)](https://github.com/pyvista/scikit-gmsh/blob/main/CODE_OF_CONDUCT.md)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge)](https://github.com/psf/black)
+[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=for-the-badge&labelColor=ef8336)](https://pycqa.github.io/isort/)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json&style=for-the-badge)](https://github.com/astral-sh/ruff)
+[![NEP29](https://raster.shields.io/badge/follows-NEP29-orange.png?style=for-the-badge)](https://numpy.org/neps/nep-0029-deprecation_policy.html)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0)
 
 Contributions _very welcome_ but first see [Contributing](#contributions).
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
@@ -140,17 +147,3 @@ clipped = mesh.clip(origin=(0.0, 0.0, 0.0), normal=(0.0, 0.0, 1.0), crinkle=True
 <p align="center">
 <img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_02.png" align="center" width=512 >
 </p>
-
-## Contributions
-
-[![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg)](https://github.com/pyvista/scikit-gmsh/blob/main/CODE_OF_CONDUCT.md)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/pyvista/scikit-gmsh/main.svg)](https://results.pre-commit.ci/latest/github/pyvista/scikit-gmsh/main)
-[![NEP29](https://raster.shields.io/badge/follows-NEP29-orange.png)](https://numpy.org/neps/nep-0029-deprecation_policy.html)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-
-## License
-
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
