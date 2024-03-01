@@ -21,7 +21,7 @@ By participating in this project you agree to abide by its terms.
 
 ---
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh)](https://github.com/pyvista/scikit-gmsh/stargazers)
+[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh?style=for-the-badge)](https://github.com/pyvista/scikit-gmsh/stargazers)
 
 Enjoying scikit-gmsh? Show your support with a [Github star](https://github.com/pyvista/scikit-gmsh) — it’s a simple click that means the world to us and helps others discover it too! ⭐️
 
