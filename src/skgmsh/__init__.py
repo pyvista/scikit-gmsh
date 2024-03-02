@@ -64,7 +64,6 @@ def frontal_delaunay_2d(
     >>> mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 
     >>> plotter = sg.Plotter(off_screen=True)
-    >>> plotter.enable_parallel_projection()
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=1, color="aliceblue", lighting=False, edge_color="gray")
     >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="gray")
     >>> plotter.show(cpos="xy", screenshot="docs/_static/frontal_delaunay_2d_01.png")
@@ -146,7 +145,6 @@ def delaunay_3d(
     >>> mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 
     >>> plotter = sg.Plotter(off_screen=True)
-    >>> plotter.enable_parallel_projection()
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=1, color="aliceblue", lighting=False, edge_color="gray")
     >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
     >>> _ = plotter.add_axes(
@@ -172,7 +170,6 @@ def delaunay_3d(
     ...     edge_color="gray",
     ... )
     >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
-    >>> plotter.enable_parallel_projection()
     >>> _ = plotter.add_axes(
     ...     box=True,
     ...     box_args={
@@ -311,9 +308,9 @@ class Report(scooby.Report):  # type: ignore[misc]
         )
 
 
-class PlotterBase:
+class Plotter(pv.Plotter):  # type: ignore[misc]
     """
-    Base class with common behaviour for a gmsh aware plotter.
+    Plotting object to display vtk meshes or numpy arrays.
 
     See :class:`pyvista.Plotter`.
 
@@ -331,7 +328,7 @@ class PlotterBase:
 
     """
 
-    def __init__(self: PlotterBase, *args, **kwargs) -> None:  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN003
+    def __init__(self: Plotter, *args, **kwargs) -> None:  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN003
         """
         Create gmsh aware plotter.
 
@@ -349,10 +346,7 @@ class PlotterBase:
 
         """
         super().__init__(*args, **kwargs)
-
-
-class Plotter(PlotterBase, pv.Plotter):  # type: ignore[misc]
-    """Plotting object to display vtk meshes or numpy arrays."""
+        super().enable_parallel_projection()
 
 
 class PolyData(pv.PolyData):  # type: ignore[misc]

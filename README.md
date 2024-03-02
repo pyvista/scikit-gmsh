@@ -70,7 +70,6 @@ To visualize the model we can use PyVista.
 
 ```python
 plotter = sg.Plotter()
-plotter.enable_parallel_projection()
 _ = plotter.add_mesh(
     mesh,
     show_edges=True,
@@ -96,7 +95,6 @@ mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 
 ```python
 plotter = sg.Plotter()
-plotter.enable_parallel_projection()
 _ = plotter.add_mesh(
     mesh,
     show_edges=True,
