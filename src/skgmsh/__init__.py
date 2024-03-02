@@ -58,18 +58,18 @@ def frontal_delaunay_2d(
     Use the ``edge_source`` parameter to create a constrained delaunay
     triangulation.
 
-    >>> import pyvista as pv
-    >>> import pvgmsh as pm
+    >>> import skgmsh as sg
 
-    >>> edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
-    >>> mesh = pm.frontal_delaunay_2d(edge_source, target_sizes=2.0)
+    >>> edge_source = sg.Polygon(n_sides=4, radius=8, fill=False)
+    >>> mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 
-    >>> plotter = pv.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False, edge_color=[153, 153, 153])
+    >>> plotter = sg.Plotter(off_screen=True)
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])
     >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
     >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
     >>> _ = plotter.add_legend([[" edge source", [214, 39, 40]], [" mesh ", [153, 153, 153]]], bcolor="white", face="r", size=(0.3, 0.3))
     >>> plotter.show(cpos="xy", screenshot="docs/_static/frontal_delaunay_2d_01.png")
+
     """
     points = edge_source.points
     lines = edge_source.lines
@@ -141,14 +141,13 @@ def delaunay_3d(
 
     Examples
     --------
-    >>> import pyvista as pv
-    >>> import pvgmsh as pm
+    >>> import skgmsh as sg
 
-    >>> edge_source = pv.Cube()
-    >>> mesh = pm.delaunay_3d(edge_source, target_sizes=0.4)
+    >>> edge_source = sg.Cube()
+    >>> mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 
-    >>> plotter = pv.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False, edge_color=[153, 153, 153])
+    >>> plotter = sg.Plotter(off_screen=True)
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])
     >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
     >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
     >>> plotter.enable_parallel_projection()
@@ -163,6 +162,34 @@ def delaunay_3d(
     ...     },
     ... )
     >>> plotter.show(screenshot="docs/_static/delaunay_3d_01.png")
+
+    >>> clipped = mesh.clip(origin = (0.0, 0.0, 0.0), normal = (0.0, 0.0, 1.0), crinkle=True)
+    >>> plotter = sg.Plotter(off_screen=True)
+    >>> _ = plotter.add_mesh(
+    ...     clipped,
+    ...     show_edges=True,
+    ...     line_width=4,
+    ...     color="white",
+    ...     lighting=True,
+    ...     edge_color=[153, 153, 153],
+    ... )
+    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
+    >>> _ = plotter.add_points(
+    ...     edge_source.points, style="points", point_size=20, color=[214, 39, 40]
+    ... )
+    >>> plotter.enable_parallel_projection()
+    >>> _ = plotter.add_axes(
+    ...     box=True,
+    ...     box_args={
+    ...         "opacity": 0.5,
+    ...         "color_box": True,
+    ...         "x_face_color": "white",
+    ...         "y_face_color": "white",
+    ...         "z_face_color": "white",
+    ...     },
+    ... )
+    >>> plotter.show(screenshot="docs/_static/delaunay_3d_02.png")
+
     """
     points = edge_source.points
     faces = edge_source.regular_faces
@@ -221,41 +248,6 @@ def delaunay_3d(
     return mesh
 
 
-PACKAGES_CORE: list[str] = [
-    "matplotlib",
-    "numpy",
-    "pooch",
-    "pyvista",
-    "scooby",
-    "vtk",
-    "gmsh",
-    "meshio",
-    "pygmsh",
-    "pyvista",
-]
-
-PACKAGES_OPTIONAL: list[str] = [
-    "imageio",
-    "pyvistaqt",
-    "PyQt5",
-    "IPython",
-    "colorcet",
-    "cmocean",
-    "ipywidgets",
-    "scipy",
-    "tqdm",
-    "jupyterlab",
-    "pytest_pyvista",
-    "trame",
-    "trame_client",
-    "trame_server",
-    "trame_vtk",
-    "trame_vuetify",
-    "jupyter_server_proxy",
-    "nest_asyncio",
-]
-
-
 class Report(scooby.Report):  # type: ignore[misc]
     """
     Generate an environment package and hardware report.
@@ -276,10 +268,40 @@ class Report(scooby.Report):  # type: ignore[misc]
     ) -> None:  # numpydoc ignore=PR01
         """Generate a :class:`scooby.Report` instance."""
         # mandatory packages
-        core = PACKAGES_CORE
+        core: list[str] = [
+            "matplotlib",
+            "numpy",
+            "pooch",
+            "pyvista",
+            "scooby",
+            "vtk",
+            "gmsh",
+            "meshio",
+            "pygmsh",
+            "pyvista",
+        ]
 
         # optional packages
-        optional = PACKAGES_OPTIONAL
+        optional: list[str] = [
+            "imageio",
+            "pyvistaqt",
+            "PyQt5",
+            "IPython",
+            "colorcet",
+            "cmocean",
+            "ipywidgets",
+            "scipy",
+            "tqdm",
+            "jupyterlab",
+            "pytest_pyvista",
+            "trame",
+            "trame_client",
+            "trame_server",
+            "trame_vtk",
+            "trame_vuetify",
+            "jupyter_server_proxy",
+            "nest_asyncio",
+        ]
 
         extra_meta = [
             ("GPU Details", "None"),
@@ -292,3 +314,61 @@ class Report(scooby.Report):  # type: ignore[misc]
             text_width=text_width,
             extra_meta=extra_meta,
         )
+
+
+class PlotterBase:
+    """
+    Base class with common behaviour for a gmsh aware plotter.
+
+    See :class:`pyvista.Plotter`.
+
+    Parameters
+    ----------
+    *args :
+        See :class:`pyvista.Plotter` for further details.
+
+    **kwargs : dict, optional
+        See :class:`pyvista.Plotter` for further details.
+
+    Notes
+    -----
+    .. versionadded:: 0.1.0
+
+    """
+
+    def __init__(self: PlotterBase, *args, **kwargs) -> None:  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN003
+        """
+        Create gmsh aware plotter.
+
+        Parameters
+        ----------
+        *args :
+            See :class:`pyvista.Plotter` for further details.
+
+        **kwargs : dict, optional
+            See :class:`pyvista.Plotter` for further details.
+
+        Notes
+        -----
+        .. versionadded:: 0.1.0
+
+        """
+        super().__init__(*args, **kwargs)
+
+
+class Plotter(PlotterBase, pv.Plotter):  # type: ignore[misc]
+    """Plotting object to display vtk meshes or numpy arrays."""
+
+
+class PolyData(pv.PolyData):  # type: ignore[misc]
+    """Dataset consisting of surface geometry (e.g. vertices, lines, and polygons)."""
+
+
+def Cube(*args, **kwargs):  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN003, ANN201, N802
+    """Create a cube."""
+    return pv.Cube(*args, **kwargs)
+
+
+def Polygon(*args, **kwargs):  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN003, ANN201, N802
+    """Create a polygon."""
+    return pv.Polygon(*args, **kwargs)

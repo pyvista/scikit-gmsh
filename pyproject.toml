@@ -1,75 +1,61 @@
 [build-system]
 requires = [
   'gmsh<4.12.3',
-  'meshio<5.3.5',
+  'meshio<5.3.6',
   'pygmsh<7.1.18',
-  'pyvista<0.43.3',
+  'pyvista',
   'scooby<0.9.3',
-  'setuptools<69.0.4',
+  'setuptools<69.0.4'
 ]
 build-backend = 'setuptools.build_meta'
 
 [project]
-name = "pvgmsh"
+name = "scikit-gmsh"
 dynamic = [
-   "readme",
-   "version",
+  "readme",
+  "version"
 ]
 dependencies = [
   'gmsh<4.12.3',
-  'meshio<5.3.5',
+  'meshio<5.3.6',
   'pygmsh<7.1.18',
-  'pyvista<0.43.3',
-  'scooby<0.9.3',
+  'pyvista',
+  'scooby<0.9.3'
 ]
+requires-python = '>=3.9'
 
-[tool.setuptools.dynamic]
-version = {attr = 'pvgmsh.__version__'}
-readme = {file = "README.md", content-type = "text/markdown"}
-
-[tool.numpydoc_validation]
-checks = [
-    "all",  # all but the following:
-    "GL01",  # Contradicts numpydoc examples
-    "GL02",  # Permit a blank line after the end of our docstring
-    "GL03",  # Considering enforcing
-    "GL06",  # Found unknown section
-    "GL07",  # "Sections are in the wrong order. Correct order is: {correct_sections}",
-    "GL09",  # Deprecation warning should precede extended summary (check broken)
-    "SA01",  # Not all docstrings need a see also
-    "SA04",  # See also section does not need descriptions
-    "SS05",  # Appears to be broken.
-    "ES01",  # Not all docstrings need an extend summary.
-    "EX01",  # Examples: Will eventually enforce
-    "YD01",  # Yields: No plan to enforce
-]
-
-[tool.ruff]
-line-length = 150
-target-version = "py38"
-src = ["src"]
-
-[tool.ruff.lint]
-select = ["ALL"]
-ignore = [
-    "COM812",
-    "D203",
-    "D212",
-    "ISC001",
-]
-
-[tool.ruff.format]
-docstring-code-format = true
-
-[tool.ruff.lint.per-file-ignores]
-"docs/**" = ["INP001"]
-"tests/**" = ["INP001", "S101"]
+[project.optional-dependencies]
+test = ['pytest==8.0.0']
 
 [tool.mypy]
 ignore_missing_imports = true
 strict = true
 warn_unreachable = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+
+[tool.numpydoc_validation]
+checks = [
+  "all", # all but the following:
+  "GL01", # Contradicts numpydoc examples
+  "GL02", # Permit a blank line after the end of our docstring
+  "GL03", # Considering enforcing
+  "GL06", # Found unknown section
+  "GL07", # "Sections are in the wrong order. Correct order is: {correct_sections}",
+  "GL09", # Deprecation warning should precede extended summary (check broken)
+  "SA01", # Not all docstrings need a see also
+  "SA04", # See also section does not need descriptions
+  "SS05", # Appears to be broken.
+  "ES01", # Not all docstrings need an extend summary.
+  "EX01", # Examples: Will eventually enforce
+  "YD01" # Yields: No plan to enforce
+]
+
+[tool.poetry]
+name = "scikit-gmsh"
+readme = "README.md"
+authors = ["Tetsuo Koyama"]
+description = "PyVista accessors for Gmsh to generate 3D finite element mesh"
+version = "0.0.0"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
@@ -78,5 +64,30 @@ xfail_strict = true
 filterwarnings = ["error", 'ignore::DeprecationWarning']
 log_cli_level = "info"
 testpaths = [
-  "tests",
+  "tests"
 ]
+
+[tool.ruff]
+line-length = 150
+target-version = "py38"
+src = ["src"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "COM812",
+  "D203",
+  "D212",
+  "ISC001"
+]
+
+[tool.ruff.lint.per-file-ignores]
+"docs/**" = ["INP001"]
+"tests/**" = ["INP001", "S101"]
+
+[tool.setuptools.dynamic]
+version = {attr = 'skgmsh.__version__'}
+readme = {file = "README.md", content-type = "text/markdown"}
