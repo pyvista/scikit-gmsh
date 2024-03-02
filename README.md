@@ -70,24 +70,16 @@ To visualize the model we can use PyVista.
 
 ```python
 plotter = sg.Plotter()
+plotter.enable_parallel_projection()
 _ = plotter.add_mesh(
     mesh,
     show_edges=True,
-    line_width=4,
-    color="white",
+    line_width=1,
+    color="aliceblue",
     lighting=False,
-    edge_color=[153, 153, 153],
+    edge_color="gray",
 )
-_ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
-_ = plotter.add_points(
-    edge_source.points, style="points", point_size=20, color=[214, 39, 40]
-)
-_ = plotter.add_legend(
-    [[" edge source", [214, 39, 40]], [" mesh ", [153, 153, 153]]],
-    bcolor="white",
-    face="r",
-    size=(0.3, 0.3),
-)
+_ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="gray")
 plotter.show(cpos="xy")
 ```
 
@@ -104,19 +96,16 @@ mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 
 ```python
 plotter = sg.Plotter()
+plotter.enable_parallel_projection()
 _ = plotter.add_mesh(
     mesh,
     show_edges=True,
-    line_width=4,
-    color="white",
+    line_width=1,
+    color="aliceblue",
     lighting=False,
-    edge_color=[153, 153, 153],
+    edge_color="gray",
 )
-_ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
-_ = plotter.add_points(
-    edge_source.points, style="points", point_size=20, color=[214, 39, 40]
-)
-plotter.enable_parallel_projection()
+_ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
 _ = plotter.add_axes(
     box=True,
     box_args={
