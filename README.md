@@ -71,7 +71,7 @@ _ = plotter.add_mesh(
     show_edges=True,
     line_width=4,
     color="white",
-    lighting=True,
+    lighting=False,
     edge_color=[153, 153, 153],
 )
 _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
@@ -105,7 +105,7 @@ _ = plotter.add_mesh(
     show_edges=True,
     line_width=4,
     color="white",
-    lighting=True,
+    lighting=False,
     edge_color=[153, 153, 153],
 )
 _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
