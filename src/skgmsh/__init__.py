@@ -308,9 +308,9 @@ class Report(scooby.Report):  # type: ignore[misc]
         )
 
 
-class Plotter(pv.Plotter):  # type: ignore[misc]
+class PlotterBase:
     """
-    Plotting object to display vtk meshes or numpy arrays.
+    Base class with common behaviour for a gmsh aware plotter.
 
     See :class:`pyvista.Plotter`.
 
@@ -328,7 +328,7 @@ class Plotter(pv.Plotter):  # type: ignore[misc]
 
     """
 
-    def __init__(self: Plotter, *args, **kwargs) -> None:  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN003
+    def __init__(self: PlotterBase, *args, **kwargs) -> None:  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN003
         """
         Create gmsh aware plotter.
 
@@ -346,7 +346,11 @@ class Plotter(pv.Plotter):  # type: ignore[misc]
 
         """
         super().__init__(*args, **kwargs)
-        super().enable_parallel_projection()
+        super().enable_parallel_projection()  # type: ignore[misc]
+
+
+class Plotter(PlotterBase, pv.Plotter):  # type: ignore[misc]
+    """Plotting object to display vtk meshes or numpy arrays."""
 
 
 class PolyData(pv.PolyData):  # type: ignore[misc]
