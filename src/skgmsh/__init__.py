@@ -64,10 +64,9 @@ def frontal_delaunay_2d(
     >>> mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 
     >>> plotter = sg.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False, edge_color=[153, 153, 153])
-    >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
-    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
-    >>> _ = plotter.add_legend([[" edge source", [214, 39, 40]], [" mesh ", [153, 153, 153]]], bcolor="white", face="r", size=(0.3, 0.3))
+    >>> plotter.enable_parallel_projection()
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=1, color="aliceblue", lighting=False, edge_color="gray")
+    >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="gray")
     >>> plotter.show(cpos="xy", screenshot="docs/_static/frontal_delaunay_2d_01.png")
 
     """
@@ -147,10 +146,9 @@ def delaunay_3d(
     >>> mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 
     >>> plotter = sg.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=False, edge_color=[153, 153, 153])
-    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
-    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
     >>> plotter.enable_parallel_projection()
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=1, color="aliceblue", lighting=False, edge_color="gray")
+    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
     >>> _ = plotter.add_axes(
     ...     box=True,
     ...     box_args={
@@ -168,15 +166,12 @@ def delaunay_3d(
     >>> _ = plotter.add_mesh(
     ...     clipped,
     ...     show_edges=True,
-    ...     line_width=4,
-    ...     color="white",
+    ...     line_width=1,
+    ...     color="aliceblue",
     ...     lighting=False,
-    ...     edge_color=[153, 153, 153],
+    ...     edge_color="gray",
     ... )
-    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
-    >>> _ = plotter.add_points(
-    ...     edge_source.points, style="points", point_size=20, color=[214, 39, 40]
-    ... )
+    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
     >>> plotter.enable_parallel_projection()
     >>> _ = plotter.add_axes(
     ...     box=True,
