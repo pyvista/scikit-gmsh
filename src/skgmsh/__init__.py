@@ -64,7 +64,6 @@ def frontal_delaunay_2d(
     >>> mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 
     >>> plotter = sg.Plotter(off_screen=True)
-    >>> plotter.enable_parallel_projection()
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=1, color="aliceblue", lighting=False, edge_color="gray")
     >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="gray")
     >>> plotter.show(cpos="xy", screenshot="docs/_static/frontal_delaunay_2d_01.png")
@@ -146,7 +145,6 @@ def delaunay_3d(
     >>> mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 
     >>> plotter = sg.Plotter(off_screen=True)
-    >>> plotter.enable_parallel_projection()
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=1, color="aliceblue", lighting=False, edge_color="gray")
     >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
     >>> _ = plotter.add_axes(
@@ -172,7 +170,6 @@ def delaunay_3d(
     ...     edge_color="gray",
     ... )
     >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
-    >>> plotter.enable_parallel_projection()
     >>> _ = plotter.add_axes(
     ...     box=True,
     ...     box_args={
@@ -349,6 +346,7 @@ class PlotterBase:
 
         """
         super().__init__(*args, **kwargs)
+        super().enable_parallel_projection()  # type: ignore[misc]
 
 
 class Plotter(PlotterBase, pv.Plotter):  # type: ignore[misc]
