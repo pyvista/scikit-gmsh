@@ -40,7 +40,7 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 
 ### Developer
 
-If you simply can't wait for the next release to play with the latest hot features, then you can easily
+If you can't wait for the next release to play with the latest hot features, then you can easily
 install the `main` development branch from GitHub:
 
 ```shell
@@ -65,7 +65,7 @@ We can then generate a 2D mesh.
 mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 ```
 
-To visualize the model we can use PyVista.
+To visualize the model, we can use PyVista.
 
 ```python
 plotter = sg.Plotter()
