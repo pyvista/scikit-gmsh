@@ -13,15 +13,15 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0)
 
-Contributions _very welcome_ but first see [Contributing](#contributions).
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
-By participating in this project you agree to abide by its terms.
+Contributions are _very welcome_ but first see [Contributing](#contributions).
+This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+By participating in this project, you agree to follow its terms.
 
 ---
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh?style=for-the-badge)](https://github.com/pyvista/scikit-gmsh/stargazers)
 
-Enjoying scikit-gmsh? Show your support with a [Github star](https://github.com/pyvista/scikit-gmsh) — it’s a simple click that means the world to us and helps others discover it too! ⭐️
+Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/pyvista/scikit-gmsh) — it’s a simple click that means the world to us and helps others discover it too! ⭐️
 
 ---
 
@@ -40,7 +40,7 @@ Enjoying scikit-gmsh? Show your support with a [Github star](https://github.com/
 
 ### Developer
 
-If you simply can't wait for the next release to play with the latest hot features, then you can easily
+If you can't wait for the next release to play with the latest hot features, then you can easily
 install the `main` development branch from GitHub:
 
 ```shell
@@ -65,7 +65,7 @@ We can then generate a 2D mesh.
 mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=2.0)
 ```
 
-To visualize the model we can use PyVista.
+To visualize the model, we can use PyVista.
 
 ```python
 plotter = sg.Plotter()
