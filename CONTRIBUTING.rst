@@ -8,7 +8,6 @@ Contributing
 
 .. |Code style: black| image:: https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge
    :target: https://github.com/psf/black
-
 .. |Imports: isort| image:: https://img.shields.io/badge/%20imports-isort-%231674b1?style=for-the-badge&labelColor=ef8336
    :target: https://pycqa.github.io/isort/
 .. |Ruff| image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json&style=for-the-badge
