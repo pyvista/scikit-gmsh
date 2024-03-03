@@ -73,7 +73,7 @@ _ = plotter.add_mesh(
     lighting=False,
     edge_color="gray",
 )
-_ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
+_ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="gray")
 plotter.show(cpos="xy")
 ```
 

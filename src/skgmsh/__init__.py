@@ -65,7 +65,7 @@ def frontal_delaunay_2d(
 
     >>> plotter = sg.Plotter(off_screen=True)
     >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=1, color="aliceblue", lighting=False, edge_color="gray")
-    >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="gray")
+    >>> _ = plotter.add_mesh(edge_source, line_width=4, color="gray")
     >>> plotter.show(cpos="xy", screenshot="docs/_static/frontal_delaunay_2d_01.png")
 
     """
