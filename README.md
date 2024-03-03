@@ -7,20 +7,16 @@
 > Scikit for Gmsh to generate 3D finite element mesh.
 
 [![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest&style=for-the-badge)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge)](https://github.com/psf/black)
-[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=for-the-badge&labelColor=ef8336)](https://pycqa.github.io/isort/)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json&style=for-the-badge)](https://github.com/astral-sh/ruff)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
 
 Contributions are _very welcome_ but first see [Contributing](#contributions).
 This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
-By participating in this project, you agree to follow its terms.
+By participating in this project, We want you to know that you agree to follow its terms.
 
 ---
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh?style=for-the-badge)](https://github.com/pyvista/scikit-gmsh/stargazers)
 
-Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/pyvista/scikit-gmsh) — it’s a simple click that means the world to us and helps others discover it too! ⭐️
+Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/pyvista/scikit-gmsh) — it’s a simple click that means the world to us and helps others discover it, too! ⭐️
 
 ---
 
