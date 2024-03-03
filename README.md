@@ -99,16 +99,7 @@ _ = plotter.add_mesh(
     edge_color="gray",
 )
 _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
-_ = plotter.add_axes(
-    box=True,
-    box_args={
-        "opacity": 0.5,
-        "color_box": True,
-        "x_face_color": "white",
-        "y_face_color": "white",
-        "z_face_color": "white",
-    },
-)
+_ = plotter.add_box_axes()
 plotter.show()
 ```
 
