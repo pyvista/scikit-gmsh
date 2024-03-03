@@ -6,8 +6,6 @@
 
 > Scikit for Gmsh to generate 3D finite element mesh.
 
-[![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest&style=for-the-badge)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
-
 Contributions are _very welcome_ but first see [Contributing](#contributions).
 This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in this project, We want you to know that you agree to follow its terms.
@@ -21,6 +19,8 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 ---
 
 ## Table of Contents
+
+[![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest&style=for-the-badge)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
