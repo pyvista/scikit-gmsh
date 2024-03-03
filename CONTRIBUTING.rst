@@ -1,7 +1,7 @@
 Contributing
 ============
 
-.. |Contributor Covenant| image:: https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg
+.. |Contributor Covenant| image:: https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg?style=for-the-badge
    :target: CODE_OF_CONDUCT.md
 
 |Contributor Covenant|
