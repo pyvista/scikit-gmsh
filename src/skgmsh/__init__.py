@@ -239,7 +239,7 @@ class Report(scooby.Report):  # type: ignore[misc]
 
     def __init__(
         self: Report, ncol: int = 3, text_width: int = 80
-    ) -> None:  # numpydoc ignore=PR01
+    ) -> None:
         """Generate a :class:`scooby.Report` instance."""
         # mandatory packages
         core: list[str] = [
