@@ -6,7 +6,9 @@
 
 > Scikit for Gmsh to generate 3D finite element mesh.
 
-Contributions are _very welcome_ but first see [Contributing](#contributions).
+[![Contributing](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg?style=for-the-badge)](https://github.com/pyvista/scikit-gmsh/issues)
+
+Contributions are _very welcome_ .
 This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in this project, We want you to know that you agree to follow its terms.
 
