@@ -52,7 +52,6 @@ testpaths = [
 
 [tool.ruff]
 line-length = 150
-target-version = "py38"
 src = ["src"]
 
 [tool.ruff.format]
