@@ -126,6 +126,11 @@ original author to relicense the code.
 Development Practices
 ---------------------
 
+.. |Nox| image:: https://img.shields.io/badge/%F0%9F%A6%8A-Nox-D85E00.svg?style=for-the-badge
+   :target: https://github.com/wntrblm/nox
+
+|Nox|
+
 This section provides a guide to how we conduct development in the
 scikit-gmsh repository. Please follow the practices outlined here when
 contributing directly to this repository.
