@@ -126,6 +126,11 @@ original author to relicense the code.
 Development Practices
 ---------------------
 
+.. |Nox| image:: https://img.shields.io/badge/%F0%9F%A6%8A-Nox-D85E00.svg?style=for-the-badge
+   :target: https://github.com/wntrblm/nox
+
+|Nox|
+
 This section provides a guide to how we conduct development in the
 scikit-gmsh repository. Please follow the practices outlined here when
 contributing directly to this repository.
@@ -480,11 +485,6 @@ changes any given branch is introducing before looking at the code.
 Testing
 ^^^^^^^
 
-.. |Nox| image:: https://img.shields.io/badge/%F0%9F%A6%8A-Nox-D85E00.svg?style=for-the-badge
-   :target: https://github.com/wntrblm/nox
-
-|Nox|
-
 After making changes, please test changes locally before creating a pull
 request. The following tests will be executed after any commit or pull
 request, so we ask that you perform the following sequence locally to
@@ -503,6 +503,7 @@ suites.
 
 Unit Testing
 ~~~~~~~~~~~~
+
 Run the primary test suite and generate coverage report:
 
 .. code:: bash
