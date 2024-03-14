@@ -503,7 +503,6 @@ suites.
 
 Unit Testing
 ~~~~~~~~~~~~
-
 Run the primary test suite and generate coverage report:
 
 .. code:: bash
