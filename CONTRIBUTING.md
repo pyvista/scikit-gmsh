@@ -13,6 +13,7 @@
 - [Licensing](#licensing)
 - [Development Practices](#development-practices)
   - [Guidelines](#guidelines)
+  - [Contributing to scikit-gmsh through GitHub](#contributing-to-scikit-gmsh-through-github)
   - [Unit Testing](#unit-testing)
   - [Documentation Testing](#documentation-testing)
   - [Style Checking](#style-checking)
