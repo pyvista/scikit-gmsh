@@ -105,4 +105,22 @@ html_css_files = [
     "theme_overrides.css",
 ]
 
-myst_enable_extensions = ["deflist"]
+# -- MyST settings ---------------------------------------------------
+
+myst_enable_extensions = [
+    "dollarmath",
+    "amsmath",
+    "deflist",
+    "fieldlist",
+    "html_admonition",
+    "html_image",
+    "colon_fence",
+    "smartquotes",
+    "replacements",
+    "linkify",
+    "strikethrough",
+    "substitution",
+    "tasklist",
+    "attrs_inline",
+    "attrs_block",
+]
