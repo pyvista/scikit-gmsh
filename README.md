@@ -24,16 +24,6 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 
 [![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest&style=for-the-badge)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Installation](#installation)
-  - [Developer](#developer)
-- [Usage](#usage)
-- [License](#license)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## Installation
 
 ### Developer
