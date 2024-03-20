@@ -13,6 +13,7 @@
 - [Licensing](#licensing)
 - [Development Practices](#development-practices)
   - [Guidelines](#guidelines)
+  - [Contributing to scikit-gmsh through GitHub](#contributing-to-scikit-gmsh-through-github)
   - [Unit Testing](#unit-testing)
   - [Documentation Testing](#documentation-testing)
   - [Style Checking](#style-checking)
@@ -182,8 +183,7 @@ There are two important copyright guidelines:
 Please also take a look at our [Code of
 Conduct](https://github.com/pyvista/scikit-gmsh/blob/main/CODE_OF_CONDUCT.md).
 
-Contributing to scikit-gmsh through GitHub
-\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~
+### Contributing to scikit-gmsh through GitHub
 
 To submit new code to scikit-gmsh, first fork the [scikit-gmsh GitHub
 Repository](https://github.com/pyvista/scikit-gmsh) and then clone the
