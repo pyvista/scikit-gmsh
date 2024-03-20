@@ -104,3 +104,5 @@ html_css_files = [
     "style.css",
     "theme_overrides.css",
 ]
+
+myst_enable_extensions = ["deflist"]
