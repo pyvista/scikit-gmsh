@@ -39,7 +39,7 @@ package_dir = root_dir / "src"
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
+extensions = ["myst_parser"]
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
@@ -103,4 +103,23 @@ html_static_path = [
 html_css_files = [
     "style.css",
     "theme_overrides.css",
+]
+
+# -- MyST settings ---------------------------------------------------
+
+myst_enable_extensions = [
+    "dollarmath",
+    "amsmath",
+    "deflist",
+    "fieldlist",
+    "html_admonition",
+    "html_image",
+    "colon_fence",
+    "smartquotes",
+    "replacements",
+    "strikethrough",
+    "substitution",
+    "tasklist",
+    "attrs_inline",
+    "attrs_block",
 ]

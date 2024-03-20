@@ -105,6 +105,7 @@ repos:
     hooks:
       - id: doctoc
         args: ["--maxlevel", "3"]
+        exclude: docs
   - repo: https://github.com/pappasam/toml-sort
     rev: v0.23.1
     hooks:
