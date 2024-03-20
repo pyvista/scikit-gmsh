@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [scikit-gmsh](#scikit-gmsh)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+    - [Developer](#developer)
+  - [Usage](#usage)
+  - [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 🚧 scikit-gmsh is in the pre-alpha stage. The interface could be subject to significant changes soon.
 
 # scikit-gmsh
