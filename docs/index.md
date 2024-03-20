@@ -1,4 +1,4 @@
-🚧 scikit-gmsh documentation =======================
+# 🚧 scikit-gmsh documentation
 
 ::: note
 ::: title
