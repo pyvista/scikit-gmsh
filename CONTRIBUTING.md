@@ -1,3 +1,5 @@
+# Contributing
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -24,8 +26,6 @@
     - [Branching Model](#branching-model)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-# Contributing
 
 We absolutely welcome contributions and we hope that this guide will
 facilitate an understanding of the scikit-gmsh code repository. It is
