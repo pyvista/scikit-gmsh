@@ -27,12 +27,10 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [scikit-gmsh](#scikit-gmsh)
-  - [Table of Contents](#table-of-contents)
-  - [Installation](#installation)
-    - [Developer](#developer)
-  - [Usage](#usage)
-  - [License](#license)
+- [Installation](#installation)
+  - [Developer](#developer)
+- [Usage](#usage)
+- [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
