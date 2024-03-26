@@ -54,7 +54,7 @@ repos:
       - id: prettier
         types_or: [yaml, markdown, html, css, scss, javascript, json, toml]
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.15.1
+    rev: v3.15.2
     hooks:
       - id: pyupgrade
         args: [--py39-plus, --keep-runtime-typing]
@@ -75,7 +75,7 @@ repos:
       - id: rst-directive-colons
       - id: rst-inline-touching-normal
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.3.3
+    rev: v0.3.4
     hooks:
       - id: ruff
         args: ["--fix", "--show-fixes"]
