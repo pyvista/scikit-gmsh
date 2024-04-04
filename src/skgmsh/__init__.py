@@ -20,7 +20,7 @@ DELAUNAY_3D = 1
 now = datetime.datetime.now(tz=datetime.timezone.utc)
 
 # major, minor, patch
-version_info = 0, 0, "dev"
+version_info = 0, 1, "dev0"
 
 # Nice string for the version
 __version__ = ".".join(map(str, version_info))
