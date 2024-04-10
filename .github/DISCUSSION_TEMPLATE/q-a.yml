@@ -2,7 +2,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to open this discussion to help improve PyVista!
+        Thanks for taking the time to open this discussion to help improve scikit-gmsh!
   - type: checkboxes
     id: checks
     attributes:
@@ -12,9 +12,9 @@ body:
           required: true
         - label: I used the GitHub search to find a similar question and didn't find it.
           required: true
-        - label: I searched the PyVista documentation, with the integrated search.
+        - label: I searched the scikit-gmsh documentation, with the integrated search.
           required: true
-        - label: I already searched in Google "How to X in PyVista" and didn't find any information.
+        - label: I already searched in Google "How to X in scikit-gmsh" and didn't find any information.
           required: true
         - label: I already read and followed all the tutorial in the docs and didn't find an answer.
           required: true
@@ -65,7 +65,7 @@ body:
         This report helps us track down bugs and will be critical to addressing your bug.
         ```python
         # Get system info
-        import pyvista as pv
+        import scikit-gmsh as pv
         print(pv.Report())
         ```
       render: shell
