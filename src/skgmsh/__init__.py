@@ -370,6 +370,116 @@ def Cube(*args, **kwargs):  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN0
     return pv.Cube(*args, **kwargs)
 
 
-def Polygon(*args, **kwargs):  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN003, ANN201, N802
+class Polygon:
     """Create a polygon."""
-    return pv.Polygon(*args, **kwargs)
+
+    def __init__(self: Polygon, n_sides: int, radius: float) -> None:
+        """
+        Create a polygon.
+
+        Parameters
+        ----------
+        n_sides : int
+            Number of sides for the polygon.
+
+        radius : float
+            Radius of the polygon.
+
+        Examples
+        --------
+        Create a polygon.
+
+        >>> import skgmsh as sg
+        >>> polygon = sg.Polygon(n_sides=4, radius=8)
+
+        """
+        self.poly_data: pv.Polygon = pv.Polygon(
+            n_sides=n_sides, radius=radius, fill=False
+        )
+
+    def frontal_delaunay_2d(
+        self: Polygon,
+        edge_source: Polygon,
+        *,
+        target_sizes: float | Sequence[float] | None = None,
+    ) -> pv.PolyData | None:
+        """
+        Frontal-Delaunay 2D mesh algorithm.
+
+        Parameters
+        ----------
+        edge_source : pyvista.PolyData
+            Specify the source object used to specify constrained
+            edges and loops. If set, and lines/polygons are defined, a
+            constrained triangulation is created. The lines/polygons
+            are assumed to reference points in the input point set
+            (i.e. point ids are identical in the input and
+            source).
+
+        target_sizes : float | Sequence[float], optional
+            Target mesh size close to the points.
+            Default max size of edge_source in each direction.
+
+        Returns
+        -------
+        pyvista.PolyData
+            Mesh from the 2D delaunay generation.
+
+        """
+        points = self.poly_data.points
+        lines = edge_source.poly_data.lines
+        bounds = edge_source.poly_data.bounds
+
+        gmsh.initialize()
+        gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
+
+        if target_sizes is None:
+            target_sizes = np.max(
+                [
+                    np.abs(bounds[1] - bounds[0]),
+                    np.abs(bounds[3] - bounds[2]),
+                    np.abs(bounds[5] - bounds[4]),
+                ]
+            )
+
+        if isinstance(target_sizes, float):
+            target_sizes = [target_sizes] * edge_source.number_of_points
+
+        for i, (target_size, point) in enumerate(zip(target_sizes, points)):
+            id_ = i + 1
+            gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
+
+        for i in range(lines[0] - 1):
+            id_ = i + 1
+            gmsh.model.geo.add_line(lines[i + 1] + 1, lines[i + 2] + 1, id_)
+
+        gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
+        gmsh.model.geo.add_plane_surface([1], 1)
+        gmsh.model.geo.synchronize()
+        gmsh.model.mesh.generate(2)
+        mesh = extract_to_meshio()
+        gmsh.clear()
+        gmsh.finalize()
+
+        for cell in mesh.cells:
+            if cell.type == "triangle":
+                return pv.PolyData.from_regular_faces(mesh.points, cell.data)
+        return None
+
+    @property
+    def number_of_points(self: Polygon) -> int:
+        """Return the number of points in the polygon."""
+        number_of_points: int = self.poly_data.number_of_points
+        return number_of_points
+
+    @property
+    def number_of_cells(self: Polygon) -> int:
+        """Return the number of cells in the polygon."""
+        number_of_cells: int = self.poly_data.number_of_cells
+        return number_of_cells
+
+    @property
+    def volume(self: Polygon) -> float:
+        """Return the volume of the polygon."""
+        volume: float = self.poly_data.volume
+        return volume
