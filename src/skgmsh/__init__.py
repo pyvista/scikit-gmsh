@@ -20,7 +20,7 @@ DELAUNAY_3D = 1
 now = datetime.datetime.now(tz=datetime.timezone.utc)
 
 # major, minor, patch
-version_info = 0, 2, "dev0"
+version_info = 0, 0, 0, now.year, now.month, now.day, now.hour, now.minute, now.second
 
 # Nice string for the version
 __version__ = ".".join(map(str, version_info))
@@ -61,9 +61,20 @@ def delaunay_3d(
     >>> mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 
     >>> plotter = sg.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=1, color="aliceblue", lighting=False, edge_color="gray")
-    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
-    >>> _ = plotter.add_box_axes()
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])
+    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
+    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
+    >>> plotter.enable_parallel_projection()
+    >>> _ = plotter.add_axes(
+    ...     box=True,
+    ...     box_args={
+    ...         "opacity": 0.5,
+    ...         "color_box": True,
+    ...         "x_face_color": "white",
+    ...         "y_face_color": "white",
+    ...         "z_face_color": "white",
+    ...     },
+    ... )
     >>> plotter.show(screenshot="docs/_static/delaunay_3d_01.png")
 
     >>> clipped = mesh.clip(origin = (0.0, 0.0, 0.0), normal = (0.0, 0.0, 1.0), crinkle=True)
@@ -71,13 +82,26 @@ def delaunay_3d(
     >>> _ = plotter.add_mesh(
     ...     clipped,
     ...     show_edges=True,
-    ...     line_width=1,
-    ...     color="aliceblue",
-    ...     lighting=False,
-    ...     edge_color="gray",
+    ...     line_width=4,
+    ...     color="white",
+    ...     lighting=True,
+    ...     edge_color=[153, 153, 153],
     ... )
-    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
-    >>> _ = plotter.add_box_axes()
+    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
+    >>> _ = plotter.add_points(
+    ...     edge_source.points, style="points", point_size=20, color=[214, 39, 40]
+    ... )
+    >>> plotter.enable_parallel_projection()
+    >>> _ = plotter.add_axes(
+    ...     box=True,
+    ...     box_args={
+    ...         "opacity": 0.5,
+    ...         "color_box": True,
+    ...         "x_face_color": "white",
+    ...         "y_face_color": "white",
+    ...         "z_face_color": "white",
+    ...     },
+    ... )
     >>> plotter.show(screenshot="docs/_static/delaunay_3d_02.png")
 
     """
@@ -153,7 +177,9 @@ class Report(scooby.Report):  # type: ignore[misc]
 
     """
 
-    def __init__(self: Report, ncol: int = 3, text_width: int = 80) -> None:
+    def __init__(
+        self: Report, ncol: int = 3, text_width: int = 80
+    ) -> None:  # numpydoc ignore=PR01
         """Generate a :class:`scooby.Report` instance."""
         # mandatory packages
         core: list[str] = [
@@ -242,122 +268,10 @@ class PlotterBase:
 
         """
         super().__init__(*args, **kwargs)
-        super().enable_parallel_projection()  # type: ignore[misc]
-
-    def add_box_axes(self: PlotterBase) -> None:
-        """
-        Show a box orientation marker.
-
-        Notes
-        -----
-        .. versionadded:: 0.1.0
-
-        """
-        super().add_axes(  # type: ignore[misc]
-            box=True,
-            box_args={
-                "opacity": 0.5,
-                "color_box": True,
-                "x_face_color": "white",
-                "y_face_color": "white",
-                "z_face_color": "white",
-            },
-        )
 
 
 class Plotter(PlotterBase, pv.Plotter):  # type: ignore[misc]
     """Plotting object to display vtk meshes or numpy arrays."""
-
-
-class PolyData(pv.PolyData):  # type: ignore[misc]
-    """Dataset consisting of surface geometry (e.g. vertices, lines, and polygons)."""
-
-    def frontal_delaunay_2d(
-        self: PolyData,
-        edge_source: PolyData,
-        *,
-        target_sizes: float | Sequence[float] | None = None,
-    ) -> pv.PolyData | None:
-        """
-        Frontal-Delaunay 2D mesh algorithm.
-
-        Parameters
-        ----------
-        edge_source : pyvista.PolyData
-            Specify the source object used to specify constrained
-            edges and loops. If set, and lines/polygons are defined, a
-            constrained triangulation is created. The lines/polygons
-            are assumed to reference points in the input point set
-            (i.e. point ids are identical in the input and
-            source).
-
-        target_sizes : float | Sequence[float], optional
-            Target mesh size close to the points.
-            Default max size of edge_source in each direction.
-
-        Returns
-        -------
-        pyvista.PolyData
-            Mesh from the 2D delaunay generation.
-
-        Examples
-        --------
-        Use the ``edge_source`` parameter to create a constrained delaunay
-        triangulation.
-
-        >>> import skgmsh as sg
-
-        >>> source = sg.Polygon(n_sides=4, radius=8, fill=False)
-        >>> edge_source = sg.Polygon(n_sides=4, radius=8, fill=False)
-        >>> mesh = source.frontal_delaunay_2d(edge_source, target_sizes=2.0)
-
-        >>> plotter = sg.Plotter(off_screen=True)
-        >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])
-        >>> _ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
-        >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
-        >>> _ = plotter.add_legend([[" edge source", [214, 39, 40]], [" mesh ", [153, 153, 153]]], bcolor="white", face="r", size=(0.3, 0.3))
-        >>> plotter.show(cpos="xy", screenshot="docs/_static/frontal_delaunay_2d_01.png")
-
-        """
-        points = edge_source.points
-        lines = edge_source.lines
-        bounds = edge_source.bounds
-
-        gmsh.initialize()
-        gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
-
-        if target_sizes is None:
-            target_sizes = np.max(
-                [
-                    np.abs(bounds[1] - bounds[0]),
-                    np.abs(bounds[3] - bounds[2]),
-                    np.abs(bounds[5] - bounds[4]),
-                ]
-            )
-
-        if isinstance(target_sizes, float):
-            target_sizes = [target_sizes] * edge_source.number_of_points
-
-        for i, (target_size, point) in enumerate(zip(target_sizes, points)):
-            id_ = i + 1
-            gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
-
-        for i in range(lines[0] - 1):
-            id_ = i + 1
-            gmsh.model.geo.add_line(lines[i + 1] + 1, lines[i + 2] + 1, id_)
-
-        gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
-        gmsh.model.geo.add_plane_surface([1], 1)
-        gmsh.model.geo.synchronize()
-        gmsh.model.mesh.generate(2)
-        mesh = extract_to_meshio()
-        gmsh.clear()
-        gmsh.finalize()
-
-        for cell in mesh.cells:
-            if cell.type == "triangle":
-                return pv.PolyData.from_regular_faces(mesh.points, cell.data)
-        return None
 
 
 def Cube(*args, **kwargs):  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN003, ANN201, N802
