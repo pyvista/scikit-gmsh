@@ -20,7 +20,7 @@ DELAUNAY_3D = 1
 now = datetime.datetime.now(tz=datetime.timezone.utc)
 
 # major, minor, patch
-version_info = 0, 0, 0, now.year, now.month, now.day, now.hour, now.minute, now.second
+version_info = 0, 2, "dev0"
 
 # Nice string for the version
 __version__ = ".".join(map(str, version_info))
@@ -61,20 +61,9 @@ def delaunay_3d(
     >>> mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 
     >>> plotter = sg.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])
-    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
-    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
-    >>> plotter.enable_parallel_projection()
-    >>> _ = plotter.add_axes(
-    ...     box=True,
-    ...     box_args={
-    ...         "opacity": 0.5,
-    ...         "color_box": True,
-    ...         "x_face_color": "white",
-    ...         "y_face_color": "white",
-    ...         "z_face_color": "white",
-    ...     },
-    ... )
+    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=1, color="aliceblue", lighting=False, edge_color="gray")
+    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
+    >>> _ = plotter.add_box_axes()
     >>> plotter.show(screenshot="docs/_static/delaunay_3d_01.png")
 
     >>> clipped = mesh.clip(origin = (0.0, 0.0, 0.0), normal = (0.0, 0.0, 1.0), crinkle=True)
@@ -82,26 +71,13 @@ def delaunay_3d(
     >>> _ = plotter.add_mesh(
     ...     clipped,
     ...     show_edges=True,
-    ...     line_width=4,
-    ...     color="white",
-    ...     lighting=True,
-    ...     edge_color=[153, 153, 153],
+    ...     line_width=1,
+    ...     color="aliceblue",
+    ...     lighting=False,
+    ...     edge_color="gray",
     ... )
-    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
-    >>> _ = plotter.add_points(
-    ...     edge_source.points, style="points", point_size=20, color=[214, 39, 40]
-    ... )
-    >>> plotter.enable_parallel_projection()
-    >>> _ = plotter.add_axes(
-    ...     box=True,
-    ...     box_args={
-    ...         "opacity": 0.5,
-    ...         "color_box": True,
-    ...         "x_face_color": "white",
-    ...         "y_face_color": "white",
-    ...         "z_face_color": "white",
-    ...     },
-    ... )
+    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
+    >>> _ = plotter.add_box_axes()
     >>> plotter.show(screenshot="docs/_static/delaunay_3d_02.png")
 
     """
@@ -177,9 +153,7 @@ class Report(scooby.Report):  # type: ignore[misc]
 
     """
 
-    def __init__(
-        self: Report, ncol: int = 3, text_width: int = 80
-    ) -> None:  # numpydoc ignore=PR01
+    def __init__(self: Report, ncol: int = 3, text_width: int = 80) -> None:
         """Generate a :class:`scooby.Report` instance."""
         # mandatory packages
         core: list[str] = [
@@ -268,6 +242,27 @@ class PlotterBase:
 
         """
         super().__init__(*args, **kwargs)
+        super().enable_parallel_projection()  # type: ignore[misc]
+
+    def add_box_axes(self: PlotterBase) -> None:
+        """
+        Show a box orientation marker.
+
+        Notes
+        -----
+        .. versionadded:: 0.1.0
+
+        """
+        super().add_axes(  # type: ignore[misc]
+            box=True,
+            box_args={
+                "opacity": 0.5,
+                "color_box": True,
+                "x_face_color": "white",
+                "y_face_color": "white",
+                "z_face_color": "white",
+            },
+        )
 
 
 class Plotter(PlotterBase, pv.Plotter):  # type: ignore[misc]
