@@ -28,6 +28,7 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Installation](#installation)
+  - [Pip](#pip)
   - [Developer](#developer)
 - [Usage](#usage)
 - [License](#license)
@@ -35,6 +36,16 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Installation
+
+scikit-gmsh is available on [PyPI](https://pypi.org/project/scikit-gmsh/).
+
+### Pip
+
+scikit-gmsh is also available on [PyPI](https://pypi.org/project/scikit-gmsh/):
+
+```shell
+pip install scikit-gmsh
+```
 
 ### Developer
 
