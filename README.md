@@ -36,6 +36,16 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 
 ## Installation
 
+scikit-gmsh is available on [PyPI](https://pypi.org/project/scikit-gmsh/).
+
+### Pip
+
+scikit-gmsh is also available on [PyPI](https://pypi.org/project/scikit-gmsh/):
+
+```shell
+pip install scikit-gmsh
+```
+
 ### Developer
 
 If you can't wait for the next release to play with the latest hot features, then you can easily
