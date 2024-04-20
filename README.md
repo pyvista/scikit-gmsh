@@ -86,8 +86,8 @@ plotter.show(cpos="xy")
 We can also generate a 3D mesh.
 
 ```python
-source = sg.Cube()
-mesh = source.delaunay_3d(edge_source=source, target_sizes=0.2)
+edge_source = sg.Cube()
+mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
 ```
 
 ```python
@@ -100,7 +100,7 @@ _ = plotter.add_mesh(
     lighting=False,
     edge_color="gray",
 )
-_ = plotter.add_mesh(source.extract_all_edges(), line_width=4, color="gray")
+_ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
 _ = plotter.add_box_axes()
 plotter.show()
 ```
