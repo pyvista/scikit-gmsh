@@ -54,13 +54,13 @@ import skgmsh as sg
 We can define the surface using PyVista.
 
 ```python
-edge_source = sg.Polygon(n_sides=4, radius=8, fill=False)
+source = sg.Polygon(n_sides=4, radius=8, fill=False)
 ```
 
 We can then generate a 2D mesh.
 
 ```python
-mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=2.0)
+mesh = source.frontal_delaunay_2d(edge_source=source, target_sizes=2.0)
 ```
 
 To visualize the model, we can use PyVista.
@@ -75,7 +75,7 @@ _ = plotter.add_mesh(
     lighting=False,
     edge_color="gray",
 )
-_ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color="gray")
+_ = plotter.add_mesh(source, show_edges=True, line_width=4, color="gray")
 plotter.show(cpos="xy")
 ```
 
