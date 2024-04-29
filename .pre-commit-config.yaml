@@ -37,7 +37,11 @@ repos:
       - id: mypy
         files: src
         additional_dependencies:
-          ["mypy-extensions==1.0.0", "toml==0.10.2", "typing-extensions==4.11.0"]
+          [
+            "mypy-extensions==1.0.0",
+            "toml==0.10.2",
+            "typing-extensions==4.11.0",
+          ]
         args:
           [
             "--disallow-untyped-calls",
