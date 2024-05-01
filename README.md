@@ -97,8 +97,8 @@ plotter.show(cpos="xy")
 We can also generate a 3D mesh.
 
 ```python
-edge_source = sg.Cube()
-mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
+source = sg.Cube()
+source = sg.delaunay_3d(edge_source=source, target_sizes=0.2)
 ```
 
 ```python
