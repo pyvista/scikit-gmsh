@@ -26,142 +26,6 @@ version_info = 0, 2, "dev0"
 __version__ = ".".join(map(str, version_info))
 
 
-def delaunay_3d(
-    edge_source: pv.PolyData,
-    *,
-    target_sizes: float | Sequence[float] | None = None,
-) -> pv.UnstructuredGrid | None:
-    """
-    Delaunay 3D mesh algorithm.
-
-    Parameters
-    ----------
-    edge_source : pyvista.PolyData
-        Specify the source object used to specify constrained
-        edges and loops. If set, and lines/polygons are defined, a
-        constrained triangulation is created. The lines/polygons
-        are assumed to reference points in the input point set
-        (i.e. point ids are identical in the input and
-        source).
-
-    target_sizes : float | Sequence[float], optional
-        Target mesh size close to the points.
-        Default max size of edge_source in each direction.
-
-    Returns
-    -------
-    pyvista.UnstructuredGrid
-        Mesh from the 3D delaunay generation.
-
-    Examples
-    --------
-    >>> import skgmsh as sg
-
-    >>> edge_source = sg.Cube()
-    >>> mesh = sg.delaunay_3d(edge_source, target_sizes=0.2)
-
-    >>> plotter = sg.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(mesh, show_edges=True, line_width=4, color="white", lighting=True, edge_color=[153, 153, 153])
-    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
-    >>> _ = plotter.add_points(edge_source.points, style="points", point_size=20, color=[214, 39, 40])
-    >>> plotter.enable_parallel_projection()
-    >>> _ = plotter.add_axes(
-    ...     box=True,
-    ...     box_args={
-    ...         "opacity": 0.5,
-    ...         "color_box": True,
-    ...         "x_face_color": "white",
-    ...         "y_face_color": "white",
-    ...         "z_face_color": "white",
-    ...     },
-    ... )
-    >>> plotter.show(screenshot="docs/_static/delaunay_3d_01.png")
-
-    >>> clipped = mesh.clip(origin = (0.0, 0.0, 0.0), normal = (0.0, 0.0, 1.0), crinkle=True)
-    >>> plotter = sg.Plotter(off_screen=True)
-    >>> _ = plotter.add_mesh(
-    ...     clipped,
-    ...     show_edges=True,
-    ...     line_width=4,
-    ...     color="white",
-    ...     lighting=True,
-    ...     edge_color=[153, 153, 153],
-    ... )
-    >>> _ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
-    >>> _ = plotter.add_points(
-    ...     edge_source.points, style="points", point_size=20, color=[214, 39, 40]
-    ... )
-    >>> plotter.enable_parallel_projection()
-    >>> _ = plotter.add_axes(
-    ...     box=True,
-    ...     box_args={
-    ...         "opacity": 0.5,
-    ...         "color_box": True,
-    ...         "x_face_color": "white",
-    ...         "y_face_color": "white",
-    ...         "z_face_color": "white",
-    ...     },
-    ... )
-    >>> plotter.show(screenshot="docs/_static/delaunay_3d_02.png")
-
-    """
-    points = edge_source.points
-    faces = edge_source.regular_faces
-    bounds = edge_source.bounds
-
-    gmsh.initialize()
-    gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
-
-    if target_sizes is None:
-        target_sizes = np.max(
-            [
-                np.abs(bounds[1] - bounds[0]),
-                np.abs(bounds[3] - bounds[2]),
-                np.abs(bounds[5] - bounds[4]),
-            ]
-        )
-
-    if isinstance(target_sizes, float):
-        target_sizes = [target_sizes] * edge_source.number_of_points
-
-    for i, (point, target_size) in enumerate(zip(points, target_sizes)):
-        id_ = i + 1
-        gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
-
-    surface_loop = []
-    for i, face in enumerate(faces):
-        gmsh.model.geo.add_line(face[0] + 1, face[1] + 1, i * 4 + 0)
-        gmsh.model.geo.add_line(face[1] + 1, face[2] + 1, i * 4 + 1)
-        gmsh.model.geo.add_line(face[2] + 1, face[3] + 1, i * 4 + 2)
-        gmsh.model.geo.add_line(face[3] + 1, face[0] + 1, i * 4 + 3)
-        gmsh.model.geo.add_curve_loop(
-            [i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1
-        )
-        gmsh.model.geo.add_plane_surface([i + 1], i + 1)
-        gmsh.model.geo.remove_all_duplicates()
-        gmsh.model.geo.synchronize()
-        surface_loop.append(i + 1)
-
-    gmsh.model.geo.add_surface_loop(surface_loop, 1)
-    gmsh.model.geo.add_volume([1], 1)
-
-    gmsh.model.geo.synchronize()
-    gmsh.model.mesh.generate(3)
-
-    mesh = pv.wrap(extract_to_meshio())
-    gmsh.clear()
-    gmsh.finalize()
-
-    ind = []
-    for i, cell in enumerate(mesh.cell):
-        if cell.type != pv.CellType.TETRA:
-            ind.append(i)
-    mesh = mesh.remove_cells(ind)
-    mesh.clear_data()
-
-    return mesh
-
-
 class Report(scooby.Report):  # type: ignore[misc]
     """
     Generate an environment package and hardware report.
@@ -274,9 +138,124 @@ class Plotter(PlotterBase, pv.Plotter):  # type: ignore[misc]
     """Plotting object to display vtk meshes or numpy arrays."""
 
 
-def Cube(*args, **kwargs):  # type: ignore[no-untyped-def]  # noqa: ANN002, ANN003, ANN201, N802
+class Cube:
     """Create a cube."""
-    return pv.Cube(*args, **kwargs)
+
+    def __init__(self: Cube) -> None:
+        """
+        Create a cube.
+
+        Examples
+        --------
+        Create a cube.
+
+        >>> import skgmsh as sg
+        >>> cube = sg.Cube()
+
+        """
+        self.cube_data: pv.Cube = pv.Cube()
+
+    def delaunay_3d(
+        self: Cube,
+        edge_source: Cube,
+        *,
+        target_sizes: float | Sequence[float] | None = None,
+    ) -> pv.UnstructuredGrid | None:
+        """
+        Delaunay 3D mesh algorithm.
+
+        Parameters
+        ----------
+        edge_source : pyvista.PolyData
+            Specify the source object used to specify constrained
+            edges and loops. If set, and lines/polygons are defined, a
+            constrained triangulation is created. The lines/polygons
+            are assumed to reference points in the input point set
+            (i.e. point ids are identical in the input and
+            source).
+
+        target_sizes : float | Sequence[float], optional
+            Target mesh size close to the points.
+
+        Returns
+        -------
+        pyvista.UnstructuredGrid
+            Mesh from the 3D delaunay generation.
+
+        """
+        points = edge_source.cube_data.points
+        faces = edge_source.cube_data.regular_faces
+        bounds = edge_source.cube_data.bounds
+
+        gmsh.initialize()
+        gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
+
+        if target_sizes is None:
+            target_sizes = np.max(
+                [
+                    np.abs(bounds[1] - bounds[0]),
+                    np.abs(bounds[3] - bounds[2]),
+                    np.abs(bounds[5] - bounds[4]),
+                ]
+            )
+
+        if isinstance(target_sizes, float):
+            target_sizes = [target_sizes] * edge_source.number_of_points
+
+        for i, (point, target_size) in enumerate(zip(points, target_sizes)):
+            id_ = i + 1
+            gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
+
+        surface_loop = []
+        for i, face in enumerate(faces):
+            gmsh.model.geo.add_line(face[0] + 1, face[1] + 1, i * 4 + 0)
+            gmsh.model.geo.add_line(face[1] + 1, face[2] + 1, i * 4 + 1)
+            gmsh.model.geo.add_line(face[2] + 1, face[3] + 1, i * 4 + 2)
+            gmsh.model.geo.add_line(face[3] + 1, face[0] + 1, i * 4 + 3)
+            gmsh.model.geo.add_curve_loop(
+                [i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1
+            )
+            gmsh.model.geo.add_plane_surface([i + 1], i + 1)
+            gmsh.model.geo.remove_all_duplicates()
+            gmsh.model.geo.synchronize()
+            surface_loop.append(i + 1)
+
+        gmsh.model.geo.add_surface_loop(surface_loop, 1)
+        gmsh.model.geo.add_volume([1], 1)
+
+        gmsh.model.geo.synchronize()
+        gmsh.model.mesh.generate(3)
+
+        mesh = pv.wrap(extract_to_meshio())
+        gmsh.clear()
+        gmsh.finalize()
+
+        ind = []
+        for i, cell in enumerate(mesh.cell):
+            if cell.type != pv.CellType.TETRA:
+                ind.append(i)
+        mesh = mesh.remove_cells(ind)
+        mesh.clear_data()
+
+        return mesh
+
+    @property
+    def number_of_points(self: Cube) -> int:
+        """Return the number of points in the cube."""
+        number_of_points: int = self.cube_data.number_of_points
+        return number_of_points
+
+    @property
+    def number_of_cells(self: Cube) -> int:
+        """Return the number of cells in the cube."""
+        number_of_cells: int = self.cube_data.number_of_cells
+        return number_of_cells
+
+    @property
+    def volume(self: Cube) -> float:
+        """Return the volume of the cube."""
+        volume: float = self.cube_data.volume
+        return volume
 
 
 class Polygon:
