@@ -9,7 +9,6 @@ if TYPE_CHECKING:
 
 import numpy as np
 import pytest
-import pyvista as pv
 
 import skgmsh as sg
 
@@ -37,8 +36,8 @@ def test_frontal_delaunay_2d(
 )
 def test_delaunay_3d(target_sizes: float | Sequence[float] | None) -> None:
     """Delaunay 3D mesh algorithm test code."""
-    edge_source = pv.Cube()
-    mesh = sg.delaunay_3d(edge_source, target_sizes=target_sizes)
+    edge_source = sg.Cube()
+    mesh = edge_source.delaunay_3d(edge_source, target_sizes=target_sizes)
     assert mesh.number_of_points > edge_source.number_of_points
     assert mesh.number_of_cells > edge_source.number_of_cells
     assert np.allclose(mesh.volume, edge_source.volume)
