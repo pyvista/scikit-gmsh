@@ -40,6 +40,7 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 scikit-gmsh is available on [PyPI](https://pypi.org/project/scikit-gmsh/).
 
 ### Pip
+[![pypi](https://img.shields.io/pypi/v/scikit-gmsh?style=for-the-badge&label=pypi&logo=python&logoColor=white)](https://pypi.org/project/scikit-gmsh/)
 
 scikit-gmsh is also available on [PyPI](https://pypi.org/project/scikit-gmsh/):
 
