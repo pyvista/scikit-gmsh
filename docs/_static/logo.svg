@@ -13,7 +13,7 @@
     <path style="fill:none;fill-opacity:1;stroke:white;stroke-width:2.0000" d="M 349.299 268.69 L 471.799 223.19 L 471.799 23.69 L 349.299 268.69 Z"/>
     <path style="fill:none;fill-opacity:1;stroke:white;stroke-width:2.0000" d="M 594.299 268.69 L 471.799 223.19 L 471.799 23.69 L 594.299 268.69 Z"/>
   </g>
-  <text xml:space="preserve" style="font-size:100px;font-family:Roboto;fill:#000000;stroke:none" x="250" y="580">
+  <text xml:space="preserve" style="font-size:100px;font-family:Roboto;fill:#000000;stroke:none" x="225" y="580">
     <tspan> skgmsh </tspan>
   </text>
 </svg>
