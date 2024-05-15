@@ -8,6 +8,10 @@ updates:
     labels:
       - "maintenance"
       - "dependencies"
+    groups:
+      pip:
+        patterns:
+          - "*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
