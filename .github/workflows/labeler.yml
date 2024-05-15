@@ -16,3 +16,8 @@ jobs:
           sync-labels: true
           configuration-path: .github/labeler.yml
           dot: true
+      - uses: actions-ecosystem/action-add-labels@v1
+        if: github.actor == 'dependabot[bot]' || github.actor == 'github-actions[bot]' ||  github.actor == 'pre-commit-ci[bot]'
+        with:
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
+          labels: ignore-for-release
