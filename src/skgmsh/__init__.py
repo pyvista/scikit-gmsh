@@ -1,4 +1,4 @@
-"""PvGmsh package for 3D mesh generation."""
+"""scikit-gmsh package for 3D mesh generation."""
 
 from __future__ import annotations
 
