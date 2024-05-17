@@ -29,7 +29,6 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 
 - [Installation](#installation)
   - [Pip](#pip)
-  - [Developer](#developer)
 - [Usage](#usage)
 - [License](#license)
 
