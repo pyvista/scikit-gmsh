@@ -29,7 +29,6 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 
 - [Installation](#installation)
   - [Pip](#pip)
-  - [Developer](#developer)
 - [Usage](#usage)
 - [License](#license)
 
@@ -47,15 +46,6 @@ scikit-gmsh is also available on [PyPI](https://pypi.org/project/scikit-gmsh/):
 
 ```shell
 pip install scikit-gmsh
-```
-
-### Developer
-
-If you can't wait for the next release to play with the latest hot features, then you can easily
-install the `main` development branch from GitHub:
-
-```shell
-pip install git+https://github.com/pyvista/scikit-gmsh@main
 ```
 
 ## Usage
