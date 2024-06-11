@@ -83,7 +83,7 @@ We can also generate a 3D mesh.
 
 ```python
 source = sg.Cube()
-source = sg.delaunay_3d(edge_source=source, target_sizes=0.2)
+mesh = source.delaunay_3d(edge_source=source, target_sizes=0.2)
 ```
 
 ```python
