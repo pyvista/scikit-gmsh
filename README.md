@@ -1,6 +1,9 @@
 🚧 scikit-gmsh is in the pre-alpha stage. The interface could be subject to significant changes soon.
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # scikit-gmsh
@@ -33,6 +36,7 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
+- [Contributors ✨](#contributors-)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
