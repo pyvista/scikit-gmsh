@@ -1,26 +1,22 @@
 🚧 scikit-gmsh is in the pre-alpha stage. The interface could be subject to significant changes soon.
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-
 # scikit-gmsh
 
 [<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/logo.svg" align="left" width="200">](https://github.com/pyvista/scikit-gmsh#--------)
 
 > Scikit for Gmsh to generate 3D finite element mesh.
 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![Contributing](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg?style=for-the-badge)](https://github.com/pyvista/scikit-gmsh/issues)
+[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh?style=for-the-badge)](https://github.com/pyvista/scikit-gmsh/stargazers)
 
 Contributions are _very welcome_ .
 This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in this project, We want you to know that you agree to follow its terms.
 
 ---
-
-[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh?style=for-the-badge)](https://github.com/pyvista/scikit-gmsh/stargazers)
 
 Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/pyvista/scikit-gmsh) — it’s a simple click that means the world to us and helps others discover it, too! ⭐️
 
