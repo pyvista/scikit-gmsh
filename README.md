@@ -6,15 +6,20 @@
 
 > Scikit for Gmsh to generate 3D finite element mesh.
 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 [![Contributing](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg?style=flat-square)](https://github.com/pyvista/scikit-gmsh/issues)
+[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh?style=flat-square)](https://github.com/pyvista/scikit-gmsh/stargazers)
 
 Contributions are _very welcome_ .
 This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in this project, We want you to know that you agree to follow its terms.
 
 ---
-
-[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh?style=flat-square)](https://github.com/pyvista/scikit-gmsh/stargazers)
 
 Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/pyvista/scikit-gmsh) — it’s a simple click that means the world to us and helps others discover it, too! ⭐️
 
@@ -30,6 +35,7 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
+- [Contributors ✨](#contributors-)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -121,3 +127,25 @@ clipped = mesh.clip(origin=(0.0, 0.0, 0.0), normal=(0.0, 0.0, 1.0), crinkle=True
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 
 This software is published under the [GPLv3 license](https://www.gnu.org/licenses/gpl-3.0.en.html).
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/tkoyama010"><img src="https://avatars.githubusercontent.com/u/7513610?v=4?s=100" width="100px;" alt="Tetsuo Koyama"/><br /><sub><b>Tetsuo Koyama</b></sub></a><br /><a href="#infra-tkoyama010" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/pyvista/scikit-gmsh/commits?author=tkoyama010" title="Tests">⚠️</a> <a href="https://github.com/pyvista/scikit-gmsh/commits?author=tkoyama010" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
