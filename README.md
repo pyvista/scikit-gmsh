@@ -36,6 +36,7 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 - [Usage](#usage)
 - [License](#license)
 - [Contributors ✨](#contributors-)
+- [Star History](#star-history)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -150,3 +151,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=pyvista/scikit-gmsh&type=Date)](https://star-history.com/#pyvista/scikit-gmsh&Date)
