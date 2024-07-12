@@ -6,7 +6,6 @@ import datetime
 from typing import TYPE_CHECKING
 
 import gmsh
-import numpy as np
 import pyvista as pv
 import scooby
 from pygmsh.helpers import extract_to_meshio
@@ -122,7 +121,6 @@ def delaunay_3d(
     """
     points = edge_source.points
     faces = edge_source.regular_faces
-    bounds = edge_source.bounds
 
     gmsh.initialize()
     gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
@@ -197,7 +195,6 @@ def frontal_delaunay_2d(
     """
     points = edge_source.points
     lines = edge_source.lines
-    bounds = edge_source.bounds
 
     gmsh.initialize()
     gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
