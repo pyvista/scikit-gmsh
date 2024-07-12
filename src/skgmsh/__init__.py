@@ -95,7 +95,7 @@ class Report(scooby.Report):  # type: ignore[misc]
 
 
 def delaunay_3d(
-    edge_source: Cube,
+    edge_source: pv.PolyData,
     target_sizes: float | Sequence[float] | None = None,
 ) -> pv.UnstructuredGrid | None:
     """
@@ -169,7 +169,7 @@ def delaunay_3d(
 
 
 def frontal_delaunay_2d(
-    edge_source: Polygon,
+    edge_source: pv.PolyData,
     target_sizes: float | Sequence[float] | None = None,
 ) -> pv.PolyData | None:
     """
