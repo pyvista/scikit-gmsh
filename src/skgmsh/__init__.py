@@ -121,6 +121,7 @@ def delaunay_3d(
     Notes
     -----
     .. versionadded:: 0.2.0
+
     """
     points = edge_source.points
     faces = edge_source.regular_faces
@@ -198,6 +199,7 @@ def frontal_delaunay_2d(
     Notes
     -----
     .. versionadded:: 0.2.0
+
     """
     points = edge_source.points
     lines = edge_source.lines
