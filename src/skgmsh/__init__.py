@@ -118,6 +118,9 @@ def delaunay_3d(
     pyvista.UnstructuredGrid
         Mesh from the 3D delaunay generation.
 
+    Notes
+    -----
+    .. versionadded:: 0.2.0
     """
     points = edge_source.points
     faces = edge_source.regular_faces
@@ -192,6 +195,9 @@ def frontal_delaunay_2d(
     pyvista.PolyData
         Mesh from the 2D delaunay generation.
 
+    Notes
+    -----
+    .. versionadded:: 0.2.0
     """
     points = edge_source.points
     lines = edge_source.lines
