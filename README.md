@@ -51,25 +51,26 @@ pip install scikit-gmsh
 ## Usage
 
 ```python
+import pyvista as pv
 import skgmsh as sg
 ```
 
 We can define the surface using PyVista.
 
 ```python
-source = sg.Polygon(n_sides=4, radius=8, fill=False)
+source = pv.Polygon(n_sides=4, radius=8, fill=False)
 ```
 
 We can then generate a 2D mesh.
 
 ```python
-mesh = source.frontal_delaunay_2d(edge_source=source, target_sizes=2.0)
+mesh = sg.frontal_delaunay_2d(edge_source=source, target_sizes=2.0)
 ```
 
 To visualize the model, we can use PyVista.
 
 ```python
-plotter = sg.Plotter()
+plotter = pv.Plotter()
 _ = plotter.add_mesh(
     mesh,
     show_edges=True,
@@ -89,12 +90,12 @@ plotter.show(cpos="xy")
 We can also generate a 3D mesh.
 
 ```python
-source = sg.Cube()
-mesh = source.delaunay_3d(edge_source=source, target_sizes=0.2)
+source = pv.Cube()
+mesh = sg.delaunay_3d(edge_source=source, target_sizes=0.2)
 ```
 
 ```python
-plotter = sg.Plotter()
+plotter = pv.Plotter()
 _ = plotter.add_mesh(
     mesh,
     show_edges=True,
