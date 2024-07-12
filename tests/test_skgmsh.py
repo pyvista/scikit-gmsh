@@ -9,8 +9,8 @@ if TYPE_CHECKING:
 
 import numpy as np
 import pytest
-
 import pyvista as pv
+
 import skgmsh as sg
 
 EDGE_SOURCES = [
