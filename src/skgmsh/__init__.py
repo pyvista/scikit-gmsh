@@ -13,8 +13,10 @@ from pygmsh.helpers import extract_to_meshio
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
+INITIAL_MESH_ONLY_2D = 5
 FRONTAL_DELAUNAY_2D = 6
 DELAUNAY_3D = 1
+INITIAL_MESH_ONLY_3D = 3
 
 SILENT = 0
 
@@ -129,7 +131,12 @@ def delaunay_3d(
     faces = edge_source.regular_faces
 
     gmsh.initialize()
-    gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
+
+    if target_sizes is None:
+        gmsh.option.set_number("Mesh.Algorithm3D", INITIAL_MESH_ONLY_3D)
+    else:
+        gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
+
     gmsh.option.set_number("General.Verbosity", SILENT)
 
     if isinstance(target_sizes, float):
@@ -208,7 +215,12 @@ def frontal_delaunay_2d(
     lines = edge_source.lines
 
     gmsh.initialize()
-    gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
+
+    if target_sizes is None:
+        gmsh.option.set_number("Mesh.Algorithm", INITIAL_MESH_ONLY_2D)
+    else:
+        gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
+
     gmsh.option.set_number("General.Verbosity", SILENT)
 
     if isinstance(target_sizes, float):
