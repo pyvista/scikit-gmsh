@@ -16,6 +16,8 @@ if TYPE_CHECKING:
 FRONTAL_DELAUNAY_2D = 6
 DELAUNAY_3D = 1
 
+SILENT = 0
+
 now = datetime.datetime.now(tz=datetime.timezone.utc)
 
 # major, minor, patch
@@ -128,6 +130,7 @@ def delaunay_3d(
 
     gmsh.initialize()
     gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
+    gmsh.option.set_number("General.Verbosity", SILENT)
 
     if isinstance(target_sizes, float):
         target_sizes = [target_sizes] * edge_source.number_of_points
@@ -206,6 +209,7 @@ def frontal_delaunay_2d(
 
     gmsh.initialize()
     gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
+    gmsh.option.set_number("General.Verbosity", SILENT)
 
     if isinstance(target_sizes, float):
         target_sizes = [target_sizes] * edge_source.number_of_points
