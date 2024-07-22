@@ -27,6 +27,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "pre-commit-ci",
+      "name": "pre-commit.ci",
+      "avatar_url": "https://avatars.githubusercontent.com/u/64617429?v=4",
+      "profile": "https://pre-commit.ci",
+      "contributions": [
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,
