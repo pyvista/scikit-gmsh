@@ -7,7 +7,9 @@
 > Scikit for Gmsh to generate 3D finite element mesh.
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Contributing](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg?style=flat-square)](https://github.com/pyvista/scikit-gmsh/issues)
