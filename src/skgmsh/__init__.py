@@ -197,7 +197,7 @@ def frontal_delaunay_2d(
 
     Returns
     -------
-    pyvista.PolyData
+    pyvista.UnstructuredGrid
         Mesh from the 2D delaunay generation.
 
     Notes
@@ -241,11 +241,13 @@ def frontal_delaunay_2d(
     gmsh.model.mesh.embed(0, embedded_points, 2, 1)
 
     gmsh.model.mesh.generate(2)
-    mesh = extract_to_meshio()
+    mesh = pv.from_meshio(extract_to_meshio())
     gmsh.clear()
     gmsh.finalize()
 
-    for cell in mesh.cells:
-        if cell.type == "triangle":
-            return pv.PolyData.from_regular_faces(mesh.points, cell.data)
-    return None
+    ind = []
+    for index, cell in enumerate(mesh.cell):
+        if cell.type in [pv.CellType.VERTEX, pv.CellType.LINE]:
+            ind.append(index)
+
+    return mesh.remove_cells(ind)
