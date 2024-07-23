@@ -177,7 +177,8 @@ def delaunay_3d(
 def frontal_delaunay_2d(
     edge_source: pv.PolyData,
     target_sizes: float | Sequence[float] | None = None,
-) -> pv.PolyData | None:
+    recombine: bool = False,  # noqa: FBT001, FBT002
+) -> pv.UnstructuredGrid | None:
     """
     Frontal-Delaunay 2D mesh algorithm.
 
@@ -194,6 +195,9 @@ def frontal_delaunay_2d(
     target_sizes : float
         Target mesh size close to the points.
         Default max size of edge_source in each direction.
+
+    recombine : bool
+        Recombine the generated mesh into quadrangles.
 
     Returns
     -------
@@ -239,6 +243,9 @@ def frontal_delaunay_2d(
     gmsh.model.geo.synchronize()
 
     gmsh.model.mesh.embed(0, embedded_points, 2, 1)
+
+    if recombine:
+        gmsh.model.mesh.setRecombine(2, 1)
 
     gmsh.model.mesh.generate(2)
     mesh = pv.from_meshio(extract_to_meshio())
