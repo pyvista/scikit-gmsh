@@ -20,7 +20,8 @@
         "maintenance",
         "bug",
         "doc",
-        "design"
+        "design",
+        "review"
       ]
     },
     {
