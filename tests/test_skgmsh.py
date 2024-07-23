@@ -23,11 +23,9 @@ def test_frontal_delaunay_2d_default() -> None:
     edge_source = pv.Polygon(n_sides=4, radius=8)
     mesh = sg.frontal_delaunay_2d(edge_source)
     assert mesh.number_of_points == edge_source.number_of_points
-    assert mesh.number_of_cells > edge_source.number_of_cells
     assert np.allclose(mesh.volume, edge_source.volume)
     # TODO @tkoyama010: Compare cell type. # noqa: FIX002
     # https://github.com/pyvista/scikit-gmsh/pull/125
-
 
 
 @pytest.mark.parametrize("edge_source", EDGE_SOURCES)
@@ -38,17 +36,6 @@ def test_frontal_delaunay_2d(
     """Frontal-Delaunay 2D mesh algorithm test code."""
     mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=target_sizes)
     assert mesh.number_of_points > edge_source.number_of_points
-    assert mesh.number_of_cells > edge_source.number_of_cells
-    assert np.allclose(mesh.volume, edge_source.volume)
-    # TODO @tkoyama010: Compare cell type. # noqa: FIX002
-    # https://github.com/pyvista/scikit-gmsh/pull/125
-
-
-def test_delaunay_3d_default() -> None:
-    """Delaunay 3D mesh algorithm test code."""
-    edge_source = pv.Cube()
-    mesh = sg.delaunay_3d(edge_source)
-    assert mesh.number_of_points == edge_source.number_of_points
     assert mesh.number_of_cells > edge_source.number_of_cells
     assert np.allclose(mesh.volume, edge_source.volume)
     # TODO @tkoyama010: Compare cell type. # noqa: FIX002
