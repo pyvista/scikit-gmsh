@@ -38,8 +38,8 @@ body:
         This report helps us track down bugs and will be critical to addressing your bug.
         ```python
         # Get system info
-        import pvgmsh as pm
-        print(pm.Report())
+        import skgmsh as sg
+        print(sg.Report())
         ```
       render: shell
     validations:
