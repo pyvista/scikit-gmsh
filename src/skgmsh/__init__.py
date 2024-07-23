@@ -224,9 +224,11 @@ def frontal_delaunay_2d(
     if isinstance(target_sizes, float):
         target_sizes = [target_sizes] * edge_source.number_of_points
 
+    embedded_points = []
     for i, (target_size, point) in enumerate(zip(target_sizes, points)):
         id_ = i + 1
         gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
+        embedded_points.append(id_)
 
     for i in range(lines[0] - 1):
         id_ = i + 1
@@ -235,6 +237,9 @@ def frontal_delaunay_2d(
     gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
     gmsh.model.geo.add_plane_surface([1], 1)
     gmsh.model.geo.synchronize()
+
+    gmsh.model.mesh.embed(0, embedded_points, 2, 1)
+
     gmsh.model.mesh.generate(2)
     mesh = extract_to_meshio()
     gmsh.clear()
