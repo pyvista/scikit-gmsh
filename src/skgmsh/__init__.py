@@ -20,8 +20,6 @@ INITIAL_MESH_ONLY_3D = 3
 
 SILENT = 0
 
-SILENT = 0
-
 now = datetime.datetime.now(tz=datetime.timezone.utc)
 
 # major, minor, patch
