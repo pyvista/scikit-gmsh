@@ -177,7 +177,8 @@ def delaunay_3d(
 def frontal_delaunay_2d(
     edge_source: pv.PolyData,
     target_sizes: float | Sequence[float] | None = None,
-) -> pv.PolyData | None:
+    recombine: bool = False,  # noqa: FBT001, FBT002
+) -> pv.UnstructuredGrid | None:
     """
     Frontal-Delaunay 2D mesh algorithm.
 
@@ -195,9 +196,12 @@ def frontal_delaunay_2d(
         Target mesh size close to the points.
         Default max size of edge_source in each direction.
 
+    recombine : bool
+        Recombine the generated mesh into quadrangles.
+
     Returns
     -------
-    pyvista.PolyData
+    pyvista.UnstructuredGrid
         Mesh from the 2D delaunay generation.
 
     Notes
@@ -240,12 +244,17 @@ def frontal_delaunay_2d(
 
     gmsh.model.mesh.embed(0, embedded_points, 2, 1)
 
+    if recombine:
+        gmsh.model.mesh.setRecombine(2, 1)
+
     gmsh.model.mesh.generate(2)
-    mesh = extract_to_meshio()
+    mesh = pv.from_meshio(extract_to_meshio())
     gmsh.clear()
     gmsh.finalize()
 
-    for cell in mesh.cells:
-        if cell.type == "triangle":
-            return pv.PolyData.from_regular_faces(mesh.points, cell.data)
-    return None
+    ind = []
+    for index, cell in enumerate(mesh.cell):
+        if cell.type in [pv.CellType.VERTEX, pv.CellType.LINE]:
+            ind.append(index)
+
+    return mesh.remove_cells(ind)

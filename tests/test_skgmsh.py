@@ -28,6 +28,17 @@ def test_frontal_delaunay_2d_default() -> None:
     # https://github.com/pyvista/scikit-gmsh/pull/125
 
 
+def test_frontal_delaunay_2d_recombine() -> None:
+    """Frontal-Delaunay 2D mesh algorithm test code."""
+    edge_source = pv.Polygon(n_sides=4, radius=8)
+    mesh = sg.frontal_delaunay_2d(edge_source, recombine=True)
+    assert mesh.number_of_points == edge_source.number_of_points
+    assert mesh.number_of_cells == 1
+    assert np.allclose(mesh.volume, edge_source.volume)
+    for cell in mesh.cell:
+        assert cell.type == pv.CellType.QUAD
+
+
 @pytest.mark.parametrize("edge_source", EDGE_SOURCES)
 @pytest.mark.parametrize("target_sizes", [2.0, [1.0, 2.0, 3.0, 4.0]])
 def test_frontal_delaunay_2d(
