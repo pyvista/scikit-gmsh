@@ -26,6 +26,8 @@ def test_frontal_delaunay_2d_default() -> None:
     assert mesh.number_of_cells > edge_source.number_of_cells
     assert np.allclose(mesh.volume, edge_source.volume)
     # TODO @tkoyama010: Compare cell type. # noqa: FIX002
+    # https://github.com/pyvista/scikit-gmsh/pull/125
+
 
 @pytest.mark.parametrize("edge_source", EDGE_SOURCES)
 @pytest.mark.parametrize("target_sizes", [2.0, [1.0, 2.0, 3.0, 4.0]])
@@ -49,6 +51,7 @@ def test_delaunay_3d_default() -> None:
     assert mesh.number_of_cells > edge_source.number_of_cells
     assert np.allclose(mesh.volume, edge_source.volume)
     # TODO @tkoyama010: Compare cell type. # noqa: FIX002
+    # https://github.com/pyvista/scikit-gmsh/pull/125
 
 
 @pytest.mark.parametrize(
