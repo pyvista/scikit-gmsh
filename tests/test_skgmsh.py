@@ -29,6 +29,7 @@ def test_frontal_delaunay_2d_default() -> None:
     # https://github.com/pyvista/scikit-gmsh/pull/125
 
 
+
 @pytest.mark.parametrize("edge_source", EDGE_SOURCES)
 @pytest.mark.parametrize("target_sizes", [2.0, [1.0, 2.0, 3.0, 4.0]])
 def test_frontal_delaunay_2d(
