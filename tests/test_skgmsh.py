@@ -35,8 +35,8 @@ def test_frontal_delaunay_2d_recombine() -> None:
     assert mesh.number_of_points == edge_source.number_of_points
     assert mesh.number_of_cells == 1
     assert np.allclose(mesh.volume, edge_source.volume)
-    # TODO @tkoyama010: Compare cell type. # noqa: FIX002
-    # https://github.com/pyvista/scikit-gmsh/pull/125
+    for cell in mesh.cell:
+        assert cell.type == pv.CellType.QUAD
 
 
 @pytest.mark.parametrize("edge_source", EDGE_SOURCES)
