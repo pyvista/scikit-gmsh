@@ -13,6 +13,8 @@ from pygmsh.helpers import extract_to_meshio
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
+    import numpy as np
+
 INITIAL_MESH_ONLY_2D = 3
 FRONTAL_DELAUNAY_2D = 6
 DELAUNAY_3D = 1
@@ -258,3 +260,33 @@ def frontal_delaunay_2d(
             ind.append(index)
 
     return mesh.remove_cells(ind)
+
+
+class FrontalDelaunay2D:
+    """
+    Frontal Delaunay 2D mesh algorithm.
+
+    Parameters
+    ----------
+    points : np.ndarray
+        Coordinates of the points to triangulate.
+
+    """
+
+    # TODO @tkoyama010: Need to consider how to handle gmsh with two or more instances. # noqa: FIX002, TD003
+
+    def __init__(self: FrontalDelaunay2D, points: np.ndarray) -> None:  # noqa: ARG002
+        """Initialize the FrontalDelaunay2D class."""
+        gmsh.initialize()
+        gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
+        gmsh.option.set_number("General.Verbosity", SILENT)
+
+    def __del__(self: FrontalDelaunay2D) -> None:
+        """Finalize the FrontalDelaunay2D class."""
+        gmsh.clear()
+        gmsh.finalize()
+
+    def enable_recombine(self: FrontalDelaunay2D) -> None:
+        """Enable recombine the generated mesh into quadrangles."""
+        # TODO @tkoyama010: Define ID of surface clearly. # noqa: FIX002, TD003
+        gmsh.model.mesh.setRecombine(2, 1)
