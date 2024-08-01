@@ -245,7 +245,7 @@ def frontal_delaunay_2d(
     gmsh.model.mesh.embed(0, embedded_points, 2, 1)
 
     if recombine:
-        gmsh.model.mesh.setRecombine(2, 1)
+        gmsh.model.mesh.set_recombine(2, 1)
 
     gmsh.model.mesh.generate(2)
     mesh = pv.from_meshio(extract_to_meshio())
