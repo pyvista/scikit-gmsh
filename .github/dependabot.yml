@@ -5,6 +5,7 @@ updates:
     insecure-external-code-execution: allow
     schedule:
       interval: "monthly"
+    open-pull-requests-limit: 100
     labels:
       - "maintenance"
       - "dependencies"
@@ -16,6 +17,7 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    open-pull-requests-limit: 100
     labels:
       - "maintenance"
       - "dependencies"
