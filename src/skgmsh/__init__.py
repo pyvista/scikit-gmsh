@@ -15,7 +15,9 @@ if TYPE_CHECKING:
 
 INITIAL_MESH_ONLY_2D = 3
 FRONTAL_DELAUNAY_2D = 6
+
 DELAUNAY_3D = 1
+INITIAL_MESH_ONLY_3D = 3
 
 SILENT = 0
 
@@ -127,11 +129,20 @@ def delaunay_3d(
 
     """
     points = edge_source.points
-    faces = edge_source.regular_faces
+    faces = edge_source.irregular_faces
 
     gmsh.initialize()
-    gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
+    if target_sizes is None:
+        gmsh.option.set_number("Mesh.Algorithm", INITIAL_MESH_ONLY_3D)
+        gmsh.option.set_number("Mesh.MeshSizeExtendFromBoundary", 0)
+        gmsh.option.set_number("Mesh.MeshSizeFromPoints", 0)
+        gmsh.option.set_number("Mesh.MeshSizeFromCurvature", 0)
+    else:
+        gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
     gmsh.option.set_number("General.Verbosity", SILENT)
+
+    if target_sizes is None:
+        target_sizes = 0.0
 
     if isinstance(target_sizes, float):
         target_sizes = [target_sizes] * edge_source.number_of_points
@@ -142,13 +153,11 @@ def delaunay_3d(
 
     surface_loop = []
     for i, face in enumerate(faces):
-        gmsh.model.geo.add_line(face[0] + 1, face[1] + 1, i * 4 + 0)
-        gmsh.model.geo.add_line(face[1] + 1, face[2] + 1, i * 4 + 1)
-        gmsh.model.geo.add_line(face[2] + 1, face[3] + 1, i * 4 + 2)
-        gmsh.model.geo.add_line(face[3] + 1, face[0] + 1, i * 4 + 3)
-        gmsh.model.geo.add_curve_loop(
-            [i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1
-        )
+        curve_tags = []
+        for j, _ in enumerate(face):
+            curve_tag = gmsh.model.geo.add_line(face[j - 1] + 1, face[j] + 1)
+            curve_tags.append(curve_tag)
+        gmsh.model.geo.add_curve_loop(curve_tags, i + 1)
         gmsh.model.geo.add_plane_surface([i + 1], i + 1)
         gmsh.model.geo.remove_all_duplicates()
         gmsh.model.geo.synchronize()
