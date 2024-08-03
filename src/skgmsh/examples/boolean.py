@@ -7,6 +7,11 @@ import sys
 import gmsh
 import pyvista as pv
 
+cube = pv.Cube().triangulate().subdivide(3)
+sphere = pv.Sphere(radius=0.6)
+result = cube.boolean_difference(sphere)
+result.plot(show_edges=True, color="white")
+
 gmsh.initialize(sys.argv)
 
 gmsh.model.add("boolean")
