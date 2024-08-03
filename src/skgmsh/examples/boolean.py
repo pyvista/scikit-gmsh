@@ -7,6 +7,10 @@ import sys
 import gmsh
 import pyvista as pv
 
+R = 1.4
+Rs = R * 0.7
+Rt = R * 1.25
+
 # %%
 # Behavior due to flipped normals
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -30,10 +34,6 @@ gmsh.model.add("boolean")
 gmsh.option.setNumber("Mesh.Algorithm", 6)
 gmsh.option.setNumber("Mesh.MeshSizeMin", 0.4)
 gmsh.option.setNumber("Mesh.MeshSizeMax", 0.4)
-
-R = 1.4
-Rs = R * 0.7
-Rt = R * 1.25
 
 gmsh.model.occ.addBox(-R, -R, -R, 2 * R, 2 * R, 2 * R, 1)
 gmsh.model.occ.addSphere(0, 0, 0, Rt, 2)
