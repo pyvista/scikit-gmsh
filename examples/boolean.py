@@ -5,6 +5,7 @@
 import sys
 
 import gmsh
+import pyvista as pv
 
 gmsh.initialize(sys.argv)
 
@@ -36,3 +37,6 @@ gmsh.model.mesh.generate(3)
 gmsh.write("boolean.msh")
 
 gmsh.finalize()
+
+mesh = pv.read("boolean.msh")
+mesh.plot(show_edges=True, color="white")
