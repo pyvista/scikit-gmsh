@@ -7,6 +7,15 @@ import sys
 import gmsh
 import pyvista as pv
 
+# %%
+# Behavior due to flipped normals
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Note that these boolean filters behave differently depending on the
+# orientation of the normals.
+#
+# Boolean difference with both cube and sphere normals pointed
+# outward.  This is the "normal" behavior.
+
 cube = pv.Cube().triangulate().subdivide(3)
 sphere = pv.Sphere(radius=0.6)
 result = cube.boolean_difference(sphere)
