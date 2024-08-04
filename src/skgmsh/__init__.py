@@ -154,7 +154,9 @@ def delaunay_3d(
     for i, face in enumerate(faces):
         curve_tags = []
         for j, _ in enumerate(face):
-            curve_tag = gmsh.model.geo.add_line(face[j - 1] + 1, face[j] + 1)
+            start_tag = face[j - 1] + 1
+            end_tag = face[j] + 1
+            curve_tag = gmsh.model.geo.add_line(start_tag, end_tag)
             curve_tags.append(curve_tag)
         gmsh.model.geo.add_curve_loop(curve_tags, i + 1)
         gmsh.model.geo.add_plane_surface([i + 1], i + 1)
