@@ -260,9 +260,9 @@ def frontal_delaunay_2d(
     return mesh.remove_cells(ind)
 
 
-class FrontalDelaunay2D:
+class Delaunay2D:
     """
-    Frontal-Delaunay 2D mesh algorithm.
+    Delaunay 2D mesh algorithm.
 
     Parameters
     ----------
@@ -281,19 +281,19 @@ class FrontalDelaunay2D:
     """
 
     def __init__(
-        self: FrontalDelaunay2D,
+        self: Delaunay2D,
         edge_source: pv.PolyData,
     ) -> None:
-        """Initialize the FrontalDelaunay2D class."""
+        """Initialize the Delaunay2D class."""
         self._edge_source = edge_source
         self._mesh = frontal_delaunay_2d(edge_source)
 
     @property
-    def edge_source(self: FrontalDelaunay2D) -> pv.PolyData:
+    def edge_source(self: Delaunay2D) -> pv.PolyData:
         """Get the edge source."""
         return self._edge_source
 
     @property
-    def mesh(self: FrontalDelaunay2D) -> pv.UnstructuredGrid:
+    def mesh(self: Delaunay2D) -> pv.UnstructuredGrid:
         """Get the mesh."""
         return self._mesh
