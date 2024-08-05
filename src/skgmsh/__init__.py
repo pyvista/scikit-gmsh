@@ -258,3 +258,42 @@ def frontal_delaunay_2d(
             ind.append(index)
 
     return mesh.remove_cells(ind)
+
+
+class FrontalDelaunay2D:
+    """
+    Frontal-Delaunay 2D mesh algorithm.
+
+    Parameters
+    ----------
+    edge_source : pyvista.PolyData
+        Specify the source object used to specify constrained
+        edges and loops. If set, and lines/polygons are defined, a
+        constrained triangulation is created. The lines/polygons
+        are assumed to reference points in the input point set
+        (i.e. point ids are identical in the input and
+        source).
+
+    Notes
+    -----
+    .. versionadded:: 0.2.0
+
+    """
+
+    def __init__(
+        self: FrontalDelaunay2D,
+        edge_source: pv.PolyData,
+    ) -> None:
+        """Initialize the FrontalDelaunay2D class."""
+        self._edge_source = edge_source
+        self._mesh = frontal_delaunay_2d(edge_source)
+
+    @property
+    def edge_source(self: FrontalDelaunay2D) -> pv.PolyData:
+        """Get the edge source."""
+        return self._edge_source
+
+    @property
+    def mesh(self: FrontalDelaunay2D) -> pv.UnstructuredGrid:
+        """Get the mesh."""
+        return self._mesh

@@ -26,6 +26,10 @@ def test_frontal_delaunay_2d_default() -> None:
     assert np.allclose(mesh.volume, edge_source.volume)
     # TODO @tkoyama010: Compare cell type. # noqa: FIX002
     # https://github.com/pyvista/scikit-gmsh/pull/125
+    frontal_delaunay_2d = sg.FrontalDelaunay2D(edge_source)
+    mesh = frontal_delaunay_2d.mesh
+    assert mesh.number_of_points == edge_source.number_of_points
+    assert np.allclose(mesh.volume, edge_source.volume)
 
 
 def test_frontal_delaunay_2d_recombine() -> None:
