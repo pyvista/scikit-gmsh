@@ -3,6 +3,7 @@
 import os
 import pathlib
 import shutil
+from __future__ import annotations
 
 import nox
 
