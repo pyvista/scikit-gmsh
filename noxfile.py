@@ -102,9 +102,6 @@ def docs_live(session) -> None:  # noqa: ANN001
     cmd = [SPHINX_AUTO_BUILD, *BUILD_PARAMETERS, SOURCE_DIR, OUTPUT_DIR, *session.posargs]
     for folder in AUTOBUILD_IGNORE:
         cmd.extend(["--ignore", f"*/{folder}/*"])
-    # This part was commented in the previous version of the nox file, keeping the same here
-    # for folder in AUTOBUILD_INCLUDE:
-    #     cmd.extend(["--watch", folder])  # noqa: ERA001
     session.run(*cmd)
 
 
