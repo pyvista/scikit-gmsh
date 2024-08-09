@@ -5,7 +5,8 @@ requires = [
   'pygmsh<7.1.18',
   'pyvista',
   'scooby<0.9.3',
-  'setuptools<69.0.4'
+  'setuptools<69.0.4',
+  'scipy<1.14.1'
 ]
 build-backend = 'setuptools.build_meta'
 
@@ -20,7 +21,8 @@ dependencies = [
   'meshio<5.3.6',
   'pygmsh<7.1.18',
   'pyvista',
-  'scooby<0.9.3'
+  'scooby<0.9.3',
+  'scipy<1.14.1'
 ]
 requires-python = '>=3.9'
 
