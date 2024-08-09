@@ -9,12 +9,12 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-[![Contributing](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg?style=flat-square)](https://github.com/pyvista/scikit-gmsh/issues)
-[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh?style=flat-square)](https://github.com/pyvista/scikit-gmsh/stargazers)
+[![Contributing](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg)](https://github.com/pyvista/scikit-gmsh/issues)
+[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh)](https://github.com/pyvista/scikit-gmsh/stargazers)
 
 Contributions are _very welcome_ .
 This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
@@ -28,7 +28,7 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 
 ## Table of Contents
 
-[![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest&style=flat-square)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -43,7 +43,7 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 
 ## Installation
 
-[![pypi](https://img.shields.io/pypi/v/scikit-gmsh?style=flat-square&label=pypi&logo=python&logoColor=white)](https://pypi.org/project/scikit-gmsh/)
+[![pypi](https://img.shields.io/pypi/v/scikit-gmsh?label=pypi&logo=python&logoColor=white)](https://pypi.org/project/scikit-gmsh/)
 
 ```shell
 pip install scikit-gmsh
@@ -127,7 +127,7 @@ clipped = mesh.clip(origin=(0.0, 0.0, 0.0), normal=(0.0, 0.0, 1.0), crinkle=True
 
 ## License
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 This software is published under the [GPLv3 license](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
