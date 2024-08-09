@@ -10,9 +10,11 @@ def tests(session: nox.Session) -> None:
     session.run("pip", "install", "-r", "requirements_test.txt", *session.posargs)
     session.run("pytest", *session.posargs)
 
+
 import os
 import pathlib
 import shutil
+
 import nox
 
 nox.options.reuse_existing_virtualenvs = True
@@ -20,9 +22,9 @@ nox.options.reuse_existing_virtualenvs = True
 ## Sphinx related options
 
 # Sphinx output and source directories
-BUILD_DIR = '_build'
+BUILD_DIR = "_build"
 OUTPUT_DIR = pathlib.Path(BUILD_DIR, "html")
-SOURCE_DIR = pathlib.Path(".")
+SOURCE_DIR = pathlib.Path()
 
 # Location of the translation templates
 TRANSLATION_TEMPLATE_DIR = pathlib.Path(BUILD_DIR, "gettext")
@@ -36,7 +38,7 @@ SPHINX_AUTO_BUILD = "sphinx-autobuild"
 BUILD_PARAMETERS = ["-b", "html"]
 
 # Sphinx parameters used to test the build of the guide
-TEST_PARAMETERS = ['-W', '--keep-going', '-E', '-a']
+TEST_PARAMETERS = ["-W", "--keep-going", "-E", "-a"]
 
 # Sphinx parameters to generate translation templates
 TRANSLATION_TEMPLATE_PARAMETERS = ["-b", "gettext"]
@@ -48,9 +50,7 @@ AUTOBUILD_IGNORE = [
     "build_assets",
     "tmp",
 ]
-AUTOBUILD_INCLUDE = [
-    pathlib.Path("_static", "pyos.css")
-]
+AUTOBUILD_INCLUDE = [pathlib.Path("_static", "pyos.css")]
 
 ## Localization options (translations)
 
@@ -67,7 +67,7 @@ def docs(session):
     session.install("-e", ".")
     session.run(SPHINX_BUILD, *BUILD_PARAMETERS, SOURCE_DIR, OUTPUT_DIR, *session.posargs)
     # When building the guide, also build the translations in RELEASE_LANGUAGES
-    session.notify("build-translations", ['release-build'])
+    session.notify("build-translations", ["release-build"])
 
 
 @nox.session(name="docs-test")
@@ -81,7 +81,7 @@ def docs_test(session):
     session.run(SPHINX_BUILD, *BUILD_PARAMETERS, *TEST_PARAMETERS, SOURCE_DIR, OUTPUT_DIR, *session.posargs)
     # When building the guide with additional parameters, also build the translations in RELEASE_LANGUAGES
     # with those same parameters.
-    session.notify("build-translations", ['release-build', *TEST_PARAMETERS])
+    session.notify("build-translations", ["release-build", *TEST_PARAMETERS])
 
 
 @nox.session(name="docs-live")
@@ -124,20 +124,14 @@ def docs_live_lang(session):
     For example, for Spanish: nox -s docs-live-lang -- es
     """
     if not session.posargs:
-        session.error(
-            "Please provide a language using:\n\n      "
-            "nox -s docs-live-lang -- LANG\n\n     "
-            f" where LANG is one of: {LANGUAGES}"
-        )
+        session.error("Please provide a language using:\n\n      " "nox -s docs-live-lang -- LANG\n\n     " f" where LANG is one of: {LANGUAGES}")
     lang = session.posargs[0]
     if lang in LANGUAGES:
         session.posargs.pop(0)
-        session.notify("docs-live", ('-D', f"language={lang}", *session.posargs))
+        session.notify("docs-live", ("-D", f"language={lang}", *session.posargs))
     else:
         session.error(
-            f"[{lang}] locale is not available. Try using:\n\n      "
-            "nox -s docs-live-lang -- LANG\n\n      "
-            f"where LANG is one of: {LANGUAGES}"
+            f"[{lang}] locale is not available. Try using:\n\n      " "nox -s docs-live-lang -- LANG\n\n      " f"where LANG is one of: {LANGUAGES}"
         )
 
 
@@ -145,9 +139,9 @@ def docs_live_lang(session):
 def clean_dir(session):
     """Clean out the docs directory used in the live build."""
     session.warn(f"Cleaning out {OUTPUT_DIR}")
-    dir_contents = OUTPUT_DIR.glob('*')
+    dir_contents = OUTPUT_DIR.glob("*")
     for content in dir_contents:
-        session.log(f'removing {content}')
+        session.log(f"removing {content}")
         if content.is_dir():
             shutil.rmtree(content)
         else:
@@ -202,7 +196,7 @@ def build_translations(session):
     argument, to build only the translations defined in RELEASE_LANGUAGES.
     """
     release_build = False
-    if session.posargs and session.posargs[0] == 'release-build':
+    if session.posargs and session.posargs[0] == "release-build":
         session.posargs.pop(0)
         release_build = True
     # if running from the docs or docs-test sessions, build only release languages
