@@ -1,9 +1,9 @@
 """Automation using nox."""
 
-import os
+from __future__ import annotations
+
 import pathlib
 import shutil
-from __future__ import annotations
 
 import nox
 
@@ -143,8 +143,8 @@ def clean_dir(session) -> None:  # noqa: ANN001
         session.log(f"removing {content}")
         if content.is_dir():
             shutil.rmtree(content)
-        else:            
-            pathlib.Path(content).unlink()  # noqa: PTH107
+        else:
+            pathlib.Path(content).unlink()
 
 
 @nox.session(name="update-translations")
