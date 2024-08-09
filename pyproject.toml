@@ -67,6 +67,11 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
+# Sort by name, don't cluster "from" vs "import"
+force-sort-within-sections = true
+# Combines "as" imports on the same line
+combine-as-imports = true
+required-imports = ["from __future__ import annotations"]
 force-single-line = true
 
 [tool.ruff.lint.per-file-ignores]
