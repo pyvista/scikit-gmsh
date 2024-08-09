@@ -554,7 +554,6 @@ style requirements:
     $ pre-commit install
     $ git commit -m "added my cool feature"
     black....................................................................Passed
-    flake8...................................................................Passed
     codespell................................................................Passed
 
 The actual installation of the environment happens before the first
