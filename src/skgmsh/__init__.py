@@ -6,9 +6,9 @@ import datetime
 from typing import TYPE_CHECKING
 
 import gmsh
+from pygmsh.helpers import extract_to_meshio
 import pyvista as pv
 import scooby
-from pygmsh.helpers import extract_to_meshio
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
