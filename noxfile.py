@@ -199,9 +199,9 @@ def build_translations(session) -> None:  # noqa: ANN001
         session.posargs.pop(0)
         release_build = True
     # if running from the docs or docs-test sessions, build only release languages
-    build_languages = RELEASE_LANGUAGES if release_build else LANGUAGES  # noqa: N806
+    build_languages = RELEASE_LANGUAGES if release_build else LANGUAGES
     # only build languages that have a locale folder
-    build_languages = [lang for lang in build_languages if (TRANSLATION_LOCALES_DIR / lang).exists()]  # noqa: N806
+    build_languages = [lang for lang in build_languages if (TRANSLATION_LOCALES_DIR / lang).exists()]
     session.log(f"Declared languages: {LANGUAGES}")
     session.log(f"Release languages: {RELEASE_LANGUAGES}")
     session.log(f"Building languages{' for release' if release_build else ''}: {build_languages}")
