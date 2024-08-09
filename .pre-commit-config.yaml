@@ -16,10 +16,6 @@ repos:
     rev: 0.29.1
     hooks:
       - id: check-github-workflows
-  - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
-    hooks:
-      - id: isort
   - repo: https://github.com/codespell-project/codespell
     rev: v2.3.0
     hooks:
