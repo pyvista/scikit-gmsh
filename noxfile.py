@@ -142,8 +142,8 @@ def clean_dir(session) -> None:  # noqa: ANN001
         session.log(f"removing {content}")
         if content.is_dir():
             shutil.rmtree(content)
-        else:
-            os.remove(content)  # noqa: PTH107
+        else:            
+            pathlib.Path(content).unlink()  # noqa: PTH107
 
 
 @nox.session(name="update-translations")
