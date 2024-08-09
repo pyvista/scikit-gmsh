@@ -43,9 +43,7 @@ class Report(scooby.Report):  # type: ignore[misc]
 
     """
 
-    def __init__(
-        self: Report, ncol: int = 3, text_width: int = 80
-    ) -> None:  # numpydoc ignore=PR01
+    def __init__(self: Report, ncol: int = 3, text_width: int = 80) -> None:  # numpydoc ignore=PR01
         """Generate a :class:`scooby.Report` instance."""
         # mandatory packages
         core: list[str] = [
@@ -146,9 +144,7 @@ def delaunay_3d(
         gmsh.model.geo.add_line(face[1] + 1, face[2] + 1, i * 4 + 1)
         gmsh.model.geo.add_line(face[2] + 1, face[3] + 1, i * 4 + 2)
         gmsh.model.geo.add_line(face[3] + 1, face[0] + 1, i * 4 + 3)
-        gmsh.model.geo.add_curve_loop(
-            [i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1
-        )
+        gmsh.model.geo.add_curve_loop([i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1)
         gmsh.model.geo.add_plane_surface([i + 1], i + 1)
         gmsh.model.geo.remove_all_duplicates()
         gmsh.model.geo.synchronize()
@@ -229,10 +225,8 @@ def frontal_delaunay_2d(
         target_sizes = [target_sizes] * edge_source.number_of_points
 
     embedded_points = []
-    for i, (target_size, point) in enumerate(zip(target_sizes, points)):
-        id_ = i + 1
-        gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
-        embedded_points.append(id_)
+    for target_size, point in zip(target_sizes, points):
+        embedded_points.append(gmsh.model.geo.add_point(point[0], point[1], point[2], target_size))
 
     for i in range(lines[0] - 1):
         id_ = i + 1

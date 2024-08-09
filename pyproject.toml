@@ -78,6 +78,10 @@ force-single-line = true
 "docs/**" = ["INP001"]
 "tests/**" = ["INP001", "S101"]
 
+[tool.ruff.lint.pyupgrade]
+# Preserve types, even if a file imports `from __future__ import annotations`.
+keep-runtime-typing = true
+
 [tool.setuptools.dynamic]
 version = {attr = 'skgmsh.__version__'}
 readme = {file = "README.md", content-type = "text/markdown"}
