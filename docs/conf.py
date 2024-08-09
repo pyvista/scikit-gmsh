@@ -8,8 +8,8 @@ https://www.sphinx-doc.org/en/master/usage/configuration.html
 from __future__ import annotations
 
 import datetime
-import os
 from importlib.metadata import version as get_version
+import os
 from pathlib import Path
 
 # -- Project information -----------------------------------------------------
