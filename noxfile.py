@@ -107,9 +107,7 @@ def docs_live(session) -> None:  # noqa: ANN001
 
 @nox.session(name="docs-live-lang")
 def docs_live_lang(session) -> None:  # noqa: ANN001
-    """
-    A convenience session for beginner contributors to use the docs-live session with
-    a specific language.
+    """A convenience session for beginner contributors to use the docs-live session with a specific language.
 
     It expects the language code to be passed as the first positional argument, so it needs
     to be called with from the command line with the following syntax:
