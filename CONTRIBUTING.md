@@ -39,7 +39,7 @@ question, concern, feature request, or desire to contribute.
 ## Being Respectful
 
 [![Contributor
-Covenant](https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg?style=for-the-badge)](CODE_OF_CONDUCT.md)
+Covenant](https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
 Please demonstrate empathy and kindness toward other people, other
 software, and the communities who have worked diligently to build
@@ -140,7 +140,7 @@ original author to relicense the code.
 
 ## Development Practices
 
-[![Nox](https://img.shields.io/badge/%F0%9F%A6%8A-Nox-D85E00.svg?style=for-the-badge)](https://github.com/wntrblm/nox)
+[![Nox](https://img.shields.io/badge/%F0%9F%A6%8A-Nox-D85E00.svg)](https://github.com/wntrblm/nox)
 
 This section provides a guide to how we conduct development in the
 scikit-gmsh repository. Please follow the practices outlined here when
@@ -203,12 +203,12 @@ section](#creating-a-new-pull-request).
 #### Coding Style
 
 [![Code style:
-black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge)](https://github.com/psf/black)
+black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports:
-isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=for-the-badge&labelColor=ef8336)](https://pycqa.github.io/isort/)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json&style=for-the-badge)](https://github.com/astral-sh/ruff)
+isort](https://img.shields.io/badge/%20imports-isort-%231674b1&labelColor=ef8336)](https://pycqa.github.io/isort/)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![code style:
-prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
+prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 We adhere to [PEP 8](https://www.python.org/dev/peps/pep-0008/) wherever
 possible, except that line widths are permitted to go beyond 79
