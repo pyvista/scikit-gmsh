@@ -61,7 +61,7 @@ RELEASE_LANGUAGES = []
 
 
 @nox.session
-def docs(session) -> None:  # noqa: ANN001
+def docs(session: nox.Session) -> None:  # noqa: ANN001
     """Build the packaging guide."""
     session.install("-e", ".")
     session.run(SPHINX_BUILD, *BUILD_PARAMETERS, SOURCE_DIR, OUTPUT_DIR, *session.posargs)
@@ -70,7 +70,7 @@ def docs(session) -> None:  # noqa: ANN001
 
 
 @nox.session(name="docs-test")
-def docs_test(session) -> None:  # noqa: ANN001
+def docs_test(session: nox.Session) -> None:  # noqa: ANN001
     """
     Build the packaging guide with more restricted parameters.
 
@@ -84,7 +84,7 @@ def docs_test(session) -> None:  # noqa: ANN001
 
 
 @nox.session(name="docs-live")
-def docs_live(session) -> None:  # noqa: ANN001
+def docs_live(session: nox.Session) -> None:  # noqa: ANN001
     """
     Build and launch a local copy of the guide.
 
@@ -106,7 +106,7 @@ def docs_live(session) -> None:  # noqa: ANN001
 
 
 @nox.session(name="docs-live-lang")
-def docs_live_lang(session) -> None:  # noqa: ANN001
+def docs_live_lang(session: nox.Session) -> None:  # noqa: ANN001
     """
     Use the docs-live session with a specific language.
 
@@ -131,7 +131,7 @@ def docs_live_lang(session) -> None:  # noqa: ANN001
 
 
 @nox.session(name="docs-clean")
-def clean_dir(session) -> None:  # noqa: ANN001
+def clean_dir(session: nox.Session) -> None:  # noqa: ANN001
     """Clean out the docs directory used in the live build."""
     session.warn(f"Cleaning out {OUTPUT_DIR}")
     dir_contents = OUTPUT_DIR.glob("*")
@@ -144,7 +144,7 @@ def clean_dir(session) -> None:  # noqa: ANN001
 
 
 @nox.session(name="update-translations")
-def update_translations(session) -> None:  # noqa: ANN001
+def update_translations(session: nox.Session) -> None:  # noqa: ANN001
     """
     Update the translation files (./locales/*/.po) for all languages translations.
 
@@ -161,7 +161,7 @@ def update_translations(session) -> None:  # noqa: ANN001
 
 
 @nox.session(name="build-languages")
-def build_languages(session) -> None:  # noqa: ANN001
+def build_languages(session: nox.Session) -> None:  # noqa: ANN001
     """
     Build the translations of the guide for the specified language.
 
@@ -182,7 +182,7 @@ def build_languages(session) -> None:  # noqa: ANN001
 
 
 @nox.session(name="build-translations")
-def build_translations(session) -> None:  # noqa: ANN001
+def build_translations(session: nox.Session) -> None:  # noqa: ANN001
     """
     Build translations of the guide.
 
@@ -208,7 +208,7 @@ def build_translations(session) -> None:  # noqa: ANN001
 
 
 @nox.session(name="build-translations-test")
-def build_translations_test(session) -> None:  # noqa: ANN001
+def build_translations_test(session: nox.Session) -> None:  # noqa: ANN001
     """
     Build all translations of the guide with testing parameters.
 
