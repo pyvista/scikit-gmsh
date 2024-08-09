@@ -202,8 +202,6 @@ section](#creating-a-new-pull-request).
 
 #### Coding Style
 
-[![Code style:
-black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports:
 isort](https://img.shields.io/badge/%20imports-isort-%231674b1&labelColor=ef8336)](https://pycqa.github.io/isort/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
@@ -214,7 +212,7 @@ We adhere to [PEP 8](https://www.python.org/dev/peps/pep-0008/) wherever
 possible, except that line widths are permitted to go beyond 79
 characters to a max of 99 characters for code. This should tend to be
 the exception rather than the norm. A uniform code style is enforced by
-[black](https://github.com/psf/black) to prevent energy wasted on style
+[Ruff](https://github.com/astral-sh/ruff) to prevent energy wasted on style
 disagreements.
 
 As for docstrings, scikit-gmsh follows the `numpydoc` style for its
@@ -555,7 +553,7 @@ style requirements:
 
     $ pre-commit install
     $ git commit -m "added my cool feature"
-    black....................................................................Passed
+    ruff.....................................................................Passed
     isort....................................................................Passed
     flake8...................................................................Passed
     codespell................................................................Passed
