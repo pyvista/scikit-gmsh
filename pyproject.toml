@@ -73,10 +73,6 @@ force-single-line = true
 "docs/**" = ["INP001"]
 "tests/**" = ["INP001", "S101"]
 
-[tool.setuptools.dynamic]
-version = {attr = 'skgmsh.__version__'}
-readme = {file = "README.md", content-type = "text/markdown"}
-
 [tool.ruff.lint.isort]
 # Sort by name, don't cluster "from" vs "import"
 force-sort-within-sections = true
@@ -84,3 +80,8 @@ force-sort-within-sections = true
 combine-as-imports = true
 required-imports = ["from __future__ import annotations"]
 force-single-line = true
+
+[tool.setuptools.dynamic]
+version = {attr = 'skgmsh.__version__'}
+readme = {file = "README.md", content-type = "text/markdown"}
+
