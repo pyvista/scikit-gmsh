@@ -1,8 +1,5 @@
 """Automation using nox."""
 
-import nox
-
-
 import os
 import pathlib
 import shutil
@@ -18,6 +15,7 @@ def tests(session: nox.Session) -> None:
     session.install(".[test]")
     session.run("pip", "install", "-r", "requirements_test.txt", *session.posargs)
     session.run("pytest", *session.posargs)
+
 
 ## Sphinx related options
 
