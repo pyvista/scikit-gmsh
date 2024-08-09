@@ -107,7 +107,8 @@ def docs_live(session) -> None:  # noqa: ANN001
 
 @nox.session(name="docs-live-lang")
 def docs_live_lang(session) -> None:  # noqa: ANN001
-    """A convenience session for beginner contributors to use the docs-live session with a specific language.
+    """
+    A convenience session for beginner contributors to use the docs-live session with a specific language.
 
     It expects the language code to be passed as the first positional argument, so it needs
     to be called with from the command line with the following syntax:
@@ -116,7 +117,7 @@ def docs_live_lang(session) -> None:  # noqa: ANN001
 
     where LANG is one of the available languages defined in LANGUAGES.
     For example, for Spanish: nox -s docs-live-lang -- es
-    """  # noqa: D205, D401
+    """  # noqa: D401
     if not session.posargs:
         session.error("Please provide a language using:\n\n      " "nox -s docs-live-lang -- LANG\n\n     " f" where LANG is one of: {LANGUAGES}")
     lang = session.posargs[0]
