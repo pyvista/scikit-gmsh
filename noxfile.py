@@ -60,7 +60,7 @@ RELEASE_LANGUAGES = []
 
 
 @nox.session
-def docs(session):
+def docs(session) -> None:  # noqa: ANN001
     """Build the packaging guide."""
     session.install("-e", ".")
     session.run(SPHINX_BUILD, *BUILD_PARAMETERS, SOURCE_DIR, OUTPUT_DIR, *session.posargs)
@@ -69,7 +69,7 @@ def docs(session):
 
 
 @nox.session(name="docs-test")
-def docs_test(session):
+def docs_test(session) -> None:  # noqa: ANN001
     """
     Build the packaging guide with more restricted parameters.
 
@@ -83,7 +83,7 @@ def docs_test(session):
 
 
 @nox.session(name="docs-live")
-def docs_live(session):
+def docs_live(session) -> None:  # noqa: ANN001
     """
     Build and launch a local copy of the guide.
 
@@ -103,12 +103,12 @@ def docs_live(session):
         cmd.extend(["--ignore", f"*/{folder}/*"])
     # This part was commented in the previous version of the nox file, keeping the same here
     # for folder in AUTOBUILD_INCLUDE:
-    #     cmd.extend(["--watch", folder])
+    #     cmd.extend(["--watch", folder])  # noqa: ERA001
     session.run(*cmd)
 
 
 @nox.session(name="docs-live-lang")
-def docs_live_lang(session):
+def docs_live_lang(session) -> None:  # noqa: ANN001
     """
     A convenience session for beginner contributors to use the docs-live session with
     a specific language.
@@ -120,7 +120,7 @@ def docs_live_lang(session):
 
     where LANG is one of the available languages defined in LANGUAGES.
     For example, for Spanish: nox -s docs-live-lang -- es
-    """
+    """  # noqa: D205, D401
     if not session.posargs:
         session.error("Please provide a language using:\n\n      " "nox -s docs-live-lang -- LANG\n\n     " f" where LANG is one of: {LANGUAGES}")
     lang = session.posargs[0]
@@ -134,7 +134,7 @@ def docs_live_lang(session):
 
 
 @nox.session(name="docs-clean")
-def clean_dir(session):
+def clean_dir(session) -> None:  # noqa: ANN001
     """Clean out the docs directory used in the live build."""
     session.warn(f"Cleaning out {OUTPUT_DIR}")
     dir_contents = OUTPUT_DIR.glob("*")
@@ -143,11 +143,11 @@ def clean_dir(session):
         if content.is_dir():
             shutil.rmtree(content)
         else:
-            os.remove(content)
+            os.remove(content)  # noqa: PTH107
 
 
 @nox.session(name="update-translations")
-def update_translations(session):
+def update_translations(session) -> None:  # noqa: ANN001
     """
     Update the translation files (./locales/*/.po) for all languages translations.
 
@@ -164,7 +164,7 @@ def update_translations(session):
 
 
 @nox.session(name="build-languages")
-def build_languages(session):
+def build_languages(session) -> None:  # noqa: ANN001
     """
     Build the translations of the guide for the specified language.
 
@@ -185,7 +185,7 @@ def build_languages(session):
 
 
 @nox.session(name="build-translations")
-def build_translations(session):
+def build_translations(session) -> None:  # noqa: ANN001
     """
     Build translations of the guide.
 
@@ -198,9 +198,9 @@ def build_translations(session):
         session.posargs.pop(0)
         release_build = True
     # if running from the docs or docs-test sessions, build only release languages
-    BUILD_LANGUAGES = RELEASE_LANGUAGES if release_build else LANGUAGES
+    BUILD_LANGUAGES = RELEASE_LANGUAGES if release_build else LANGUAGES  # noqa: N806
     # only build languages that have a locale folder
-    BUILD_LANGUAGES = [lang for lang in BUILD_LANGUAGES if (TRANSLATION_LOCALES_DIR / lang).exists()]
+    BUILD_LANGUAGES = [lang for lang in BUILD_LANGUAGES if (TRANSLATION_LOCALES_DIR / lang).exists()]  # noqa: N806
     session.log(f"Declared languages: {LANGUAGES}")
     session.log(f"Release languages: {RELEASE_LANGUAGES}")
     session.log(f"Building languages{' for release' if release_build else ''}: {BUILD_LANGUAGES}")
@@ -211,7 +211,7 @@ def build_translations(session):
 
 
 @nox.session(name="build-translations-test")
-def build_translations_test(session):
+def build_translations_test(session) -> None:  # noqa: ANN001
     """
     Build all translations of the guide with testing parameters.
 
