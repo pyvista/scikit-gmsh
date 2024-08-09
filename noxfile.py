@@ -1,5 +1,7 @@
 """Automation using nox."""
 
+from __future__ import annotations
+
 import nox
 
 
