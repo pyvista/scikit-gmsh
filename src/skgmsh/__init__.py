@@ -300,6 +300,7 @@ class Delaunay2D:
         """Get the mesh."""
         return self._mesh
 
+
 class FrontalDelaunay2D:
     """
     Frontal Delaunay 2D mesh algorithm.
