@@ -65,3 +65,12 @@ def test_delaunay_3d(target_sizes: float | Sequence[float]) -> None:
     assert np.allclose(mesh.volume, edge_source.volume)
     # TODO @tkoyama010: Compare cell type. # noqa: FIX002
     # https://github.com/pyvista/scikit-gmsh/pull/125
+
+
+@pytest.mark.parametrize("edge_source", [pv.Cube(), pv.Cylinder()])
+def test_delaunay_3d_default(edge_source: pv.PolyData) -> None:
+    """Delaunay 3D mesh algorithm test code."""
+    edge_source.merge(pv.PolyData(edge_source.points), merge_points=True, inplace=True)
+    delaunay_3d = sg.Delaunay3D(edge_source)
+    mesh = delaunay_3d.mesh
+    assert np.allclose(mesh.volume, edge_source.volume)
