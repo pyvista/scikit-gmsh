@@ -330,6 +330,7 @@ class Delaunay3D:
         edge_source: pv.PolyData,
     ) -> None:
         """Initialize the Delaunay3D class."""
+        edge_source.merge(pv.PolyData(edge_source.points), merge_points=True, inplace=True)
         self._edge_source = edge_source
         self._mesh = delaunay_3d(edge_source)
 
