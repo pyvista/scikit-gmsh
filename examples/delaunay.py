@@ -1,5 +1,7 @@
 """Example of Delaunay triangulation in 2D."""
 
+from __future__ import annotations
+
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.spatial import Delaunay
