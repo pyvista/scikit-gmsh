@@ -26,6 +26,10 @@ def test_frontal_delaunay_2d_default() -> None:
     assert np.allclose(mesh.volume, edge_source.volume)
     # TODO @tkoyama010: Compare cell type. # noqa: FIX002
     # https://github.com/pyvista/scikit-gmsh/pull/125
+    frontal_delaunay_2d = sg.Delaunay2D(edge_source)
+    mesh = frontal_delaunay_2d.mesh
+    assert mesh.number_of_points == edge_source.number_of_points
+    assert np.allclose(mesh.volume, edge_source.volume)
 
 
 def test_frontal_delaunay_2d_recombine() -> None:
@@ -41,9 +45,7 @@ def test_frontal_delaunay_2d_recombine() -> None:
 
 @pytest.mark.parametrize("edge_source", EDGE_SOURCES)
 @pytest.mark.parametrize("target_sizes", [2.0, [1.0, 2.0, 3.0, 4.0]])
-def test_frontal_delaunay_2d(
-    edge_source: pv.Polygon, target_sizes: float | Sequence[float]
-) -> None:
+def test_frontal_delaunay_2d(edge_source: pv.Polygon, target_sizes: float | Sequence[float]) -> None:
     """Frontal-Delaunay 2D mesh algorithm test code."""
     mesh = sg.frontal_delaunay_2d(edge_source, target_sizes=target_sizes)
     assert mesh.number_of_points > edge_source.number_of_points
@@ -53,9 +55,7 @@ def test_frontal_delaunay_2d(
     # https://github.com/pyvista/scikit-gmsh/pull/125
 
 
-@pytest.mark.parametrize(
-    "target_sizes", [0.5, [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]]
-)
+@pytest.mark.parametrize("target_sizes", [0.5, [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]])
 def test_delaunay_3d(target_sizes: float | Sequence[float]) -> None:
     """Delaunay 3D mesh algorithm test code."""
     edge_source = pv.Cube()

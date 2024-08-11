@@ -6,9 +6,9 @@ import datetime
 from typing import TYPE_CHECKING
 
 import gmsh
+from pygmsh.helpers import extract_to_meshio
 import pyvista as pv
 import scooby
-from pygmsh.helpers import extract_to_meshio
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -44,9 +44,7 @@ class Report(scooby.Report):  # type: ignore[misc]
 
     """
 
-    def __init__(
-        self: Report, ncol: int = 3, text_width: int = 80
-    ) -> None:  # numpydoc ignore=PR01
+    def __init__(self: Report, ncol: int = 3, text_width: int = 80) -> None:  # numpydoc ignore=PR01
         """Generate a :class:`scooby.Report` instance."""
         # mandatory packages
         core: list[str] = [
@@ -239,10 +237,8 @@ def frontal_delaunay_2d(
         target_sizes = [target_sizes] * edge_source.number_of_points
 
     embedded_points = []
-    for i, (target_size, point) in enumerate(zip(target_sizes, points)):
-        id_ = i + 1
-        gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
-        embedded_points.append(id_)
+    for target_size, point in zip(target_sizes, points):
+        embedded_points.append(gmsh.model.geo.add_point(point[0], point[1], point[2], target_size))
 
     for i in range(lines[0] - 1):
         id_ = i + 1
@@ -268,3 +264,42 @@ def frontal_delaunay_2d(
             ind.append(index)
 
     return mesh.remove_cells(ind)
+
+
+class Delaunay2D:
+    """
+    Delaunay 2D mesh algorithm.
+
+    Parameters
+    ----------
+    edge_source : pyvista.PolyData
+        Specify the source object used to specify constrained
+        edges and loops. If set, and lines/polygons are defined, a
+        constrained triangulation is created. The lines/polygons
+        are assumed to reference points in the input point set
+        (i.e. point ids are identical in the input and
+        source).
+
+    Notes
+    -----
+    .. versionadded:: 0.2.0
+
+    """
+
+    def __init__(
+        self: Delaunay2D,
+        edge_source: pv.PolyData,
+    ) -> None:
+        """Initialize the Delaunay2D class."""
+        self._edge_source = edge_source
+        self._mesh = frontal_delaunay_2d(edge_source)
+
+    @property
+    def edge_source(self: Delaunay2D) -> pv.PolyData:
+        """Get the edge source."""
+        return self._edge_source
+
+    @property
+    def mesh(self: Delaunay2D) -> pv.UnstructuredGrid:
+        """Get the mesh."""
+        return self._mesh
