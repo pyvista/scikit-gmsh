@@ -1,1 +1,1 @@
-"""Example of a scikit-gmm package."""
+"""scikit-gmsh example for 3D mesh generation."""

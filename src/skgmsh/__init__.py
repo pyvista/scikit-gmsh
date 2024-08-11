@@ -6,9 +6,9 @@ import datetime
 from typing import TYPE_CHECKING
 
 import gmsh
+from pygmsh.helpers import extract_to_meshio
 import pyvista as pv
 import scooby
-from pygmsh.helpers import extract_to_meshio
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -16,6 +16,7 @@ if TYPE_CHECKING:
 INITIAL_MESH_ONLY_2D = 3
 FRONTAL_DELAUNAY_2D = 6
 DELAUNAY_3D = 1
+INITIAL_MESH_ONLY_3D = 3
 
 SILENT = 0
 
@@ -43,9 +44,7 @@ class Report(scooby.Report):  # type: ignore[misc]
 
     """
 
-    def __init__(
-        self: Report, ncol: int = 3, text_width: int = 80
-    ) -> None:  # numpydoc ignore=PR01
+    def __init__(self: Report, ncol: int = 3, text_width: int = 80) -> None:  # numpydoc ignore=PR01
         """Generate a :class:`scooby.Report` instance."""
         # mandatory packages
         core: list[str] = [
@@ -127,11 +126,20 @@ def delaunay_3d(
 
     """
     points = edge_source.points
-    faces = edge_source.regular_faces
+    faces = edge_source.irregular_faces
 
     gmsh.initialize()
-    gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
+    if target_sizes is None:
+        gmsh.option.set_number("Mesh.Algorithm", INITIAL_MESH_ONLY_3D)
+        gmsh.option.set_number("Mesh.MeshSizeExtendFromBoundary", 0)
+        gmsh.option.set_number("Mesh.MeshSizeFromPoints", 0)
+        gmsh.option.set_number("Mesh.MeshSizeFromCurvature", 0)
+    else:
+        gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
     gmsh.option.set_number("General.Verbosity", SILENT)
+
+    if target_sizes is None:
+        target_sizes = 0.0
 
     if isinstance(target_sizes, float):
         target_sizes = [target_sizes] * edge_source.number_of_points
@@ -142,13 +150,13 @@ def delaunay_3d(
 
     surface_loop = []
     for i, face in enumerate(faces):
-        gmsh.model.geo.add_line(face[0] + 1, face[1] + 1, i * 4 + 0)
-        gmsh.model.geo.add_line(face[1] + 1, face[2] + 1, i * 4 + 1)
-        gmsh.model.geo.add_line(face[2] + 1, face[3] + 1, i * 4 + 2)
-        gmsh.model.geo.add_line(face[3] + 1, face[0] + 1, i * 4 + 3)
-        gmsh.model.geo.add_curve_loop(
-            [i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1
-        )
+        curve_tags = []
+        for j, _ in enumerate(face):
+            start_tag = face[j - 1] + 1
+            end_tag = face[j] + 1
+            curve_tag = gmsh.model.geo.add_line(start_tag, end_tag)
+            curve_tags.append(curve_tag)
+        gmsh.model.geo.add_curve_loop(curve_tags, i + 1)
         gmsh.model.geo.add_plane_surface([i + 1], i + 1)
         gmsh.model.geo.remove_all_duplicates()
         gmsh.model.geo.synchronize()
@@ -229,10 +237,8 @@ def frontal_delaunay_2d(
         target_sizes = [target_sizes] * edge_source.number_of_points
 
     embedded_points = []
-    for i, (target_size, point) in enumerate(zip(target_sizes, points)):
-        id_ = i + 1
-        gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
-        embedded_points.append(id_)
+    for target_size, point in zip(target_sizes, points):
+        embedded_points.append(gmsh.model.geo.add_point(point[0], point[1], point[2], target_size))
 
     for i in range(lines[0] - 1):
         id_ = i + 1
@@ -258,3 +264,81 @@ def frontal_delaunay_2d(
             ind.append(index)
 
     return mesh.remove_cells(ind)
+
+
+class Delaunay2D:
+    """
+    Delaunay 2D mesh algorithm.
+
+    Parameters
+    ----------
+    edge_source : pyvista.PolyData
+        Specify the source object used to specify constrained
+        edges and loops. If set, and lines/polygons are defined, a
+        constrained triangulation is created. The lines/polygons
+        are assumed to reference points in the input point set
+        (i.e. point ids are identical in the input and
+        source).
+
+    Notes
+    -----
+    .. versionadded:: 0.2.0
+
+    """
+
+    def __init__(
+        self: Delaunay2D,
+        edge_source: pv.PolyData,
+    ) -> None:
+        """Initialize the Delaunay2D class."""
+        self._edge_source = edge_source
+        self._mesh = frontal_delaunay_2d(edge_source)
+
+    @property
+    def edge_source(self: Delaunay2D) -> pv.PolyData:
+        """Get the edge source."""
+        return self._edge_source
+
+    @property
+    def mesh(self: Delaunay2D) -> pv.UnstructuredGrid:
+        """Get the mesh."""
+        return self._mesh
+
+
+class Delaunay3D:
+    """
+    Delaunay 3D mesh algorithm.
+
+    Parameters
+    ----------
+    edge_source : pyvista.PolyData
+        Specify the source object used to specify constrained
+        edges and loops. If set, and lines/polygons are defined, a
+        constrained triangulation is created. The lines/polygons
+        are assumed to reference points in the input point set
+        (i.e. point ids are identical in the input and
+        source).
+
+    Notes
+    -----
+    .. versionadded:: 0.2.0
+
+    """
+
+    def __init__(
+        self: Delaunay3D,
+        edge_source: pv.PolyData,
+    ) -> None:
+        """Initialize the Delaunay3D class."""
+        self._edge_source = edge_source
+        self._mesh = delaunay_3d(edge_source)
+
+    @property
+    def edge_source(self: Delaunay3D) -> pv.PolyData:
+        """Get the edge source."""
+        return self._edge_source
+
+    @property
+    def mesh(self: Delaunay3D) -> pv.UnstructuredGrid:
+        """Get the mesh."""
+        return self._mesh

@@ -1,6 +1,6 @@
 {
   "files": [
-    "README.md"
+    "CONTRIBUTORS.md"
   ],
   "imageSize": 100,
   "commit": false,
@@ -39,6 +39,15 @@
       "name": "pre-commit.ci",
       "avatar_url": "https://avatars.githubusercontent.com/u/64617429?v=4",
       "profile": "https://pre-commit.ci",
+      "contributions": [
+        "maintenance"
+      ]
+    },
+    {
+      "login": "dependabot",
+      "name": "Dependabot",
+      "avatar_url": "https://avatars.githubusercontent.com/u/27347476?v=4",
+      "profile": "https://github.com/features/security",
       "contributions": [
         "maintenance"
       ]
