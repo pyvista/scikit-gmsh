@@ -1,6 +1,7 @@
 """Boolean operations on a sphere, a box and two cylinders."""
 
 # This reimplements gmsh/examples/boolean/boolean.geo in Python.
+from __future__ import annotations
 
 import sys
 
