@@ -8,6 +8,8 @@
 [![Contributing](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg)](https://github.com/pyvista/scikit-gmsh/issues)
 [![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh)](https://github.com/pyvista/scikit-gmsh/stargazers)
 
+The `sikit-gmsh` package provides a simple interface to the `gmsh` library.
+
 Contributions are _very welcome_ .
 This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in this project, We want you to know that you agree to follow its terms.
