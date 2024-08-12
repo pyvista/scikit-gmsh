@@ -1,6 +1,3 @@
-> [!CAUTION]
-> scikit-gmsh is in the pre-alpha stage. The interface could be subject to significant changes soon.
-
 # scikit-gmsh
 
 [<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/logo.svg" align="left" width="200">](https://github.com/pyvista/scikit-gmsh#--------)
