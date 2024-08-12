@@ -245,13 +245,13 @@ def frontal_delaunay_2d(
         gmsh.model.geo.add_line(lines[i + 1] + 1, lines[i + 2] + 1, id_)
 
     gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
-    tag = gmsh.model.geo.add_plane_surface([1])
+    plane_surface_tag = gmsh.model.geo.add_plane_surface([1])
     gmsh.model.geo.synchronize()
 
     gmsh.model.mesh.embed(0, embedded_points, 2, 1)
 
     if recombine:
-        gmsh.model.mesh.set_recombine(2, tag)
+        gmsh.model.mesh.set_recombine(2, plane_surface_tag)
 
     gmsh.model.mesh.generate(2)
     mesh = pv.from_meshio(extract_to_meshio())
