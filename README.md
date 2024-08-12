@@ -1,5 +1,3 @@
-# scikit-gmsh
-
 [<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/logo.svg" align="center" width="200">](https://github.com/pyvista/scikit-gmsh#--------)
 
 > Scikit for Gmsh to generate 3D finite element mesh.
@@ -7,6 +5,7 @@
 [![All Contributors](https://img.shields.io/github/all-contributors/pyvista/scikit-gmsh?color=ee8449)](https://scikit-gmsh.readthedocs.io/en/latest/reference/about.html#contributors)
 [![Contributing](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg)](https://github.com/pyvista/scikit-gmsh/issues)
 [![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh)](https://github.com/pyvista/scikit-gmsh/stargazers)
+[![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
 
 The `sikit-gmsh` package provides a simple interface to the `gmsh` library.
 
@@ -21,8 +20,6 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 ---
 
 ## Table of Contents
-
-[![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
