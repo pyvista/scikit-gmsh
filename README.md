@@ -41,7 +41,7 @@ source = pv.Polygon(n_sides=4, radius=8, fill=False)
 We can then generate a 2D mesh.
 
 ```python
-mesh = sg.frontal_delaunay_2d(edge_source=source, target_sizes=2.0)
+delaunay_2d = Delaunay2d(edge_source=source, target_sizes=2.0)
 ```
 
 To visualize the model, we can use PyVista.
@@ -49,7 +49,7 @@ To visualize the model, we can use PyVista.
 ```python
 plotter = pv.Plotter()
 _ = plotter.add_mesh(
-    mesh,
+    delaunay_2d.mesh,
     show_edges=True,
     line_width=1,
     color="aliceblue",
@@ -68,13 +68,13 @@ We can also generate a 3D mesh.
 
 ```python
 source = pv.Cube()
-mesh = sg.delaunay_3d(edge_source=source, target_sizes=0.2)
+delaunay_3d = Delaunay3D(edge_source=source, target_sizes=0.2)
 ```
 
 ```python
 plotter = pv.Plotter()
 _ = plotter.add_mesh(
-    mesh,
+    delaunay_3d.mesh,
     show_edges=True,
     line_width=1,
     color="aliceblue",
@@ -94,7 +94,9 @@ We can clip a mesh by a plane by specifying the origin and normal.
 See [clip_with_surface_example](https://docs.pyvista.org/examples/01-filter/clipping-with-surface#clip-with-surface-example) for more examples using this filter.
 
 ```python
-clipped = mesh.clip(origin=(0.0, 0.0, 0.0), normal=(0.0, 0.0, 1.0), crinkle=True)
+clipped = delaunay_3d.mesh.clip(
+    origin=(0.0, 0.0, 0.0), normal=(0.0, 0.0, 1.0), crinkle=True
+)
 ```
 
 <p align="center">
