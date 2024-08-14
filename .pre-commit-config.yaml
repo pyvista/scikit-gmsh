@@ -92,12 +92,6 @@ repos:
         args: [--branch, main]
       - id: requirements-txt-fixer
       - id: trailing-whitespace
-  - repo: https://github.com/thlorenz/doctoc
-    rev: v2.2.0
-    hooks:
-      - id: doctoc
-        args: ["--maxlevel", "3"]
-        exclude: docs
   - repo: https://github.com/pappasam/toml-sort
     rev: v0.23.1
     hooks:
