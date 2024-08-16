@@ -46,7 +46,7 @@ source = pv.Polygon(n_sides=4, radius=8, fill=False)
 We can then generate a 2D mesh.
 
 ```python
-delaunay_2d = Delaunay2d(edge_source=source, target_sizes=2.0)
+delaunay_2d = sg.Delaunay2d(edge_source=source, target_sizes=2.0)
 ```
 
 To visualize the model, we can use PyVista.
@@ -73,7 +73,7 @@ We can also generate a 3D mesh.
 
 ```python
 source = pv.Cube()
-delaunay_3d = Delaunay3D(edge_source=source, target_sizes=0.2)
+delaunay_3d = sg.Delaunay3D(edge_source=source, target_sizes=0.2)
 ```
 
 ```python
