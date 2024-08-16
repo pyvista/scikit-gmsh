@@ -104,7 +104,7 @@ details.
 
 ## Licensing
 
-All contributed code will be licensed under The MIT License found in the
+All contributed code will be licensed under The GPL-3.0 license found in the
 repository. If you did not write the code yourself, it is your
 responsibility to ensure that the existing license is compatible and
 included in the contributed files or you can obtain permission from the

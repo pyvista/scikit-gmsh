@@ -4,6 +4,10 @@
 
 ```
 
+```{include} ../CONTRIBUTING.md
+
+```
+
 ## Contributors
 
 :::{include} ../CONTRIBUTORS.md
