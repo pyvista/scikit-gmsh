@@ -17,6 +17,8 @@ By participating in this project, We want you to know that you agree to follow i
 
 Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/pyvista/scikit-gmsh) — it’s a simple click that means the world to us and helps others discover it, too! ⭐️
 
+---
+
 ## Installation
 
 [![pypi](https://img.shields.io/pypi/v/scikit-gmsh?label=pypi&logo=python&logoColor=white)](https://pypi.org/project/scikit-gmsh/)
@@ -41,7 +43,7 @@ source = pv.Polygon(n_sides=4, radius=8, fill=False)
 We can then generate a 2D mesh.
 
 ```python
-delaunay_2d = Delaunay2d(edge_source=source, target_sizes=2.0)
+delaunay_2d = sg.Delaunay2d(edge_source=source, target_sizes=2.0)
 ```
 
 To visualize the model, we can use PyVista.
@@ -68,7 +70,7 @@ We can also generate a 3D mesh.
 
 ```python
 source = pv.Cube()
-delaunay_3d = Delaunay3D(edge_source=source, target_sizes=0.2)
+delaunay_3d = sg.Delaunay3D(edge_source=source, target_sizes=0.2)
 ```
 
 ```python
