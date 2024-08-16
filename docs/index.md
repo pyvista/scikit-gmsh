@@ -1,12 +1,8 @@
-# 🚧 scikit-gmsh documentation
+# scikit-gmsh documentation
 
-:::{note}
-We've marked content with a 🚧 to indicate that it's still under construction.
-:::
+```{include} ../README.md
 
-## 🚧 Overview
-
-The `sikit-gmsh` package provides a simple interface to the `gmsh` library.
+```
 
 ```{include} ../CONTRIBUTING.md
 
