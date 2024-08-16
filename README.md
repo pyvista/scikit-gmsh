@@ -1,3 +1,5 @@
+# scikit-gmsh
+
 [<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/logo.svg" align="center" width="200">](https://github.com/pyvista/scikit-gmsh#--------)
 
 > Scikit for Gmsh to generate 3D finite element mesh.
