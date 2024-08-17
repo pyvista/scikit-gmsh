@@ -183,7 +183,7 @@ def delaunay_3d(
 
 
 def frontal_delaunay_2d(
-    edge_source: pv.PolyData,
+    edge_source: pv.PolyData | shapely.geometry.Polygon,
     target_sizes: float | Sequence[float] | None = None,
     recombine: bool = False,  # noqa: FBT001, FBT002
 ) -> pv.UnstructuredGrid | None:
@@ -192,7 +192,7 @@ def frontal_delaunay_2d(
 
     Parameters
     ----------
-    edge_source : pyvista.PolyData
+    edge_source : pyvista.PolyData | shapely.geometry.Polygon
         Specify the source object used to specify constrained
         edges and loops. If set, and lines/polygons are defined, a
         constrained triangulation is created. The lines/polygons
@@ -217,9 +217,6 @@ def frontal_delaunay_2d(
     .. versionadded:: 0.2.0
 
     """
-    points = edge_source.points
-    lines = edge_source.lines
-
     gmsh.initialize()
     if target_sizes is None:
         gmsh.option.set_number("Mesh.Algorithm", INITIAL_MESH_ONLY_2D)
@@ -230,22 +227,42 @@ def frontal_delaunay_2d(
         gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
     gmsh.option.set_number("General.Verbosity", SILENT)
 
-    if target_sizes is None:
-        target_sizes = 0.0
+    if isinstance(edge_source, shapely.geometry.Polygon):
+        for linearring in [edge_source.exterior, *list(edge_source.interiors)]:
+            coords = linearring.coords[:-1].copy()
+        tags = []
+        for coord in coords:
+            x = coord[0]
+            y = coord[1]
+            z = coord[2]
+            tags.append(gmsh.model.geo.add_point(x, y, z))
+        curve_tags = []
+        for i, _ in enumerate(tags):
+            start_tag = tags[i - 1]
+            end_tag = tags[i]
+            curve_tags.append(gmsh.model.geo.add_line(start_tag, end_tag))
+        wire_tags.append(gmsh.model.geo.add_curve_loop(curve_tags))
+        gmsh.model.geo.add_plane_surface(wire_tags)
+    else:
+        points = edge_source.points
+        lines = edge_source.lines
 
-    if isinstance(target_sizes, float):
-        target_sizes = [target_sizes] * edge_source.number_of_points
+        if target_sizes is None:
+            target_sizes = 0.0
 
-    embedded_points = []
-    for target_size, point in zip(target_sizes, points):
-        embedded_points.append(gmsh.model.geo.add_point(point[0], point[1], point[2], target_size))
+        if isinstance(target_sizes, float):
+            target_sizes = [target_sizes] * edge_source.number_of_points
 
-    for i in range(lines[0] - 1):
-        id_ = i + 1
-        gmsh.model.geo.add_line(lines[i + 1] + 1, lines[i + 2] + 1, id_)
+        embedded_points = []
+        for target_size, point in zip(target_sizes, points):
+            embedded_points.append(gmsh.model.geo.add_point(point[0], point[1], point[2], target_size))
 
-    gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
-    gmsh.model.geo.add_plane_surface([1], 1)
+        for i in range(lines[0] - 1):
+            id_ = i + 1
+            gmsh.model.geo.add_line(lines[i + 1] + 1, lines[i + 2] + 1, id_)
+
+        gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
+        gmsh.model.geo.add_plane_surface([1], 1)
     gmsh.model.geo.synchronize()
 
     gmsh.model.mesh.embed(0, embedded_points, 2, 1)
