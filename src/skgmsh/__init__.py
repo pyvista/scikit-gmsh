@@ -19,6 +19,10 @@ DELAUNAY_3D = 1
 INITIAL_MESH_ONLY_3D = 3
 
 SILENT = 0
+SIMPLE = 0
+
+TRUE = 1
+FALSE = 0
 
 now = datetime.datetime.now(tz=datetime.timezone.utc)
 
@@ -137,6 +141,9 @@ def delaunay_3d(
     else:
         gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
     gmsh.option.set_number("General.Verbosity", SILENT)
+    gmsh.option.set_number("Mesh.AlgorithmSwitchOnFailure", FALSE)
+    gmsh.option.set_number("Mesh.RecombinationAlgorithm", SIMPLE)
+    gmsh.option.set_number("Mesh.RecombineNodeRepositioning", FALSE)
 
     if target_sizes is None:
         target_sizes = 0.0
