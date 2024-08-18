@@ -9,6 +9,7 @@ import gmsh
 from pygmsh.helpers import extract_to_meshio
 import pyvista as pv
 import scooby
+import shapely
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -182,7 +183,7 @@ def delaunay_3d(
     return mesh
 
 
-def frontal_delaunay_2d(
+def frontal_delaunay_2d(  # noqa: C901, PLR0912
     edge_source: pv.PolyData | shapely.geometry.Polygon,
     target_sizes: float | Sequence[float] | None = None,
     recombine: bool = False,  # noqa: FBT001, FBT002
@@ -228,20 +229,21 @@ def frontal_delaunay_2d(
     gmsh.option.set_number("General.Verbosity", SILENT)
 
     if isinstance(edge_source, shapely.geometry.Polygon):
+        wire_tags = []
         for linearring in [edge_source.exterior, *list(edge_source.interiors)]:
             coords = linearring.coords[:-1].copy()
-        tags = []
-        for coord in coords:
-            x = coord[0]
-            y = coord[1]
-            z = coord[2]
-            tags.append(gmsh.model.geo.add_point(x, y, z))
-        curve_tags = []
-        for i, _ in enumerate(tags):
-            start_tag = tags[i - 1]
-            end_tag = tags[i]
-            curve_tags.append(gmsh.model.geo.add_line(start_tag, end_tag))
-        wire_tags.append(gmsh.model.geo.add_curve_loop(curve_tags))
+            tags = []
+            for coord in coords:
+                x = coord[0]
+                y = coord[1]
+                z = coord[2]
+                tags.append(gmsh.model.geo.add_point(x, y, z))
+            curve_tags = []
+            for i, _ in enumerate(tags):
+                start_tag = tags[i - 1]
+                end_tag = tags[i]
+                curve_tags.append(gmsh.model.geo.add_line(start_tag, end_tag))
+            wire_tags.append(gmsh.model.geo.add_curve_loop(curve_tags))
         gmsh.model.geo.add_plane_surface(wire_tags)
     else:
         points = edge_source.points
