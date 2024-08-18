@@ -291,7 +291,7 @@ class Delaunay2D:
 
     Parameters
     ----------
-    edge_source : pyvista.PolyData
+    edge_source : pyvista.PolyData | shapely.geometry.Polygon
         Specify the source object used to specify constrained
         edges and loops. If set, and lines/polygons are defined, a
         constrained triangulation is created. The lines/polygons
@@ -307,14 +307,14 @@ class Delaunay2D:
 
     def __init__(
         self: Delaunay2D,
-        edge_source: pv.PolyData,
+        edge_source: pv.PolyData | shapely.geometry.Polygon,
     ) -> None:
         """Initialize the Delaunay2D class."""
         self._edge_source = edge_source
         self._mesh = frontal_delaunay_2d(edge_source)
 
     @property
-    def edge_source(self: Delaunay2D) -> pv.PolyData:
+    def edge_source(self: Delaunay2D) -> pv.PolyData | shapely.geometry.Polygon:
         """Get the edge source."""
         return self._edge_source
 
