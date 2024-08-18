@@ -22,7 +22,8 @@
         "bug",
         "doc",
         "design",
-        "review"
+        "review",
+        "example"
       ]
     },
     {
