@@ -298,13 +298,22 @@ class Delaunay2D:
 
     Parameters
     ----------
-    edge_source : pyvista.PolyData | shapely.geometry.Polygon
+    edge_source : pyvista.PolyData | shapely.Polygon
         Specify the source object used to specify constrained
         edges and loops. If set, and lines/polygons are defined, a
         constrained triangulation is created. The lines/polygons
         are assumed to reference points in the input point set
         (i.e. point ids are identical in the input and
         source).
+
+    shell : sequence
+        A sequence of (x, y [,z]) numeric coordinate pairs or triples, or
+        an array-like with shape (N, 2) or (N, 3).
+        Also can be a sequence of Point objects.
+
+    holes : sequence
+        A sequence of objects which satisfy the same requirements as the
+        shell parameters above
 
     Notes
     -----
@@ -314,10 +323,16 @@ class Delaunay2D:
 
     def __init__(
         self: Delaunay2D,
-        edge_source: pv.PolyData | shapely.geometry.Polygon,
+        *,
+        edge_source: pv.PolyData | shapely.Polygon | None = None,
+        shell: Sequence[tuple[int]] | None = None,
+        holes: Sequence[tuple[int]] | None = None,
     ) -> None:
         """Initialize the Delaunay2D class."""
-        self._edge_source = edge_source
+        if edge_source is not None:
+            self._edge_source = edge_source
+        else:
+            edge_source = shapely.Polygon(shell, holes)
         self._mesh = frontal_delaunay_2d(edge_source)
 
     @property
