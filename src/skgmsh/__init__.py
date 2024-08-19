@@ -245,6 +245,7 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
                 curve_tags.append(gmsh.model.geo.add_line(start_tag, end_tag))
             wire_tags.append(gmsh.model.geo.add_curve_loop(curve_tags))
         gmsh.model.geo.add_plane_surface(wire_tags)
+        gmsh.model.geo.synchronize()
     else:
         points = edge_source.points
         lines = edge_source.lines
@@ -265,9 +266,8 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
 
         gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
         gmsh.model.geo.add_plane_surface([1], 1)
-    gmsh.model.geo.synchronize()
-
-    gmsh.model.mesh.embed(0, embedded_points, 2, 1)
+        gmsh.model.geo.synchronize()
+        gmsh.model.mesh.embed(0, embedded_points, 2, 1)
 
     if recombine:
         gmsh.model.mesh.set_recombine(2, 1)
