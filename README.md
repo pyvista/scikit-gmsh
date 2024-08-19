@@ -14,6 +14,12 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 The `sikit-gmsh` package provides a simple interface to the `gmsh` library.
+The library has following main objectives:
+
+1. Provide an intuitive, object-oriented API for mesh creation.
+1. Provide 2D [Shapely](https://github.com/shapely/shapely) geometry features for mesh creation.
+1. Provide 3D [PyVista](https://github.com/pyvista/pyvista) geometry features for mesh creation.
+1. Integrate seamlessly with other libraries in the [scientific Python ecosystem](https://www.scipy.org/about.html).
 
 Contributions are _very welcome_ .
 This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
