@@ -58,14 +58,7 @@ mesh = alg.mesh
 To visualize the model, we can use PyVista.
 
 ```python
-mesh.plot(
-    show_edges=True,
-    line_width=1,
-    color="aliceblue",
-    lighting=False,
-    edge_color="gray",
-    cpos="xy",
-)
+mesh.plot(show_edges=True, color="white", cpos="xy")
 ```
 
 <p align="center">
