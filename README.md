@@ -51,7 +51,8 @@ source = pv.Polygon(n_sides=4, radius=8, fill=False)
 We can then generate a 2D mesh.
 
 ```python
-delaunay_2d = sg.Delaunay2d(edge_source=source, target_sizes=2.0)
+algorithm = sg.Delaunay2d(edge_source=source, target_sizes=2.0)
+mesh = algorithm.mesh
 ```
 
 To visualize the model, we can use PyVista.
@@ -59,7 +60,7 @@ To visualize the model, we can use PyVista.
 ```python
 plotter = pv.Plotter()
 _ = plotter.add_mesh(
-    delaunay_2d.mesh,
+    mesh,
     show_edges=True,
     line_width=1,
     color="aliceblue",
@@ -71,20 +72,21 @@ plotter.show(cpos="xy")
 ```
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_01.png" align="center" width=400 >
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_algorithm_01.png" align="center" width=400 >
 </p>
 
 We can also generate a 3D mesh.
 
 ```python
 source = pv.Cube()
-delaunay_3d = sg.Delaunay3D(edge_source=source, target_sizes=0.2)
+algorithm = sg.Delaunay3D(edge_source=source, target_sizes=0.2)
+mesh = algorithm.mesh
 ```
 
 ```python
 plotter = pv.Plotter()
 _ = plotter.add_mesh(
-    delaunay_3d.mesh,
+    mesh,
     show_edges=True,
     line_width=1,
     color="aliceblue",
@@ -97,20 +99,20 @@ plotter.show()
 ```
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_01.png" align="center" width=400 >
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/algorithm_01.png" align="center" width=400 >
 </p>
 
 We can clip a mesh by a plane by specifying the origin and normal.
 See [clip_with_surface_example](https://docs.pyvista.org/examples/01-filter/clipping-with-surface#clip-with-surface-example) for more examples using this filter.
 
 ```python
-clipped = delaunay_3d.mesh.clip(
+clipped = algorithm.mesh.clip(
     origin=(0.0, 0.0, 0.0), normal=(0.0, 0.0, 1.0), crinkle=True
 )
 ```
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_02.png" align="center" width=400 >
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/algorithm_02.png" align="center" width=400 >
 </p>
 
 ## License
