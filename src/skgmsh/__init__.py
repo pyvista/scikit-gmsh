@@ -235,6 +235,9 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
         gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
     gmsh.option.set_number("General.Verbosity", SILENT)
 
+    if target_sizes is None:
+        target_sizes = 0.0
+
     if isinstance(edge_source, shapely.geometry.Polygon):
         wire_tags = []
         for linearring in [edge_source.exterior, *list(edge_source.interiors)]:
@@ -244,7 +247,7 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
                 x = coord[0]
                 y = coord[1]
                 z = coord[2]
-                tags.append(gmsh.model.geo.add_point(x, y, z))
+                tags.append(gmsh.model.geo.add_point(x, y, z, target_sizes))
             curve_tags = []
             for i, _ in enumerate(tags):
                 start_tag = tags[i - 1]
@@ -256,9 +259,6 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
     else:
         points = edge_source.points
         lines = edge_source.lines
-
-        if target_sizes is None:
-            target_sizes = 0.0
 
         if isinstance(target_sizes, float):
             target_sizes = [target_sizes] * edge_source.number_of_points
@@ -327,13 +327,14 @@ class Delaunay2D:
         edge_source: pv.PolyData | shapely.Polygon | None = None,
         shell: Sequence[tuple[int]] | None = None,
         holes: Sequence[tuple[int]] | None = None,
+        size: float | None = None,
     ) -> None:
         """Initialize the Delaunay2D class."""
         if edge_source is not None:
             self._edge_source = edge_source
         else:
-            edge_source = shapely.Polygon(shell, holes)
-        self._mesh = frontal_delaunay_2d(edge_source)
+            self._edge_source = shapely.Polygon(shell, holes)
+        self._size = size
 
     @property
     def edge_source(self: Delaunay2D) -> pv.PolyData | shapely.geometry.Polygon:
@@ -343,7 +344,17 @@ class Delaunay2D:
     @property
     def mesh(self: Delaunay2D) -> pv.UnstructuredGrid:
         """Get the mesh."""
-        return self._mesh
+        return frontal_delaunay_2d(self._edge_source, target_sizes=self._size)
+
+    @property
+    def size(self: Delaunay2D) -> float | None:
+        """Get the size of the mesh."""
+        return self._size
+
+    @size.setter
+    def size(self: Delaunay2D, size: int) -> None:
+        """Set the size of the mesh."""
+        self._size = size
 
 
 class Delaunay3D:

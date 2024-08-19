@@ -61,8 +61,19 @@ To visualize the model, we can use PyVista.
 mesh.plot(show_edges=True, color="white", cpos="xy")
 ```
 
+If you want to set the cell size, you can do so.
+
 <p align="center">
 <img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_01.png" align="center" width=400 >
+</p>
+
+```python
+alg.size = 0.5
+alg.mesh.plot(show_edges=True, color="white", cpos="xy")
+```
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_02.png" align="center" width=400 >
 </p>
 
 We can also generate a 3D mesh.
