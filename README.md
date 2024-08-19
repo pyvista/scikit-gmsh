@@ -43,7 +43,7 @@ import skgmsh as sg
 from shapely import Polygon
 ```
 
-We can define the [geometry using Shapely](https://shapely.readthedocs.io/en/stable/geometry.html).
+Now, let's define geometry using [Shapely geometry classes](https://shapely.readthedocs.io/en/stable/geometry.html).
 
 ```python
 shell = [(0, 0, 0), (0, 10, 0), (10, 10, 0), (10, 0, 0), (0, 0, 0)]
