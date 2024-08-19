@@ -40,18 +40,21 @@ pip install scikit-gmsh
 ```python
 import pyvista as pv
 import skgmsh as sg
+from shapely import Polygon
 ```
 
-We can define the surface using PyVista.
+We can define the [geometry using Shapely](https://shapely.readthedocs.io/en/stable/geometry.html).
 
 ```python
-source = pv.Polygon(n_sides=4, radius=8, fill=False)
+shell = [(0, 0, 0), (0, 10, 0), (10, 10, 0), (10, 0, 0), (0, 0, 0)]
+holes = [[(2, 2, 0), (2, 4, 0), (4, 4, 0), (4, 2, 0), (2, 2, 0)]]
+polygon_with_hole = Polygon(shell, holes=holes)
 ```
 
 We can then generate a 2D mesh.
 
 ```python
-delaunay_2d = sg.Delaunay2d(edge_source=source, target_sizes=2.0)
+delaunay_2d = sg.Delaunay2D(polygon_with_hole)
 ```
 
 To visualize the model, we can use PyVista.
