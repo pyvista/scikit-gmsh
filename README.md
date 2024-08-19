@@ -1,13 +1,25 @@
-[<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/logo.svg" align="center" width="200">](https://github.com/pyvista/scikit-gmsh#--------)
+<h1 align="center">
+  <a href="https://github.com/pyvista/scikit-gmsh#--------">
+    <img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/logo.svg"
+         alt="scikit-gmsh"
+         width="200"></a>
+</h1>
 
 > Scikit for Gmsh to generate 3D finite element mesh.
 
 [![All Contributors](https://img.shields.io/github/all-contributors/pyvista/scikit-gmsh?color=ee8449)](https://scikit-gmsh.readthedocs.io/en/latest/reference/about.html#contributors)
 [![Contributing](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg)](https://github.com/pyvista/scikit-gmsh/issues)
-[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh)](https://github.com/pyvista/scikit-gmsh/stargazers)
 [![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
+[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh)](https://github.com/pyvista/scikit-gmsh/stargazers)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 The `sikit-gmsh` package provides a simple interface to the `gmsh` library.
+The library has following main objectives:
+
+1. Provide an intuitive, object-oriented API for mesh creation.
+1. Provide 2D [Shapely](https://github.com/shapely/shapely) geometry features for mesh creation.
+1. Provide 3D [PyVista](https://github.com/pyvista/pyvista) geometry features for mesh creation.
+1. Integrate seamlessly with other libraries in the [scientific Python ecosystem](https://www.scipy.org/about.html).
 
 Contributions are _very welcome_ .
 This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
@@ -59,7 +71,7 @@ plotter.show(cpos="xy")
 ```
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_01.png" align="center" width=512 >
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_01.png" align="center" width=400 >
 </p>
 
 We can also generate a 3D mesh.
@@ -85,7 +97,7 @@ plotter.show()
 ```
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_01.png" align="center" width=512 >
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_01.png" align="center" width=400 >
 </p>
 
 We can clip a mesh by a plane by specifying the origin and normal.
@@ -98,7 +110,7 @@ clipped = delaunay_3d.mesh.clip(
 ```
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_02.png" align="center" width=512 >
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_02.png" align="center" width=400 >
 </p>
 
 ## License
