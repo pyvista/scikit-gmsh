@@ -9,7 +9,6 @@ import gmsh
 from pygmsh.helpers import extract_to_meshio
 import pyvista as pv
 import scooby
-import shapely
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -190,8 +189,8 @@ def delaunay_3d(
     return mesh
 
 
-def frontal_delaunay_2d(  # noqa: C901, PLR0912
-    edge_source: pv.PolyData | shapely.geometry.Polygon,
+def frontal_delaunay_2d(
+    edge_source: pv.PolyData,
     target_sizes: float | Sequence[float] | None = None,
     recombine: bool = False,  # noqa: FBT001, FBT002
 ) -> pv.UnstructuredGrid | None:
@@ -200,7 +199,7 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
 
     Parameters
     ----------
-    edge_source : pyvista.PolyData | shapely.geometry.Polygon
+    edge_source : pyvista.PolyData
         Specify the source object used to specify constrained
         edges and loops. If set, and lines/polygons are defined, a
         constrained triangulation is created. The lines/polygons
@@ -225,6 +224,9 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
     .. versionadded:: 0.2.0
 
     """
+    points = edge_source.points
+    lines = edge_source.lines
+
     gmsh.initialize()
     if target_sizes is None:
         gmsh.option.set_number("Mesh.Algorithm", INITIAL_MESH_ONLY_2D)
@@ -235,46 +237,25 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
         gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
     gmsh.option.set_number("General.Verbosity", SILENT)
 
-    if isinstance(edge_source, shapely.geometry.Polygon):
-        wire_tags = []
-        for linearring in [edge_source.exterior, *list(edge_source.interiors)]:
-            coords = linearring.coords[:-1].copy()
-            tags = []
-            for coord in coords:
-                x = coord[0]
-                y = coord[1]
-                z = coord[2]
-                tags.append(gmsh.model.geo.add_point(x, y, z))
-            curve_tags = []
-            for i, _ in enumerate(tags):
-                start_tag = tags[i - 1]
-                end_tag = tags[i]
-                curve_tags.append(gmsh.model.geo.add_line(start_tag, end_tag))
-            wire_tags.append(gmsh.model.geo.add_curve_loop(curve_tags))
-        gmsh.model.geo.add_plane_surface(wire_tags)
-        gmsh.model.geo.synchronize()
-    else:
-        points = edge_source.points
-        lines = edge_source.lines
+    if target_sizes is None:
+        target_sizes = 0.0
 
-        if target_sizes is None:
-            target_sizes = 0.0
+    if isinstance(target_sizes, float):
+        target_sizes = [target_sizes] * edge_source.number_of_points
 
-        if isinstance(target_sizes, float):
-            target_sizes = [target_sizes] * edge_source.number_of_points
+    embedded_points = []
+    for target_size, point in zip(target_sizes, points):
+        embedded_points.append(gmsh.model.geo.add_point(point[0], point[1], point[2], target_size))
 
-        embedded_points = []
-        for target_size, point in zip(target_sizes, points):
-            embedded_points.append(gmsh.model.geo.add_point(point[0], point[1], point[2], target_size))
+    for i in range(lines[0] - 1):
+        id_ = i + 1
+        gmsh.model.geo.add_line(lines[i + 1] + 1, lines[i + 2] + 1, id_)
 
-        for i in range(lines[0] - 1):
-            id_ = i + 1
-            gmsh.model.geo.add_line(lines[i + 1] + 1, lines[i + 2] + 1, id_)
+    gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
+    gmsh.model.geo.add_plane_surface([1], 1)
+    gmsh.model.geo.synchronize()
 
-        gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
-        gmsh.model.geo.add_plane_surface([1], 1)
-        gmsh.model.geo.synchronize()
-        gmsh.model.mesh.embed(0, embedded_points, 2, 1)
+    gmsh.model.mesh.embed(0, embedded_points, 2, 1)
 
     if recombine:
         gmsh.model.mesh.set_recombine(2, 1)
@@ -298,7 +279,7 @@ class Delaunay2D:
 
     Parameters
     ----------
-    edge_source : pyvista.PolyData | shapely.geometry.Polygon
+    edge_source : pyvista.PolyData
         Specify the source object used to specify constrained
         edges and loops. If set, and lines/polygons are defined, a
         constrained triangulation is created. The lines/polygons
@@ -314,14 +295,14 @@ class Delaunay2D:
 
     def __init__(
         self: Delaunay2D,
-        edge_source: pv.PolyData | shapely.geometry.Polygon,
+        edge_source: pv.PolyData,
     ) -> None:
         """Initialize the Delaunay2D class."""
         self._edge_source = edge_source
         self._mesh = frontal_delaunay_2d(edge_source)
 
     @property
-    def edge_source(self: Delaunay2D) -> pv.PolyData | shapely.geometry.Polygon:
+    def edge_source(self: Delaunay2D) -> pv.PolyData:
         """Get the edge source."""
         return self._edge_source
 
