@@ -39,7 +39,7 @@ pip install scikit-gmsh
 import skgmsh as sg
 ```
 
-Now, let's define geometry using [Shapely geometry classes](https://shapely.readthedocs.io/en/stable/geometry.html).
+Now, let's define geometry.
 
 ```python
 shell = [(0, 0, 0), (0, 10, 0), (10, 10, 0), (10, 0, 0), (0, 0, 0)]
