@@ -235,6 +235,9 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
         gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
     gmsh.option.set_number("General.Verbosity", SILENT)
 
+    if target_sizes is None:
+        target_sizes = 0.0
+
     if isinstance(edge_source, shapely.geometry.Polygon):
         wire_tags = []
         for linearring in [edge_source.exterior, *list(edge_source.interiors)]:
@@ -244,7 +247,7 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
                 x = coord[0]
                 y = coord[1]
                 z = coord[2]
-                tags.append(gmsh.model.geo.add_point(x, y, z))
+                tags.append(gmsh.model.geo.add_point(x, y, z, target_sizes))
             curve_tags = []
             for i, _ in enumerate(tags):
                 start_tag = tags[i - 1]
@@ -256,9 +259,6 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
     else:
         points = edge_source.points
         lines = edge_source.lines
-
-        if target_sizes is None:
-            target_sizes = 0.0
 
         if isinstance(target_sizes, float):
             target_sizes = [target_sizes] * edge_source.number_of_points
@@ -298,13 +298,25 @@ class Delaunay2D:
 
     Parameters
     ----------
-    edge_source : pyvista.PolyData | shapely.geometry.Polygon
+    edge_source : pyvista.PolyData | shapely.Polygon
         Specify the source object used to specify constrained
         edges and loops. If set, and lines/polygons are defined, a
         constrained triangulation is created. The lines/polygons
         are assumed to reference points in the input point set
         (i.e. point ids are identical in the input and
         source).
+
+    shell : sequence
+        A sequence of (x, y [,z]) numeric coordinate pairs or triples, or
+        an array-like with shape (N, 2) or (N, 3).
+        Also can be a sequence of Point objects.
+
+    holes : sequence
+        A sequence of objects which satisfy the same requirements as the
+        shell parameters above
+
+    cell_size : float
+       Meshing constraint at point.
 
     Notes
     -----
@@ -314,11 +326,18 @@ class Delaunay2D:
 
     def __init__(
         self: Delaunay2D,
-        edge_source: pv.PolyData | shapely.geometry.Polygon,
+        *,
+        edge_source: pv.PolyData | shapely.Polygon | None = None,
+        shell: Sequence[tuple[int]] | None = None,
+        holes: Sequence[tuple[int]] | None = None,
+        cell_size: float | None = None,
     ) -> None:
         """Initialize the Delaunay2D class."""
-        self._edge_source = edge_source
-        self._mesh = frontal_delaunay_2d(edge_source)
+        if edge_source is not None:
+            self._edge_source = edge_source
+        else:
+            self._edge_source = shapely.Polygon(shell, holes)
+        self._cell_size = cell_size
 
     @property
     def edge_source(self: Delaunay2D) -> pv.PolyData | shapely.geometry.Polygon:
@@ -326,9 +345,20 @@ class Delaunay2D:
         return self._edge_source
 
     @property
-    def mesh(self: Delaunay2D) -> pv.UnstructuredGrid:
+    def mesh(self: Delaunay2D) -> pv.PolyData:
         """Get the mesh."""
-        return self._mesh
+        mesh = frontal_delaunay_2d(self._edge_source, target_sizes=self._cell_size)
+        return pv.PolyData(mesh.points, mesh.cells)
+
+    @property
+    def cell_size(self: Delaunay2D) -> float | None:
+        """Get the cell_size of the mesh."""
+        return self._cell_size
+
+    @cell_size.setter
+    def cell_size(self: Delaunay2D, size: int) -> None:
+        """Set the cell_size of the mesh."""
+        self._cell_size = size
 
 
 class Delaunay3D:
