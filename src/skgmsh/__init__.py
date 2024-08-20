@@ -342,9 +342,10 @@ class Delaunay2D:
         return self._edge_source
 
     @property
-    def mesh(self: Delaunay2D) -> pv.UnstructuredGrid:
+    def mesh(self: Delaunay2D) -> pv.PolyData:
         """Get the mesh."""
-        return frontal_delaunay_2d(self._edge_source, target_sizes=self._size)
+        mesh = frontal_delaunay_2d(self._edge_source, target_sizes=self._size)
+        return pv.PolyData(mesh.points, mesh.cells)
 
     @property
     def size(self: Delaunay2D) -> float | None:
