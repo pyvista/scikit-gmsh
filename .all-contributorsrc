@@ -22,7 +22,9 @@
         "bug",
         "doc",
         "design",
-        "review"
+        "review",
+        "example",
+        "promotion"
       ]
     },
     {
@@ -50,6 +52,15 @@
       "profile": "https://github.com/features/security",
       "contributions": [
         "maintenance"
+      ]
+    },
+    {
+      "login": "adtzlr",
+      "name": "Andreas Dutzler",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5793153?v=4",
+      "profile": "https://github.com/adtzlr",
+      "contributions": [
+        "example"
       ]
     }
   ],

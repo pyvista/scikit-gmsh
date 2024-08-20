@@ -1,13 +1,23 @@
-[<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/logo.svg" align="center" width="200">](https://github.com/pyvista/scikit-gmsh#--------)
+<h1 align="center">
+  <a href="https://github.com/pyvista/scikit-gmsh#--------">
+    <img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/logo.svg"
+         alt="scikit-gmsh"
+         width="200"></a>
+</h1>
 
 > Scikit for Gmsh to generate 3D finite element mesh.
 
 [![All Contributors](https://img.shields.io/github/all-contributors/pyvista/scikit-gmsh?color=ee8449)](https://scikit-gmsh.readthedocs.io/en/latest/reference/about.html#contributors)
 [![Contributing](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg)](https://github.com/pyvista/scikit-gmsh/issues)
-[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh)](https://github.com/pyvista/scikit-gmsh/stargazers)
 [![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
+[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh)](https://github.com/pyvista/scikit-gmsh/stargazers)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 The `sikit-gmsh` package provides a simple interface to the `gmsh` library.
+The library has following main objectives:
+
+1. Provide an intuitive, object-oriented API for mesh creation.
+1. Integrate seamlessly with other libraries in the [scientific Python ecosystem](https://www.scipy.org/about.html).
 
 Contributions are _very welcome_ .
 This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
@@ -26,40 +36,42 @@ pip install scikit-gmsh
 ## Usage
 
 ```python
-import pyvista as pv
 import skgmsh as sg
 ```
 
-We can define the surface using PyVista.
+Now, let's define geometry.
 
 ```python
-source = pv.Polygon(n_sides=4, radius=8, fill=False)
+shell = [(0, 0, 0), (0, 10, 0), (10, 10, 0), (10, 0, 0), (0, 0, 0)]
+holes = [[(2, 2, 0), (2, 4, 0), (4, 4, 0), (4, 2, 0), (2, 2, 0)]]
 ```
 
 We can then generate a 2D mesh.
 
 ```python
-delaunay_2d = sg.Delaunay2d(edge_source=source, target_sizes=2.0)
+alg = sg.Delaunay2D(shell=shell, holes=holes)
+mesh = alg.mesh
 ```
 
 To visualize the model, we can use PyVista.
 
 ```python
-plotter = pv.Plotter()
-_ = plotter.add_mesh(
-    delaunay_2d.mesh,
-    show_edges=True,
-    line_width=1,
-    color="aliceblue",
-    lighting=False,
-    edge_color="gray",
-)
-_ = plotter.add_mesh(source, show_edges=True, line_width=4, color="gray")
-plotter.show(cpos="xy")
+mesh.plot(show_edges=True, color="white", cpos="xy")
 ```
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_01.png" align="center" width=512 >
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_01.png" align="center" width=400 >
+</p>
+
+If you want to set the cell size, you can do so.
+
+```python
+alg.cell_size = 0.5
+alg.mesh.plot(show_edges=True, color="white", cpos="xy")
+```
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_02.png" align="center" width=400 >
 </p>
 
 We can also generate a 3D mesh.
@@ -85,7 +97,7 @@ plotter.show()
 ```
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_01.png" align="center" width=512 >
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_01.png" align="center" width=400 >
 </p>
 
 We can clip a mesh by a plane by specifying the origin and normal.
@@ -98,7 +110,7 @@ clipped = delaunay_3d.mesh.clip(
 ```
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_02.png" align="center" width=512 >
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_02.png" align="center" width=400 >
 </p>
 
 ## License

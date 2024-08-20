@@ -409,9 +409,9 @@ warning messages.
 ```python
 with pytest.warns(skgmshDeprecationWarning):
     addition(a, b)
-    if pv._version.version_info >= (0, 40):
+    if sg._version.version_info >= (0, 40):
         raise RuntimeError("Convert error this function")
-    if pv._version.version_info >= (0, 41):
+    if sg._version.version_info >= (0, 41):
         raise RuntimeError("Remove this function")
 ```
 
@@ -830,7 +830,7 @@ created the following will occur:
     not be deleted. Tag the release with:
 
     ```bash
-    git tag v$(python -c "import scikit-gmsh as pv; print(pv.__version__)")
+    git tag v$(python -c "import scikit-gmsh as sg; print(sg.__version__)")
     ```
 
 1.  Please check again that the tag has been created correctly and push
