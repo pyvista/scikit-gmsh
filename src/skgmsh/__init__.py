@@ -315,6 +315,9 @@ class Delaunay2D:
         A sequence of objects which satisfy the same requirements as the
         shell parameters above
 
+    cell_size : float
+       Meshing constraint at point.
+
     Notes
     -----
     .. versionadded:: 0.2.0
@@ -327,14 +330,14 @@ class Delaunay2D:
         edge_source: pv.PolyData | shapely.Polygon | None = None,
         shell: Sequence[tuple[int]] | None = None,
         holes: Sequence[tuple[int]] | None = None,
-        size: float | None = None,
+        cell_size: float | None = None,
     ) -> None:
         """Initialize the Delaunay2D class."""
         if edge_source is not None:
             self._edge_source = edge_source
         else:
             self._edge_source = shapely.Polygon(shell, holes)
-        self._size = size
+        self._cell_size = cell_size
 
     @property
     def edge_source(self: Delaunay2D) -> pv.PolyData | shapely.geometry.Polygon:
@@ -344,18 +347,18 @@ class Delaunay2D:
     @property
     def mesh(self: Delaunay2D) -> pv.PolyData:
         """Get the mesh."""
-        mesh = frontal_delaunay_2d(self._edge_source, target_sizes=self._size)
+        mesh = frontal_delaunay_2d(self._edge_source, target_sizes=self._cell_size)
         return pv.PolyData(mesh.points, mesh.cells)
 
     @property
-    def size(self: Delaunay2D) -> float | None:
-        """Get the size of the mesh."""
-        return self._size
+    def cell_size(self: Delaunay2D) -> float | None:
+        """Get the cell_size of the mesh."""
+        return self._cell_size
 
-    @size.setter
-    def size(self: Delaunay2D, size: int) -> None:
-        """Set the size of the mesh."""
-        self._size = size
+    @cell_size.setter
+    def cell_size(self: Delaunay2D, size: int) -> None:
+        """Set the cell_size of the mesh."""
+        self._cell_size = size
 
 
 class Delaunay3D:

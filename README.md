@@ -66,7 +66,7 @@ mesh.plot(show_edges=True, color="white", cpos="xy")
 If you want to set the cell size, you can do so.
 
 ```python
-alg.size = 0.5
+alg.cell_size = 0.5
 alg.mesh.plot(show_edges=True, color="white", cpos="xy")
 ```
 
