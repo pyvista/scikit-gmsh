@@ -1,11 +1,8 @@
-name: Feature Request
-description: Request that a feature be added to scikit-gmsh
-labels: ["feature-request"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to open this issue to help improve scikit-gmsh!
+        Thanks for taking the time to open this discussion to help improve scikit-gmsh!
   - type: textarea
     id: feature-details
     attributes:

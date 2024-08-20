@@ -1,159 +1,124 @@
-🚧 pvgmsh is in the pre-alpha stage the interface could be subject to important changes soon.
+<h1 align="center">
+  <a href="https://github.com/pyvista/scikit-gmsh#--------">
+    <img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/logo.svg"
+         alt="scikit-gmsh"
+         width="200"></a>
+</h1>
 
-# pvgmsh
+> Scikit for Gmsh to generate 3D finite element mesh.
 
-[![Documentation Status](https://readthedocs.org/projects/pvgmsh/badge/?version=latest)](https://pvgmsh.readthedocs.io/en/latest/?badge=latest)
-[![pvgmsh examples and documentation](https://img.shields.io/static/v1?label=%20&message=Open%20in%20Community%20Cloud&color=pink&logo=streamlit)](https://pvgmsh.streamlit.app/)
+[![All Contributors](https://img.shields.io/github/all-contributors/pyvista/scikit-gmsh?color=ee8449)](https://scikit-gmsh.readthedocs.io/en/latest/reference/about.html#contributors)
+[![Contributing](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg)](https://github.com/pyvista/scikit-gmsh/issues)
+[![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
+[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh)](https://github.com/pyvista/scikit-gmsh/stargazers)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-[<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/logo.svg" align="left" width="100">](https://github.com/pyvista/pvgmsh#--------)
+The `sikit-gmsh` package provides a simple interface to the `gmsh` library.
+The library has following main objectives:
 
-> PyVista accessors for Gmsh to generate 3D finite element mesh.
+1. Provide an intuitive, object-oriented API for mesh creation.
+1. Integrate seamlessly with other libraries in the [scientific Python ecosystem](https://www.scipy.org/about.html).
 
-Also, this **LIST** is a collection of 2D and 3D finite element mesh examples.
+Contributions are _very welcome_ .
+This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+By participating in this project, We want you to know that you agree to follow its terms.
 
-Contributions _very welcome_ but first see [Contributing](#contributions).
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
-By participating in this project you agree to abide by its terms.
-
----
-
-[![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/pvgmsh)](https://github.com/pyvista/pvgmsh/stargazers)
-
-Enjoying pvgmsh? Show your support with a [Github star](https://github.com/pyvista/pvgmsh) — it’s a simple click that means the world to us and helps others discover it too! ⭐️
-
----
-
-## Table of Contents
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Installation](#installation)
-  - [Developer](#developer)
-- [Usage](#usage)
-- [Contributions](#contributions)
-- [License](#license)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/pyvista/scikit-gmsh) — it’s a simple click that means the world to us and helps others discover it, too! ⭐️
 
 ## Installation
 
-### Developer
-
-If you simply can't wait for the next release to play with the latest hot features, then you can easily
-install the `main` development branch from GitHub:
+[![pypi](https://img.shields.io/pypi/v/scikit-gmsh?label=pypi&logo=python&logoColor=white)](https://pypi.org/project/scikit-gmsh/)
 
 ```shell
-pip install git+https://github.com/pyvista/pvgmsh@main
+pip install scikit-gmsh
 ```
 
 ## Usage
 
 ```python
-import pyvista as pv
-import pvgmsh as pm
+import skgmsh as sg
 ```
 
-We can define the surface using PyVista.
+Now, let's define geometry.
 
 ```python
-edge_source = pv.Polygon(n_sides=4, radius=8, fill=False)
+shell = [(0, 0, 0), (0, 10, 0), (10, 10, 0), (10, 0, 0), (0, 0, 0)]
+holes = [[(2, 2, 0), (2, 4, 0), (4, 4, 0), (4, 2, 0), (2, 2, 0)]]
 ```
 
 We can then generate a 2D mesh.
 
 ```python
-mesh = pm.frontal_delaunay_2d(edge_source, target_sizes=2.0)
+alg = sg.Delaunay2D(shell=shell, holes=holes)
+mesh = alg.mesh
 ```
 
-To visualize the model we can use PyVista.
+To visualize the model, we can use PyVista.
 
 ```python
-plotter = pv.Plotter()
-_ = plotter.add_mesh(
-    mesh,
-    show_edges=True,
-    line_width=4,
-    color="white",
-    lighting=True,
-    edge_color=[153, 153, 153],
-)
-_ = plotter.add_mesh(edge_source, show_edges=True, line_width=4, color=[214, 39, 40])
-_ = plotter.add_points(
-    edge_source.points, style="points", point_size=20, color=[214, 39, 40]
-)
-_ = plotter.add_legend(
-    [[" edge source", [214, 39, 40]], [" mesh ", [153, 153, 153]]],
-    bcolor="white",
-    face="r",
-    size=(0.3, 0.3),
-)
-plotter.show(cpos="xy")
+mesh.plot(show_edges=True, cpos="xy")
 ```
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/frontal_delaunay_2d_01.png" align="center" width=512 >
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_01.png" align="center" width=400 >
+</p>
+
+If you want to set the cell size, you can do so.
+
+```python
+alg.cell_size = 0.5
+alg.mesh.plot(show_edges=True, cpos="xy")
+```
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_02.png" align="center" width=400 >
 </p>
 
 We can also generate a 3D mesh.
 
 ```python
-edge_source = pv.Cube()
-mesh = pm.delaunay_3d(edge_source, target_sizes=0.2)
+source = pv.Cube()
+delaunay_3d = sg.Delaunay3D(edge_source=source, target_sizes=0.2)
 ```
 
 ```python
 plotter = pv.Plotter()
 _ = plotter.add_mesh(
-    mesh,
+    delaunay_3d.mesh,
     show_edges=True,
-    line_width=4,
-    color="white",
-    lighting=True,
-    edge_color=[153, 153, 153],
+    line_width=1,
+    color="aliceblue",
+    lighting=False,
+    edge_color="gray",
 )
-_ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color=[214, 39, 40])
-_ = plotter.add_points(
-    edge_source.points, style="points", point_size=20, color=[214, 39, 40]
-)
-plotter.enable_parallel_projection()
-_ = plotter.add_axes(
-    box=True,
-    box_args={
-        "opacity": 0.5,
-        "color_box": True,
-        "x_face_color": "white",
-        "y_face_color": "white",
-        "z_face_color": "white",
-    },
-)
+_ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
+_ = plotter.add_box_axes()
 plotter.show()
 ```
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/delaunay_3d_01.png" align="center" width=512 >
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_01.png" align="center" width=400 >
 </p>
 
 We can clip a mesh by a plane by specifying the origin and normal.
 See [clip_with_surface_example](https://docs.pyvista.org/examples/01-filter/clipping-with-surface#clip-with-surface-example) for more examples using this filter.
 
 ```python
-clipped = mesh.clip(origin=(0.0, 0.0, 0.0), normal=(0.0, 0.0, 1.0), crinkle=True)
+clipped = delaunay_3d.mesh.clip(
+    origin=(0.0, 0.0, 0.0), normal=(0.0, 0.0, 1.0), crinkle=True
+)
 ```
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/pvgmsh/main/docs/_static/delaunay_3d_02.png" align="center" width=512 >
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_02.png" align="center" width=400 >
 </p>
-
-## Contributions
-
-[![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg)](https://github.com/pyvista/pvgmsh/blob/main/CODE_OF_CONDUCT.md)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/pyvista/pvgmsh/main.svg)](https://results.pre-commit.ci/latest/github/pyvista/pvgmsh/main)
-[![NEP29](https://raster.shields.io/badge/follows-NEP29-orange.png)](https://numpy.org/neps/nep-0029-deprecation_policy.html)
 
 ## License
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+This software is published under the [GPLv3 license](https://www.gnu.org/licenses/gpl-3.0.en.html).
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=pyvista/scikit-gmsh&type=Date)](https://star-history.com/#pyvista/scikit-gmsh&Date)
