@@ -17,8 +17,6 @@ The `sikit-gmsh` package provides a simple interface to the `gmsh` library.
 The library has following main objectives:
 
 1. Provide an intuitive, object-oriented API for mesh creation.
-1. Provide 2D [Shapely](https://github.com/shapely/shapely) geometry features for mesh creation.
-1. Provide 3D [PyVista](https://github.com/pyvista/pyvista) geometry features for mesh creation.
 1. Integrate seamlessly with other libraries in the [scientific Python ecosystem](https://www.scipy.org/about.html).
 
 Contributions are _very welcome_ .
@@ -38,43 +36,42 @@ pip install scikit-gmsh
 ## Usage
 
 ```python
-import pyvista as pv
 import skgmsh as sg
-from shapely import Polygon
 ```
 
-Now, let's define geometry using [Shapely geometry classes](https://shapely.readthedocs.io/en/stable/geometry.html).
+Now, let's define geometry.
 
 ```python
 shell = [(0, 0, 0), (0, 10, 0), (10, 10, 0), (10, 0, 0), (0, 0, 0)]
 holes = [[(2, 2, 0), (2, 4, 0), (4, 4, 0), (4, 2, 0), (2, 2, 0)]]
-polygon_with_hole = Polygon(shell, holes=holes)
 ```
 
 We can then generate a 2D mesh.
 
 ```python
-delaunay_2d = sg.Delaunay2D(polygon_with_hole)
+alg = sg.Delaunay2D(shell=shell, holes=holes)
+mesh = alg.mesh
 ```
 
 To visualize the model, we can use PyVista.
 
 ```python
-plotter = pv.Plotter()
-_ = plotter.add_mesh(
-    delaunay_2d.mesh,
-    show_edges=True,
-    line_width=1,
-    color="aliceblue",
-    lighting=False,
-    edge_color="gray",
-)
-_ = plotter.add_mesh(source, show_edges=True, line_width=4, color="gray")
-plotter.show(cpos="xy")
+mesh.plot(show_edges=True, color="white", cpos="xy")
 ```
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_01.png" align="center" width=400 >
+</p>
+
+If you want to set the cell size, you can do so.
+
+```python
+alg.cell_size = 0.5
+alg.mesh.plot(show_edges=True, color="white", cpos="xy")
+```
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_02.png" align="center" width=400 >
 </p>
 
 We can also generate a 3D mesh.
