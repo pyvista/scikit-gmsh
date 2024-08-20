@@ -56,7 +56,7 @@ mesh = alg.mesh
 To visualize the model, we can use PyVista.
 
 ```python
-mesh.plot(show_edges=True, color="white", cpos="xy")
+mesh.plot(show_edges=True, cpos="xy")
 ```
 
 <p align="center">
@@ -67,7 +67,7 @@ If you want to set the cell size, you can do so.
 
 ```python
 alg.cell_size = 0.5
-alg.mesh.plot(show_edges=True, color="white", cpos="xy")
+alg.mesh.plot(show_edges=True, cpos="xy")
 ```
 
 <p align="center">
