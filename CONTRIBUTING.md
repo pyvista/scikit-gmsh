@@ -838,7 +838,7 @@ created the following will occur:
 
     ```bash
     git push origin HEAD
-    git push origin --tags
+    git push origin v$(python -c "import scikit-gmsh as sg; print(sg.__version__)")
     ```
 
 1.  Create a list of all changes for the release. It is often helpful to
