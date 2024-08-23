@@ -13,7 +13,7 @@
 [![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh)](https://github.com/pyvista/scikit-gmsh/stargazers)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-The `sikit-gmsh` package provides a simple interface to the `gmsh` library.
+The `scikit-gmsh` package provides a simple interface to the `gmsh` library.
 The library has following main objectives:
 
 1. Provide an intuitive, object-oriented API for mesh creation like [scipy.spatial.Delaunay class](https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html).
