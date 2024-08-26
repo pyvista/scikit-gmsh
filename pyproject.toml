@@ -54,7 +54,6 @@ testpaths = [
 
 [tool.ruff]
 line-length = 150
-src = ["src"]
 
 [tool.ruff.format]
 docstring-code-format = true
