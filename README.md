@@ -114,6 +114,15 @@ clipped = delaunay_3d.mesh.clip(
 <img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_02.png" align="center" width=400 >
 </p>
 
+## Other Resources
+
+This library may not meet your needs and if this is this case, consider checking out these other resources:
+
+- [optimesh](https://github.com/meshpro/optimesh) - Mesh optimization, mesh smoothing.
+- [pandamesh](https://github.com/Deltares/pandamesh) - 🐼 From geodataframe to mesh ▦.
+- [pygalmesh](https://github.com/meshpro/pygalmesh) - A Python interface to CGAL's meshing tools.
+- [pygmsh](https://github.com/nschloe/pygmsh) - Gmsh for Python.
+
 ## License
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
