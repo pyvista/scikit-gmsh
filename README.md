@@ -79,20 +79,20 @@ We can also generate a 3D mesh.
 
 ```python
 source = pv.Cube()
-delaunay_3d = sg.Delaunay3D(edge_source=source, target_sizes=0.2)
+alg = sg.Delaunay3D(edge_source=source, target_sizes=0.2)
 ```
 
 ```python
 plotter = pv.Plotter()
 _ = plotter.add_mesh(
-    delaunay_3d.mesh,
+    alg.mesh,
     show_edges=True,
     line_width=1,
     color="aliceblue",
     lighting=False,
     edge_color="gray",
 )
-_ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
+_ = plotter.add_mesh(source.extract_all_edges(), line_width=4, color="gray")
 _ = plotter.add_box_axes()
 plotter.show()
 ```
