@@ -115,12 +115,13 @@ clipped = delaunay_3d.mesh.clip(
 </p>
 
 ## Other Resources
+
 This library may not meet your needs and if this is this case, consider checking out these other resources:
 
-* [optimesh](https://github.com/meshpro/optimesh) - Mesh optimization, mesh smoothing.
-* [pandamesh](https://github.com/Deltares/pandamesh) - 🐼 From geodataframe to mesh ▦.
-* [pygalmesh](https://github.com/meshpro/pygalmesh) - A Python interface to CGAL's meshing tools.
-* [pygmsh](https://github.com/nschloe/pygmsh) - Gmsh for Python.
+- [optimesh](https://github.com/meshpro/optimesh) - Mesh optimization, mesh smoothing.
+- [pandamesh](https://github.com/Deltares/pandamesh) - 🐼 From geodataframe to mesh ▦.
+- [pygalmesh](https://github.com/meshpro/pygalmesh) - A Python interface to CGAL's meshing tools.
+- [pygmsh](https://github.com/nschloe/pygmsh) - Gmsh for Python.
 
 ## License
 
