@@ -34,7 +34,7 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 pip install scikit-gmsh
 ```
 
-## Usage
+## Gallery
 
 ![pyvista_banner_small](https://github.com/pyvista/pyvista/raw/main/doc/source/_static/pyvista_banner_small.png)
 
