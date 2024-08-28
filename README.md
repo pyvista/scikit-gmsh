@@ -34,10 +34,9 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 pip install scikit-gmsh
 ```
 
-## Highlights
+## Gallery
 
-Head over to the [Quick Examples](http://docs.pyvista.org/examples/index.html) page in the docs to explore our gallery of examples showcasing what scikit-gmsh can do.
-
+Check out the example galleries organized by subject here:
 ![pyvista_banner_small](https://github.com/pyvista/pyvista/raw/main/doc/source/_static/pyvista_banner_small.png)
 
 ## Other Resources
