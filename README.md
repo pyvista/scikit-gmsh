@@ -36,8 +36,7 @@ pip install scikit-gmsh
 
 ## Gallery
 
-Check out the example galleries organized by subject here:
-![pyvista_banner_small](https://github.com/pyvista/pyvista/raw/main/doc/source/_static/pyvista_banner_small.png)
+Check out the example galleries organized by subject [here](https://scikit-gmsh.readthedocs.io/en/latest/examples/index.html).
 
 ## Other Resources
 
