@@ -123,7 +123,7 @@ html_css_files = [
     "theme_overrides.css",
 ]
 
-# -- MyST settings ---------------------------------------------------
+# -- MyST settings -----------------------------------------------------------
 
 myst_enable_extensions = [
     "dollarmath",
@@ -142,7 +142,7 @@ myst_enable_extensions = [
     "attrs_block",
 ]
 
-# -- sphinx_gallery settings ---------------------------------------------------
+# -- sphinx_gallery settings -------------------------------------------------
 
 sphinx_gallery_conf = {
     "examples_dirs": ["../examples"],
