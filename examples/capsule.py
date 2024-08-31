@@ -1,4 +1,12 @@
-"""scikit-gmsh package for 3D mesh generation test."""
+r"""
+Capsule geometry example
+-------------------------
+
+Capsule geometry example.
+
+"""
+
+# sphinx_gallery_thumbnail_number = 1 # noqa:ERA001
 
 from __future__ import annotations
 
