@@ -20,12 +20,6 @@ The library has following main objectives:
 1. Provide an intuitive, object-oriented API for mesh creation like [scipy.spatial.Delaunay class](https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html).
 1. Integrate seamlessly with other libraries in the [Scientific Python ecosystem](https://scientific-python.org/).
 
-Contributions are _very welcome_ .
-This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
-By participating in this project, We want you to know that you agree to follow its terms.
-
-Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/pyvista/scikit-gmsh) — it’s a simple click that means the world to us and helps others discover it, too! ⭐️
-
 ## Installation
 
 [![pypi](https://img.shields.io/pypi/v/scikit-gmsh?label=pypi&logo=python&logoColor=white)](https://pypi.org/project/scikit-gmsh/)
@@ -129,6 +123,14 @@ This library may not meet your needs and if this is this case, consider checking
 
 This software is published under the [GPLv3 license](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
+## Contributions
+
+Contributions are _very welcome_ .
+This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+By participating in this project, We want you to know that you agree to follow its terms.
+
 ## Star History
+
+Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/pyvista/scikit-gmsh) — it’s a simple click that means the world to us and helps others discover it, too! ⭐️
 
 [![Star History Chart](https://api.star-history.com/svg?repos=pyvista/scikit-gmsh&type=Date)](https://star-history.com/#pyvista/scikit-gmsh&Date)
