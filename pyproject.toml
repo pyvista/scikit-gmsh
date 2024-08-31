@@ -3,7 +3,7 @@ requires = [
   'gmsh<4.12.3',
   'meshio<5.3.6',
   'pygmsh<7.1.18',
-  'pyvista',
+  'pyvista[all]',
   'scooby<0.9.3',
   'setuptools<69.0.4',
   'shapely<2.0.6'
