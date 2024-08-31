@@ -14,8 +14,12 @@ import pyvista as pv
 
 import skgmsh as sg
 
-edge_source = pv.Capsule(resolution=3)
+edge_source = pv.Capsule(resolution=9)
 edge_source.merge(pv.PolyData(edge_source.points), merge_points=True, inplace=True)
 edge_source.plot(show_edges=True)
+
+# %%
+# Create a 3D mesh from the edge source.
+
 alg = sg.Delaunay3D(edge_source)
 alg.mesh.shrink(0.9).plot(show_edges=True)
