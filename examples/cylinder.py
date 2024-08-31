@@ -6,6 +6,8 @@ Cylinder geometry example.
 
 """
 
+# sphinx_gallery_thumbnail_number = 3 # noqa:ERA001
+
 from __future__ import annotations
 
 import pyvista as pv
@@ -20,4 +22,10 @@ edge_source.plot(show_edges=True)
 # Generate the mesh.
 
 alg = sg.Delaunay3D(edge_source)
+alg.mesh.plot(show_edges=True)
+
+# %%
+# Change the cell size of the mesh.
+
+alg.cell_size = 0.5
 alg.mesh.plot(show_edges=True)

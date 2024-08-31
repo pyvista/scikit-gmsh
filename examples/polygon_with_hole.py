@@ -6,6 +6,8 @@ Polygon with hole geometry example.
 
 """
 
+# sphinx_gallery_thumbnail_number = 2 # noqa:ERA001
+
 from __future__ import annotations
 
 import skgmsh as sg
@@ -17,5 +19,10 @@ alg = sg.Delaunay2D(shell=shell, holes=holes)
 # %%
 # Generate the mesh.
 
-mesh = alg.mesh
-mesh.plot(show_edges=True, color="white", cpos="xy")
+alg.mesh.plot(show_edges=True, cpos="xy")
+
+# %%
+# Change the cell size of the mesh.
+
+alg.cell_size = 0.5
+alg.mesh.plot(show_edges=True, cpos="xy")
