@@ -11,6 +11,7 @@ import datetime
 from importlib.metadata import version as get_version
 import os
 from pathlib import Path
+
 import pyvista
 from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
 from sphinx_gallery.sorting import FileNameSortKey
@@ -57,7 +58,7 @@ package_dir = root_dir / "src"
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["myst_parser", 'sphinx_gallery.gen_gallery'    "pyvista.ext.plot_directive",    "pyvista.ext.viewer_directive"]
+extensions = ["myst_parser", "sphinx_gallery.gen_gallery" "pyvista.ext.plot_directive", "pyvista.ext.viewer_directive"]
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
