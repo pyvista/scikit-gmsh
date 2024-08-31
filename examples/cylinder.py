@@ -1,4 +1,7 @@
-"""scikit-gmsh package for 3D mesh generation test."""
+r"""
+Cylinder geometry example
+-------------------------
+"""
 
 from __future__ import annotations
 
