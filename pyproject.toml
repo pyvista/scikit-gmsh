@@ -3,9 +3,10 @@ requires = [
   'gmsh<4.12.3',
   'meshio<5.3.6',
   'pygmsh<7.1.18',
-  'pyvista',
+  'pyvista[all]<0.44.2',
   'scooby<0.9.3',
-  'setuptools<69.0.4'
+  'setuptools<69.0.4',
+  'shapely<2.0.6'
 ]
 build-backend = 'setuptools.build_meta'
 
@@ -19,13 +20,23 @@ dependencies = [
   'gmsh<4.12.3',
   'meshio<5.3.6',
   'pygmsh<7.1.18',
-  'pyvista',
-  'scooby<0.9.3'
+  'pyvista[all]<0.44.2',
+  'scooby<0.9.3',
+  'shapely<2.0.6'
 ]
 requires-python = '>=3.9'
 
 [project.optional-dependencies]
 test = ['pytest==8.0.0']
+docs = [
+  'myst-parser==4.0.0',
+  'sphinx==8.0.2',
+  'sphinx-book-theme==1.1.3',
+  'sphinx-copybutton==0.5.2',
+  'sphinx-design==0.6.1',
+  'sphinx-gallery==0.17.1',
+  'sphinx-toolbox==3.8.0'
+]
 
 [tool.mypy]
 ignore_missing_imports = true
@@ -52,7 +63,6 @@ testpaths = [
 
 [tool.ruff]
 line-length = 150
-src = ["src"]
 
 [tool.ruff.format]
 docstring-code-format = true
@@ -77,6 +87,7 @@ force-single-line = true
 [tool.ruff.lint.per-file-ignores]
 "docs/**" = ["INP001"]
 "tests/**" = ["INP001", "S101"]
+"examples/**" = ["D205", "D400", "D415", "INP001"]
 
 [tool.ruff.lint.pyupgrade]
 # Preserve types, even if a file imports `from __future__ import annotations`.
