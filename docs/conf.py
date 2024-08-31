@@ -15,18 +15,12 @@ from pathlib import Path
 import pyvista
 from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
 
-# Manage errors
 pyvista.set_error_output_file("errors.txt")
-# Ensure that offscreen rendering is used for docs generation
 pyvista.OFF_SCREEN = True  # Not necessary - simply an insurance policy
-# Preferred plotting style for documentation
 pyvista.set_plot_theme("document")
-
-# necessary when building the sphinx gallery
 pyvista.BUILDING_GALLERY = True
 os.environ["PYVISTA_BUILDING_GALLERY"] = "true"
 
-# start a virtual framebuffer
 if os.environ.get("READTHEDOCS") or os.environ.get("CI"):
     pyvista.start_xvfb()
 
