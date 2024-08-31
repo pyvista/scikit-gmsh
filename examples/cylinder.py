@@ -6,7 +6,7 @@ Cylinder geometry example.
 
 """
 
-# sphinx_gallery_thumbnail_number = 3
+# sphinx_gallery_thumbnail_number = 3 # noqa:ERA001
 
 from __future__ import annotations
 
