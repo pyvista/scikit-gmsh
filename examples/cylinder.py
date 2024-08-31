@@ -22,10 +22,16 @@ edge_source.plot(show_edges=True)
 # Generate the mesh.
 
 alg = sg.Delaunay3D(edge_source)
-alg.mesh.plot(show_edges=True)
+mesh = alg.mesh
+mesh.plot(show_edges=True)
+
+# %%
+# Output the information of the mesh.
+
+print(mesh)
 
 # %%
 # Change the cell size of the mesh.
 
-alg.cell_size = 0.5
+alg.cell_size = 0.25
 alg.mesh.plot(show_edges=True)
