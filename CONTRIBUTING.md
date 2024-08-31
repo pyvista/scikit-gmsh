@@ -409,9 +409,9 @@ warning messages.
 ```python
 with pytest.warns(skgmshDeprecationWarning):
     addition(a, b)
-    if pv._version.version_info >= (0, 40):
+    if sg._version.version_info >= (0, 40):
         raise RuntimeError("Convert error this function")
-    if pv._version.version_info >= (0, 41):
+    if sg._version.version_info >= (0, 41):
         raise RuntimeError("Remove this function")
 ```
 
@@ -754,16 +754,6 @@ Since it may be necessary to merge your branch with the current release
 branch (see below), please do not delete your branch if it is a `fix/`
 branch.
 
-### Preview the Documentation
-
-Once you have make a Pull Request. You can comment
-`github-actions preview` on a pull request to preview documentation.
-Since this command is only available for
-[\@scikit-gmsh/developers](https://github.com/orgs/scikit-gmsh/teams/developers)
-, new contributors kindly request them to comment command. This is
-essential to safeguard the deployment site against potentially harmful
-commits.
-
 ### Branching Model
 
 This project has a branching model that enables rapid development of
@@ -840,7 +830,7 @@ created the following will occur:
     not be deleted. Tag the release with:
 
     ```bash
-    git tag v$(python -c "import scikit-gmsh as pv; print(pv.__version__)")
+    git tag v$(python -c "import scikit-gmsh as sg; print(sg.__version__)")
     ```
 
 1.  Please check again that the tag has been created correctly and push
@@ -848,7 +838,7 @@ created the following will occur:
 
     ```bash
     git push origin HEAD
-    git push origin --tags
+    git push origin v$(python -c "import scikit-gmsh as sg; print(sg.__version__)")
     ```
 
 1.  Create a list of all changes for the release. It is often helpful to

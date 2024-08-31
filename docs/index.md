@@ -3,9 +3,6 @@
 :::{include} ../README.md
 :parser: myst_parser.sphinx
 
-:::{include} ../CONTRIBUTING.md
-:parser: myst_parser.sphinx
-
 ## Contributors
 
 :::{include} ../CONTRIBUTORS.md
