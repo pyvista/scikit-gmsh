@@ -86,3 +86,10 @@ keep-runtime-typing = true
 [tool.setuptools.dynamic]
 version = {attr = 'skgmsh.__version__'}
 readme = {file = "README.md", content-type = "text/markdown"}
+
+[project.optional-dependencies]
+docs = [
+myst-parser==4.0.0
+sphinx==8.0.2
+sphinx-book-theme==1.1.3
+]
