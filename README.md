@@ -15,6 +15,8 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 The `scikit-gmsh` package provides a simple interface to the `gmsh` library.
+The [Gmsh](https://gmsh.info/) is a three-dimensional finite element mesh generator with built-in pre- and post-processing facilities.
+
 The library has following main objectives:
 
 1. Provide an intuitive, object-oriented API for mesh creation like [scipy.spatial.Delaunay class](https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html).
