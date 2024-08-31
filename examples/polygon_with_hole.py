@@ -10,5 +10,11 @@ polygon_with_hole = Polygon(
     [(0, 0, 0), (0, 10, 0), (10, 10, 0), (10, 0, 0), (0, 0, 0)], holes=[[(2, 2, 0), (2, 4, 0), (4, 4, 0), (4, 2, 0), (2, 2, 0)]]
 )
 
-delaunay2d = sg.Delaunay2D(polygon_with_hole)
-delaunay2d.mesh.plot(show_edges=True, color="white", cpos="xy")
+alg = sg.Delaunay2D(polygon_with_hole)
+alg.mesh.plot(show_edges=True, color="white", cpos="xy")
+
+# %%
+# Change the cell size of the mesh.
+
+alg.cell_size = 0.5
+alg.mesh.plot(show_edges=True, color="white", cpos="xy")
