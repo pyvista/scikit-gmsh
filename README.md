@@ -28,84 +28,12 @@ The library has following main objectives:
 pip install scikit-gmsh
 ```
 
-## Usage
+## Gallery
 
-```python
-import skgmsh as sg
-```
-
-Now, let's define geometry.
-
-```python
-shell = [(0, 0, 0), (0, 10, 0), (10, 10, 0), (10, 0, 0), (0, 0, 0)]
-holes = [[(2, 2, 0), (2, 4, 0), (4, 4, 0), (4, 2, 0), (2, 2, 0)]]
-```
-
-We can then generate a 2D mesh.
-
-```python
-alg = sg.Delaunay2D(shell=shell, holes=holes)
-mesh = alg.mesh
-```
-
-To visualize the model, we can use PyVista.
-
-```python
-mesh.plot(show_edges=True, cpos="xy")
-```
+Check out the example galleries organized by subject here:
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_01.png" align="center" width=400 >
-</p>
-
-If you want to set the cell size, you can do so.
-
-```python
-alg.cell_size = 0.5
-alg.mesh.plot(show_edges=True, cpos="xy")
-```
-
-<p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_02.png" align="center" width=400 >
-</p>
-
-We can also generate a 3D mesh.
-
-```python
-source = pv.Cube()
-alg = sg.Delaunay3D(edge_source=source, target_sizes=0.2)
-```
-
-```python
-plotter = pv.Plotter()
-_ = plotter.add_mesh(
-    alg.mesh,
-    show_edges=True,
-    line_width=1,
-    color="aliceblue",
-    lighting=False,
-    edge_color="gray",
-)
-_ = plotter.add_mesh(source.extract_all_edges(), line_width=4, color="gray")
-_ = plotter.add_box_axes()
-plotter.show()
-```
-
-<p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_01.png" align="center" width=400 >
-</p>
-
-We can clip a mesh by a plane by specifying the origin and normal.
-See [clip_with_surface_example](https://docs.pyvista.org/examples/01-filter/clipping-with-surface#clip-with-surface-example) for more examples using this filter.
-
-```python
-clipped = delaunay_3d.mesh.clip(
-    origin=(0.0, 0.0, 0.0), normal=(0.0, 0.0, 1.0), crinkle=True
-)
-```
-
-<p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_02.png" align="center" width=400 >
+  <a href="https://scikit-gmsh.readthedocs.io/en/latest/examples/polygon_with_hole.html"><img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_polygon_with_hole_thumb.png" height="200px"/></a> <a href="https://scikit-gmsh.readthedocs.io/en/latest/examples/cylinder.html"><img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_cylinder_thumb.png" height="200px"/></a>
 </p>
 
 ## Other Resources
