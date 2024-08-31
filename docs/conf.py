@@ -151,7 +151,7 @@ sphinx_gallery_conf = {
     "download_all_examples": False,
     "remove_config_comments": True,
     "reset_modules_order": "both",
-    "filename_pattern": "ex.*\\.py",
+    "filename_pattern": "*\\.py",
     "backreferences_dir": None,
     "pypandoc": True,
     "capture_repr": ("_repr_html_",),
