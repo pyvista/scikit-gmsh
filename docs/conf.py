@@ -11,6 +11,24 @@ import datetime
 from importlib.metadata import version as get_version
 import os
 from pathlib import Path
+import pyvista
+from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
+from sphinx_gallery.sorting import FileNameSortKey
+
+# Manage errors
+pyvista.set_error_output_file("errors.txt")
+# Ensure that offscreen rendering is used for docs generation
+pyvista.OFF_SCREEN = True  # Not necessary - simply an insurance policy
+# Preferred plotting style for documentation
+pyvista.set_plot_theme("document")
+
+# necessary when building the sphinx gallery
+pyvista.BUILDING_GALLERY = True
+os.environ["PYVISTA_BUILDING_GALLERY"] = "true"
+
+# start a virtual framebuffer
+if os.environ.get("READTHEDOCS") or os.environ.get("CI"):
+    pyvista.start_xvfb()
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -39,8 +57,7 @@ package_dir = root_dir / "src"
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["myst_parser"]
-
+extensions = ["myst_parser", 'sphinx_gallery.gen_gallery'    "pyvista.ext.plot_directive",    "pyvista.ext.viewer_directive"]
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
@@ -123,3 +140,19 @@ myst_enable_extensions = [
     "attrs_inline",
     "attrs_block",
 ]
+
+# -- sphinx_gallery settings ---------------------------------------------------
+
+sphinx_gallery_conf = {
+    "examples_dirs": ["../examples"],
+    "gallery_dirs": ["examples"],
+    "image_scrapers": (DynamicScraper(), "matplotlib"),
+    "download_all_examples": False,
+    "remove_config_comments": True,
+    "reset_modules_order": "both",
+    "filename_pattern": "ex.*\\.py",
+    "backreferences_dir": None,
+    "pypandoc": True,
+    "capture_repr": ("_repr_html_",),
+    "within_subsection_order": FileNameSortKey,
+}
