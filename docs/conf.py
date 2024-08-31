@@ -58,7 +58,7 @@ package_dir = root_dir / "src"
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["myst_parser", "sphinx_gallery.gen_gallery", "pyvista.ext.plot_directive", "pyvista.ext.viewer_directive"]
+extensions = ["myst_parser", "sphinx_gallery.gen_gallery", "pyvista.ext.plot_directive", "pyvista.ext.viewer_directive", "sphinx_design"]
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
