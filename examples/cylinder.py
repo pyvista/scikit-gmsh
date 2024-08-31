@@ -26,4 +26,4 @@ alg.mesh.plot(show_edges=True)
 # Change the cell size of the mesh.
 
 alg.cell_size = 0.5
-alg.mesh.plot(show_edges=True, color="white", cpos="xy")
+alg.mesh.plot(show_edges=True)
