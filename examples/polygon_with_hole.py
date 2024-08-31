@@ -6,6 +6,8 @@ Polygon with hole geometry example.
 
 """
 
+# sphinx_gallery_thumbnail_number = 3
+
 from __future__ import annotations
 
 import skgmsh as sg
