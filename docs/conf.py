@@ -125,34 +125,34 @@ html_css_files = [
 # -- MyST settings -----------------------------------------------------------
 
 myst_enable_extensions = [
-    "dollarmath",
     "amsmath",
+    "attrs_block",
+    "attrs_inline",
+    "colon_fence",
     "deflist",
+    "dollarmath",
     "fieldlist",
     "html_admonition",
     "html_image",
-    "colon_fence",
-    "smartquotes",
     "replacements",
+    "smartquotes",
     "strikethrough",
     "substitution",
     "tasklist",
-    "attrs_inline",
-    "attrs_block",
 ]
 
 # -- sphinx_gallery settings -------------------------------------------------
 
 sphinx_gallery_conf = {
-    "pypandoc": True,
-    "examples_dirs": ["../examples/"],
-    "gallery_dirs": ["./examples"],
-    "filename_pattern": r"\.py",
-    "download_all_examples": False,
-    "remove_config_comments": True,
     "backreferences_dir": None,
     "doc_module": "pyvista",
-    "image_scrapers": (DynamicScraper(), "matplotlib"),
+    "download_all_examples": False,
+    "examples_dirs": ["../examples/"],
+    "filename_pattern": r"\.py",
     "first_notebook_cell": ("%matplotlib inline\n" "from pyvista import set_plot_theme\n" "set_plot_theme('document')\n"),
+    "gallery_dirs": ["./examples"],
+    "image_scrapers": (DynamicScraper(), "matplotlib"),
+    "pypandoc": True,
+    "remove_config_comments": True,
     "reset_modules_order": "both",
 }
