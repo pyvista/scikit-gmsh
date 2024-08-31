@@ -1,5 +1,0 @@
--e ..
-myst-parser==4.0.0
-sphinx==8.0.2
-sphinx-book-theme==1.1.3
-sphinx-gallery==0.17.1
