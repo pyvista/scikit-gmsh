@@ -1,4 +1,7 @@
-"""scikit-gmsh package for polygon with hole mesh generation test."""
+r"""
+Polygon with hole geometry example
+----------------------------------
+"""
 
 from __future__ import annotations
 
