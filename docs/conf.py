@@ -150,6 +150,7 @@ sphinx_gallery_conf = {
     "image_scrapers": (DynamicScraper(), "matplotlib"),
     "download_all_examples": False,
     "remove_config_comments": True,
+    "reset_modules_order": "both",
     "filename_pattern": "*\\.py",
     "backreferences_dir": None,
     "pypandoc": True,
