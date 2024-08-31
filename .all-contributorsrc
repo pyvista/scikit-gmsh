@@ -63,6 +63,15 @@
       "contributions": [
         "example"
       ]
+    },
+    {
+      "login": "bjlittle",
+      "name": "Bill Little",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2051656?v=4",
+      "profile": "https://github.com/bjlittle",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,

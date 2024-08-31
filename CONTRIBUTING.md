@@ -754,16 +754,6 @@ Since it may be necessary to merge your branch with the current release
 branch (see below), please do not delete your branch if it is a `fix/`
 branch.
 
-### Preview the Documentation
-
-Once you have make a Pull Request. You can comment
-`github-actions preview` on a pull request to preview documentation.
-Since this command is only available for
-[\@scikit-gmsh/developers](https://github.com/orgs/scikit-gmsh/teams/developers)
-, new contributors kindly request them to comment command. This is
-essential to safeguard the deployment site against potentially harmful
-commits.
-
 ### Branching Model
 
 This project has a branching model that enables rapid development of

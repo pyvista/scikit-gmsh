@@ -7,6 +7,7 @@
 
 > Scikit for Gmsh to generate 3D finite element mesh.
 
+[![Status](https://badgen.net/badge/status/alpha/d8624d)](https://badgen.net/badge/status/alpha/d8624d)
 [![All Contributors](https://img.shields.io/github/all-contributors/pyvista/scikit-gmsh?color=ee8449)](https://scikit-gmsh.readthedocs.io/en/latest/reference/about.html#contributors)
 [![Contributing](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg)](https://github.com/pyvista/scikit-gmsh/issues)
 [![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
@@ -18,14 +19,8 @@ The [Gmsh](https://gmsh.info/) is a three-dimensional finite element mesh genera
 
 The library has following main objectives:
 
-1. Provide an intuitive, object-oriented API for mesh creation.
-1. Integrate seamlessly with other libraries in the [scientific Python ecosystem](https://www.scipy.org/about.html).
-
-Contributions are _very welcome_ .
-This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
-By participating in this project, We want you to know that you agree to follow its terms.
-
-Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/pyvista/scikit-gmsh) — it’s a simple click that means the world to us and helps others discover it, too! ⭐️
+1. Provide an intuitive, object-oriented API for mesh creation like [scipy.spatial.Delaunay class](https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html).
+1. Integrate seamlessly with other libraries in the [Scientific Python ecosystem](https://scientific-python.org/).
 
 ## Installation
 
@@ -35,85 +30,22 @@ Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/
 pip install scikit-gmsh
 ```
 
-## Usage
+## Gallery
 
-```python
-import skgmsh as sg
-```
-
-Now, let's define geometry.
-
-```python
-shell = [(0, 0, 0), (0, 10, 0), (10, 10, 0), (10, 0, 0), (0, 0, 0)]
-holes = [[(2, 2, 0), (2, 4, 0), (4, 4, 0), (4, 2, 0), (2, 2, 0)]]
-```
-
-We can then generate a 2D mesh.
-
-```python
-alg = sg.Delaunay2D(shell=shell, holes=holes)
-mesh = alg.mesh
-```
-
-To visualize the model, we can use PyVista.
-
-```python
-mesh.plot(show_edges=True, cpos="xy")
-```
+Check out the example galleries organized by subject here:
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_01.png" align="center" width=400 >
+  <a href="https://scikit-gmsh.readthedocs.io/en/latest/examples/polygon_with_hole.html"><img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_polygon_with_hole_thumb.png" height="200px"/></a> <a href="https://scikit-gmsh.readthedocs.io/en/latest/examples/cylinder.html"><img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_cylinder_thumb.png" height="200px"/></a>
 </p>
 
-If you want to set the cell size, you can do so.
+## Other Resources
 
-```python
-alg.cell_size = 0.5
-alg.mesh.plot(show_edges=True, cpos="xy")
-```
+This library may not meet your needs and if this is this case, consider checking out these other resources:
 
-<p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/frontal_delaunay_2d_02.png" align="center" width=400 >
-</p>
-
-We can also generate a 3D mesh.
-
-```python
-source = pv.Cube()
-delaunay_3d = sg.Delaunay3D(edge_source=source, target_sizes=0.2)
-```
-
-```python
-plotter = pv.Plotter()
-_ = plotter.add_mesh(
-    delaunay_3d.mesh,
-    show_edges=True,
-    line_width=1,
-    color="aliceblue",
-    lighting=False,
-    edge_color="gray",
-)
-_ = plotter.add_mesh(edge_source.extract_all_edges(), line_width=4, color="gray")
-_ = plotter.add_box_axes()
-plotter.show()
-```
-
-<p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_01.png" align="center" width=400 >
-</p>
-
-We can clip a mesh by a plane by specifying the origin and normal.
-See [clip_with_surface_example](https://docs.pyvista.org/examples/01-filter/clipping-with-surface#clip-with-surface-example) for more examples using this filter.
-
-```python
-clipped = delaunay_3d.mesh.clip(
-    origin=(0.0, 0.0, 0.0), normal=(0.0, 0.0, 1.0), crinkle=True
-)
-```
-
-<p align="center">
-<img src="https://raw.githubusercontent.com/pyvista/scikit-gmsh/main/docs/_static/delaunay_3d_02.png" align="center" width=400 >
-</p>
+- [optimesh](https://github.com/meshpro/optimesh) - Mesh optimization, mesh smoothing.
+- [pandamesh](https://github.com/Deltares/pandamesh) - 🐼 From geodataframe to mesh ▦.
+- [pygalmesh](https://github.com/meshpro/pygalmesh) - A Python interface to CGAL's meshing tools.
+- [pygmsh](https://github.com/nschloe/pygmsh) - Gmsh for Python.
 
 ## License
 
@@ -121,6 +53,14 @@ clipped = delaunay_3d.mesh.clip(
 
 This software is published under the [GPLv3 license](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
+## Contributions
+
+Contributions are _very welcome_ .
+This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+By participating in this project, We want you to know that you agree to follow its terms.
+
 ## Star History
+
+Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/pyvista/scikit-gmsh) — it’s a simple click that means the world to us and helps others discover it, too! ⭐️
 
 [![Star History Chart](https://api.star-history.com/svg?repos=pyvista/scikit-gmsh&type=Date)](https://star-history.com/#pyvista/scikit-gmsh&Date)
