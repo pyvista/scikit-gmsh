@@ -23,3 +23,9 @@ edge_source.plot(show_edges=True)
 
 alg = sg.Delaunay3D(edge_source)
 alg.mesh.shrink(0.9).plot(show_edges=True)
+
+# %%
+# Change the cell size of the mesh.
+
+alg.cell_size = 0.5
+alg.mesh.plot(show_edges=True)
