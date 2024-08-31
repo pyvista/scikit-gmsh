@@ -14,7 +14,6 @@ from pathlib import Path
 
 import pyvista
 from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
-from sphinx_gallery.sorting import FileNameSortKey
 
 # Manage errors
 pyvista.set_error_output_file("errors.txt")
@@ -145,15 +144,19 @@ myst_enable_extensions = [
 # -- sphinx_gallery settings -------------------------------------------------
 
 sphinx_gallery_conf = {
-    "examples_dirs": ["../examples"],
-    "gallery_dirs": ["examples"],
-    "image_scrapers": (DynamicScraper(), "matplotlib"),
+    "pypandoc": True,
+    "examples_dirs": ["../examples/"],
+    "gallery_dirs": ["./examples"],
+    "filename_pattern": r"\.py",
     "download_all_examples": False,
     "remove_config_comments": True,
-    "reset_modules_order": "both",
-    "filename_pattern": "*\\.py",
     "backreferences_dir": None,
-    "pypandoc": True,
-    "capture_repr": ("_repr_html_",),
-    "within_subsection_order": FileNameSortKey,
+    "doc_module": "pyvista",
+    "image_scrapers": (DynamicScraper(), "matplotlib"),
+    "first_notebook_cell": (
+        "%matplotlib inline\n"
+        "from pyvista import set_plot_theme\n"
+        "set_plot_theme('document')\n"
+    ),
+    "reset_modules_order": "both",
 }
