@@ -1,6 +1,9 @@
 r"""
 Polygon with hole geometry example
 ----------------------------------
+
+Polygon with hole geometry example.
+
 """
 
 from __future__ import annotations

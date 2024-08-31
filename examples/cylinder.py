@@ -1,6 +1,9 @@
 r"""
 Cylinder geometry example
 -------------------------
+
+Cylinder geometry example.
+
 """
 
 from __future__ import annotations
