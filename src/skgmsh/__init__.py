@@ -384,10 +384,11 @@ class Delaunay3D:
     def __init__(
         self: Delaunay3D,
         edge_source: pv.PolyData,
+        cell_size: float | None = None,
     ) -> None:
         """Initialize the Delaunay3D class."""
         self._edge_source = edge_source
-        self._mesh = delaunay_3d(edge_source)
+        self._cell_size = cell_size
 
     @property
     def edge_source(self: Delaunay3D) -> pv.PolyData:
@@ -397,4 +398,15 @@ class Delaunay3D:
     @property
     def mesh(self: Delaunay3D) -> pv.UnstructuredGrid:
         """Get the mesh."""
+        self._mesh = delaunay_3d(self.edge_source, target_sizes=self.cell_size)
         return self._mesh
+
+    @property
+    def cell_size(self: Delaunay3D) -> float | None:
+        """Get the cell_size of the mesh."""
+        return self._cell_size
+
+    @cell_size.setter
+    def cell_size(self: Delaunay3D, size: int) -> None:
+        """Set the cell_size of the mesh."""
+        self._cell_size = size
