@@ -16,7 +16,7 @@ import skgmsh as sg
 
 edge_source = pv.Cylinder(resolution=16)
 edge_source.merge(pv.PolyData(edge_source.points), merge_points=True, inplace=True)
-edge_source.plot(show_edges=True)
+edge_source.plot(show_edges=True, color="white", line_width=2)
 
 # %%
 # Generate the mesh.
@@ -34,4 +34,4 @@ print(mesh)
 # Change the cell size of the mesh.
 
 alg.cell_size = 0.25
-alg.mesh.plot(show_edges=True)
+alg.mesh.plot(show_edges=True, color="white", line_width=2)
