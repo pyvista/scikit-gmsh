@@ -16,7 +16,7 @@
 
 The `scikit-gmsh` package provides a simple interface to:
 
-* Christophe Geuzaine and Jean-François Remacle's [Gmsh](https://pypi.org/project/gmsh/)
+- Christophe Geuzaine and Jean-François Remacle's [Gmsh](https://pypi.org/project/gmsh/)
 
 The library has following main objectives:
 
