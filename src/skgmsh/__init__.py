@@ -166,9 +166,10 @@ def delaunay_3d(
             curve_tags.append(curve_tag)
         gmsh.model.geo.add_curve_loop(curve_tags, i + 1)
         gmsh.model.geo.add_plane_surface([i + 1], i + 1)
-        gmsh.model.geo.remove_all_duplicates()
-        gmsh.model.geo.synchronize()
         surface_loop.append(i + 1)
+
+    gmsh.model.geo.remove_all_duplicates()
+    gmsh.model.geo.synchronize()
 
     gmsh.model.geo.add_surface_loop(surface_loop, 1)
     gmsh.model.geo.add_volume([1], 1)
