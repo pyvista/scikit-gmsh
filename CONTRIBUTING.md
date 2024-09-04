@@ -830,7 +830,7 @@ created the following will occur:
     not be deleted. Tag the release with:
 
     ```bash
-    git tag v$(python -c "import scikit-gmsh as sg; print(sg.__version__)")
+    git tag v$(python -c "import skgmsh as skg; print(skg.__version__)")
     ```
 
 1.  Please check again that the tag has been created correctly and push
@@ -838,7 +838,7 @@ created the following will occur:
 
     ```bash
     git push origin HEAD
-    git push origin v$(python -c "import scikit-gmsh as sg; print(sg.__version__)")
+    git push origin v$(python -c "import skgmsh as skg; print(skg.__version__)")
     ```
 
 1.  Create a list of all changes for the release. It is often helpful to
