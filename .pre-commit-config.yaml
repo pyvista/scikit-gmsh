@@ -93,7 +93,6 @@ repos:
       - id: requirements-txt-fixer
       - id: trailing-whitespace
       - id: sort-simple-yaml
-        files: ^.*.yaml
   - repo: https://github.com/pappasam/toml-sort
     rev: v0.23.1
     hooks:
