@@ -1,15 +1,19 @@
-name: Unit Testing and Deployment
+      - name: Install Testing Requirements
+        run: |
+          pip install -e .[test]
 
-on:
-  pull_request:
-  workflow_dispatch:
-  schedule:
-    - cron: "0 4 * * *"
-  push:
-    tags:
-      - "*"
-    branches:
-      - main
+      - name: Install packages
+        run: |
+          for i in $(cat packages.txt); do sudo apt-get install $i; done
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Unit Testing
+        run: |
+          export PYTHONPATH=. && xvfb-run python -m pytest -v
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -32,19 +36,15 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
+name: Unit Testing and Deployment
 
-      - name: Install packages
-        run: |
-          for i in $(cat packages.txt); do sudo apt-get install $i; done
-
-      - name: Install Testing Requirements
-        run: |
-          pip install -e .[test]
-
-      - name: Unit Testing
-        run: |
-          export PYTHONPATH=. && xvfb-run python -m pytest -v
+on:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 4 * * *"
+  push:
+    tags:
+      - "*"
+    branches:
+      - main

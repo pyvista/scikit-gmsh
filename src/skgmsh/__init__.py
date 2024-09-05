@@ -1,70 +1,3 @@
-"""scikit-gmsh package for 3D mesh generation."""
-
-from __future__ import annotations
-
-import datetime
-from typing import TYPE_CHECKING
-
-import gmsh
-from pygmsh.helpers import extract_to_meshio
-import pyvista as pv
-import scooby
-import shapely
-
-if TYPE_CHECKING:
-    from collections.abc import Sequence
-
-INITIAL_MESH_ONLY_2D = 3
-FRONTAL_DELAUNAY_2D = 6
-DELAUNAY_3D = 1
-INITIAL_MESH_ONLY_3D = 3
-
-SILENT = 0
-SIMPLE = 0
-
-TRUE = 1
-FALSE = 0
-
-now = datetime.datetime.now(tz=datetime.timezone.utc)
-
-# major, minor, patch
-version_info = 0, 3, "dev0"
-
-# Nice string for the version
-__version__ = ".".join(map(str, version_info))
-
-
-class Report(scooby.Report):  # type: ignore[misc]
-    """
-    Generate an environment package and hardware report.
-
-    Parameters
-    ----------
-    ncol : int, default: 3
-        Number of package-columns in html table; only has effect if
-        ``mode='HTML'`` or ``mode='html'``.
-
-    text_width : int, default: 80
-        The text width for non-HTML display modes.
-
-    """
-
-    def __init__(self: Report, ncol: int = 3, text_width: int = 80) -> None:  # numpydoc ignore=PR01
-        """Generate a :class:`scooby.Report` instance."""
-        # mandatory packages
-        core: list[str] = [
-            "matplotlib",
-            "numpy",
-            "pooch",
-            "pyvista",
-            "scooby",
-            "vtk",
-            "gmsh",
-            "meshio",
-            "pygmsh",
-            "pyvista",
-        ]
-
         # optional packages
         optional: list[str] = [
             "imageio",
@@ -87,9 +20,25 @@ class Report(scooby.Report):  # type: ignore[misc]
             "nest_asyncio",
         ]
 
+        embedded_points = []
+        for target_size, point in zip(target_sizes, points):
+            embedded_points.append(gmsh.model.geo.add_point(point[0], point[1], point[2], target_size))
+
         extra_meta = [
             ("GPU Details", "None"),
         ]
+
+        for i in range(lines[0] - 1):
+            id_ = i + 1
+            gmsh.model.geo.add_line(lines[i + 1] + 1, lines[i + 2] + 1, id_)
+
+        gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
+        gmsh.model.geo.add_plane_surface([1], 1)
+        gmsh.model.geo.synchronize()
+        gmsh.model.mesh.embed(0, embedded_points, 2, 1)
+
+        if isinstance(target_sizes, float):
+            target_sizes = [target_sizes] * edge_source.number_of_points
 
         super().__init__(
             core=core,
@@ -99,13 +48,90 @@ class Report(scooby.Report):  # type: ignore[misc]
             extra_meta=extra_meta,
         )
 
-
-def delaunay_3d(
-    edge_source: pv.PolyData,
-    target_sizes: float | Sequence[float] | None = None,
-) -> pv.UnstructuredGrid | None:
     """
-    Delaunay 3D mesh algorithm.
+
+    """
+    points = edge_source.points
+    faces = edge_source.irregular_faces
+
+    """
+    gmsh.initialize()
+    if target_sizes is None:
+        gmsh.option.set_number("Mesh.Algorithm", INITIAL_MESH_ONLY_2D)
+        gmsh.option.set_number("Mesh.MeshSizeExtendFromBoundary", 0)
+        gmsh.option.set_number("Mesh.MeshSizeFromPoints", 0)
+        gmsh.option.set_number("Mesh.MeshSizeFromCurvature", 0)
+    else:
+        gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
+    gmsh.option.set_number("General.Verbosity", SILENT)
+
+    """
+
+    """
+
+    @cell_size.setter
+    def cell_size(self: Delaunay2D, size: int) -> None:
+        """Set the cell_size of the mesh."""
+        self._cell_size = size
+
+    @cell_size.setter
+    def cell_size(self: Delaunay3D, size: int) -> None:
+        """Set the cell_size of the mesh."""
+        self._cell_size = size
+
+    @property
+    def edge_source(self: Delaunay2D) -> pv.PolyData | shapely.geometry.Polygon:
+        """Get the edge source."""
+        return self._edge_source
+
+    @property
+    def mesh(self: Delaunay2D) -> pv.PolyData:
+        """Get the mesh."""
+        mesh = frontal_delaunay_2d(self._edge_source, target_sizes=self._cell_size)
+        return pv.PolyData(mesh.points, mesh.cells)
+
+    @property
+    def cell_size(self: Delaunay2D) -> float | None:
+        """Get the cell_size of the mesh."""
+        return self._cell_size
+
+    @property
+    def edge_source(self: Delaunay3D) -> pv.PolyData:
+        """Get the edge source."""
+        return self._edge_source
+
+    @property
+    def mesh(self: Delaunay3D) -> pv.UnstructuredGrid:
+        """Get the mesh."""
+        self._mesh = delaunay_3d(self.edge_source, target_sizes=self.cell_size)
+        return self._mesh
+
+    @property
+    def cell_size(self: Delaunay3D) -> float | None:
+        """Get the cell_size of the mesh."""
+        return self._cell_size
+
+    Notes
+    -----
+    .. versionadded:: 0.2.0
+
+    Notes
+    -----
+    .. versionadded:: 0.2.0
+
+    Notes
+    -----
+    .. versionadded:: 0.2.0
+
+    Notes
+    -----
+    .. versionadded:: 0.2.0
+
+    Parameters
+    ----------
+    ncol : int, default: 3
+        Number of package-columns in html table; only has effect if
+        ``mode='HTML'`` or ``mode='html'``.
 
     Parameters
     ----------
@@ -117,21 +143,92 @@ def delaunay_3d(
         (i.e. point ids are identical in the input and
         source).
 
-    target_sizes : float | Sequence[float]
-        Target mesh size close to the points.
+    Parameters
+    ----------
+    edge_source : pyvista.PolyData | shapely.geometry.Polygon
+        Specify the source object used to specify constrained
+        edges and loops. If set, and lines/polygons are defined, a
+        constrained triangulation is created. The lines/polygons
+        are assumed to reference points in the input point set
+        (i.e. point ids are identical in the input and
+        source).
+
+    Parameters
+    ----------
+    edge_source : pyvista.PolyData | shapely.Polygon
+        Specify the source object used to specify constrained
+        edges and loops. If set, and lines/polygons are defined, a
+        constrained triangulation is created. The lines/polygons
+        are assumed to reference points in the input point set
+        (i.e. point ids are identical in the input and
+        source).
+
+    Parameters
+    ----------
+    edge_source : pyvista.PolyData
+        Specify the source object used to specify constrained
+        edges and loops. If set, and lines/polygons are defined, a
+        constrained triangulation is created. The lines/polygons
+        are assumed to reference points in the input point set
+        (i.e. point ids are identical in the input and
+        source).
 
     Returns
     -------
     pyvista.UnstructuredGrid
         Mesh from the 3D delaunay generation.
 
-    Notes
-    -----
-    .. versionadded:: 0.2.0
+    Returns
+    -------
+    pyvista.UnstructuredGrid
+        Mesh from the 2D delaunay generation.
 
-    """
-    points = edge_source.points
-    faces = edge_source.irregular_faces
+    cell_size : float
+       Meshing constraint at point.
+
+    def __init__(
+        self: Delaunay2D,
+        *,
+        edge_source: pv.PolyData | shapely.Polygon | None = None,
+        shell: Sequence[tuple[int]] | None = None,
+        holes: Sequence[tuple[int]] | None = None,
+        cell_size: float | None = None,
+    ) -> None:
+        """Initialize the Delaunay2D class."""
+        if edge_source is not None:
+            self._edge_source = edge_source
+        else:
+            self._edge_source = shapely.Polygon(shell, holes)
+        self._cell_size = cell_size
+
+    def __init__(
+        self: Delaunay3D,
+        edge_source: pv.PolyData,
+        cell_size: float | None = None,
+    ) -> None:
+        """Initialize the Delaunay3D class."""
+        self._edge_source = edge_source
+        self._cell_size = cell_size
+
+    def __init__(self: Report, ncol: int = 3, text_width: int = 80) -> None:  # numpydoc ignore=PR01
+        """Generate a :class:`scooby.Report` instance."""
+        # mandatory packages
+        core: list[str] = [
+            "matplotlib",
+            "numpy",
+            "pooch",
+            "pyvista",
+            "scooby",
+            "vtk",
+            "gmsh",
+            "meshio",
+            "pygmsh",
+            "pyvista",
+        ]
+
+    for i, (point, target_size) in enumerate(zip(points, target_sizes)):
+        id_ = i + 1
+        gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
 
     gmsh.initialize()
     if target_sizes is None:
@@ -146,98 +243,23 @@ def delaunay_3d(
     gmsh.option.set_number("Mesh.RecombinationAlgorithm", SIMPLE)
     gmsh.option.set_number("Mesh.RecombineNodeRepositioning", FALSE)
 
-    if target_sizes is None:
-        target_sizes = 0.0
-
-    if isinstance(target_sizes, float):
-        target_sizes = [target_sizes] * edge_source.number_of_points
-
-    for i, (point, target_size) in enumerate(zip(points, target_sizes)):
-        id_ = i + 1
-        gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
-
-    surface_loop = []
-    for i, face in enumerate(faces):
-        curve_tags = []
-        for j, _ in enumerate(face):
-            start_tag = face[j - 1] + 1
-            end_tag = face[j] + 1
-            curve_tag = gmsh.model.geo.add_line(start_tag, end_tag)
-            curve_tags.append(curve_tag)
-        gmsh.model.geo.add_curve_loop(curve_tags, i + 1)
-        gmsh.model.geo.add_plane_surface([i + 1], i + 1)
-        surface_loop.append(i + 1)
+    gmsh.model.geo.add_surface_loop(surface_loop, 1)
+    gmsh.model.geo.add_volume([1], 1)
 
     gmsh.model.geo.remove_all_duplicates()
     gmsh.model.geo.synchronize()
 
-    gmsh.model.geo.add_surface_loop(surface_loop, 1)
-    gmsh.model.geo.add_volume([1], 1)
-
     gmsh.model.geo.synchronize()
     gmsh.model.mesh.generate(3)
 
-    mesh = pv.wrap(extract_to_meshio())
+    gmsh.model.mesh.generate(2)
+    mesh = pv.from_meshio(extract_to_meshio())
     gmsh.clear()
     gmsh.finalize()
 
-    ind = []
-    for i, cell in enumerate(mesh.cell):
-        if cell.type != pv.CellType.TETRA:
-            ind.append(i)
-    mesh = mesh.remove_cells(ind)
-    mesh.clear_data()
-
-    return mesh
-
-
-def frontal_delaunay_2d(  # noqa: C901, PLR0912
-    edge_source: pv.PolyData | shapely.geometry.Polygon,
-    target_sizes: float | Sequence[float] | None = None,
-    recombine: bool = False,  # noqa: FBT001, FBT002
-) -> pv.UnstructuredGrid | None:
-    """
-    Frontal-Delaunay 2D mesh algorithm.
-
-    Parameters
-    ----------
-    edge_source : pyvista.PolyData | shapely.geometry.Polygon
-        Specify the source object used to specify constrained
-        edges and loops. If set, and lines/polygons are defined, a
-        constrained triangulation is created. The lines/polygons
-        are assumed to reference points in the input point set
-        (i.e. point ids are identical in the input and
-        source).
-
-    target_sizes : float
-        Target mesh size close to the points.
-        Default max size of edge_source in each direction.
-
-    recombine : bool
-        Recombine the generated mesh into quadrangles.
-
-    Returns
-    -------
-    pyvista.UnstructuredGrid
-        Mesh from the 2D delaunay generation.
-
-    Notes
-    -----
-    .. versionadded:: 0.2.0
-
-    """
-    gmsh.initialize()
-    if target_sizes is None:
-        gmsh.option.set_number("Mesh.Algorithm", INITIAL_MESH_ONLY_2D)
-        gmsh.option.set_number("Mesh.MeshSizeExtendFromBoundary", 0)
-        gmsh.option.set_number("Mesh.MeshSizeFromPoints", 0)
-        gmsh.option.set_number("Mesh.MeshSizeFromCurvature", 0)
-    else:
-        gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
-    gmsh.option.set_number("General.Verbosity", SILENT)
-
-    if target_sizes is None:
-        target_sizes = 0.0
+    holes : sequence
+        A sequence of objects which satisfy the same requirements as the
+        shell parameters above
 
     if isinstance(edge_source, shapely.geometry.Polygon):
         wire_tags = []
@@ -261,153 +283,126 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
         points = edge_source.points
         lines = edge_source.lines
 
-        if isinstance(target_sizes, float):
-            target_sizes = [target_sizes] * edge_source.number_of_points
-
-        embedded_points = []
-        for target_size, point in zip(target_sizes, points):
-            embedded_points.append(gmsh.model.geo.add_point(point[0], point[1], point[2], target_size))
-
-        for i in range(lines[0] - 1):
-            id_ = i + 1
-            gmsh.model.geo.add_line(lines[i + 1] + 1, lines[i + 2] + 1, id_)
-
-        gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
-        gmsh.model.geo.add_plane_surface([1], 1)
-        gmsh.model.geo.synchronize()
-        gmsh.model.mesh.embed(0, embedded_points, 2, 1)
+    if isinstance(target_sizes, float):
+        target_sizes = [target_sizes] * edge_source.number_of_points
 
     if recombine:
         gmsh.model.mesh.set_recombine(2, 1)
 
-    gmsh.model.mesh.generate(2)
-    mesh = pv.from_meshio(extract_to_meshio())
-    gmsh.clear()
-    gmsh.finalize()
+    if target_sizes is None:
+        target_sizes = 0.0
+
+    if target_sizes is None:
+        target_sizes = 0.0
+
+    ind = []
+    for i, cell in enumerate(mesh.cell):
+        if cell.type != pv.CellType.TETRA:
+            ind.append(i)
+    mesh = mesh.remove_cells(ind)
+    mesh.clear_data()
 
     ind = []
     for index, cell in enumerate(mesh.cell):
         if cell.type in [pv.CellType.VERTEX, pv.CellType.LINE]:
             ind.append(index)
 
+    mesh = pv.wrap(extract_to_meshio())
+    gmsh.clear()
+    gmsh.finalize()
+
+    recombine : bool
+        Recombine the generated mesh into quadrangles.
+
+    return mesh
+
     return mesh.remove_cells(ind)
-
-
-class Delaunay2D:
-    """
-    Delaunay 2D mesh algorithm.
-
-    Parameters
-    ----------
-    edge_source : pyvista.PolyData | shapely.Polygon
-        Specify the source object used to specify constrained
-        edges and loops. If set, and lines/polygons are defined, a
-        constrained triangulation is created. The lines/polygons
-        are assumed to reference points in the input point set
-        (i.e. point ids are identical in the input and
-        source).
 
     shell : sequence
         A sequence of (x, y [,z]) numeric coordinate pairs or triples, or
         an array-like with shape (N, 2) or (N, 3).
         Also can be a sequence of Point objects.
 
-    holes : sequence
-        A sequence of objects which satisfy the same requirements as the
-        shell parameters above
+    surface_loop = []
+    for i, face in enumerate(faces):
+        curve_tags = []
+        for j, _ in enumerate(face):
+            start_tag = face[j - 1] + 1
+            end_tag = face[j] + 1
+            curve_tag = gmsh.model.geo.add_line(start_tag, end_tag)
+            curve_tags.append(curve_tag)
+        gmsh.model.geo.add_curve_loop(curve_tags, i + 1)
+        gmsh.model.geo.add_plane_surface([i + 1], i + 1)
+        surface_loop.append(i + 1)
 
-    cell_size : float
-       Meshing constraint at point.
+    target_sizes : float
+        Target mesh size close to the points.
+        Default max size of edge_source in each direction.
 
-    Notes
-    -----
-    .. versionadded:: 0.2.0
+    target_sizes : float | Sequence[float]
+        Target mesh size close to the points.
 
+    text_width : int, default: 80
+        The text width for non-HTML display modes.
+
+"""scikit-gmsh package for 3D mesh generation."""
+
+INITIAL_MESH_ONLY_2D = 3
+FRONTAL_DELAUNAY_2D = 6
+DELAUNAY_3D = 1
+INITIAL_MESH_ONLY_3D = 3
+
+SILENT = 0
+SIMPLE = 0
+
+TRUE = 1
+FALSE = 0
+
+# Nice string for the version
+__version__ = ".".join(map(str, version_info))
+
+class Delaunay2D:
     """
-
-    def __init__(
-        self: Delaunay2D,
-        *,
-        edge_source: pv.PolyData | shapely.Polygon | None = None,
-        shell: Sequence[tuple[int]] | None = None,
-        holes: Sequence[tuple[int]] | None = None,
-        cell_size: float | None = None,
-    ) -> None:
-        """Initialize the Delaunay2D class."""
-        if edge_source is not None:
-            self._edge_source = edge_source
-        else:
-            self._edge_source = shapely.Polygon(shell, holes)
-        self._cell_size = cell_size
-
-    @property
-    def edge_source(self: Delaunay2D) -> pv.PolyData | shapely.geometry.Polygon:
-        """Get the edge source."""
-        return self._edge_source
-
-    @property
-    def mesh(self: Delaunay2D) -> pv.PolyData:
-        """Get the mesh."""
-        mesh = frontal_delaunay_2d(self._edge_source, target_sizes=self._cell_size)
-        return pv.PolyData(mesh.points, mesh.cells)
-
-    @property
-    def cell_size(self: Delaunay2D) -> float | None:
-        """Get the cell_size of the mesh."""
-        return self._cell_size
-
-    @cell_size.setter
-    def cell_size(self: Delaunay2D, size: int) -> None:
-        """Set the cell_size of the mesh."""
-        self._cell_size = size
-
+    Delaunay 2D mesh algorithm.
 
 class Delaunay3D:
     """
     Delaunay 3D mesh algorithm.
 
-    Parameters
-    ----------
-    edge_source : pyvista.PolyData
-        Specify the source object used to specify constrained
-        edges and loops. If set, and lines/polygons are defined, a
-        constrained triangulation is created. The lines/polygons
-        are assumed to reference points in the input point set
-        (i.e. point ids are identical in the input and
-        source).
-
-    Notes
-    -----
-    .. versionadded:: 0.2.0
-
+class Report(scooby.Report):  # type: ignore[misc]
     """
+    Generate an environment package and hardware report.
 
-    def __init__(
-        self: Delaunay3D,
-        edge_source: pv.PolyData,
-        cell_size: float | None = None,
-    ) -> None:
-        """Initialize the Delaunay3D class."""
-        self._edge_source = edge_source
-        self._cell_size = cell_size
+def delaunay_3d(
+    edge_source: pv.PolyData,
+    target_sizes: float | Sequence[float] | None = None,
+) -> pv.UnstructuredGrid | None:
+    """
+    Delaunay 3D mesh algorithm.
 
-    @property
-    def edge_source(self: Delaunay3D) -> pv.PolyData:
-        """Get the edge source."""
-        return self._edge_source
+def frontal_delaunay_2d(  # noqa: C901, PLR0912
+    edge_source: pv.PolyData | shapely.geometry.Polygon,
+    target_sizes: float | Sequence[float] | None = None,
+    recombine: bool = False,  # noqa: FBT001, FBT002
+) -> pv.UnstructuredGrid | None:
+    """
+    Frontal-Delaunay 2D mesh algorithm.
 
-    @property
-    def mesh(self: Delaunay3D) -> pv.UnstructuredGrid:
-        """Get the mesh."""
-        self._mesh = delaunay_3d(self.edge_source, target_sizes=self.cell_size)
-        return self._mesh
+from __future__ import annotations
 
-    @property
-    def cell_size(self: Delaunay3D) -> float | None:
-        """Get the cell_size of the mesh."""
-        return self._cell_size
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
-    @cell_size.setter
-    def cell_size(self: Delaunay3D, size: int) -> None:
-        """Set the cell_size of the mesh."""
-        self._cell_size = size
+import datetime
+from typing import TYPE_CHECKING
+
+import gmsh
+from pygmsh.helpers import extract_to_meshio
+import pyvista as pv
+import scooby
+import shapely
+
+now = datetime.datetime.now(tz=datetime.timezone.utc)
+
+# major, minor, patch
+version_info = 0, 3, "dev0"
