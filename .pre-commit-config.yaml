@@ -12,6 +12,10 @@ repos:
     rev: 0.29.2
     hooks:
       - id: check-github-workflows
+      - id: check-dependabot
+      - id: check-github-actions
+      - id: check-github-workflows
+      - id: check-readthedocs
   - repo: https://github.com/codespell-project/codespell
     rev: v2.3.0
     hooks:
