@@ -1,22 +1,5 @@
 # Contributor Covenant Code of Conduct
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Our Pledge](#our-pledge)
-- [Our Standards](#our-standards)
-- [Enforcement Responsibilities](#enforcement-responsibilities)
-- [Scope](#scope)
-- [Enforcement](#enforcement)
-- [Enforcement Guidelines](#enforcement-guidelines)
-  - [1. Correction](#1-correction)
-  - [2. Warning](#2-warning)
-  - [3. Temporary Ban](#3-temporary-ban)
-  - [4. Permanent Ban](#4-permanent-ban)
-- [Attribution](#attribution)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## Our Pledge
 
 We as members, contributors, and leaders pledge to make participation in our

@@ -22,7 +22,11 @@
         "bug",
         "doc",
         "design",
-        "review"
+        "review",
+        "example",
+        "promotion",
+        "security",
+        "question"
       ]
     },
     {
@@ -51,10 +55,28 @@
       "contributions": [
         "maintenance"
       ]
+    },
+    {
+      "login": "adtzlr",
+      "name": "Andreas Dutzler",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5793153?v=4",
+      "profile": "https://github.com/adtzlr",
+      "contributions": [
+        "example"
+      ]
+    },
+    {
+      "login": "bjlittle",
+      "name": "Bill Little",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2051656?v=4",
+      "profile": "https://github.com/bjlittle",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "skipCi": true,
+  "skipCi": false,
   "repoType": "github",
   "repoHost": "https://github.com",
   "projectName": "scikit-gmsh",

@@ -1,31 +1,5 @@
 # Contributing
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Being Respectful](#being-respectful)
-- [Cloning the Source Repository](#cloning-the-source-repository)
-- [Quick Start Development with Codespaces](#quick-start-development-with-codespaces)
-- [Questions](#questions)
-- [Reporting Bugs](#reporting-bugs)
-- [Feature Requests](#feature-requests)
-- [Contributing New Code](#contributing-new-code)
-- [Licensing](#licensing)
-- [Development Practices](#development-practices)
-  - [Guidelines](#guidelines)
-  - [Contributing to scikit-gmsh through GitHub](#contributing-to-scikit-gmsh-through-github)
-  - [Unit Testing](#unit-testing)
-  - [Documentation Testing](#documentation-testing)
-  - [Style Checking](#style-checking)
-  - [Notes Regarding Image Regression Testing](#notes-regarding-image-regression-testing)
-  - [Building the Documentation](#building-the-documentation)
-  - [Contributing to the Documentation](#contributing-to-the-documentation)
-  - [Creating a New Pull Request](#creating-a-new-pull-request)
-  - [Preview the Documentation](#preview-the-documentation)
-  - [Branching Model](#branching-model)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 We absolutely welcome contributions and we hope that this guide will
 facilitate an understanding of the scikit-gmsh code repository. It is
 important to note that the scikit-gmsh software package is maintained on
@@ -130,7 +104,7 @@ details.
 
 ## Licensing
 
-All contributed code will be licensed under The MIT License found in the
+All contributed code will be licensed under The GPL-3.0 license found in the
 repository. If you did not write the code yourself, it is your
 responsibility to ensure that the existing license is compatible and
 included in the contributed files or you can obtain permission from the
@@ -435,9 +409,9 @@ warning messages.
 ```python
 with pytest.warns(skgmshDeprecationWarning):
     addition(a, b)
-    if pv._version.version_info >= (0, 40):
+    if sg._version.version_info >= (0, 40):
         raise RuntimeError("Convert error this function")
-    if pv._version.version_info >= (0, 41):
+    if sg._version.version_info >= (0, 41):
         raise RuntimeError("Remove this function")
 ```
 
@@ -780,16 +754,6 @@ Since it may be necessary to merge your branch with the current release
 branch (see below), please do not delete your branch if it is a `fix/`
 branch.
 
-### Preview the Documentation
-
-Once you have make a Pull Request. You can comment
-`github-actions preview` on a pull request to preview documentation.
-Since this command is only available for
-[\@scikit-gmsh/developers](https://github.com/orgs/scikit-gmsh/teams/developers)
-, new contributors kindly request them to comment command. This is
-essential to safeguard the deployment site against potentially harmful
-commits.
-
 ### Branching Model
 
 This project has a branching model that enables rapid development of
@@ -866,7 +830,7 @@ created the following will occur:
     not be deleted. Tag the release with:
 
     ```bash
-    git tag v$(python -c "import scikit-gmsh as pv; print(pv.__version__)")
+    git tag v$(python -c "import skgmsh as skg; print(skg.__version__)")
     ```
 
 1.  Please check again that the tag has been created correctly and push
@@ -874,7 +838,7 @@ created the following will occur:
 
     ```bash
     git push origin HEAD
-    git push origin --tags
+    git push origin v$(python -c "import skgmsh as skg; print(skg.__version__)")
     ```
 
 1.  Create a list of all changes for the release. It is often helpful to
