@@ -12,6 +12,10 @@ repos:
     rev: 0.29.2
     hooks:
       - id: check-github-workflows
+      - id: check-dependabot
+      - id: check-github-actions
+      - id: check-github-workflows
+      - id: check-readthedocs
   - repo: https://github.com/codespell-project/codespell
     rev: v2.3.0
     hooks:
@@ -66,7 +70,7 @@ repos:
       - id: rst-directive-colons
       - id: rst-inline-touching-normal
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.3
+    rev: v0.6.4
     hooks:
       - id: ruff
         args: ["--fix", "--show-fixes"]
