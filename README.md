@@ -36,13 +36,22 @@ pip install scikit-gmsh
 Check out the example galleries organized by subject here:
 
 <p align="center">
-  <a href="https://scikit-gmsh.readthedocs.io/en/latest/examples/polygon_with_hole.html"><img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_polygon_with_hole_thumb.png" height="200px"/></a> <a href="https://scikit-gmsh.readthedocs.io/en/latest/examples/cylinder.html"><img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_cylinder_thumb.png" height="200px"/></a>
+  <a href="https://scikit-gmsh.readthedocs.io/en/latest/examples/icosahedron.html">
+    <img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_icosahedron_thumb.png" height="190px"/>
+  </a>
+  <a href="https://scikit-gmsh.readthedocs.io/en/latest/examples/polygon_with_hole.html">
+    <img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_polygon_with_hole_thumb.png" height="190px"/>
+  </a>
+  <a href="https://scikit-gmsh.readthedocs.io/en/latest/examples/cylinder.html">
+    <img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_cylinder_thumb.png" height="190px"/>
 </p>
 
 ## Other Resources
 
 This library may not meet your needs and if this is this case, consider checking out these other resources:
 
+- [meshwell](https://github.com/simbilod/meshwell) - GMSH wrapper, with integrated photonics focus.
+- [objectgmsh](https://github.com/nemocrys/objectgmsh) - Object oriented Gmsh modeling.
 - [optimesh](https://github.com/meshpro/optimesh) - Mesh optimization, mesh smoothing.
 - [pandamesh](https://github.com/Deltares/pandamesh) - 🐼 From geodataframe to mesh ▦.
 - [pygalmesh](https://github.com/meshpro/pygalmesh) - A Python interface to CGAL's meshing tools.
