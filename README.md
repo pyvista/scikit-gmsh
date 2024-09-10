@@ -43,6 +43,7 @@ Check out the example galleries organized by subject here:
 
 This library may not meet your needs and if this is this case, consider checking out these other resources:
 
+- [meshwell](https://github.com/simbilod/meshwell) - GMSH wrapper, with integrated photonics focus.
 - [optimesh](https://github.com/meshpro/optimesh) - Mesh optimization, mesh smoothing.
 - [pandamesh](https://github.com/Deltares/pandamesh) - 🐼 From geodataframe to mesh ▦.
 - [pygalmesh](https://github.com/meshpro/pygalmesh) - A Python interface to CGAL's meshing tools.
