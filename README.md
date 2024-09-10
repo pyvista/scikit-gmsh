@@ -37,13 +37,13 @@ Check out the example galleries organized by subject here:
 
 <p align="center">
   <a href="https://scikit-gmsh.readthedocs.io/en/latest/examples/icosahedron.html">
-    <img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_icosahedron_thumb.png" height="150px"/>
+    <img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_icosahedron_thumb.png" height="175px"/>
   </a>
   <a href="https://scikit-gmsh.readthedocs.io/en/latest/examples/polygon_with_hole.html">
-    <img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_polygon_with_hole_thumb.png" height="150px"/>
+    <img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_polygon_with_hole_thumb.png" height="175px"/>
   </a>
   <a href="https://scikit-gmsh.readthedocs.io/en/latest/examples/cylinder.html">
-    <img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_cylinder_thumb.png" height="150px"/>
+    <img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_cylinder_thumb.png" height="175px"/>
 </p>
 
 ## Other Resources
