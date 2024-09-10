@@ -23,6 +23,8 @@ The library has following main objectives:
 1. Provide an intuitive, object-oriented API for mesh creation like [scipy.spatial.Delaunay class](https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html).
 1. Integrate seamlessly with other libraries in the [Scientific Python ecosystem](https://scientific-python.org/).
 
+The design of the library is strongly influenced by [pandamesh](https://github.com/Deltares/pandamesh).
+
 ## Installation
 
 [![pypi](https://img.shields.io/pypi/v/scikit-gmsh?label=pypi&logo=python&logoColor=white)](https://pypi.org/project/scikit-gmsh/)
