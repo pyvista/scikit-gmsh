@@ -44,7 +44,6 @@ Check out the example galleries organized by subject here:
   </a>
   <a href="https://scikit-gmsh.readthedocs.io/en/latest/examples/cylinder.html">
     <img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_cylinder_thumb.png" height="200px"/>
-  </a>
 </p>
 
 ## Other Resources
