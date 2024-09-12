@@ -24,5 +24,6 @@ alg.mesh.plot(show_edges=True, cpos="xy", color="white", line_width=2)
 # %%
 # Change the cell size of the mesh.
 
-alg.cell_size = 2.0
+del alg
+alg = sg.Delaunay2D(shell=shell, holes=holes, cell_size=2.0)
 alg.mesh.plot(show_edges=True, cpos="xy", color="white", line_width=2)
