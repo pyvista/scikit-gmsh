@@ -415,7 +415,7 @@ class Delaunay3D:
         self._cell_size = size
 
 
-class GmshGeometryManager:  # noqa: D101
+class Geometry2D:  # noqa: D101
     def __init__(self):  # noqa: ANN204, D107
         # List to store geometry elements
         self.elements = []
@@ -503,7 +503,7 @@ class GmshGeometryManager:  # noqa: D101
 
 # Example usage
 # Create geometry, save to virtual file, and execute Gmsh
-manager = GmshGeometryManager()
+manager = Geometry2D()
 manager.add_point(0, 0, 0, 1.0)  # Point 1: Origin
 manager.add_point(1, 0, 0, 1.0)  # Point 2: X-axis
 manager.add_point(1, 1, 0, 1.0)  # Point 3: Perpendicular point
