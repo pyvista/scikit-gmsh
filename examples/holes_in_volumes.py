@@ -5,18 +5,19 @@
 #  Mesh sizes, holes in volumes
 #
 # ------------------------------------------------------------------------------
+from __future__ import annotations
+
+import sys
 
 import gmsh
-import math
-import sys
 
 gmsh.initialize()
 
 gmsh.model.add("t5")
 
-lcar1 = .1
-lcar2 = .0005
-lcar3 = .055
+lcar1 = 0.1
+lcar2 = 0.0005
+lcar3 = 0.055
 
 # If we wanted to change these mesh sizes globally (without changing the above
 # definitions), we could give a global scaling factor for all mesh sizes with
@@ -215,7 +216,7 @@ gmsh.model.mesh.generate(3)
 gmsh.write("t5.msh")
 
 # Launch the GUI to see the results:
-if '-nopopup' not in sys.argv:
+if "-nopopup" not in sys.argv:
     gmsh.fltk.run()
 
 gmsh.finalize()
