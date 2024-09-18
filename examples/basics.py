@@ -8,8 +8,11 @@
 
 # The Python API is entirely defined in the `gmsh.py' module (which contains the
 # full documentation of all the functions in the API):
-import gmsh
+from __future__ import annotations
+
 import sys
+
+import gmsh
 
 # Before using any functions in the Python API, Gmsh must be initialized:
 gmsh.initialize()
@@ -47,12 +50,12 @@ gmsh.model.geo.addPoint(0, 0, 0, lc, 1)
 #
 # We can then define some additional points. All points should have different
 # tags:
-gmsh.model.geo.addPoint(.1, 0, 0, lc, 2)
-gmsh.model.geo.addPoint(.1, .3, 0, lc, 3)
+gmsh.model.geo.addPoint(0.1, 0, 0, lc, 2)
+gmsh.model.geo.addPoint(0.1, 0.3, 0, lc, 3)
 
 # If the tag is not provided explicitly, a new tag is automatically created, and
 # returned by the function:
-p4 = gmsh.model.geo.addPoint(0, .3, 0, lc)
+p4 = gmsh.model.geo.addPoint(0, 0.3, 0, lc)
 
 # Curves are Gmsh's second type of elementery entities, and, amongst curves,
 # straight lines are the simplest. The API to create straight line segments with
@@ -145,7 +148,7 @@ gmsh.write("t1.msh")
 # To visualize the model we can run the graphical user interface with
 # `gmsh.fltk.run()'. Here we run it only if "-nopopup" is not provided in the
 # command line arguments:
-if '-nopopup' not in sys.argv:
+if "-nopopup" not in sys.argv:
     gmsh.fltk.run()
 
 # Note that starting with Gmsh 3.0, models can be built using other geometry
