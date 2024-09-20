@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import gmsh
 
 gmsh.initialize()
@@ -7,5 +9,6 @@ gmsh.write("quad.vtk")
 gmsh.finalize()
 
 import pyvista as pv
+
 mesh = pv.read("quad.vtk")
 mesh.plot(show_edges=True, color="w", cpos="xy")
