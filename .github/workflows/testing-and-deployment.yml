@@ -39,6 +39,7 @@ jobs:
 
       - name: Install packages
         run: |
+          sudo apt-get update
           for i in $(cat packages.txt); do sudo apt-get install $i; done
 
       - name: Install Testing Requirements
