@@ -22,9 +22,7 @@ jobs:
       - name: Install packages
         run: >
           sudo apt -y install
-          libgl1-mesa-glx
           xvfb
-          python-tk
           libglu1
           libxcursor-dev
           libxft2
