@@ -20,18 +20,8 @@ jobs:
         with:
           python-version: "3.x"
       - name: Install packages
-        run: >
-          sudo apt -y install
-          xvfb
-          libglu1
-          libxcursor-dev
-          libxft2
-          libxinerama1
-          libfltk1.3-dev
-          libfreetype6-dev
-          libgl1-mesa-dev
-          libocct-foundation-dev
-          libocct-data-exchange-dev
+        run: |
+          for i in $(cat packages.txt); do sudo apt-get install $i; done
       - name: Install pypa/build
         run: >-
           python3 -m
