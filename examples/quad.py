@@ -5,6 +5,7 @@ Quad geometry example
 Quad geometry example.
 
 """
+
 from __future__ import annotations
 
 import gmsh
