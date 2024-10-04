@@ -13,6 +13,7 @@
 [![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
 [![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh)](https://github.com/pyvista/scikit-gmsh/stargazers)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/scikit-gmsh.svg)](https://pypi.org/project/scikit-gmsh/)
 
 The `scikit-gmsh` package provides a simple interface to:
 
@@ -55,7 +56,7 @@ This library may not meet your needs and if this is this case, consider checking
 - [optimesh](https://github.com/meshpro/optimesh) - Mesh optimization, mesh smoothing.
 - [pandamesh](https://github.com/Deltares/pandamesh) - 🐼 From geodataframe to mesh ▦.
 - [pygalmesh](https://github.com/meshpro/pygalmesh) - A Python interface to CGAL's meshing tools.
-- [pygmsh](https://github.com/nschloe/pygmsh) - Gmsh for Python.
+- [scikit-gmsh](https://github.com/nschloe/scikit-gmsh) - Gmsh for Python.
 
 ## License
 
