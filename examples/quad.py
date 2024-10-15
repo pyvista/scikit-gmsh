@@ -12,12 +12,21 @@ from pathlib import Path
 import subprocess
 
 import pyvista as pv
+import shapely
+
+shell = [(0, 0, 0), (1, 0, 0), (1, 1, 0), (0, 1, 0), (0, 0, 0)]
+edge_source = shapely.Polygon(shell)
+
+cell_size = 0.05
 
 with Path("quad.geo").open("w") as f:
-    f.write("Point(1) = {0, 0, 0, 0.05};\n")
-    f.write("Point(2) = {1, 0, 0, 0.05};\n")
-    f.write("Point(3) = {1, 1, 0, 0.05};\n")
-    f.write("Point(4) = {0, 1, 0, 0.05};\n")
+    for linearring in [edge_source.exterior, *list(edge_source.interiors)]:
+        coords = linearring.coords[:-1].copy()
+        for i, coord in enumerate(coords):
+            x = coord[0]
+            y = coord[1]
+            z = coord[2]
+            f.write("Point(" + str(i + 1) + ") = {" + str(x) + "," + str(y) + "," + str(z) + "," + str(cell_size) + "};\n")
     f.write("Line(1) = {1, 2};\n")
     f.write("Line(2) = {2, 3};\n")
     f.write("Line(3) = {3, 4};\n")
