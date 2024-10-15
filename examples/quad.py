@@ -14,11 +14,10 @@ import subprocess
 import pyvista as pv
 
 with Path("quad.geo").open("w") as f:
-    f.write("lc = 0.05;\n")
-    f.write("Point(1) = {0, 0, 0, lc};\n")
-    f.write("Point(2) = {1, 0, 0, lc};\n")
-    f.write("Point(3) = {1, 1, 0, lc};\n")
-    f.write("Point(4) = {0, 1, 0, lc};\n")
+    f.write("Point(1) = {0, 0, 0, 0.05};\n")
+    f.write("Point(2) = {1, 0, 0, 0.05};\n")
+    f.write("Point(3) = {1, 1, 0, 0.05};\n")
+    f.write("Point(4) = {0, 1, 0, 0.05};\n")
     f.write("Line(1) = {1, 2};\n")
     f.write("Line(2) = {2, 3};\n")
     f.write("Line(3) = {3, 4};\n")
