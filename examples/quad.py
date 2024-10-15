@@ -9,7 +9,7 @@ Quad geometry example.
 from __future__ import annotations
 
 import subprocess
-import gmsh
+
 import pyvista as pv
 
 with open("quad.geo", "w") as f:
@@ -25,7 +25,7 @@ with open("quad.geo", "w") as f:
     f.write("Line Loop(1) = {1, 2, 3, 4};\n")
     f.write("Plane Surface(1) = {1};\n")
 
-subprocess.run(["gmsh", "quad.geo", "-2", "-o", "quad.vtk"])
+subprocess.run(["gmsh", "quad.geo", "-2", "-o", "quad.vtk"], check=False)
 
 mesh = pv.read("quad.vtk")
 mesh.plot(show_edges=True, color="w", cpos="xy")
