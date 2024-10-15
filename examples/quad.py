@@ -35,11 +35,9 @@ class Delaunay2D:
                     y = coord[1]
                     z = coord[2]
                     f.write("Point(" + str(i + 1) + ") = {" + str(x) + "," + str(y) + "," + str(z) + "," + str(cell_size) + "};\n")
-
                 for i, _ in enumerate(coords[:-1]):
                     f.write("Line(" + str(i + 1) + ") = {" + str(i + 1) + ", " + str(i + 2) + "};\n")
                 f.write("Line(" + str(len(coords)) + ") = {" + str(len(coords)) + ", 1};\n")
-
                 f.write("Line Loop(1) = {")
                 for i in range(len(coords) - 1):
                     f.write(str(i + 1) + ", ")
