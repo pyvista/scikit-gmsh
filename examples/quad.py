@@ -27,11 +27,16 @@ with Path("quad.geo").open("w") as f:
             y = coord[1]
             z = coord[2]
             f.write("Point(" + str(i + 1) + ") = {" + str(x) + "," + str(y) + "," + str(z) + "," + str(cell_size) + "};\n")
+
         for i, _ in enumerate(coords[:-1]):
             f.write("Line(" + str(i + 1) + ") = {" + str(i + 1) + ", " + str(i + 2) + "};\n")
         f.write("Line(" + str(len(coords)) + ") = {" + str(len(coords)) + ", 1};\n")
-    f.write("Line Loop(1) = {1, 2, 3, 4};\n")
-    f.write("Plane Surface(1) = {1};\n")
+
+        f.write("Line Loop(1) = {")
+        for i in range(len(coords) - 1):
+            f.write(str(i + 1) + ", ")
+        f.write(str(len(coords)) + "};\n")
+        f.write("Plane Surface(1) = {1};\n")
 
 subprocess.run(["gmsh", "quad.geo", "-2", "-o", "quad.vtk"], check=False)  # noqa: S603, S607
 
