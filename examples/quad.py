@@ -26,8 +26,7 @@ with Path("quad.geo").open("w") as f:
     f.write("Line Loop(1) = {1, 2, 3, 4};\n")
     f.write("Plane Surface(1) = {1};\n")
 
-cmd = "gmsh quad.geo -2 -o quad.vtk".split()
-subprocess.run(cmd, check=True)  # noqa: S603
+subprocess.run(["gmsh", "quad.geo", "-2", "-o", "quad.vtk"], check=False)  # noqa: S603, S607
 
 mesh = pv.read("quad.vtk")
 mesh.plot(show_edges=True, color="w", cpos="xy")
