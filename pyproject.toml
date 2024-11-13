@@ -77,9 +77,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-# Sort by name, don't cluster "from" vs "import"
 force-sort-within-sections = true
-# Combines "as" imports on the same line
 combine-as-imports = true
 required-imports = ["from __future__ import annotations"]
 force-single-line = true
@@ -90,7 +88,6 @@ force-single-line = true
 "examples/**" = ["D205", "D400", "D415", "INP001", "T201"]
 
 [tool.ruff.lint.pyupgrade]
-# Preserve types, even if a file imports `from __future__ import annotations`.
 keep-runtime-typing = true
 
 [tool.setuptools.dynamic]
