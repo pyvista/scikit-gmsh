@@ -6,23 +6,20 @@ requires = [
   'pyvista[all]<0.44.2',
   'scooby<0.9.3',
   'setuptools<69.0.4',
-  'shapely<2.0.6'
+  'shapely<2.0.6',
 ]
 build-backend = 'setuptools.build_meta'
 
 [project]
 name = "scikit-gmsh"
-dynamic = [
-  "readme",
-  "version"
-]
+dynamic = ["readme", "version"]
 dependencies = [
   'gmsh<4.12.3',
   'meshio<5.3.6',
   'pygmsh<7.1.18',
   'pyvista[all]<0.44.2',
   'scooby<0.9.3',
-  'shapely<2.0.6'
+  'shapely<2.0.6',
 ]
 requires-python = '>=3.9'
 
@@ -30,12 +27,12 @@ requires-python = '>=3.9'
 test = ['pytest==8.0.0']
 docs = [
   'myst-parser==4.0.0',
-  'sphinx==8.0.2',
   'sphinx-book-theme==1.1.3',
   'sphinx-copybutton==0.5.2',
   'sphinx-design==0.6.1',
   'sphinx-gallery==0.17.1',
-  'sphinx-toolbox==3.8.0'
+  'sphinx-toolbox==3.8.0',
+  'sphinx==8.0.2',
 ]
 
 [tool.mypy]
@@ -53,13 +50,11 @@ version = "0.0.0"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
+addopts = ["--showlocals", "--strict-config", "--strict-markers", "-ra"]
 xfail_strict = true
 filterwarnings = ["error", 'ignore::DeprecationWarning']
 log_cli_level = "info"
-testpaths = [
-  "tests"
-]
+testpaths = ["tests"]
 
 [tool.ruff]
 line-length = 150
@@ -69,12 +64,7 @@ docstring-code-format = true
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = [
-  "COM812",
-  "D203",
-  "D212",
-  "ISC001"
-]
+ignore = ["COM812", "D203", "D212", "ISC001"]
 
 [tool.ruff.lint.isort]
 force-sort-within-sections = true
@@ -91,5 +81,5 @@ force-single-line = true
 keep-runtime-typing = true
 
 [tool.setuptools.dynamic]
-version = {attr = 'skgmsh.__version__'}
-readme = {file = "README.md", content-type = "text/markdown"}
+version = { attr = 'skgmsh.__version__' }
+readme = { file = "README.md", content-type = "text/markdown" }
