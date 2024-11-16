@@ -78,7 +78,7 @@ repos:
     hooks:
       - id: taplo-format
         # See options: https://taplo.tamasfe.dev/configuration/formatter-options.html
-        args: [--option, "reorder_arrays=true"]
+        args: [--option, "reorder_arrays=true", --option, "reorder_keys=true"]
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
