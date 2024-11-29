@@ -13,6 +13,7 @@
 [![Documentation Status](https://readthedocs.org/projects/scikit-gmsh/badge/?version=latest)](https://scikit-gmsh.readthedocs.io/en/latest/?badge=latest)
 [![GitHub Repo stars](https://img.shields.io/github/stars/pyvista/scikit-gmsh)](https://github.com/pyvista/scikit-gmsh/stargazers)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![scikit-gmsh](/advisor/python/scikit-gmsh/badge.svg)](/advisor/python/scikit-gmsh)]
 
 The `scikit-gmsh` package provides a simple interface to:
 
