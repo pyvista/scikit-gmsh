@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import datetime
 from typing import TYPE_CHECKING
+import warnings
 
 import gmsh
 from pygmsh.helpers import extract_to_meshio
@@ -299,7 +300,7 @@ class Delaunay2D:
 
     Parameters
     ----------
-    edge_source : pyvista.PolyData | shapely.Polygon
+    edge_source : pyvista.PolyData | shapely.geometry.Polygon
         Specify the source object used to specify constrained
         edges and loops. If set, and lines/polygons are defined, a
         constrained triangulation is created. The lines/polygons
@@ -328,38 +329,82 @@ class Delaunay2D:
     def __init__(
         self: Delaunay2D,
         *,
-        edge_source: pv.PolyData | shapely.Polygon | None = None,
+        edge_source: pv.PolyData | shapely.geometry.Polygon | None = None,
         shell: Sequence[tuple[int]] | None = None,
         holes: Sequence[tuple[int]] | None = None,
         cell_size: float | None = None,
     ) -> None:
         """Initialize the Delaunay2D class."""
         if edge_source is not None:
-            self._edge_source = edge_source
+            warnings.warn("edge_source is deprecated. Please use shell and holes instead.", DeprecationWarning, stacklevel=2)
+            if isinstance(edge_source, pv.PolyData):
+                self._polygon = shapely.Polygon(edge_source.points)
+            else:
+                self._polygon = edge_source
         else:
-            self._edge_source = shapely.Polygon(shell, holes)
-        self._cell_size = cell_size
+            self._polygon = shapely.Polygon(shell, holes)
+        if gmsh.is_initialized():
+            msg = "Gmsh is already initialized. Please finalize it before running this function."
+            raise RuntimeError(msg)
+        gmsh.initialize()
+        gmsh.option.set_number("General.Verbosity", SILENT)
+        if cell_size is None:
+            gmsh.option.set_number("Mesh.Algorithm", INITIAL_MESH_ONLY_2D)
+            gmsh.option.set_number("Mesh.MeshSizeExtendFromBoundary", 0)
+            gmsh.option.set_number("Mesh.MeshSizeFromPoints", 0)
+            gmsh.option.set_number("Mesh.MeshSizeFromCurvature", 0)
+            self._cell_size = 0.0
+        else:
+            gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
+            self._cell_size = cell_size
+
+    def __del__(self: Delaunay2D) -> None:
+        """Finalize the gmsh instance."""
+        gmsh.clear()
+        gmsh.finalize()
 
     @property
-    def edge_source(self: Delaunay2D) -> pv.PolyData | shapely.geometry.Polygon:
+    def polygon(self: Delaunay2D) -> pv.PolyData | shapely.geometry.Polygon:
         """Get the edge source."""
-        return self._edge_source
+        return self._polygon
+
+    def add_plane_surface(self: Delaunay2D, shell: shapely.geometry.Polygon) -> None:
+        """Add a plane surface to the mesh."""
+        wire_tags = []
+        for linearring in [shell.exterior, *list(shell.interiors)]:
+            coords = linearring.coords[:-1].copy()
+            tags = []
+            for coord in coords:
+                x = coord[0]
+                y = coord[1]
+                z = coord[2]
+                tags.append(gmsh.model.geo.add_point(x, y, z, self.cell_size))
+            curve_tags = []
+            for i, _ in enumerate(tags):
+                start_tag = tags[i - 1]
+                end_tag = tags[i]
+                curve_tags.append(gmsh.model.geo.add_line(start_tag, end_tag))
+            wire_tags.append(gmsh.model.geo.add_curve_loop(curve_tags))
+        gmsh.model.geo.add_plane_surface(wire_tags)
+        gmsh.model.geo.synchronize()
 
     @property
     def mesh(self: Delaunay2D) -> pv.PolyData:
         """Get the mesh."""
-        mesh = frontal_delaunay_2d(self._edge_source, target_sizes=self._cell_size)
+        self.add_plane_surface(self.polygon)
+        gmsh.model.mesh.generate(2)
+        mesh = pv.from_meshio(extract_to_meshio())
+        ind = []
+        for index, cell in enumerate(mesh.cell):
+            if cell.type in [pv.CellType.VERTEX, pv.CellType.LINE]:
+                ind.append(index)
+        mesh = mesh.remove_cells(ind)
         return pv.PolyData(mesh.points, mesh.cells)
 
     @property
     def cell_size(self: Delaunay2D) -> float | None:
         """Get the cell_size of the mesh."""
         return self._cell_size
-
-    @cell_size.setter
-    def cell_size(self: Delaunay2D, size: int) -> None:
-        """Set the cell_size of the mesh."""
-        self._cell_size = size
 
 
 class Delaunay3D:
