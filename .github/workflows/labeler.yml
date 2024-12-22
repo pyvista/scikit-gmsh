@@ -1,6 +1,6 @@
 name: "Pull Request Labeler"
 on:
-  pull_request_target:
+  pull_request:
     types: [opened, reopened]
 
 jobs:
@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/labeler@v5
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
