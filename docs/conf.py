@@ -143,7 +143,7 @@ sphinx_gallery_conf = {
     "download_all_examples": False,
     "examples_dirs": ["../examples/"],
     "filename_pattern": r"\.py",
-    "first_notebook_cell": ("%matplotlib inline\n" "from pyvista import set_plot_theme\n" "set_plot_theme('document')\n"),
+    "first_notebook_cell": ("%matplotlib inline\nfrom pyvista import set_plot_theme\nset_plot_theme('document')\n"),
     "gallery_dirs": ["./examples"],
     "image_scrapers": (DynamicScraper(), "matplotlib"),
     "pypandoc": True,
