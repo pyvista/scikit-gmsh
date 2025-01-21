@@ -22,6 +22,9 @@ env:
 jobs:
   Linux:
     name: Linux Unit Testing
+    permissions:
+      contents: read
+      actions: write
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
