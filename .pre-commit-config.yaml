@@ -43,7 +43,7 @@ repos:
             "--no-strict-optional",
           ]
   - repo: https://github.com/rbubley/mirrors-prettier
-    rev: v3.5.0
+    rev: v3.5.1
     hooks:
       - id: prettier
         types_or: [yaml, markdown, html, css, scss, javascript, json, toml]
