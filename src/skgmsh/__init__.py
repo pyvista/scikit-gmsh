@@ -288,7 +288,7 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
     return mesh.remove_cells(ind)
 
 
-def generate_mesh(dim) -> pv.UnstructuredGrid:
+def generate_mesh(dim: int) -> pv.UnstructuredGrid:
     """
     Generate a mesh of the current model.
 
@@ -322,23 +322,19 @@ def generate_mesh(dim) -> pv.UnstructuredGrid:
         element_types, element_tags, element_node_tags = gmsh.model.mesh.getElements()
 
         # Points
-        assert (np.diff(node_tags) > 0).all()
+        assert (np.diff(node_tags) > 0).all()  # noqa: S101
         points = np.reshape(coord, (-1, 3))
 
         # Cells
         cells = {}
 
         for type_, tags, node_tags in zip(element_types, element_tags, element_node_tags):
-            assert (np.diff(tags) > 0).all()
+            assert (np.diff(tags) > 0).all()  # noqa: S101
 
             celltype = gmsh_to_pyvista_type[type_]
             num_nodes = gmsh.model.mesh.getElementProperties(type_)[3]
             cells[celltype] = np.reshape(node_tags, (-1, num_nodes)) - 1
 
-    except Exception as e:
-        raise
-
-    else:
         mesh = pv.UnstructuredGrid(cells, points)
 
     finally:
