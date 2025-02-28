@@ -335,6 +335,13 @@ def generate_mesh(dim: int) -> pv.UnstructuredGrid:
             num_nodes = gmsh.model.mesh.getElementProperties(type_)[3]
             cells[celltype] = np.reshape(node_tags, (-1, num_nodes)) - 1
 
+<<<<<<< HEAD
+=======
+    except Exception:
+        raise
+
+    else:
+>>>>>>> 0b46b9a02de4a8767bafc8bc0d30679a93a5152c
         mesh = pv.UnstructuredGrid(cells, points)
 
     finally:
