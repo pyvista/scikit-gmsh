@@ -1,31 +1,5 @@
 # Contributing
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Being Respectful](#being-respectful)
-- [Cloning the Source Repository](#cloning-the-source-repository)
-- [Quick Start Development with Codespaces](#quick-start-development-with-codespaces)
-- [Questions](#questions)
-- [Reporting Bugs](#reporting-bugs)
-- [Feature Requests](#feature-requests)
-- [Contributing New Code](#contributing-new-code)
-- [Licensing](#licensing)
-- [Development Practices](#development-practices)
-  - [Guidelines](#guidelines)
-  - [Contributing to scikit-gmsh through GitHub](#contributing-to-scikit-gmsh-through-github)
-  - [Unit Testing](#unit-testing)
-  - [Documentation Testing](#documentation-testing)
-  - [Style Checking](#style-checking)
-  - [Notes Regarding Image Regression Testing](#notes-regarding-image-regression-testing)
-  - [Building the Documentation](#building-the-documentation)
-  - [Contributing to the Documentation](#contributing-to-the-documentation)
-  - [Creating a New Pull Request](#creating-a-new-pull-request)
-  - [Preview the Documentation](#preview-the-documentation)
-  - [Branching Model](#branching-model)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 We absolutely welcome contributions and we hope that this guide will
 facilitate an understanding of the scikit-gmsh code repository. It is
 important to note that the scikit-gmsh software package is maintained on
@@ -39,7 +13,7 @@ question, concern, feature request, or desire to contribute.
 ## Being Respectful
 
 [![Contributor
-Covenant](https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg?style=for-the-badge)](CODE_OF_CONDUCT.md)
+Covenant](https://img.shields.io/badge/contributor%20covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
 Please demonstrate empathy and kindness toward other people, other
 software, and the communities who have worked diligently to build
@@ -130,7 +104,7 @@ details.
 
 ## Licensing
 
-All contributed code will be licensed under The MIT License found in the
+All contributed code will be licensed under The GPL-3.0 license found in the
 repository. If you did not write the code yourself, it is your
 responsibility to ensure that the existing license is compatible and
 included in the contributed files or you can obtain permission from the
@@ -140,7 +114,7 @@ original author to relicense the code.
 
 ## Development Practices
 
-[![Nox](https://img.shields.io/badge/%F0%9F%A6%8A-Nox-D85E00.svg?style=for-the-badge)](https://github.com/wntrblm/nox)
+[![Nox](https://img.shields.io/badge/%F0%9F%A6%8A-Nox-D85E00.svg)](https://github.com/wntrblm/nox)
 
 This section provides a guide to how we conduct development in the
 scikit-gmsh repository. Please follow the practices outlined here when
@@ -202,19 +176,15 @@ section](#creating-a-new-pull-request).
 
 #### Coding Style
 
-[![Code style:
-black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge)](https://github.com/psf/black)
-[![Imports:
-isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=for-the-badge&labelColor=ef8336)](https://pycqa.github.io/isort/)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json&style=for-the-badge)](https://github.com/astral-sh/ruff)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![code style:
-prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
+prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 We adhere to [PEP 8](https://www.python.org/dev/peps/pep-0008/) wherever
 possible, except that line widths are permitted to go beyond 79
 characters to a max of 99 characters for code. This should tend to be
 the exception rather than the norm. A uniform code style is enforced by
-[black](https://github.com/psf/black) to prevent energy wasted on style
+[Ruff](https://github.com/astral-sh/ruff) to prevent energy wasted on style
 disagreements.
 
 As for docstrings, scikit-gmsh follows the `numpydoc` style for its
@@ -439,9 +409,9 @@ warning messages.
 ```python
 with pytest.warns(skgmshDeprecationWarning):
     addition(a, b)
-    if pv._version.version_info >= (0, 40):
+    if sg._version.version_info >= (0, 40):
         raise RuntimeError("Convert error this function")
-    if pv._version.version_info >= (0, 41):
+    if sg._version.version_info >= (0, 41):
         raise RuntimeError("Remove this function")
 ```
 
@@ -555,9 +525,7 @@ style requirements:
 
     $ pre-commit install
     $ git commit -m "added my cool feature"
-    black....................................................................Passed
-    isort....................................................................Passed
-    flake8...................................................................Passed
+    ruff.....................................................................Passed
     codespell................................................................Passed
 
 The actual installation of the environment happens before the first
@@ -786,16 +754,6 @@ Since it may be necessary to merge your branch with the current release
 branch (see below), please do not delete your branch if it is a `fix/`
 branch.
 
-### Preview the Documentation
-
-Once you have make a Pull Request. You can comment
-`github-actions preview` on a pull request to preview documentation.
-Since this command is only available for
-[\@scikit-gmsh/developers](https://github.com/orgs/scikit-gmsh/teams/developers)
-, new contributors kindly request them to comment command. This is
-essential to safeguard the deployment site against potentially harmful
-commits.
-
 ### Branching Model
 
 This project has a branching model that enables rapid development of
@@ -872,7 +830,7 @@ created the following will occur:
     not be deleted. Tag the release with:
 
     ```bash
-    git tag v$(python -c "import scikit-gmsh as pv; print(pv.__version__)")
+    git tag v$(python -c "import skgmsh as skg; print(skg.__version__)")
     ```
 
 1.  Please check again that the tag has been created correctly and push
@@ -880,7 +838,7 @@ created the following will occur:
 
     ```bash
     git push origin HEAD
-    git push origin --tags
+    git push origin v$(python -c "import skgmsh as skg; print(skg.__version__)")
     ```
 
 1.  Create a list of all changes for the release. It is often helpful to

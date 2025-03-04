@@ -1,4 +1,5 @@
+blank_issues_enabled: false
 contact_links:
   - name: Questions and Discussions
-    url: https://github.com/pyvista/pvgmsh/discussions
+    url: https://github.com/pyvista/scikit-gmsh/discussions
     about: For general questions and discussions

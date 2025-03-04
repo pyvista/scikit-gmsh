@@ -4,21 +4,19 @@
 version: 2
 
 build:
-  os: ubuntu-22.04
+  os: ubuntu-24.04
   tools:
-    python: "3.11"
+    python: "3.12"
   apt_packages:
     - libfltk1.3-dev
     - libfreetype6-dev
     - libgl1-mesa-dev
-    - libgl1-mesa-glx
     - libglu1
     - libocct-data-exchange-dev
     - libocct-foundation-dev
     - libxcursor-dev
     - libxft2
     - libxinerama1
-    - python-tk
     - xvfb
 
 sphinx:
@@ -30,4 +28,3 @@ python:
       path: .
       extra_requirements:
         - docs
-    - requirements: docs/requirements.txt

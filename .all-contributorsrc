@@ -1,11 +1,12 @@
 {
   "files": [
-    "README.md"
+    "CONTRIBUTORS.md"
   ],
   "imageSize": 100,
   "commit": false,
   "commitType": "docs",
   "commitConvention": "angular",
+  "contributorsSortAlphabetically": true,
   "contributors": [
     {
       "login": "tkoyama010",
@@ -16,7 +17,16 @@
         "infra",
         "test",
         "code",
-        "ideas"
+        "ideas",
+        "maintenance",
+        "bug",
+        "doc",
+        "design",
+        "review",
+        "example",
+        "promotion",
+        "security",
+        "question"
       ]
     },
     {
@@ -36,10 +46,37 @@
       "contributions": [
         "maintenance"
       ]
+    },
+    {
+      "login": "dependabot",
+      "name": "Dependabot",
+      "avatar_url": "https://avatars.githubusercontent.com/u/27347476?v=4",
+      "profile": "https://github.com/features/security",
+      "contributions": [
+        "maintenance"
+      ]
+    },
+    {
+      "login": "adtzlr",
+      "name": "Andreas Dutzler",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5793153?v=4",
+      "profile": "https://github.com/adtzlr",
+      "contributions": [
+        "example"
+      ]
+    },
+    {
+      "login": "bjlittle",
+      "name": "Bill Little",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2051656?v=4",
+      "profile": "https://github.com/bjlittle",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "skipCi": true,
+  "skipCi": false,
   "repoType": "github",
   "repoHost": "https://github.com",
   "projectName": "scikit-gmsh",

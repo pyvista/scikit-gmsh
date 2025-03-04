@@ -8,9 +8,21 @@ https://www.sphinx-doc.org/en/master/usage/configuration.html
 from __future__ import annotations
 
 import datetime
-import os
 from importlib.metadata import version as get_version
+import os
 from pathlib import Path
+
+import pyvista
+from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
+
+pyvista.set_error_output_file("errors.txt")
+pyvista.OFF_SCREEN = True  # Not necessary - simply an insurance policy
+pyvista.set_plot_theme("document")
+pyvista.BUILDING_GALLERY = True
+os.environ["PYVISTA_BUILDING_GALLERY"] = "true"
+
+if os.environ.get("READTHEDOCS") or os.environ.get("CI"):
+    pyvista.start_xvfb()
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -28,8 +40,7 @@ if on_rtd:
 
 # The full version, including alpha/beta/rc tags
 release = get_version("scikit-gmsh")
-if release.endswith("+dirty"):
-    release = release[: -len("+dirty")]
+release = release.removesuffix("+dirty")
 
 # docs src directory
 src_dir = Path(__file__).absolute().parent
@@ -39,8 +50,7 @@ package_dir = root_dir / "src"
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["myst_parser"]
-
+extensions = ["myst_parser", "pyvista.ext.plot_directive", "pyvista.ext.viewer_directive", "sphinx_design", "sphinx_gallery.gen_gallery"]
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
@@ -105,21 +115,37 @@ html_css_files = [
     "theme_overrides.css",
 ]
 
-# -- MyST settings ---------------------------------------------------
+# -- MyST settings -----------------------------------------------------------
 
 myst_enable_extensions = [
-    "dollarmath",
     "amsmath",
+    "attrs_block",
+    "attrs_inline",
+    "colon_fence",
     "deflist",
+    "dollarmath",
     "fieldlist",
     "html_admonition",
     "html_image",
-    "colon_fence",
-    "smartquotes",
     "replacements",
+    "smartquotes",
     "strikethrough",
     "substitution",
     "tasklist",
-    "attrs_inline",
-    "attrs_block",
 ]
+
+# -- sphinx_gallery settings -------------------------------------------------
+
+sphinx_gallery_conf = {
+    "backreferences_dir": None,
+    "doc_module": "pyvista",
+    "download_all_examples": False,
+    "examples_dirs": ["../examples/"],
+    "filename_pattern": r"\.py",
+    "first_notebook_cell": ("%matplotlib inline\nfrom pyvista import set_plot_theme\nset_plot_theme('document')\n"),
+    "gallery_dirs": ["./examples"],
+    "image_scrapers": (DynamicScraper(), "matplotlib"),
+    "pypandoc": True,
+    "remove_config_comments": True,
+    "reset_modules_order": "both",
+}

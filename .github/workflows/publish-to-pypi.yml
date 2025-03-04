@@ -1,39 +1,25 @@
 name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
 on:
-  workflow_dispatch:
-  pull_request:
   push:
     tags:
       - "*"
-    branches:
-      - main
-      - "release/*"
-permissions:
-  id-token: write
 jobs:
   build-n-publish:
     runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
       - name: Install packages
-        run: >
-          sudo apt -y install
-          libgl1-mesa-glx
-          xvfb
-          python-tk
-          libglu1
-          libxcursor-dev
-          libxft2
-          libxinerama1
-          libfltk1.3-dev
-          libfreetype6-dev
-          libgl1-mesa-dev
-          libocct-foundation-dev
-          libocct-data-exchange-dev
+        run: |
+          for i in $(cat packages.txt); do sudo apt-get install $i; done
       - name: Install pypa/build
         run: >-
           python3 -m
@@ -48,7 +34,4 @@ jobs:
           --wheel
           --outdir dist/
       - name: Publish distribution  to PyPI
-        if: startsWith(github.ref, 'refs/tags')
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PYPI_API_TOKEN }}

@@ -3,25 +3,34 @@
 from __future__ import annotations
 
 import datetime
+from pathlib import Path
+import subprocess
 from typing import TYPE_CHECKING
+from typing import Optional
 
 import gmsh
 import pyvista as pv
 import scooby
-from pygmsh.helpers import extract_to_meshio
+import shapely
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
+INITIAL_MESH_ONLY_2D = 3
 FRONTAL_DELAUNAY_2D = 6
 DELAUNAY_3D = 1
+INITIAL_MESH_ONLY_3D = 3
 
 SILENT = 0
+SIMPLE = 0
+
+TRUE = 1
+FALSE = 0
 
 now = datetime.datetime.now(tz=datetime.timezone.utc)
 
 # major, minor, patch
-version_info = 0, 2, "dev0"
+version_info = 0, 3, "dev0"
 
 # Nice string for the version
 __version__ = ".".join(map(str, version_info))
@@ -42,9 +51,7 @@ class Report(scooby.Report):  # type: ignore[misc]
 
     """
 
-    def __init__(
-        self: Report, ncol: int = 3, text_width: int = 80
-    ) -> None:  # numpydoc ignore=PR01
+    def __init__(self: Report, ncol: int = 3, text_width: int = 80) -> None:  # numpydoc ignore=PR01
         """Generate a :class:`scooby.Report` instance."""
         # mandatory packages
         core: list[str] = [
@@ -126,11 +133,23 @@ def delaunay_3d(
 
     """
     points = edge_source.points
-    faces = edge_source.regular_faces
+    faces = edge_source.irregular_faces
 
     gmsh.initialize()
-    gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
+    if target_sizes is None:
+        gmsh.option.set_number("Mesh.Algorithm", INITIAL_MESH_ONLY_3D)
+        gmsh.option.set_number("Mesh.MeshSizeExtendFromBoundary", 0)
+        gmsh.option.set_number("Mesh.MeshSizeFromPoints", 0)
+        gmsh.option.set_number("Mesh.MeshSizeFromCurvature", 0)
+    else:
+        gmsh.option.set_number("Mesh.Algorithm3D", DELAUNAY_3D)
     gmsh.option.set_number("General.Verbosity", SILENT)
+    gmsh.option.set_number("Mesh.AlgorithmSwitchOnFailure", FALSE)
+    gmsh.option.set_number("Mesh.RecombinationAlgorithm", SIMPLE)
+    gmsh.option.set_number("Mesh.RecombineNodeRepositioning", FALSE)
+
+    if target_sizes is None:
+        target_sizes = 0.0
 
     if isinstance(target_sizes, float):
         target_sizes = [target_sizes] * edge_source.number_of_points
@@ -141,27 +160,24 @@ def delaunay_3d(
 
     surface_loop = []
     for i, face in enumerate(faces):
-        gmsh.model.geo.add_line(face[0] + 1, face[1] + 1, i * 4 + 0)
-        gmsh.model.geo.add_line(face[1] + 1, face[2] + 1, i * 4 + 1)
-        gmsh.model.geo.add_line(face[2] + 1, face[3] + 1, i * 4 + 2)
-        gmsh.model.geo.add_line(face[3] + 1, face[0] + 1, i * 4 + 3)
-        gmsh.model.geo.add_curve_loop(
-            [i * 4 + 0, i * 4 + 1, i * 4 + 2, i * 4 + 3], i + 1
-        )
+        curve_tags = []
+        for j, _ in enumerate(face):
+            start_tag = face[j - 1] + 1
+            end_tag = face[j] + 1
+            curve_tag = gmsh.model.geo.add_line(start_tag, end_tag)
+            curve_tags.append(curve_tag)
+        gmsh.model.geo.add_curve_loop(curve_tags, i + 1)
         gmsh.model.geo.add_plane_surface([i + 1], i + 1)
-        gmsh.model.geo.remove_all_duplicates()
-        gmsh.model.geo.synchronize()
         surface_loop.append(i + 1)
+
+    gmsh.model.geo.remove_all_duplicates()
+    gmsh.model.geo.synchronize()
 
     gmsh.model.geo.add_surface_loop(surface_loop, 1)
     gmsh.model.geo.add_volume([1], 1)
 
     gmsh.model.geo.synchronize()
-    gmsh.model.mesh.generate(3)
-
-    mesh = pv.wrap(extract_to_meshio())
-    gmsh.clear()
-    gmsh.finalize()
+    mesh = generate_mesh(3)
 
     ind = []
     for i, cell in enumerate(mesh.cell):
@@ -173,16 +189,17 @@ def delaunay_3d(
     return mesh
 
 
-def frontal_delaunay_2d(
-    edge_source: pv.PolyData,
+def frontal_delaunay_2d(  # noqa: C901, PLR0912
+    edge_source: pv.PolyData | shapely.geometry.Polygon,
     target_sizes: float | Sequence[float] | None = None,
-) -> pv.PolyData | None:
+    recombine: bool = False,  # noqa: FBT001, FBT002
+) -> pv.UnstructuredGrid | None:
     """
     Frontal-Delaunay 2D mesh algorithm.
 
     Parameters
     ----------
-    edge_source : pyvista.PolyData
+    edge_source : pyvista.PolyData | shapely.geometry.Polygon
         Specify the source object used to specify constrained
         edges and loops. If set, and lines/polygons are defined, a
         constrained triangulation is created. The lines/polygons
@@ -194,9 +211,12 @@ def frontal_delaunay_2d(
         Target mesh size close to the points.
         Default max size of edge_source in each direction.
 
+    recombine : bool
+        Recombine the generated mesh into quadrangles.
+
     Returns
     -------
-    pyvista.PolyData
+    pyvista.UnstructuredGrid
         Mesh from the 2D delaunay generation.
 
     Notes
@@ -204,33 +224,272 @@ def frontal_delaunay_2d(
     .. versionadded:: 0.2.0
 
     """
-    points = edge_source.points
-    lines = edge_source.lines
-
     gmsh.initialize()
-    gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
+    if target_sizes is None:
+        gmsh.option.set_number("Mesh.Algorithm", INITIAL_MESH_ONLY_2D)
+        gmsh.option.set_number("Mesh.MeshSizeExtendFromBoundary", 0)
+        gmsh.option.set_number("Mesh.MeshSizeFromPoints", 0)
+        gmsh.option.set_number("Mesh.MeshSizeFromCurvature", 0)
+    else:
+        gmsh.option.set_number("Mesh.Algorithm", FRONTAL_DELAUNAY_2D)
     gmsh.option.set_number("General.Verbosity", SILENT)
 
-    if isinstance(target_sizes, float):
-        target_sizes = [target_sizes] * edge_source.number_of_points
+    if target_sizes is None:
+        target_sizes = 0.0
 
-    for i, (target_size, point) in enumerate(zip(target_sizes, points)):
-        id_ = i + 1
-        gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
+    if isinstance(edge_source, shapely.geometry.Polygon):
+        wire_tags = []
+        for linearring in [edge_source.exterior, *list(edge_source.interiors)]:
+            coords = linearring.coords[:-1].copy()
+            tags = []
+            for coord in coords:
+                x = coord[0]
+                y = coord[1]
+                z = coord[2]
+                tags.append(gmsh.model.geo.add_point(x, y, z, target_sizes))
+            curve_tags = []
+            for i, _ in enumerate(tags):
+                start_tag = tags[i - 1]
+                end_tag = tags[i]
+                curve_tags.append(gmsh.model.geo.add_line(start_tag, end_tag))
+            wire_tags.append(gmsh.model.geo.add_curve_loop(curve_tags))
+        gmsh.model.geo.add_plane_surface(wire_tags)
+        gmsh.model.geo.synchronize()
+    else:
+        points = edge_source.points
+        lines = edge_source.lines
 
-    for i in range(lines[0] - 1):
-        id_ = i + 1
-        gmsh.model.geo.add_line(lines[i + 1] + 1, lines[i + 2] + 1, id_)
+        if isinstance(target_sizes, float):
+            target_sizes = [target_sizes] * edge_source.number_of_points
 
-    gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
-    gmsh.model.geo.add_plane_surface([1], 1)
-    gmsh.model.geo.synchronize()
-    gmsh.model.mesh.generate(2)
-    mesh = extract_to_meshio()
-    gmsh.clear()
-    gmsh.finalize()
+        embedded_points = []
+        for target_size, point in zip(target_sizes, points):
+            embedded_points.append(gmsh.model.geo.add_point(point[0], point[1], point[2], target_size))
 
-    for cell in mesh.cells:
-        if cell.type == "triangle":
-            return pv.PolyData.from_regular_faces(mesh.points, cell.data)
-    return None
+        for i in range(lines[0] - 1):
+            id_ = i + 1
+            gmsh.model.geo.add_line(lines[i + 1] + 1, lines[i + 2] + 1, id_)
+
+        gmsh.model.geo.add_curve_loop(range(1, lines[0]), 1)
+        gmsh.model.geo.add_plane_surface([1], 1)
+        gmsh.model.geo.synchronize()
+        gmsh.model.mesh.embed(0, embedded_points, 2, 1)
+
+    if recombine:
+        gmsh.model.mesh.set_recombine(2, 1)
+
+    mesh = generate_mesh(2)
+
+    ind = []
+    for index, cell in enumerate(mesh.cell):
+        if cell.type in [pv.CellType.VERTEX, pv.CellType.LINE]:
+            ind.append(index)
+
+    return mesh.remove_cells(ind)
+
+
+def generate_mesh(dim: int) -> pv.UnstructuredGrid:
+    """
+    Generate a mesh of the current model.
+
+    Parameters
+    ----------
+    dim : int
+        Mesh dimension.
+
+    Returns
+    -------
+    pyvista.UnstructuredGrid
+        Generated mesh.
+
+    """
+    import numpy as np
+
+    gmsh_to_pyvista_type = {
+        1: pv.CellType.LINE,
+        2: pv.CellType.TRIANGLE,
+        3: pv.CellType.QUAD,
+        4: pv.CellType.TETRA,
+        5: pv.CellType.HEXAHEDRON,
+        6: pv.CellType.WEDGE,
+        7: pv.CellType.PYRAMID,
+        15: pv.CellType.VERTEX,
+    }
+
+    try:
+        gmsh.model.mesh.generate(dim)
+        node_tags, coord, _ = gmsh.model.mesh.getNodes()
+        element_types, element_tags, element_node_tags = gmsh.model.mesh.getElements()
+
+        # Points
+        assert (np.diff(node_tags) > 0).all()  # noqa: S101
+        points = np.reshape(coord, (-1, 3))
+
+        # Cells
+        cells = {}
+
+        for type_, tags, node_tags in zip(element_types, element_tags, element_node_tags):
+            assert (np.diff(tags) > 0).all()  # noqa: S101
+
+            celltype = gmsh_to_pyvista_type[type_]
+            num_nodes = gmsh.model.mesh.getElementProperties(type_)[3]
+            cells[celltype] = np.reshape(node_tags, (-1, num_nodes)) - 1
+
+        mesh = pv.UnstructuredGrid(cells, points)
+
+    finally:
+        gmsh.clear()
+        gmsh.finalize()
+
+    return mesh
+
+
+class Delaunay2D:
+    """
+    Delaunay 2D mesh algorithm.
+
+    Parameters
+    ----------
+    edge_source : pyvista.PolyData | shapely.Polygon
+        Specify the source object used to specify constrained
+        edges and loops. If set, and lines/polygons are defined, a
+        constrained triangulation is created. The lines/polygons
+        are assumed to reference points in the input point set
+        (i.e. point ids are identical in the input and
+        source).
+
+    shell : sequence
+        A sequence of (x, y [,z]) numeric coordinate pairs or triples, or
+        an array-like with shape (N, 2) or (N, 3).
+        Also can be a sequence of Point objects.
+
+    holes : sequence
+        A sequence of objects which satisfy the same requirements as the
+        shell parameters above
+
+    cell_size : float
+       Meshing constraint at point.
+
+    Notes
+    -----
+    .. versionadded:: 0.2.0
+
+    """
+
+    def __init__(
+        self: Delaunay2D,
+        *,
+        edge_source: pv.PolyData | shapely.Polygon | None = None,
+        shell: Sequence[tuple[int]] | None = None,
+        holes: Sequence[tuple[int]] | None = None,
+        cell_size: float | None = None,
+    ) -> None:
+        """Initialize the Delaunay2D class."""
+        if edge_source is not None:
+            self._edge_source = edge_source
+        else:
+            self._edge_source = shapely.Polygon(shell, holes)
+        self._cell_size = cell_size
+
+    @property
+    def edge_source(self: Delaunay2D) -> pv.PolyData | shapely.geometry.Polygon:
+        """Get the edge source."""
+        return self._edge_source
+
+    @property
+    def mesh(self: Delaunay2D) -> pv.PolyData:
+        """Get the mesh."""
+        mesh = frontal_delaunay_2d(self._edge_source, target_sizes=self._cell_size)
+        return pv.PolyData(mesh.points, mesh.cells)
+
+    @property
+    def cell_size(self: Delaunay2D) -> float | None:
+        """Get the cell_size of the mesh."""
+        return self._cell_size
+
+    @cell_size.setter
+    def cell_size(self: Delaunay2D, size: int) -> None:
+        """Set the cell_size of the mesh."""
+        self._cell_size = size
+
+
+class Delaunay3D:
+    """
+    Delaunay 3D mesh algorithm.
+
+    Parameters
+    ----------
+    edge_source : pyvista.PolyData
+        Specify the source object used to specify constrained
+        edges and loops. If set, and lines/polygons are defined, a
+        constrained triangulation is created. The lines/polygons
+        are assumed to reference points in the input point set
+        (i.e. point ids are identical in the input and
+        source).
+
+    Notes
+    -----
+    .. versionadded:: 0.2.0
+
+    """
+
+    def __init__(
+        self: Delaunay3D,
+        edge_source: pv.PolyData,
+        cell_size: float | None = None,
+    ) -> None:
+        """Initialize the Delaunay3D class."""
+        self._edge_source = edge_source
+        self._cell_size = cell_size
+
+    @property
+    def edge_source(self: Delaunay3D) -> pv.PolyData:
+        """Get the edge source."""
+        return self._edge_source
+
+    @property
+    def mesh(self: Delaunay3D) -> pv.UnstructuredGrid:
+        """Get the mesh."""
+        self._mesh = delaunay_3d(self.edge_source, target_sizes=self.cell_size)
+        return self._mesh
+
+    @property
+    def cell_size(self: Delaunay3D) -> float | None:
+        """Get the cell_size of the mesh."""
+        return self._cell_size
+
+    @cell_size.setter
+    def cell_size(self: Delaunay3D, size: int) -> None:
+        """Set the cell_size of the mesh."""
+        self._cell_size = size
+
+
+class Delaunay2D2:
+    """Delaunay2D class."""
+
+    def __init__(self, shell: shapely.Polygon, holes: Optional[list[shapely.Polygon]] = None) -> None:
+        """Create a Delaunay2D object."""
+        self.shell = shapely.Polygon(shell)
+        self.holes = [shapely.Polygon(hole) for hole in holes] if holes else []
+        self._generate_mesh()
+
+    def _generate_mesh(self) -> None:
+        cell_size = 0.05
+        with Path("quad.geo").open("w") as f:
+            for linearring in [self.shell.exterior, *list(self.shell.interiors), *self.holes]:
+                coords = linearring.coords[:-1].copy()
+                for i, coord in enumerate(coords):
+                    x = coord[0]
+                    y = coord[1]
+                    z = coord[2]
+                    f.write("Point(" + str(i + 1) + ") = {" + str(x) + "," + str(y) + "," + str(z) + "," + str(cell_size) + "};\n")
+                for i, _ in enumerate(coords[:-1]):
+                    f.write("Line(" + str(i + 1) + ") = {" + str(i + 1) + ", " + str(i + 2) + "};\n")
+                f.write("Line(" + str(len(coords)) + ") = {" + str(len(coords)) + ", 1};\n")
+                f.write("Line Loop(1) = {")
+                for i in range(len(coords) - 1):
+                    f.write(str(i + 1) + ", ")
+                f.write(str(len(coords)) + "};\n")
+                f.write("Plane Surface(1) = {1};\n")
+        subprocess.run(["gmsh", "quad.geo", "-2", "-o", "quad.vtk"], check=False)  # noqa: S603, S607
+        self.mesh = pv.read("quad.vtk")

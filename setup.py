@@ -1,5 +1,7 @@
 """scikit-gmsh setuptools packaging."""
 
+from __future__ import annotations
+
 from pathlib import Path
 
 from setuptools import setup

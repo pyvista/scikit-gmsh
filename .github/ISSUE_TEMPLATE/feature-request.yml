@@ -1,11 +1,11 @@
 name: Feature Request
-description: Request that a feature be added to PyVista
+description: Request that a feature be added to scikit-gmsh
 labels: ["feature-request"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to open this issue to help improve PyVista!
+        Thanks for taking the time to open this issue to help improve scikit-gmsh!
   - type: textarea
     id: feature-details
     attributes:
@@ -17,10 +17,10 @@ body:
     validations:
       required: true
   - type: textarea
-    id: VTK-Links
+    id: Gmsh-Links
     attributes:
-      label: Links to VTK Documentation, Examples, or Class Definitions.
-      description: If you are requesting that a feature from VTK be wrapped or exposed, please include the relevant links below.
+      label: Links to Gmsh Documentation, Examples, or Class Definitions.
+      description: If you are requesting that a feature from Gmsh be wrapped or exposed, please include the relevant links below.
   - type: textarea
     id: pseudocode-and-screenshots
     attributes:
