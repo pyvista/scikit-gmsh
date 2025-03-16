@@ -40,13 +40,6 @@ ignore_missing_imports = true
 strict = true
 warn_unreachable = true
 
-[tool.poetry]
-authors = ["Tetsuo Koyama"]
-description = "PyVista accessors for Gmsh to generate 3D finite element mesh"
-name = "scikit-gmsh"
-readme = "README.md"
-version = "0.0.0"
-
 [tool.pytest.ini_options]
 addopts = ["--showlocals", "--strict-config", "--strict-markers", "-ra"]
 filterwarnings = ["error", 'ignore::DeprecationWarning']
