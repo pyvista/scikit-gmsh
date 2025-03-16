@@ -1,5 +1,6 @@
 libfltk1.3-dev
 libfreetype6-dev
+libgeos-dev
 libglu1
 libocct-data-exchange-dev
 libocct-foundation-dev
