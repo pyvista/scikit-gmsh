@@ -4,7 +4,7 @@ on:
     tags:
       - "*"
 jobs:
-  build-n-publish:
+  build:
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
@@ -33,5 +33,29 @@ jobs:
           --sdist
           --wheel
           --outdir dist/
-      - name: Publish distribution  to PyPI
+      - name: Store the distribution packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+  publish:
+    name: >-
+      Publish Python 🐍 distribution 📦 to PyPI
+    if: github.repository_owner == 'pyvista'
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/scikit-gmsh
+    permissions:
+      id-token: write
+    steps:
+      - name: Download all the dists
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+      - name: Publish package to PyPI
+        if: github.event_name == 'release'
         uses: pypa/gh-action-pypi-publish@release/v1
