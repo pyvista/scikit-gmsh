@@ -33,7 +33,7 @@ FALSE = 0
 now = datetime.datetime.now(tz=datetime.timezone.utc)
 
 # major, minor, patch
-version_info = 0, 3, 2
+version_info = 0, 3, 3
 
 # Nice string for the version
 __version__ = ".".join(map(str, version_info))
