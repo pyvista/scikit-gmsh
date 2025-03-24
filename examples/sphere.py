@@ -91,8 +91,3 @@ def save_view(view_name: str, camera_pos: Literal["xy", "xz", "yz"]) -> None:
 save_view("xy", "xy")  # Top view
 save_view("xz", "xz")  # Front view
 save_view("yz", "yz")  # Side view
-
-print("メッシュの可視化を3つの視点から保存しました:")
-print("- sphere_xy.png (上面図)")
-print("- sphere_xz.png (正面図)")
-print("- sphere_yz.png (側面図)")
