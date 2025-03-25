@@ -6,7 +6,6 @@ import datetime
 from pathlib import Path
 import subprocess
 from typing import TYPE_CHECKING
-from typing import Optional
 
 import gmsh
 import numpy as np
@@ -157,7 +156,7 @@ def delaunay_3d(
     if isinstance(target_sizes, float):
         target_sizes = [target_sizes] * edge_source.number_of_points
 
-    for i, (point, target_size) in enumerate(zip(points, target_sizes)):
+    for i, (point, target_size) in enumerate(zip(points, target_sizes, strict=False)):
         id_ = i + 1
         gmsh.model.geo.add_point(point[0], point[1], point[2], target_size, id_)
 
@@ -246,11 +245,11 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
         if isinstance(target_sizes, float):
             target_sizes = [target_sizes] * (len(edge_source.interiors) + 1)
 
-        for target_size, linearring in zip(target_sizes, [edge_source.exterior, *list(edge_source.interiors)]):
+        for target_size, linearring in zip(target_sizes, [edge_source.exterior, *list(edge_source.interiors)], strict=False):
             sizes = [target_size] * (len(linearring.coords) - 1) if isinstance(target_size, float) else target_size
             coords = linearring.coords[:-1].copy()
             tags = []
-            for size, coord in zip(sizes, coords):
+            for size, coord in zip(sizes, coords, strict=False):
                 x, y, z = coord
                 tags.append(gmsh.model.geo.add_point(x, y, z, size))
             curve_tags = []
@@ -269,7 +268,7 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
             target_sizes = [target_sizes] * edge_source.number_of_points
 
         embedded_points = []
-        for target_size, point in zip(target_sizes, points):
+        for target_size, point in zip(target_sizes, points, strict=False):
             embedded_points.append(gmsh.model.geo.add_point(point[0], point[1], point[2], target_size))
 
         for i in range(lines[0] - 1):
@@ -334,7 +333,7 @@ def generate_mesh(dim: int) -> pv.UnstructuredGrid:
         # Cells
         cells = {}
 
-        for type_, tags, node_tags in zip(element_types, element_tags, element_node_tags):
+        for type_, tags, node_tags in zip(element_types, element_tags, element_node_tags, strict=False):
             assert (np.diff(tags) > 0).all()  # noqa: S101
 
             celltype = gmsh_to_pyvista_type[type_]
@@ -498,7 +497,7 @@ class Delaunay3D:
 class Delaunay2D2:
     """Delaunay2D class."""
 
-    def __init__(self, shell: shapely.Polygon, holes: Optional[list[shapely.Polygon]] = None) -> None:
+    def __init__(self, shell: shapely.Polygon, holes: list[shapely.Polygon] | None = None) -> None:
         """Create a Delaunay2D object."""
         self.shell = shapely.Polygon(shell)
         self.holes = [shapely.Polygon(hole) for hole in holes] if holes else []
