@@ -6,7 +6,6 @@ import datetime
 from pathlib import Path
 import subprocess
 from typing import TYPE_CHECKING
-from typing import Optional
 
 import gmsh
 import numpy as np
