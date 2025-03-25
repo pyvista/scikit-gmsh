@@ -47,7 +47,7 @@ jobs:
 
       - name: Install Testing Requirements
         run: |
-          pip install -e .[test]
+          uv pip install -e .[test]
 
       - name: Unit Testing
         run: |
