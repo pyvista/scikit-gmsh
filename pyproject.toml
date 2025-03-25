@@ -7,6 +7,7 @@ requires = [
   'scooby<0.10.1',
   'setuptools<77.0.4',
   'shapely<2.0.8',
+  'uv',
 ]
 
 [project]
@@ -16,6 +17,7 @@ dependencies = [
   'pyvista[all]<0.44.3',
   'scooby<0.10.1',
   'shapely<2.0.8',
+  'uv',
 ]
 dynamic = ["readme", "version"]
 name = "scikit-gmsh"

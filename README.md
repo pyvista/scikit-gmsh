@@ -29,7 +29,7 @@ The library has following main objectives:
 [![pypi](https://img.shields.io/pypi/v/scikit-gmsh?label=pypi&logo=python&logoColor=white)](https://pypi.org/project/scikit-gmsh/)
 
 ```shell
-pip install scikit-gmsh
+uv pip install scikit-gmsh
 ```
 
 ## Gallery
