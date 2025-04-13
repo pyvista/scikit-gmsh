@@ -23,7 +23,7 @@ This tutorial will guide you through the basic usage of scikit-gmsh. Below is a 
    pip install scikit-gmsh
    ```
 
-2. **Write a Python Script**:
+1. **Write a Python Script**:
    Create a Python file (e.g., `example.py`) and add the following code:
 
    ```python
@@ -39,14 +39,14 @@ This tutorial will guide you through the basic usage of scikit-gmsh. Below is a 
    print("Mesh saved as square.msh")
    ```
 
-3. **Run the Script**:
+1. **Run the Script**:
    Execute the script in your terminal:
 
    ```bash
    python example.py
    ```
 
-4. **Visualize the Mesh**:
+1. **Visualize the Mesh**:
    Use a mesh viewer like Gmsh to open the generated `square.msh` file.
 
 This is a basic example to get you started. For more advanced examples, refer to the `examples/` directory in the repository.
