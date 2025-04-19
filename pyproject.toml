@@ -3,7 +3,7 @@ build-backend = 'setuptools.build_meta'
 requires = [
   'gmsh<4.13.2',
   'meshio<5.3.6',
-  'pyvista[all]<0.44.3',
+  'pyvista[all]<0.45.1',
   'scooby<0.10.1',
   'setuptools<78.1.1',
   'shapely<2.0.8',
@@ -13,7 +13,7 @@ requires = [
 dependencies = [
   'gmsh<4.13.2',
   'meshio<5.3.6',
-  'pyvista[all]<0.44.3',
+  'pyvista[all]<0.45.1',
   'scooby<0.10.1',
   'shapely<2.0.8',
 ]
