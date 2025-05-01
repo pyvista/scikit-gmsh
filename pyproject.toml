@@ -4,8 +4,8 @@ requires = [
   'gmsh<4.13.2',
   'meshio<5.3.6',
   'pyvista[all]<0.45.1',
-  'scooby<0.10.1',
-  'setuptools<78.1.1',
+  'scooby<0.10.2',
+  'setuptools<80.1.1',
   'shapely<2.0.8',
 ]
 
@@ -14,7 +14,7 @@ dependencies = [
   'gmsh<4.13.2',
   'meshio<5.3.6',
   'pyvista[all]<0.45.1',
-  'scooby<0.10.1',
+  'scooby<0.10.2',
   'shapely<2.0.8',
 ]
 dynamic = ["readme", "version"]
