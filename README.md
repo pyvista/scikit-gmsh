@@ -58,9 +58,10 @@ This library may not meet your needs and if this is this case, consider checking
 - [meshwell](https://github.com/simbilod/meshwell) - GMSH wrapper, with integrated photonics focus.
 - [objectgmsh](https://github.com/nemocrys/objectgmsh) - Object oriented Gmsh modeling.
 - [optimesh](https://github.com/meshpro/optimesh) - Mesh optimization, mesh smoothing.
-- [pandamesh](https://github.com/Deltares/pandamesh) - 🐼 From geodataframe to mesh ▦.
+- [pandamesh](https://github.com/Deltares/pandamesh) - From geodataframe to mesh.
 - [pygalmesh](https://github.com/meshpro/pygalmesh) - A Python interface to CGAL's meshing tools.
 - [pygmsh](https://github.com/nschloe/pygmsh) - Gmsh for Python.
+- [pyvista-gridder](https://github.com/INTERA-Inc/pyvista-gridder) - Mesh generation using PyVista.
 
 ## License
 
@@ -76,6 +77,6 @@ By participating in this project, We want you to know that you agree to follow i
 
 ## Star History
 
-Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/pyvista/scikit-gmsh) — it’s a simple click that means the world to us and helps others discover it, too! ⭐️
+Enjoying scikit-gmsh? Show your support with a [GitHub star](https://github.com/pyvista/scikit-gmsh) — it’s a simple click that means the world to us and helps others discover it, too!
 
 [![Star History Chart](https://api.star-history.com/svg?repos=pyvista/scikit-gmsh&type=Date)](https://star-history.com/#pyvista/scikit-gmsh&Date)
