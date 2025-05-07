@@ -58,7 +58,7 @@ This library may not meet your needs and if this is this case, consider checking
 - [meshwell](https://github.com/simbilod/meshwell) - GMSH wrapper, with integrated photonics focus.
 - [objectgmsh](https://github.com/nemocrys/objectgmsh) - Object oriented Gmsh modeling.
 - [optimesh](https://github.com/meshpro/optimesh) - Mesh optimization, mesh smoothing.
-- [pandamesh](https://github.com/Deltares/pandamesh) - From geodataframe to mesh ▦.
+- [pandamesh](https://github.com/Deltares/pandamesh) - From geodataframe to mesh.
 - [pygalmesh](https://github.com/meshpro/pygalmesh) - A Python interface to CGAL's meshing tools.
 - [pygmsh](https://github.com/nschloe/pygmsh) - Gmsh for Python.
 - [pyvista-gridder](https://github.com/INTERA-Inc/pyvista-gridder) - Mesh generation using PyVista.
