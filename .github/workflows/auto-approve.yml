@@ -16,7 +16,7 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: hmarr/auto-approve-action@v4
+      - uses: hmarr/auto-approve-action@8f929096a962e83ccdfa8afcf855f39f12d4dac7
         with:
           review-message: ":white_check_mark: Approving this PR because [${{ github.event.comment.user.login }}](https://github.com/${{ github.event.comment.user.login }}) said so in [here](${{ github.event.comment.html_url }}) :shipit:"
           pull-request-number: ${{ github.event.issue.number }}
