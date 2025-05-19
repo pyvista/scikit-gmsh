@@ -10,16 +10,16 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@85e6279cec87321a52edac9c87bce653a07cf6c2
         with:
           persist-credentials: false
-      - uses: actions/labeler@v5
+      - uses: actions/labeler@6463cdb00ee92c05bec55dffc4e1fce250301945
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           sync-labels: true
           configuration-path: .github/labeler.yml
           dot: true
-      - uses: actions-ecosystem/action-add-labels@v1
+      - uses: actions-ecosystem/action-add-labels@1a9c3715c0037e96b97bb38cb4c4b56a1f1d4871
         if: github.actor == 'dependabot[bot]' || github.actor == 'github-actions[bot]' ||  github.actor == 'pre-commit-ci[bot]'
         with:
           github_token: "${{ secrets.GITHUB_TOKEN }}"
