@@ -447,6 +447,10 @@ class Delaunay2D:
         """Enable recombination of the mesh."""
         self._recombine = True
 
+    def disable_recombine(self: Delaunay2D) -> None:
+        """Disable recombination of the mesh."""
+        self._recombine = False
+
 
 class Delaunay3D:
     """
