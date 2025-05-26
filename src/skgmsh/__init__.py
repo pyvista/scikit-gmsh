@@ -412,6 +412,7 @@ class Delaunay2D:
                 cell_size = self._compute_cell_size_from_points(edge_points)
 
         self._cell_size = cell_size
+        self._recombine = False
 
     @staticmethod
     def _compute_cell_size_from_points(points: ArrayLike) -> ArrayLike:
@@ -429,7 +430,7 @@ class Delaunay2D:
     @property
     def mesh(self: Delaunay2D) -> pv.PolyData:
         """Get the mesh."""
-        mesh = frontal_delaunay_2d(self._edge_source, target_sizes=self._cell_size)
+        mesh = frontal_delaunay_2d(self._edge_source, target_sizes=self._cell_size, recombine=self._recombine)
         return pv.PolyData(mesh.points, mesh.cells)
 
     @property
@@ -441,6 +442,14 @@ class Delaunay2D:
     def cell_size(self: Delaunay2D, size: float | ArrayLike | None) -> None:
         """Set the cell_size of the mesh."""
         self._cell_size = size
+
+    def enable_recombine(self: Delaunay2D) -> None:
+        """Enable recombination of the mesh."""
+        self._recombine = True
+
+    def disable_recombine(self: Delaunay2D) -> None:
+        """Disable recombination of the mesh."""
+        self._recombine = False
 
 
 class Delaunay3D:

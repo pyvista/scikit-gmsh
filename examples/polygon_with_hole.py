@@ -26,3 +26,9 @@ alg.mesh.plot(show_edges=True, cpos="xy", color="white", line_width=2)
 
 alg.cell_size = 2.0
 alg.mesh.plot(show_edges=True, cpos="xy", color="white", line_width=2)
+
+# %%
+# Enable recombine.
+
+alg.enable_recombine()
+alg.mesh.plot(show_edges=True, cpos="xy", color="white", line_width=2)
