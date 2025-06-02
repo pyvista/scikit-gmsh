@@ -22,7 +22,7 @@ repos:
       - id: codespell
         args: ["-L", "socio-economic"]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.15.0
+    rev: v1.16.0
     hooks:
       - id: mypy
         files: src
@@ -64,7 +64,7 @@ repos:
       - id: rst-directive-colons
       - id: rst-inline-touching-normal
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.11
+    rev: v0.11.12
     hooks:
       - id: ruff
         args: ["--fix", "--show-fixes"]
@@ -98,6 +98,6 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/woodruffw/zizmor-pre-commit
-    rev: v1.8.0
+    rev: v1.9.0
     hooks:
       - id: zizmor
