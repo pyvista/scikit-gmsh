@@ -308,8 +308,6 @@ def generate_mesh(dim: int) -> pv.UnstructuredGrid:
         Generated mesh.
 
     """
-    import numpy as np
-
     gmsh_to_pyvista_type = {
         1: pv.CellType.LINE,
         2: pv.CellType.TRIANGLE,
