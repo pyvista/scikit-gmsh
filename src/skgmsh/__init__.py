@@ -308,8 +308,6 @@ def generate_mesh(dim: int) -> pv.UnstructuredGrid:
         Generated mesh.
 
     """
-    import numpy as np
-
     gmsh_to_pyvista_type = {
         1: pv.CellType.LINE,
         2: pv.CellType.TRIANGLE,
@@ -530,5 +528,5 @@ class Delaunay2D2:
                     f.write(str(i + 1) + ", ")
                 f.write(str(len(coords)) + "};\n")
                 f.write("Plane Surface(1) = {1};\n")
-        subprocess.run(["gmsh", "quad.geo", "-2", "-o", "quad.vtk"], check=False)  # noqa: S603, S607
+        subprocess.run(["gmsh", "quad.geo", "-2", "-o", "quad.vtk"], check=False)  # noqa: S607
         self.mesh = pv.read("quad.vtk")
