@@ -18,15 +18,23 @@ if TYPE_CHECKING:
 
     from numpy.typing import ArrayLike
 
+#: Mesh algorithm constant for initial mesh only in 2D
 INITIAL_MESH_ONLY_2D = 3
+#: Mesh algorithm constant for Frontal-Delaunay in 2D
 FRONTAL_DELAUNAY_2D = 6
+#: Mesh algorithm constant for Delaunay in 3D
 DELAUNAY_3D = 1
+#: Mesh algorithm constant for initial mesh only in 3D
 INITIAL_MESH_ONLY_3D = 3
 
+#: Verbosity level for silent mode
 SILENT = 0
+#: Recombination algorithm setting for simple mode
 SIMPLE = 0
 
+#: Boolean constant for True in Gmsh
 TRUE = 1
+#: Boolean constant for False in Gmsh
 FALSE = 0
 
 now = datetime.datetime.now(tz=datetime.timezone.utc)
@@ -502,10 +510,37 @@ class Delaunay3D:
 
 
 class Delaunay2D2:
-    """Delaunay2D class."""
+    """
+    Alternative Delaunay 2D mesh algorithm using file-based approach.
+    
+    This is an experimental implementation that uses file I/O with Gmsh.
+    
+    Parameters
+    ----------
+    shell : shapely.Polygon
+        The outer boundary polygon.
+    holes : list[shapely.Polygon], optional
+        List of hole polygons to subtract from the shell.
+        
+    Notes
+    -----
+    This is an experimental implementation. Use :class:`Delaunay2D` for 
+    production applications.
+    
+    .. versionadded:: 0.2.0
+    """
 
     def __init__(self, shell: shapely.Polygon, holes: list[shapely.Polygon] | None = None) -> None:
-        """Create a Delaunay2D object."""
+        """
+        Create a Delaunay2D object.
+        
+        Parameters
+        ----------
+        shell : shapely.Polygon
+            The outer boundary polygon.
+        holes : list[shapely.Polygon], optional
+            List of hole polygons to subtract from the shell.
+        """
         self.shell = shapely.Polygon(shell)
         self.holes = [shapely.Polygon(hole) for hole in holes] if holes else []
         self._generate_mesh()

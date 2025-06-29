@@ -11,18 +11,43 @@ import datetime
 from importlib.metadata import version as get_version
 import os
 from pathlib import Path
+import sys
 
-import pyvista
-from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
+# Add the package to the Python path
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-pyvista.set_error_output_file("errors.txt")
-pyvista.OFF_SCREEN = True  # Not necessary - simply an insurance policy
-pyvista.set_plot_theme("document")
-pyvista.BUILDING_GALLERY = True
-os.environ["PYVISTA_BUILDING_GALLERY"] = "true"
+# Mock imports for documentation building
+autodoc_mock_imports = [
+    "gmsh", 
+    "scooby", 
+    "numpy", 
+    "shapely", 
+    "pyvista",
+    "numpy.typing",
+    "shapely.geometry",
+    "pyvista.plotting.utilities.sphinx_gallery"
+]
 
-if os.environ.get("READTHEDOCS") or os.environ.get("CI"):
-    pyvista.start_xvfb()
+# Try to import pyvista for gallery setup, but skip if not available
+try:
+    import pyvista
+    from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
+    
+    pyvista.set_error_output_file("errors.txt")
+    pyvista.OFF_SCREEN = True  # Not necessary - simply an insurance policy
+    pyvista.set_plot_theme("document")
+    pyvista.BUILDING_GALLERY = True
+    os.environ["PYVISTA_BUILDING_GALLERY"] = "true"
+
+    if os.environ.get("READTHEDOCS") or os.environ.get("CI"):
+        pyvista.start_xvfb()
+        
+    has_pyvista = True
+except ImportError:
+    # Create a mock DynamicScraper for when pyvista is not available
+    class DynamicScraper:
+        pass
+    has_pyvista = False
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -50,9 +75,66 @@ package_dir = root_dir / "src"
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["myst_parser", "pyvista.ext.plot_directive", "pyvista.ext.viewer_directive", "sphinx_design", "sphinx_gallery.gen_gallery"]
+extensions = [
+    "myst_parser", 
+    "sphinx_design", 
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.intersphinx",
+]
+
+# Add pyvista extensions and gallery if available
+if has_pyvista:
+    try:
+        import sphinx_gallery
+        extensions.extend([
+            "pyvista.ext.plot_directive", 
+            "pyvista.ext.viewer_directive", 
+            "sphinx_gallery.gen_gallery"
+        ])
+        has_gallery = True
+    except ImportError:
+        has_gallery = False
+else:
+    has_gallery = False
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+
+# -- Autodoc configuration --------------------------------------------------
+
+autodoc_default_options = {
+    "members": True,
+    "member-order": "bysource",
+    "special-members": "__init__",
+    "undoc-members": True,
+    "exclude-members": "__weakref__"
+}
+
+autosummary_generate = True
+autosummary_imported_members = True
+
+# -- Napoleon settings -------------------------------------------------------
+napoleon_google_docstring = True
+napoleon_numpy_docstring = True
+napoleon_include_init_with_doc = False
+napoleon_include_private_with_doc = False
+napoleon_include_special_with_doc = True
+napoleon_use_admonition_for_examples = False
+napoleon_use_admonition_for_notes = False
+napoleon_use_admonition_for_references = False
+napoleon_use_ivar = False
+napoleon_use_param = True
+napoleon_use_rtype = True
+
+# -- Intersphinx configuration ----------------------------------------------
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "numpy": ("https://numpy.org/doc/stable/", None),
+    "pyvista": ("https://docs.pyvista.org/", None),
+    "shapely": ("https://shapely.readthedocs.io/en/stable/", None),
+}
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -136,16 +218,18 @@ myst_enable_extensions = [
 
 # -- sphinx_gallery settings -------------------------------------------------
 
-sphinx_gallery_conf = {
-    "backreferences_dir": None,
-    "doc_module": "pyvista",
-    "download_all_examples": False,
-    "examples_dirs": ["../examples/"],
-    "filename_pattern": r"\.py",
-    "first_notebook_cell": ("%matplotlib inline\nfrom pyvista import set_plot_theme\nset_plot_theme('document')\n"),
-    "gallery_dirs": ["./examples"],
-    "image_scrapers": (DynamicScraper(), "matplotlib"),
-    "pypandoc": True,
-    "remove_config_comments": True,
-    "reset_modules_order": "both",
-}
+# Gallery configuration only if available
+if has_gallery:
+    sphinx_gallery_conf = {
+        "backreferences_dir": None,
+        "doc_module": "pyvista",
+        "download_all_examples": False,
+        "examples_dirs": ["../examples/"],
+        "filename_pattern": r"\.py",
+        "first_notebook_cell": ("%matplotlib inline\nfrom pyvista import set_plot_theme\nset_plot_theme('document')\n"),
+        "gallery_dirs": ["./examples"],
+        "image_scrapers": (DynamicScraper(), "matplotlib"),
+        "pypandoc": True,
+        "remove_config_comments": True,
+        "reset_modules_order": "both",
+    }
