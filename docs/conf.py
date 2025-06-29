@@ -89,10 +89,13 @@ extensions = [
 # Add pyvista extensions and gallery if available
 if has_pyvista:
     try:
-        import sphinx_gallery
+        import importlib.util
 
-        extensions.extend(["pyvista.ext.plot_directive", "pyvista.ext.viewer_directive", "sphinx_gallery.gen_gallery"])
-        has_gallery = True
+        if importlib.util.find_spec("sphinx_gallery"):
+            extensions.extend(["pyvista.ext.plot_directive", "pyvista.ext.viewer_directive", "sphinx_gallery.gen_gallery"])
+            has_gallery = True
+        else:
+            has_gallery = False
     except ImportError:
         has_gallery = False
 else:

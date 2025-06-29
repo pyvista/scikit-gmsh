@@ -27,5 +27,3 @@
       ~Delaunay3D.cell_size
       ~Delaunay3D.edge_source
       ~Delaunay3D.mesh
-
-
