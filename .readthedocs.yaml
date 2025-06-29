@@ -10,6 +10,7 @@ build:
   apt_packages:
     - libfltk1.3-dev
     - libfreetype6-dev
+    - libgeos-dev
     - libgl1-mesa-dev
     - libglu1
     - libocct-data-exchange-dev

@@ -247,7 +247,7 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
     if target_sizes is None:
         target_sizes = 0.0
 
-    if isinstance(edge_source, shapely.geometry.Polygon):
+    if isinstance(edge_source, shapely.Polygon):
         wire_tags = []
 
         if isinstance(target_sizes, float):
@@ -329,8 +329,16 @@ def generate_mesh(dim: int) -> pv.UnstructuredGrid:
 
     try:
         gmsh.model.mesh.generate(dim)
-        node_tags, coord, _ = gmsh.model.mesh.getNodes()
-        element_types, element_tags, element_node_tags = gmsh.model.mesh.getElements()
+        node_data = gmsh.model.mesh.getNodes()
+        if len(node_data) == 0:
+            msg = "Mesh generation failed: no nodes generated"
+            raise ValueError(msg)
+        node_tags, coord, _ = node_data
+        element_data = gmsh.model.mesh.getElements()
+        if len(element_data) == 0 or len(element_data[0]) == 0:
+            msg = "Mesh generation failed: no elements generated"
+            raise ValueError(msg)
+        element_types, element_tags, element_node_tags = element_data
 
         # Points
         assert (np.diff(node_tags) > 0).all()  # noqa: S101
