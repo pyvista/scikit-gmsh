@@ -37,5 +37,3 @@
       ~Report.sys_version
       ~Report.system
       ~Report.total_ram
-
-

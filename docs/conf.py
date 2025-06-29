@@ -46,7 +46,7 @@ try:
 except ImportError:
     # Create a mock DynamicScraper for when pyvista is not available
     class DynamicScraper:
-        pass
+        """Mock DynamicScraper class for when pyvista is not available."""
 
     has_pyvista = False
 
@@ -89,8 +89,6 @@ extensions = [
 # Add pyvista extensions and gallery if available
 if has_pyvista:
     try:
-        import sphinx_gallery
-
         extensions.extend(["pyvista.ext.plot_directive", "pyvista.ext.viewer_directive", "sphinx_gallery.gen_gallery"])
         has_gallery = True
     except ImportError:
