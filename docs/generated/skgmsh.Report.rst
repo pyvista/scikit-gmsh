@@ -8,23 +8,23 @@
    :show-inheritance:
    :inherited-members:
 
-   
-   
+
+
    .. rubric:: Methods
 
    .. autosummary::
-   
+
       ~Report.__init__
       ~Report.to_dict
-   
-   
 
-   
-   
+
+
+
+
    .. rubric:: Attributes
 
    .. autosummary::
-   
+
       ~Report.architecture
       ~Report.cpu_count
       ~Report.date
@@ -37,5 +37,5 @@
       ~Report.sys_version
       ~Report.system
       ~Report.total_ram
-   
-   
+
+
