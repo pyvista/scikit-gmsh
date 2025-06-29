@@ -1,9 +1,16 @@
 # scikit-gmsh documentation
 
 :::{include} ../README.md
-:parser: myst_parser.sphinx
+:::
+
+```{toctree}
+:maxdepth: 2
+:caption: Contents
+
+api
+```
 
 ## Contributors
 
 :::{include} ../CONTRIBUTORS.md
-:parser: myst_parser.sphinx
+:::
