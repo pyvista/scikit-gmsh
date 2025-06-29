@@ -58,7 +58,7 @@ def main() -> None:
     ax1.fill(x, y, alpha=0.5, fc="lightblue", ec="black", linewidth=2)
     ax1.plot(x, y, "ko-", markersize=6)
     ax1.set_aspect("equal")
-    ax1.grid(visible=True, alpha=0.3)  # noqa: FBT003
+    ax1.grid(visible=True, alpha=0.3)
     ax1.set_xlabel("X")
     ax1.set_ylabel("Y")
 
@@ -71,7 +71,7 @@ def main() -> None:
     # Overlay original polygon boundary
     ax2.fill(x, y, alpha=0.2, fc="lightblue", ec="blue", linewidth=2)
     ax2.set_aspect("equal")
-    ax2.grid(visible=True, alpha=0.3)  # noqa: FBT003
+    ax2.grid(visible=True, alpha=0.3)
     ax2.set_xlabel("X")
     ax2.set_ylabel("Y")
 

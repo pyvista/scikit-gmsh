@@ -7,13 +7,14 @@ similar to pandamesh. It supports conversion of geopandas GeoDataFrames to meshe
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
 import warnings
-from typing import TYPE_CHECKING, Any
 
 import numpy as np
 
 try:
-    from shapely.geometry import MultiPolygon, Polygon
+    from shapely.geometry import MultiPolygon
+    from shapely.geometry import Polygon
     from shapely.ops import unary_union
 
     HAS_GEOPANDAS = True
