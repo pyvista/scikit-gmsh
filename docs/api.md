@@ -12,7 +12,7 @@ scikit-gmsh provides a Python interface to the Gmsh mesh generator, offering bot
 .. autosummary::
    :toctree: generated/
    :template: class.rst
-   
+
    skgmsh.Delaunay2D
    skgmsh.Delaunay3D
 ```
@@ -23,7 +23,7 @@ scikit-gmsh provides a Python interface to the Gmsh mesh generator, offering bot
 .. autosummary::
    :toctree: generated/
    :template: function.rst
-   
+
    skgmsh.delaunay_3d
    skgmsh.frontal_delaunay_2d
    skgmsh.generate_mesh
@@ -35,10 +35,9 @@ scikit-gmsh provides a Python interface to the Gmsh mesh generator, offering bot
 .. autosummary::
    :toctree: generated/
    :template: class.rst
-   
+
    skgmsh.Report
 ```
-
 
 ## Constants
 

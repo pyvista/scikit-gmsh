@@ -512,34 +512,36 @@ class Delaunay3D:
 class Delaunay2D2:
     """
     Alternative Delaunay 2D mesh algorithm using file-based approach.
-    
+
     This is an experimental implementation that uses file I/O with Gmsh.
-    
+
     Parameters
     ----------
     shell : shapely.Polygon
         The outer boundary polygon.
     holes : list[shapely.Polygon], optional
         List of hole polygons to subtract from the shell.
-        
+
     Notes
     -----
-    This is an experimental implementation. Use :class:`Delaunay2D` for 
+    This is an experimental implementation. Use :class:`Delaunay2D` for
     production applications.
-    
+
     .. versionadded:: 0.2.0
+
     """
 
     def __init__(self, shell: shapely.Polygon, holes: list[shapely.Polygon] | None = None) -> None:
         """
         Create a Delaunay2D object.
-        
+
         Parameters
         ----------
         shell : shapely.Polygon
             The outer boundary polygon.
         holes : list[shapely.Polygon], optional
             List of hole polygons to subtract from the shell.
+
         """
         self.shell = shapely.Polygon(shell)
         self.holes = [shapely.Polygon(hole) for hole in holes] if holes else []

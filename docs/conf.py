@@ -18,21 +18,21 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 # Mock imports for documentation building
 autodoc_mock_imports = [
-    "gmsh", 
-    "scooby", 
-    "numpy", 
-    "shapely", 
+    "gmsh",
+    "scooby",
+    "numpy",
+    "shapely",
     "pyvista",
     "numpy.typing",
     "shapely.geometry",
-    "pyvista.plotting.utilities.sphinx_gallery"
+    "pyvista.plotting.utilities.sphinx_gallery",
 ]
 
 # Try to import pyvista for gallery setup, but skip if not available
 try:
     import pyvista
     from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
-    
+
     pyvista.set_error_output_file("errors.txt")
     pyvista.OFF_SCREEN = True  # Not necessary - simply an insurance policy
     pyvista.set_plot_theme("document")
@@ -41,12 +41,13 @@ try:
 
     if os.environ.get("READTHEDOCS") or os.environ.get("CI"):
         pyvista.start_xvfb()
-        
+
     has_pyvista = True
 except ImportError:
     # Create a mock DynamicScraper for when pyvista is not available
     class DynamicScraper:
         pass
+
     has_pyvista = False
 
 # -- Project information -----------------------------------------------------
@@ -76,8 +77,8 @@ package_dir = root_dir / "src"
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    "myst_parser", 
-    "sphinx_design", 
+    "myst_parser",
+    "sphinx_design",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.napoleon",
@@ -89,11 +90,8 @@ extensions = [
 if has_pyvista:
     try:
         import sphinx_gallery
-        extensions.extend([
-            "pyvista.ext.plot_directive", 
-            "pyvista.ext.viewer_directive", 
-            "sphinx_gallery.gen_gallery"
-        ])
+
+        extensions.extend(["pyvista.ext.plot_directive", "pyvista.ext.viewer_directive", "sphinx_gallery.gen_gallery"])
         has_gallery = True
     except ImportError:
         has_gallery = False
@@ -109,7 +107,7 @@ autodoc_default_options = {
     "member-order": "bysource",
     "special-members": "__init__",
     "undoc-members": True,
-    "exclude-members": "__weakref__"
+    "exclude-members": "__weakref__",
 }
 
 autosummary_generate = True
