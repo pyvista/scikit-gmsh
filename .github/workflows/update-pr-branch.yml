@@ -12,7 +12,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Automatically update PR
-        uses: adRise/update-pr-branch@ec110d229a285239e5ed4a60544ce3222bba29f8
+        uses: adRise/update-pr-branch@84354a688583b4a3598345e534e7ad49f98e7330
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: "main"
