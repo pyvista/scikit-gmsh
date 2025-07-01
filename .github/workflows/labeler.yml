@@ -10,10 +10,10 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@85e6279cec87321a52edac9c87bce653a07cf6c2
+      - uses: actions/checkout@09d2acae674a48949e3602304ab46fd20ae0c42f
         with:
           persist-credentials: false
-      - uses: actions/labeler@6463cdb00ee92c05bec55dffc4e1fce250301945
+      - uses: actions/labeler@bee50fefe18762fad67754b2f3bfff2c8082ebb8
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           sync-labels: true
