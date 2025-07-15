@@ -1,3 +1,11 @@
+# /// script
+# requires-python = ">=3.8"
+# dependencies = [
+#   "pyvista",
+#   "scikit-gmsh",
+# ]
+# ///
+
 r"""
 Cylinder geometry example
 -------------------------
