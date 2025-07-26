@@ -530,3 +530,10 @@ class Delaunay2D2:
                 f.write("Plane Surface(1) = {1};\n")
         subprocess.run(["gmsh", "quad.geo", "-2", "-o", "quad.vtk"], check=False)  # noqa: S607
         self.mesh = pv.read("quad.vtk")
+
+
+# Import geospatial module if available (at end to avoid circular imports)
+try:
+    from .geospatial import GeoMesher
+except ImportError:
+    GeoMesher = None  # type: ignore[assignment, misc]
