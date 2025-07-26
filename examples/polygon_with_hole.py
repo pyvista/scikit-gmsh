@@ -1,3 +1,10 @@
+# /// script
+# requires-python = ">=3.8"
+# dependencies = [
+#   "scikit-gmsh",
+# ]
+# ///
+
 r"""
 Polygon with hole geometry example
 ----------------------------------
