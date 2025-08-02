@@ -24,7 +24,7 @@ requires-python = '>=3.10'
 [project.optional-dependencies]
 docs = [
   'myst-parser==4.0.1',
-  'pydata-sphinx-theme==0.16.1', # Do not upgrade, see https://github.com/pyvista/scikit-gmsh/pull/446
+  'pydata-sphinx-theme==0.15.4', # Do not upgrade, see https://github.com/pyvista/scikit-gmsh/pull/446
   'sphinx-book-theme==1.1.4',
   'sphinx-copybutton==0.5.2',
   'sphinx-design==0.6.1',
