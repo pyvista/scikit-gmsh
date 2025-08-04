@@ -3,8 +3,6 @@
 from __future__ import annotations
 
 import datetime
-from pathlib import Path
-import subprocess
 from typing import TYPE_CHECKING
 
 import gmsh
