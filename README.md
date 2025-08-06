@@ -46,9 +46,6 @@ Check out the example galleries organized by subject here:
   <a href="https://scikit-gmsh.readthedocs.io/en/latest/examples/cylinder.html">
     <img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_cylinder_thumb.png" height="190px"/>
   </a>
-  <a href="https://scikit-gmsh.readthedocs.io/en/latest/examples/quad.html">
-    <img src="https://scikit-gmsh.readthedocs.io/en/latest/_images/sphx_glr_quad_thumb.png" height="190px"/>
-  </a>
 </p>
 
 ## Other Resources
