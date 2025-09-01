@@ -3,7 +3,7 @@ build-backend = 'setuptools.build_meta'
 requires = [
   'gmsh<4.14.1',
   'meshio<5.3.6',
-  'pyvista[all]<0.45.4',
+  'pyvista[all]<0.46.4',
   'scooby<0.10.2',
   'setuptools<80.9.1',
   'shapely<2.1.2',
@@ -13,7 +13,7 @@ requires = [
 dependencies = [
   'gmsh<4.14.1',
   'meshio<5.3.6',
-  'pyvista[all]<0.45.4',
+  'pyvista[all]<0.46.4',
   'scooby<0.10.2',
   'shapely<2.1.2',
 ]
@@ -24,7 +24,7 @@ requires-python = '>=3.10'
 [project.optional-dependencies]
 docs = [
   'myst-parser==4.0.1',
-  'pydata-sphinx-theme==0.15.4', # Do not upgrade, see https://github.com/pyvista/scikit-gmsh/pull/446
+  'pydata-sphinx-theme==0.16.1', # Do not upgrade, see https://github.com/pyvista/scikit-gmsh/pull/446
   'sphinx-book-theme==1.1.4',
   'sphinx-copybutton==0.5.2',
   'sphinx-design==0.6.1',
