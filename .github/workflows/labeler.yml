@@ -10,7 +10,7 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@8edcb1bdb4e267140fa742c62e395cd74f332709
+      - uses: actions/checkout@ff7abcd0c3c05ccf6adc123a8cd1fd4fb30fb493
         with:
           persist-credentials: false
       - uses: actions/labeler@b0a1180683c9f17424de4d71c044bea4c7b9bc7c
