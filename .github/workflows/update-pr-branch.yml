@@ -10,9 +10,11 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      repository-projects: read
+      issues: read
     steps:
       - name: Automatically update PR
-        uses: adRise/update-pr-branch@84354a688583b4a3598345e534e7ad49f98e7330
+        uses: adRise/update-pr-branch@v0.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: "main"
@@ -21,3 +23,5 @@ jobs:
           sort: "created"
           direction: "desc"
           require_auto_merge_enabled: true
+          # Skip PRs from forks as GITHUB_TOKEN cannot update fork branches
+          skip_if_head_is_fork: true
