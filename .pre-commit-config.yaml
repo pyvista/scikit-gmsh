@@ -63,7 +63,7 @@ repos:
       - id: rst-directive-colons
       - id: rst-inline-touching-normal
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.13.1
+    rev: v0.13.2
     hooks:
       - id: ruff
         args: ["--fix", "--show-fixes"]
@@ -97,6 +97,6 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/woodruffw/zizmor-pre-commit
-    rev: v1.13.0
+    rev: v1.14.2
     hooks:
       - id: zizmor
