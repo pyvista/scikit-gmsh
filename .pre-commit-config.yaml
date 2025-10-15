@@ -62,6 +62,14 @@ repos:
       - id: rst-backticks
       - id: rst-directive-colons
       - id: rst-inline-touching-normal
+  - repo: local
+    hooks:
+      - id: pyscn
+        name: pyscn
+        entry: pyscn
+        language: system
+        types: [python]
+        pass_filenames: false
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.14.0
     hooks:
