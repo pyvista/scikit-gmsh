@@ -27,7 +27,7 @@ SIMPLE = 0
 TRUE = 1
 FALSE = 0
 
-now = datetime.datetime.now(tz=datetime.timezone.utc)
+now = datetime.datetime.now(tz=datetime.UTC)
 
 # major, minor, patch
 version_info = 0, 4, "dev0"
