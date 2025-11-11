@@ -279,7 +279,7 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
         gmsh.model.mesh.embed(0, embedded_points, 2, 1)
 
     if recombine:
-        gmsh.model.mesh.set_recombine(2, 1)
+        gmsh.model.mesh.set_recombine(2, plane_surface_tag)
 
     mesh = generate_mesh(2)
 
