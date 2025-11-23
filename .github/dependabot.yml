@@ -2,9 +2,9 @@ version: 2
 updates:
   - package-ecosystem: "pip"
     directory: "/"
-    insecure-external-code-execution: allow
     schedule:
       interval: "monthly"
+      time: "09:00"
     open-pull-requests-limit: 100
     labels:
       - "maintenance"
@@ -15,10 +15,13 @@ updates:
           - "*"
     ignore:
       - dependency-name: "pydata-sphinx-theme"
+    cooldown:
+      default-days: 7
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "monthly"
+      time: "09:00"
     open-pull-requests-limit: 100
     labels:
       - "maintenance"
@@ -27,3 +30,5 @@ updates:
       actions:
         patterns:
           - "*"
+    cooldown:
+      default-days: 7

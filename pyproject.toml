@@ -34,6 +34,20 @@ docs = [
 ]
 test = ['pytest==8.4.2']
 
+[dependency-groups]
+dev = [{ include-group = "docs" }, { include-group = "test" }]
+docs = [
+  "myst-parser==4.0.1",
+  "pydata-sphinx-theme==0.15.4",
+  "sphinx-book-theme==1.1.4",
+  "sphinx-copybutton==0.5.2",
+  "sphinx-design==0.6.1",
+  "sphinx-gallery==0.19.0",
+  "sphinx-toolbox==4.0.0",
+  "sphinx==8.2.3",
+]
+test = ["pytest==8.4.2"]
+
 [tool.mypy]
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 ignore_missing_imports = true
