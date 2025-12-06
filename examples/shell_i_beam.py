@@ -65,7 +65,6 @@ def create_i_beam_cross_section(
         (-web_thickness / 2, -height / 2 + flange_thickness, 0),
         # Back to start
         (-width / 2, -height / 2 + flange_thickness, 0),
-        (-width / 2, -height / 2, 0),
     ]
 
 
