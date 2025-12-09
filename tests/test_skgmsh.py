@@ -18,6 +18,29 @@ EDGE_SOURCES = [
 ]
 
 
+def create_i_beam_cross_section(
+    height: float = 0.3,
+    width: float = 0.15,
+    web_thickness: float = 0.01,
+    flange_thickness: float = 0.02,
+) -> list[tuple[float, float, float]]:
+    """Create an I-beam cross-section profile."""
+    return [
+        (-width / 2, -height / 2, 0),
+        (width / 2, -height / 2, 0),
+        (width / 2, -height / 2 + flange_thickness, 0),
+        (web_thickness / 2, -height / 2 + flange_thickness, 0),
+        (web_thickness / 2, height / 2 - flange_thickness, 0),
+        (width / 2, height / 2 - flange_thickness, 0),
+        (width / 2, height / 2, 0),
+        (-width / 2, height / 2, 0),
+        (-width / 2, height / 2 - flange_thickness, 0),
+        (-web_thickness / 2, height / 2 - flange_thickness, 0),
+        (-web_thickness / 2, -height / 2 + flange_thickness, 0),
+        (-width / 2, -height / 2 + flange_thickness, 0),
+    ]
+
+
 def test_frontal_delaunay_2d_default() -> None:
     """Frontal-Delaunay 2D mesh algorithm test code."""
     edge_source = pv.Polygon(n_sides=4, radius=8)
@@ -74,3 +97,16 @@ def test_delaunay_3d_default(edge_source: pv.PolyData) -> None:
     delaunay_3d = sg.Delaunay3D(edge_source)
     mesh = delaunay_3d.mesh
     assert np.allclose(mesh.volume, edge_source.volume)
+
+
+def test_shell_model_i_beam() -> None:
+    """Test shell model generation for I-beam cross-section."""
+    i_beam_profile = create_i_beam_cross_section()
+    delaunay_2d = sg.Delaunay2D(shell=i_beam_profile, cell_size=0.02)
+    mesh = delaunay_2d.mesh
+
+    assert mesh.number_of_points > 0
+    assert mesh.number_of_cells > 0
+    # Verify all cells are 2D (triangles or quads)
+    for cell in mesh.cell:
+        assert cell.type in [pv.CellType.TRIANGLE, pv.CellType.QUAD]
