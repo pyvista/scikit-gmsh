@@ -1,4 +1,4 @@
-name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
+name: Build and publish Python distributions to PyPI and TestPyPI
 on:
   release:
     types: [published]
@@ -12,11 +12,11 @@ jobs:
     permissions:
       id-token: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
         with:
           persist-credentials: false
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548
         with:
           python-version: "3.x"
       - name: Install packages
@@ -36,13 +36,13 @@ jobs:
           --wheel
           --outdir dist/
       - name: Store the distribution packages
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
         with:
           name: python-package-distributions
           path: dist/
   publish:
     name: >-
-      Publish Python 🐍 distribution 📦 to PyPI
+      Publish Python  distribution  to PyPI
     if: github.repository_owner == 'pyvista'
     needs:
       - build
@@ -54,10 +54,10 @@ jobs:
       id-token: write
     steps:
       - name: Download all the dists
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131
         with:
           name: python-package-distributions
           path: dist/
       - name: Publish package to PyPI
         if: github.event_name == 'release'
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e

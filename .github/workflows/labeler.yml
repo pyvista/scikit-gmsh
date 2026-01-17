@@ -10,17 +10,17 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
         with:
           persist-credentials: false
-      - uses: actions/labeler@v5
+      - uses: actions/labeler@25abb3cad4f14b7ac27968a495c37798860a5a1a
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           sync-labels: true
           configuration-path: .github/labeler.yml
           dot: true
-      - uses: actions-ecosystem/action-add-labels@v1
-        if: github.actor == 'dependabot[bot]' || github.actor == 'github-actions[bot]' ||  github.actor == 'pre-commit-ci[bot]'
+      - uses: actions-ecosystem/action-add-labels@1a9c3715c0037e96b97bb38cb4c4b56a1f1d4871
+        if: github.event.pull_request.user.type == 'Bot' && (github.event.pull_request.user.login == 'dependabot[bot]' || github.event.pull_request.user.login == 'github-actions[bot]' || github.event.pull_request.user.login == 'pre-commit-ci[bot]')
         with:
           github_token: "${{ secrets.GITHUB_TOKEN }}"
           labels: ignore-for-release
