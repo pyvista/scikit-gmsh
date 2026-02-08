@@ -44,7 +44,7 @@ jobs:
       - name: Install packages
         run: |
           sudo apt-get update
-          for i in $(cat packages.txt); do sudo apt-get install -y $i; done
+          xargs -r sudo apt-get install -y < packages.txt
 
       - name: Install Testing Requirements
         run: |
