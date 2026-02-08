@@ -22,7 +22,7 @@ jobs:
       - name: Install packages
         run: |
           sudo apt-get update
-          for i in $(cat packages.txt); do sudo apt-get install -y $i; done
+          sudo xargs -a packages.txt apt-get install -y
       - name: Install pypa/build
         run: >-
           python3 -m
