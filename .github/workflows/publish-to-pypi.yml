@@ -21,7 +21,8 @@ jobs:
           python-version: "3.x"
       - name: Install packages
         run: |
-          for i in $(cat packages.txt); do sudo apt-get install $i; done
+          sudo apt-get update
+          for i in $(cat packages.txt); do sudo apt-get install -y $i; done
       - name: Install pypa/build
         run: >-
           python3 -m
