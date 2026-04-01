@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
           persist-credentials: false
-      - uses: actions/labeler@77a4082b841706ac431479b7e2bb11216ffef250
+      - uses: actions/labeler@c5dadc2a45784a4b6adfcd20fea3465da3a5f904
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           sync-labels: true
