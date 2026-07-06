@@ -19,8 +19,9 @@ jobs:
           sync-labels: true
           configuration-path: .github/labeler.yml
           dot: true
-      - uses: actions-ecosystem/action-add-labels@1a9c3715c0037e96b97bb38cb4c4b56a1f1d4871
+      - name: Add ignore-for-release label for bot PRs
         if: github.event.pull_request.user.type == 'Bot' && (github.event.pull_request.user.login == 'dependabot[bot]' || github.event.pull_request.user.login == 'github-actions[bot]' || github.event.pull_request.user.login == 'pre-commit-ci[bot]')
-        with:
-          github_token: "${{ secrets.GITHUB_TOKEN }}"
-          labels: ignore-for-release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMBER: ${{ github.event.pull_request.number }}
+        run: gh pr edit "$NUMBER" --add-label ignore-for-release
