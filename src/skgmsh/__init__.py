@@ -11,6 +11,9 @@ import pyvista as pv
 import scooby
 import shapely
 
+from skgmsh.bridge import from_gmsh as from_gmsh
+from skgmsh.bridge import to_gmsh as to_gmsh
+
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
