@@ -46,10 +46,10 @@ jobs:
           sudo apt-get update
           xargs -r sudo apt-get install -y < packages.txt
 
-      - name: Install Testing Requirements
+      - name: Install tox
         run: |
-          pip install -e .[test]
+          pip install tox tox-gh-actions
 
-      - name: Unit Testing
+      - name: Run tests with tox
         run: |
-          export PYTHONPATH=. && xvfb-run python -m pytest -v
+          export PYTHONPATH=. && xvfb-run tox
