@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+from contextlib import suppress
 import datetime
 from typing import TYPE_CHECKING
+from typing import Self
+import weakref
 
 import gmsh
 import numpy as np
@@ -108,6 +111,8 @@ class Report(scooby.Report):  # type: ignore[misc]
 def delaunay_3d(
     edge_source: pv.PolyData,
     target_sizes: float | Sequence[float] | None = None,
+    *,
+    _manage_gmsh: bool = True,
 ) -> pv.UnstructuredGrid | None:
     """
     Delaunay 3D mesh algorithm.
@@ -138,7 +143,9 @@ def delaunay_3d(
     points = edge_source.points
     faces = edge_source.irregular_faces
 
-    gmsh.initialize()
+    if _manage_gmsh:
+        _ensure_no_active_mesher()
+        gmsh.initialize()
     if target_sizes is None:
         gmsh.option.set_number("Mesh.Algorithm", INITIAL_MESH_ONLY_3D)
         gmsh.option.set_number("Mesh.MeshSizeExtendFromBoundary", 0)
@@ -180,7 +187,7 @@ def delaunay_3d(
     gmsh.model.geo.add_volume([1], 1)
 
     gmsh.model.geo.synchronize()
-    mesh = generate_mesh(3)
+    mesh = generate_mesh(3, finalize=_manage_gmsh)
 
     ind = []
     for i, cell in enumerate(mesh.cell):
@@ -196,6 +203,8 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
     edge_source: pv.PolyData | shapely.geometry.Polygon,
     target_sizes: float | ArrayLike | None = None,
     recombine: bool = False,  # noqa: FBT001, FBT002
+    *,
+    _manage_gmsh: bool = True,
 ) -> pv.UnstructuredGrid | None:
     """
     Frontal-Delaunay 2D mesh algorithm.
@@ -227,7 +236,9 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
     .. versionadded:: 0.2.0
 
     """
-    gmsh.initialize()
+    if _manage_gmsh:
+        _ensure_no_active_mesher()
+        gmsh.initialize()
     if target_sizes is None:
         gmsh.option.set_number("Mesh.Algorithm", INITIAL_MESH_ONLY_2D)
         gmsh.option.set_number("Mesh.MeshSizeExtendFromBoundary", 0)
@@ -284,7 +295,7 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
     if recombine:
         gmsh.model.mesh.set_recombine(2, 1)
 
-    mesh = generate_mesh(2)
+    mesh = generate_mesh(2, finalize=_manage_gmsh)
 
     ind = []
     for index, cell in enumerate(mesh.cell):
@@ -294,7 +305,7 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
     return mesh.remove_cells(ind)
 
 
-def generate_mesh(dim: int) -> pv.UnstructuredGrid:
+def generate_mesh(dim: int, *, finalize: bool = True) -> pv.UnstructuredGrid:
     """
     Generate a mesh of the current model.
 
@@ -302,6 +313,10 @@ def generate_mesh(dim: int) -> pv.UnstructuredGrid:
     ----------
     dim : int
         Mesh dimension.
+
+    finalize : bool, default: True
+        Finalize Gmsh after generating the mesh. Class-based meshers disable
+        this because they own the Gmsh session until ``finalize()`` is called.
 
     Returns
     -------
@@ -343,12 +358,74 @@ def generate_mesh(dim: int) -> pv.UnstructuredGrid:
 
     finally:
         gmsh.clear()
-        gmsh.finalize()
+        if finalize:
+            gmsh.finalize()
 
     return mesh
 
 
-class Delaunay2D:
+class _GmshMesher:
+    """Manage the process-global Gmsh session used by class-based meshers."""
+
+    _instance: weakref.ReferenceType[_GmshMesher] | None = None
+
+    def __new__(cls, *_args: object, **_kwargs: object) -> Self:
+        active = _GmshMesher.active()
+        if active is not None:
+            msg = f"Cannot create {cls.__name__} while {type(active).__name__} is active. Call finalize() or delete the active mesher first."
+            raise RuntimeError(msg)
+
+        instance = super().__new__(cls)
+        instance._initialized = False
+        _GmshMesher._instance = weakref.ref(instance)
+        return instance
+
+    @classmethod
+    def active(cls) -> _GmshMesher | None:
+        """Return the class-based mesher that currently owns Gmsh."""
+        return cls._instance() if cls._instance is not None else None
+
+    def _initialize_gmsh(self) -> None:
+        """Initialize the Gmsh session owned by this mesher."""
+        if gmsh.is_initialized():
+            msg = "Gmsh is already initialized outside this mesher. Finalize that session before creating a Delaunay class."
+            raise RuntimeError(msg)
+        gmsh.initialize()
+        self._initialized = True
+
+    def _require_initialized(self) -> None:
+        """Raise when this mesher no longer owns an active Gmsh session."""
+        if not self._initialized:
+            msg = f"This {type(self).__name__} has been finalized"
+            raise RuntimeError(msg)
+
+    def finalize(self) -> None:
+        """Finalize Gmsh and release the active mesher slot."""
+        try:
+            if self._initialized and gmsh.is_initialized():
+                gmsh.clear()
+                gmsh.finalize()
+        finally:
+            self._initialized = False
+            active = _GmshMesher.active()
+            if active is self:
+                _GmshMesher._instance = None
+
+    def __del__(self) -> None:
+        """Release Gmsh when the owning mesher is garbage-collected."""
+        with suppress(Exception):
+            self.finalize()
+
+
+def _ensure_no_active_mesher() -> None:
+    """Prevent standalone functions from clobbering a class-owned session."""
+    active = _GmshMesher.active()
+    if active is not None:
+        msg = f"Cannot use a standalone meshing function while {type(active).__name__} is active. Call finalize() first."
+        raise RuntimeError(msg)
+
+
+class Delaunay2D(_GmshMesher):
     """
     Delaunay 2D mesh algorithm.
 
@@ -381,6 +458,10 @@ class Delaunay2D:
     -----
     .. versionadded:: 0.2.0
 
+    Gmsh uses process-global state, so only one ``Delaunay2D`` or
+    ``Delaunay3D`` instance may be active at a time. Call ``finalize()`` or
+    delete the active instance before creating another class-based mesher.
+
     """
 
     def __init__(
@@ -412,6 +493,7 @@ class Delaunay2D:
 
         self._cell_size = cell_size
         self._recombine = False
+        self._initialize_gmsh()
 
     @staticmethod
     def _compute_cell_size_from_points(points: ArrayLike) -> ArrayLike:
@@ -429,7 +511,13 @@ class Delaunay2D:
     @property
     def mesh(self: Delaunay2D) -> pv.PolyData:
         """Get the mesh."""
-        mesh = frontal_delaunay_2d(self._edge_source, target_sizes=self._cell_size, recombine=self._recombine)
+        self._require_initialized()
+        mesh = frontal_delaunay_2d(
+            self._edge_source,
+            target_sizes=self._cell_size,
+            recombine=self._recombine,
+            _manage_gmsh=False,
+        )
         return pv.PolyData(mesh.points, mesh.cells)
 
     @property
@@ -451,7 +539,7 @@ class Delaunay2D:
         self._recombine = False
 
 
-class Delaunay3D:
+class Delaunay3D(_GmshMesher):
     """
     Delaunay 3D mesh algorithm.
 
@@ -469,6 +557,10 @@ class Delaunay3D:
     -----
     .. versionadded:: 0.2.0
 
+    Gmsh uses process-global state, so only one ``Delaunay2D`` or
+    ``Delaunay3D`` instance may be active at a time. Call ``finalize()`` or
+    delete the active instance before creating another class-based mesher.
+
     """
 
     def __init__(
@@ -479,6 +571,7 @@ class Delaunay3D:
         """Initialize the Delaunay3D class."""
         self._edge_source = edge_source
         self._cell_size = cell_size
+        self._initialize_gmsh()
 
     @property
     def edge_source(self: Delaunay3D) -> pv.PolyData:
@@ -488,7 +581,8 @@ class Delaunay3D:
     @property
     def mesh(self: Delaunay3D) -> pv.UnstructuredGrid:
         """Get the mesh."""
-        self._mesh = delaunay_3d(self.edge_source, target_sizes=self.cell_size)
+        self._require_initialized()
+        self._mesh = delaunay_3d(self.edge_source, target_sizes=self.cell_size, _manage_gmsh=False)
         return self._mesh
 
     @property
