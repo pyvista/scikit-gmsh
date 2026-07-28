@@ -3,11 +3,13 @@
 
 from __future__ import annotations
 
+import gc
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
+import gmsh
 import numpy as np
 import pytest
 import pyvista as pv
@@ -17,6 +19,39 @@ import skgmsh as sg
 EDGE_SOURCES = [
     pv.Polygon(n_sides=4, radius=8),
 ]
+
+
+def test_delaunay_classes_own_single_gmsh_session() -> None:
+    """Only one class-based mesher may own Gmsh's global state at a time."""
+    mesher = sg.Delaunay2D(shell=[(0, 0), (1, 0), (0, 1)])  # noqa: S604
+    try:
+        assert gmsh.is_initialized()
+        with pytest.raises(RuntimeError, match="Delaunay2D is active"):
+            sg.Delaunay3D(pv.Cube())
+        with pytest.raises(RuntimeError, match="Delaunay2D is active"):
+            sg.frontal_delaunay_2d(pv.Polygon(n_sides=3))
+    finally:
+        mesher.finalize()
+
+    assert not gmsh.is_initialized()
+    with pytest.raises(RuntimeError, match="has been finalized"):
+        _ = mesher.mesh
+
+    replacement = sg.Delaunay3D(pv.Cube())
+    replacement.finalize()
+
+
+def test_deleting_delaunay_class_finalizes_gmsh() -> None:
+    """Deleting the active mesher releases Gmsh and permits a replacement."""
+    mesher = sg.Delaunay2D(shell=[(0, 0), (1, 0), (0, 1)])  # noqa: S604
+    assert gmsh.is_initialized()
+
+    del mesher
+    gc.collect()
+
+    assert not gmsh.is_initialized()
+    replacement = sg.Delaunay2D(shell=[(0, 0), (1, 0), (0, 1)])  # noqa: S604
+    replacement.finalize()
 
 
 def test_frontal_delaunay_2d_default() -> None:
