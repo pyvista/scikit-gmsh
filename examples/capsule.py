@@ -1,3 +1,4 @@
+# Copyright (c) 2024 scikit-gmsh contributors
 r"""
 Capsule geometry example
 -------------------------

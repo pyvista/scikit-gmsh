@@ -1,3 +1,4 @@
+# Copyright (c) 2024 scikit-gmsh contributors
 """scikit-gmsh package for 3D mesh generation."""
 
 from __future__ import annotations
