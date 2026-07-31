@@ -1,3 +1,4 @@
+# Copyright (c) 2024 scikit-gmsh contributors
 """
 Configuration file for the Sphinx documentation builder.
 

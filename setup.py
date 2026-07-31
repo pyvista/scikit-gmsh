@@ -1,3 +1,4 @@
+# Copyright (c) 2024 scikit-gmsh contributors
 """scikit-gmsh setuptools packaging."""
 
 from __future__ import annotations

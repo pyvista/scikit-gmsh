@@ -1,3 +1,4 @@
+# Copyright (c) 2024 scikit-gmsh contributors
 """Tests for the ``skgmsh.bridge`` PyVista ↔ gmsh helpers."""
 
 from __future__ import annotations

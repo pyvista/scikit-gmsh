@@ -1,3 +1,4 @@
+# Copyright (c) 2024 scikit-gmsh contributors
 r"""
 Polygon with hole geometry example
 ----------------------------------

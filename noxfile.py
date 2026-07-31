@@ -2,6 +2,7 @@
 # /// script
 # dependencies = ["nox"]
 # ///
+# Copyright (c) 2024 scikit-gmsh contributors
 """Automation using nox."""
 
 from __future__ import annotations
