@@ -1,4 +1,5 @@
 <!-- hy-mt2-i18n:start -->
+
 [English](./README.md) | [中文](./README_zh-CN.md) | [日本語](./README_ja.md) | **Español**
 <!-- hy-mt2-i18n:end -->
 
@@ -26,7 +27,7 @@ El paquete `scikit-gmsh` ofrece una interfaz sencilla para:
 
 La biblioteca tiene los siguientes objetivos principales:
 
-1. Ofrecer una API intuitiva y orientada a objetos para la creación de mallas, similar a la [clase scipy.spatial.Delaunay](https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html).  
+1. Ofrecer una API intuitiva y orientada a objetos para la creación de mallas, similar a la [clase scipy.spatial.Delaunay](https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html).
 1. Integrarse perfectamente con otras bibliotecas del [ecosistema Scientific Python](https://scientific-python.org/).
 
 ## Instalación
@@ -57,12 +58,12 @@ Eche un vistazo a las galerías de ejemplos organizadas por tema aquí:
 
 Es posible que esta biblioteca no satisfaga sus necesidades; si es así, considere echar un vistazo a estos otros recursos:
 
-- [meshwell](https://github.com/simbilod/meshwell) - Envoltorio para GMSH con enfoque en la óptica fotónica integrada.  
-- [objectgmsh](https://github.com/nemocrys/objectgmsh) - Modelado orientado a objetos con Gmsh.  
-- [optimesh](https://github.com/meshpro/optimesh) - Optimización y suavizado de mallas.  
-- [pandamesh](https://github.com/Deltares/pandamesh) - Conversión de geodatos a mallas.  
-- [pygalmesh](https://github.com/meshpro/pygalmesh) - Interfaz en Python para las herramientas de malla de CGAL.  
-- [pygmsh](https://github.com/nschloe/pygmsh) - Gmsh para Python.  
+- [meshwell](https://github.com/simbilod/meshwell) - Envoltorio para GMSH con enfoque en la óptica fotónica integrada.
+- [objectgmsh](https://github.com/nemocrys/objectgmsh) - Modelado orientado a objetos con Gmsh.
+- [optimesh](https://github.com/meshpro/optimesh) - Optimización y suavizado de mallas.
+- [pandamesh](https://github.com/Deltares/pandamesh) - Conversión de geodatos a mallas.
+- [pygalmesh](https://github.com/meshpro/pygalmesh) - Interfaz en Python para las herramientas de malla de CGAL.
+- [pygmsh](https://github.com/nschloe/pygmsh) - Gmsh para Python.
 - [pyvista-gridder](https://github.com/INTERA-Inc/pyvista-gridder) - Generación de mallas mediante PyVista.
 
 ## Licencia
@@ -73,8 +74,8 @@ Este software se publica bajo la licencia [GPLv3](https://www.gnu.org/licenses/g
 
 ## Contribuciones
 
-Las contribuciones son _muy bienvenidas_.  
-Este proyecto se publica con un [Código de conducta para colaboradores](CODE_OF_CONDUCT.md).  
+Las contribuciones son _muy bienvenidas_.
+Este proyecto se publica con un [Código de conducta para colaboradores](CODE_OF_CONDUCT.md).
 Al participar en este proyecto, queremos que sepa que acepta cumplir con sus términos.
 
 ## Historial de estrellas

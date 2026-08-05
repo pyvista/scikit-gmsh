@@ -1,4 +1,5 @@
 <!-- hy-mt2-i18n:start -->
+
 [English](./README.md) | [中文](./README_zh-CN.md) | **日本語** | [Español](./README_es.md)
 <!-- hy-mt2-i18n:end -->
 
@@ -57,12 +58,12 @@ pip install scikit-gmsh
 
 このライブラリがご要望を満たさない場合は、他のリソースもご覧になることをお勧めします：
 
-- [meshwell](https://github.com/simbilod/meshwell) - フォトニクス機能を統合したGMSHラッパー。  
-- [objectgmsh](https://github.com/nemocrys/objectgmsh) - オブジェクト指向のGmshモデリングツール。  
-- [optimesh](https://github.com/meshpro/optimesh) - メッシュの最適化および平滑化処理を行うツール。  
-- [pandamesh](https://github.com/Deltares/pandamesh) - 地理データフレームからメッシュへの変換ツール。  
-- [pygalmesh](https://github.com/meshpro/pygalmesh) - CGALのメッシュ生成ツールをPythonで利用するためのインターフェース。  
-- [pygmsh](https://github.com/nschloe/pygmsh) - Python向けのGmsh実装。  
+- [meshwell](https://github.com/simbilod/meshwell) - フォトニクス機能を統合したGMSHラッパー。
+- [objectgmsh](https://github.com/nemocrys/objectgmsh) - オブジェクト指向のGmshモデリングツール。
+- [optimesh](https://github.com/meshpro/optimesh) - メッシュの最適化および平滑化処理を行うツール。
+- [pandamesh](https://github.com/Deltares/pandamesh) - 地理データフレームからメッシュへの変換ツール。
+- [pygalmesh](https://github.com/meshpro/pygalmesh) - CGALのメッシュ生成ツールをPythonで利用するためのインターフェース。
+- [pygmsh](https://github.com/nschloe/pygmsh) - Python向けのGmsh実装。
 - [pyvista-gridder](https://github.com/INTERA-Inc/pyvista-gridder) - PyVistaを利用したメッシュ生成ツール。
 
 ## ライセンス

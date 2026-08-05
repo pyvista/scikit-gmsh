@@ -1,4 +1,5 @@
 <!-- hy-mt2-i18n:start -->
+
 [English](./README.md) | **中文** | [日本語](./README_ja.md) | [Español](./README_es.md)
 <!-- hy-mt2-i18n:end -->
 
@@ -57,12 +58,12 @@ pip install scikit-gmsh
 
 该库可能无法满足您的需求，若是如此，建议您查看这些其他资源：
 
-- [meshwell](https://github.com/simbilod/meshwell) —— 集成光子学功能的 GMSH 封装工具。  
-- [objectgmsh](https://github.com/nemocrys/objectgmsh) —— 基于面向对象方式的 Gmsh 建模工具。  
-- [optimesh](https://github.com/meshpro/optimesh) —— 网格优化与网格平滑处理工具。  
-- [pandamesh](https://github.com/Deltares/pandamesh) —— 用于将地理数据框转换为网格的工具。  
-- [pygalmesh](https://github.com/meshpro/pygalmesh) —— CGAL 网格生成工具的 Python 接口。  
-- [pygmsh](https://github.com/nschloe/pygmsh) —— 专为 Python 设计的 Gmsh 工具。  
+- [meshwell](https://github.com/simbilod/meshwell) —— 集成光子学功能的 GMSH 封装工具。
+- [objectgmsh](https://github.com/nemocrys/objectgmsh) —— 基于面向对象方式的 Gmsh 建模工具。
+- [optimesh](https://github.com/meshpro/optimesh) —— 网格优化与网格平滑处理工具。
+- [pandamesh](https://github.com/Deltares/pandamesh) —— 用于将地理数据框转换为网格的工具。
+- [pygalmesh](https://github.com/meshpro/pygalmesh) —— CGAL 网格生成工具的 Python 接口。
+- [pygmsh](https://github.com/nschloe/pygmsh) —— 专为 Python 设计的 Gmsh 工具。
 - [pyvista-gridder](https://github.com/INTERA-Inc/pyvista-gridder) —— 基于 PyVista 的网格生成工具。
 
 ## 许可证
