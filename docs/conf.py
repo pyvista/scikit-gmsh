@@ -8,7 +8,7 @@ https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 from __future__ import annotations
 
-import datetime
+import datetime as dt
 from importlib.metadata import version as get_version
 import os
 from pathlib import Path
@@ -29,7 +29,7 @@ if os.environ.get("READTHEDOCS") or os.environ.get("CI"):
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "scikit-gmsh"
-copyright_years = f"2024 - {datetime.datetime.now(datetime.UTC).year}"
+copyright_years = f"2024 - {dt.datetime.now(dt.UTC).year}"
 copyright = "2024, Tetsuo Koyama"  # noqa: A001
 author = f"{project} Contributors"
 on_rtd = os.environ.get("READTHEDOCS")
