@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 from contextlib import suppress
-import datetime
+import datetime as dt
 from typing import TYPE_CHECKING
 from typing import Self
 import weakref
@@ -34,7 +34,7 @@ SIMPLE = 0
 TRUE = 1
 FALSE = 0
 
-now = datetime.datetime.now(tz=datetime.UTC)
+now = dt.datetime.now(tz=dt.UTC)
 
 # major, minor, patch
 version_info = 0, 5, "dev0"
