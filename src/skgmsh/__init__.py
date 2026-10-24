@@ -140,6 +140,9 @@ def delaunay_3d(
     -----
     .. versionadded:: 0.2.0
 
+    Not thread-safe: Gmsh is process-global and its calls may release the
+    GIL, so call meshing functions from a single thread only.
+
     """
     points = edge_source.points
     faces = edge_source.irregular_faces
@@ -235,6 +238,9 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
     Notes
     -----
     .. versionadded:: 0.2.0
+
+    Not thread-safe: Gmsh is process-global and its calls may release the
+    GIL, so call meshing functions from a single thread only.
 
     """
     if _manage_gmsh:
@@ -454,7 +460,9 @@ class Delaunay2D(_GmshMesher):
 
     Gmsh state: multiple ``Delaunay2D``/``Delaunay3D`` instances may be active
     at the same time; they share one Gmsh session. Call ``finalize()`` (or
-    delete the instances) to release the shared session when done.
+    delete the instances) to release the shared session when done. Not
+    thread-safe: Gmsh calls may release the GIL, so use instances from a
+    single thread and combine only sequential (not parallel) ``mesh`` access.
 
     """
 
@@ -553,7 +561,9 @@ class Delaunay3D(_GmshMesher):
 
     Gmsh state: multiple ``Delaunay2D``/``Delaunay3D`` instances may be active
     at the same time; they share one Gmsh session. Call ``finalize()`` (or
-    delete the instances) to release the shared session when done.
+    delete the instances) to release the shared session when done. Not
+    thread-safe: Gmsh calls may release the GIL, so use instances from a
+    single thread and combine only sequential (not parallel) ``mesh`` access.
 
     """
 
