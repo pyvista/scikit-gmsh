@@ -16,7 +16,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: google-github-actions/release-please-action@aa4d55748f924e60b5b3e5d87dd8b655ec6971db # v4.4.0
+      - uses: google-github-actions/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4.4.0
         with:
           # GitHub-created releases must not use GITHUB_TOKEN, otherwise the
           # `release: published` trigger in publish-to-pypi.yml will not fire.
