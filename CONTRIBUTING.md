@@ -738,6 +738,16 @@ Which enables:
 
 ### Creating a New Pull Request
 
+[![Conventional
+Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://www.conventionalcommits.org/en/v1.0.0/)
+
+Pull request titles must follow the [Conventional
+Commits](https://www.conventionalcommits.org/en/v1.0.0/) format:
+`type(optional-scope): description`. Accepted types are
+`feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert`. This is
+enforced by a CI check on every pull request and is required by our
+release automation.
+
 Once you have tested your branch locally, create a pull request on
 [scikit-gmsh GitHub](https://github.com/pyvista/scikit-gmsh) while
 merging to main. This will automatically run continuous integration (CI)
