@@ -1,0 +1,25 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: google-github-actions/release-please-action@aa4d55748f924e60b5b3e5d87dd8b655ec6971db # v4.4.0
+        with:
+          # GitHub-created releases must not use GITHUB_TOKEN, otherwise the
+          # `release: published` trigger in publish-to-pypi.yml will not fire.
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json

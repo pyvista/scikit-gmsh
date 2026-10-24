@@ -36,11 +36,7 @@ FALSE = 0
 
 now = dt.datetime.now(tz=dt.UTC)
 
-# major, minor, patch
-version_info = 0, 5, "dev0"
-
-# Nice string for the version
-__version__ = ".".join(map(str, version_info))
+__version__ = "0.4.0"
 
 
 class Report(scooby.Report):  # type: ignore[misc]
