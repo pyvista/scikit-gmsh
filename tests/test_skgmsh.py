@@ -50,6 +50,36 @@ def test_delaunay_classes_share_single_gmsh_session() -> None:
         _ = mesher_2d.mesh
 
 
+def test_four_delaunay_classes_share_single_gmsh_session() -> None:
+    """Two Delaunay2D and two Delaunay3D meshers share one session."""
+    shell = [(0, 0), (1, 0), (0, 1)]
+    shell_b = [(5, 5), (6, 5), (5, 6)]
+    mesher_2d_a = sg.Delaunay2D(shell=shell)
+    mesher_2d_b = sg.Delaunay2D(shell=shell_b)
+    edge_source = pv.Cube()
+    edge_source.merge(pv.PolyData(edge_source.points), merge_points=True, inplace=True)
+    mesher_3d_a = sg.Delaunay3D(edge_source)
+    mesher_3d_b = sg.Delaunay3D(edge_source)
+    assert gmsh.is_initialized()
+
+    for mesher_2d in (mesher_2d_a, mesher_2d_b):
+        mesh_2d = mesher_2d.mesh
+        assert mesh_2d.number_of_points == len(shell)
+        assert mesh_2d.number_of_cells == 1
+    for mesher_3d in (mesher_3d_a, mesher_3d_b):
+        assert np.allclose(mesher_3d.mesh.volume, edge_source.volume)
+
+    mesher_2d_a.finalize()
+    assert gmsh.is_initialized()  # three meshers still hold the session
+    for mesher in (mesher_2d_b, mesher_3d_a, mesher_3d_b):
+        assert mesher.mesh is not None
+    mesher_2d_b.finalize()
+    mesher_3d_a.finalize()
+    assert gmsh.is_initialized()  # mesher_3d_b holds the last lease
+    mesher_3d_b.finalize()
+    assert not gmsh.is_initialized()
+
+
 def test_deleting_delaunay_class_finalizes_gmsh() -> None:
     """Deleting the active mesher releases Gmsh and permits a replacement."""
     mesher = sg.Delaunay2D(shell=[(0, 0), (1, 0), (0, 1)])  # noqa: S604
