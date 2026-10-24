@@ -36,7 +36,7 @@ FALSE = 0
 
 now = dt.datetime.now(tz=dt.UTC)
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"  # x-release-please-version
 
 
 class Report(scooby.Report):  # type: ignore[misc]
