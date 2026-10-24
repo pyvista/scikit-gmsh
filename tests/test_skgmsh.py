@@ -90,15 +90,26 @@ def test_concurrent_meshing_matches_single_run() -> None:
 
     shell = [(0, 0), (1, 0), (0, 1)]
     assert not gmsh.is_initialized()
-    # Each baseline is a true single run: a temporary mesher owns and releases
-    # the session within one statement (refcounted __del__), so every baseline
-    # starts from a fresh Gmsh session.
-    baseline_2d = sg.Delaunay2D(shell=shell).mesh
-    assert not gmsh.is_initialized()  # single 2D run released the session
-    baseline_3d = sg.Delaunay3D(cube_source()).mesh
-    assert not gmsh.is_initialized()  # single 3D run released the session
+
+    # Single runs: one mesher owns the session end to end.
+    # ``Delaunay2D(...)/Delaunay3D(...)`` initialize Gmsh in ``__init__``.
+    baseline_2d_mesher = sg.Delaunay2D(shell=shell)
+    assert gmsh.is_initialized()  # initialize: implicit in __init__
+    baseline_2d = baseline_2d_mesher.mesh
+    baseline_2d_mesher.finalize()
+    assert not gmsh.is_initialized()  # finalize: explicit call, session closed
+
+    baseline_3d_mesher = sg.Delaunay3D(cube_source())
+    assert gmsh.is_initialized()  # initialize: implicit in __init__
+    baseline_3d = baseline_3d_mesher.mesh
+    baseline_3d_mesher.finalize()
+    assert not gmsh.is_initialized()  # finalize: explicit call, session closed
 
     assert not gmsh.is_initialized()
+
+    # Concurrent runs: all four meshers share one session.
+    # Each __init__ merely keeps the shared session alive (leased); only the
+    # last explicit finalize() closes it.
     mesher_2d_a = sg.Delaunay2D(shell=shell)
     mesher_2d_b = sg.Delaunay2D(shell=shell)
     mesher_3d_a = sg.Delaunay3D(cube_source())
@@ -117,10 +128,15 @@ def test_concurrent_meshing_matches_single_run() -> None:
         assert np.array_equal(concurrent_3d.points, baseline_3d.points)
         assert np.array_equal(concurrent_3d.cells, baseline_3d.cells)
 
+    # finalize: explicit, one per mesher; only the last one closes Gmsh
     mesher_2d_a.finalize()
+    assert gmsh.is_initialized()  # three leases remain
     mesher_2d_b.finalize()
+    assert gmsh.is_initialized()  # two leases remain
     mesher_3d_a.finalize()
+    assert gmsh.is_initialized()  # one lease remains
     mesher_3d_b.finalize()
+    assert not gmsh.is_initialized()  # last finalize closes the shared session
 
 
 def test_deleting_delaunay_class_finalizes_gmsh() -> None:
