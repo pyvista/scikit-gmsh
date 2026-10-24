@@ -89,13 +89,21 @@ def test_concurrent_meshing_matches_single_run() -> None:
         return edge_source
 
     shell = [(0, 0), (1, 0), (0, 1)]
+    assert not gmsh.is_initialized()
+    # Each baseline is a true single run: a temporary mesher owns and releases
+    # the session within one statement (refcounted __del__), so every baseline
+    # starts from a fresh Gmsh session.
     baseline_2d = sg.Delaunay2D(shell=shell).mesh
+    assert not gmsh.is_initialized()  # single 2D run released the session
     baseline_3d = sg.Delaunay3D(cube_source()).mesh
+    assert not gmsh.is_initialized()  # single 3D run released the session
 
+    assert not gmsh.is_initialized()
     mesher_2d_a = sg.Delaunay2D(shell=shell)
     mesher_2d_b = sg.Delaunay2D(shell=shell)
     mesher_3d_a = sg.Delaunay3D(cube_source())
     mesher_3d_b = sg.Delaunay3D(cube_source())
+    assert gmsh.is_initialized()  # all four share one session
 
     concurrent_2d_a = mesher_2d_a.mesh
     concurrent_2d_b = mesher_2d_b.mesh
