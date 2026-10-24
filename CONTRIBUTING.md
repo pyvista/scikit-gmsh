@@ -453,8 +453,23 @@ changes any given branch is introducing before looking at the code.
 - `no-ci/`: for low impact activity that should NOT trigger the CI
   routines
 - `testing/`: improvements or changes to testing
-- `release/`: releases (see below)
+- `release/`: releases (no longer used - releases are automated, see
+  [Releases](#releases))
 - `breaking-change/`: Changes that break backward compatibility
+
+#### Commit Messages
+
+We follow [Conventional Commits](https://www.conventionalcommits.org/).
+Pull request titles must follow `type(scope?): description` using one of the
+following types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`,
+`build`, `ci`, `chore`, or `revert`. A CI check enforces this on every pull
+request, and the pull request title becomes the commit message when squashed
+on merge, so it directly drives our automated releases (see
+[Releases](#releases)):
+
+- `feat:` bumps the minor version
+- `fix:` bumps the patch version
+- `!` after the type or a `BREAKING CHANGE:` footer bumps the major version
 
 #### Testing
 
@@ -760,134 +775,17 @@ permission you may merge the branch. If you don't have write permission,
 the reviewer or someone else with write permission will merge the branch
 and delete the PR branch.
 
-Since it may be necessary to merge your branch with the current release
-branch (see below), please do not delete your branch if it is a `fix/`
-branch.
+### Releases
 
-### Branching Model
+Releases are automated with
+[Release Please](https://github.com/googleapis/release-please). You do not
+need to bump versions, write release notes, or create tags manually.
 
-This project has a branching model that enables rapid development of
-features without sacrificing stability, and closely follows the [Trunk
-Based Development](https://trunkbaseddevelopment.com/) approach.
-
-The main features of our branching model are:
-
-- The `main` branch is the main development branch. All features,
-  patches, and other branches should be merged here. While all PRs
-  should pass all applicable CI checks, this branch may be
-  functionally unstable as changes might have introduced unintended
-  side-effects or bugs that were not caught through unit testing.
-- There will be one or many `release/` branches based on minor
-  releases (for example `release/0.24`) which contain a stable version
-  of the code base that is also reflected on PyPI/. Hotfixes from
-  `fix/` branches should be merged both to main and to these branches.
-  When necessary to create a new patch release these release branches
-  will have their `scikit-gmsh/_version.py` updated and be tagged with
-  a semantic version (for example `v0.24.1`). This triggers CI to push
-  to PyPI, and allow us to rapidly push hotfixes for past versions of
-  `scikit-gmsh` without having to worry about untested features.
-- When a minor release candidate is ready, a new `release` branch will
-  be created from `main` with the next incremented minor version (for
-  example `release/0.25`), which will be thoroughly tested. When
-  deemed stable, the release branch will be tagged with the version
-  (`v0.25.0` in this case), and if necessary merged with main if any
-  changes were pushed to it. Feature development then continues on
-  `main` and any hotfixes will now be merged with this release. Older
-  release branches should not be deleted so they can be patched as
-  needed.
-
-#### Minor Release Steps
-
-Minor releases are feature and bug releases that improve the
-functionality and stability of `scikit-gmsh`. Before a minor release is
-created the following will occur:
-
-1.  Create a new branch from the `main` branch with name
-    `release/MAJOR.MINOR` (for example `release/0.25`).
-
-1.  Update the development version numbers in `scikit-gmsh/_version.py`
-    and commit it (for example `0, 26, 'dev0'`). Push the branch to
-    GitHub and create a new PR for this release that merges it to main.
-    Development to main should be limited at this point while effort is
-    focused on the release.
-
-1.  Locally run all tests as outlined in the [Testing Section](#testing)
-    and ensure all are passing.
-
-1.  Locally test and build the documentation with link checking to make
-    sure no links are outdated. Be sure to run `make clean` to ensure no
-    results are cached.
-
-    ```bash
-    cd doc
-    make clean  # deletes the sphinx-gallery cache
-    make doctest-modules
-    make html -b linkcheck
-    ```
-
-1.  After building the documentation, open the local build and examine
-    the examples gallery for any obvious issues.
-
-1.  It is now the responsibility of the `scikit-gmsh` community to
-    functionally test the new release. It is best to locally install
-    this branch and use it in production. Any bugs identified should
-    have their hotfixes pushed to this release branch.
-
-1.  When the branch is deemed as stable for public release, the PR will
-    be merged to main. After update the version number in
-    `release/MAJOR.MINOR` branch, the `release/MAJOR.MINOR` branch will
-    be tagged with a `vMAJOR.MINOR.0` release. The release branch will
-    not be deleted. Tag the release with:
-
-    ```bash
-    git tag v$(python -c "import skgmsh as skg; print(skg.__version__)")
-    ```
-
-1.  Please check again that the tag has been created correctly and push
-    the branch and tag.
-
-    ```bash
-    git push origin HEAD
-    git push origin v$(python -c "import skgmsh as skg; print(skg.__version__)")
-    ```
-
-1.  Create a list of all changes for the release. It is often helpful to
-    leverage [GitHub's compare
-    feature](https://github.com/pyvista/scikit-gmsh/compare) to see the
-    differences from the last tag and the `main` branch. Be sure to
-    acknowledge new contributors by their GitHub username and place
-    mentions where appropriate if a specific contributor is to thank for
-    a new feature.
-
-1.  Place your release notes from previous step in the description for
-    [the new release on
-    GitHub](https://github.com/pyvista/scikit-gmsh/releases/new).
-
-1.  Go grab a beer/coffee/water and wait for
-    [\@regro-cf-autotick-bot](https://github.com/regro/cf-scripts) to
-    open a pull request on the conda-forge [scikit-gmsh
-    feedstock](https://github.com/conda-forge/scikit-gmsh-feedstock).
-    Merge that pull request.
-
-1.  Announce the new release in the Discussions page and celebrate.
-
-#### Patch Release Steps
-
-Patch releases are for critical and important bugfixes that can not or
-should not wait until a minor release. The steps for a patch release
-
-1.  Push the necessary bugfix(es) to the applicable release branch. This
-    will generally be the latest release branch (for example
-    `release/0.25`).
-1.  Update `scikit-gmsh/_version.py` with the next patch increment (for
-    example `v0.25.1`), commit it, and open a PR that merge with the
-    release branch. This gives the `scikit-gmsh` community a chance to
-    validate and approve the bugfix release. Any additional hotfixes
-    should be outside of this PR.
-1.  When approved, merge with the release branch, but not `main` as
-    there is no reason to increment the version of the `main` branch.
-    Then create a tag from the release branch with the applicable
-    version number (see above for the correct steps).
-1.  If deemed necessary, create a release notes page. Also, open the PR
-    from conda and follow the directions in step 10 in the minor release
-    section.
+- After every merge to `main`, Release Please maintains an open release pull
+  request that collects conventional commits, updates the version in
+  `src/skgmsh/__init__.py`, and updates the changelog.
+- Merging the release pull request creates a Git tag and a GitHub release,
+  which triggers `publish-to-pypi.yml` to build and publish the package to
+  PyPI automatically.
+- To cut a release, simply merge the release pull request. To postpone a
+  release, leave it open - new commits keep accumulating in it.
