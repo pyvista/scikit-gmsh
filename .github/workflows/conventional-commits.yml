@@ -1,0 +1,28 @@
+name: Conventional Commits
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+
+permissions:
+  pull-requests: read
+
+jobs:
+  title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR title
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          pattern='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-zA-Z0-9_./-]+\))?!?: .+'
+          if ! echo "$TITLE" | grep -qE "$pattern"; then
+            echo "PR title does not follow Conventional Commits:" >&2
+            echo "  $TITLE" >&2
+            echo "Expected: type(scope)?: description" >&2
+            echo "See https://www.conventionalcommits.org/en/v1.0.0/" >&2
+            exit 1
+          fi
