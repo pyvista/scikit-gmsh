@@ -80,6 +80,41 @@ def test_four_delaunay_classes_share_single_gmsh_session() -> None:
     assert not gmsh.is_initialized()
 
 
+def test_concurrent_meshing_matches_single_run() -> None:
+    """Concurrent meshers produce meshes identical to single-run meshers."""
+
+    def cube_source() -> pv.PolyData:
+        edge_source = pv.Cube()
+        edge_source.merge(pv.PolyData(edge_source.points), merge_points=True, inplace=True)
+        return edge_source
+
+    shell = [(0, 0), (1, 0), (0, 1)]
+    baseline_2d = sg.Delaunay2D(shell=shell).mesh
+    baseline_3d = sg.Delaunay3D(cube_source()).mesh
+
+    mesher_2d_a = sg.Delaunay2D(shell=shell)
+    mesher_2d_b = sg.Delaunay2D(shell=shell)
+    mesher_3d_a = sg.Delaunay3D(cube_source())
+    mesher_3d_b = sg.Delaunay3D(cube_source())
+
+    concurrent_2d_a = mesher_2d_a.mesh
+    concurrent_2d_b = mesher_2d_b.mesh
+    concurrent_3d_a = mesher_3d_a.mesh
+    concurrent_3d_b = mesher_3d_b.mesh
+
+    for concurrent_2d in (concurrent_2d_a, concurrent_2d_b):
+        assert np.array_equal(concurrent_2d.points, baseline_2d.points)
+        assert np.array_equal(concurrent_2d.faces, baseline_2d.faces)
+    for concurrent_3d in (concurrent_3d_a, concurrent_3d_b):
+        assert np.array_equal(concurrent_3d.points, baseline_3d.points)
+        assert np.array_equal(concurrent_3d.cells, baseline_3d.cells)
+
+    mesher_2d_a.finalize()
+    mesher_2d_b.finalize()
+    mesher_3d_a.finalize()
+    mesher_3d_b.finalize()
+
+
 def test_deleting_delaunay_class_finalizes_gmsh() -> None:
     """Deleting the active mesher releases Gmsh and permits a replacement."""
     mesher = sg.Delaunay2D(shell=[(0, 0), (1, 0), (0, 1)])  # noqa: S604
