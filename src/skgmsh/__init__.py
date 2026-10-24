@@ -6,7 +6,7 @@ from __future__ import annotations
 from contextlib import suppress
 import datetime as dt
 from typing import TYPE_CHECKING
-from typing import Self
+from typing import ClassVar
 import weakref
 
 import gmsh
@@ -263,7 +263,7 @@ def frontal_delaunay_2d(  # noqa: C901, PLR0912
             coords = linearring.coords[:-1].copy()
             tags = []
             for size, coord in zip(sizes, coords, strict=False):
-                x, y, z = coord
+                x, y, z = np.append(coord, 0.0)[:3]
                 tags.append(gmsh.model.geo.add_point(x, y, z, size))
             curve_tags = []
             for i, _ in enumerate(tags):
@@ -368,31 +368,27 @@ def generate_mesh(dim: int, *, finalize: bool = True) -> pv.UnstructuredGrid:
 class _GmshMesher:
     """Manage the process-global Gmsh session used by class-based meshers."""
 
-    _instance: weakref.ReferenceType[_GmshMesher] | None = None
-
-    def __new__(cls, *_args: object, **_kwargs: object) -> Self:
-        active = _GmshMesher.active()
-        if active is not None:
-            msg = f"Cannot create {cls.__name__} while {type(active).__name__} is active. Call finalize() or delete the active mesher first."
-            raise RuntimeError(msg)
-
-        instance = super().__new__(cls)
-        instance._initialized = False
-        _GmshMesher._instance = weakref.ref(instance)
-        return instance
-
-    @classmethod
-    def active(cls) -> _GmshMesher | None:
-        """Return the class-based mesher that currently owns Gmsh."""
-        return cls._instance() if cls._instance is not None else None
+    _users: ClassVar[int] = 0
+    _instances: ClassVar[weakref.WeakSet[_GmshMesher]] = weakref.WeakSet()
 
     def _initialize_gmsh(self) -> None:
-        """Initialize the Gmsh session owned by this mesher."""
-        if gmsh.is_initialized():
-            msg = "Gmsh is already initialized outside this mesher. Finalize that session before creating a Delaunay class."
-            raise RuntimeError(msg)
-        gmsh.initialize()
+        """Open the shared Gmsh session or join the one other meshers use."""
+        if _GmshMesher._users == 0:
+            if gmsh.is_initialized():
+                msg = "Gmsh is already initialized outside this mesher. Finalize that session before creating a Delaunay class."
+                raise RuntimeError(msg)
+            gmsh.initialize()
+        _GmshMesher._users += 1
+        _GmshMesher._instances.add(self)
         self._initialized = True
+
+    @classmethod
+    def first_active(cls) -> _GmshMesher | None:
+        """Return a live mesher that holds the session, if any."""
+        for mesher in cls._instances:
+            if mesher._initialized:  # noqa: SLF001
+                return mesher
+        return None
 
     def _require_initialized(self) -> None:
         """Raise when this mesher no longer owns an active Gmsh session."""
@@ -401,16 +397,13 @@ class _GmshMesher:
             raise RuntimeError(msg)
 
     def finalize(self) -> None:
-        """Finalize Gmsh and release the active mesher slot."""
-        try:
-            if self._initialized and gmsh.is_initialized():
+        """Release this mesher's share of the Gmsh session."""
+        if self._initialized:
+            _GmshMesher._users -= 1
+            if _GmshMesher._users == 0:
                 gmsh.clear()
                 gmsh.finalize()
-        finally:
-            self._initialized = False
-            active = _GmshMesher.active()
-            if active is self:
-                _GmshMesher._instance = None
+        self._initialized = False
 
     def __del__(self) -> None:
         """Release Gmsh when the owning mesher is garbage-collected."""
@@ -420,7 +413,7 @@ class _GmshMesher:
 
 def _ensure_no_active_mesher() -> None:
     """Prevent standalone functions from clobbering a class-owned session."""
-    active = _GmshMesher.active()
+    active = _GmshMesher.first_active()
     if active is not None:
         msg = f"Cannot use a standalone meshing function while {type(active).__name__} is active. Call finalize() first."
         raise RuntimeError(msg)
@@ -459,9 +452,9 @@ class Delaunay2D(_GmshMesher):
     -----
     .. versionadded:: 0.2.0
 
-    Gmsh uses process-global state, so only one ``Delaunay2D`` or
-    ``Delaunay3D`` instance may be active at a time. Call ``finalize()`` or
-    delete the active instance before creating another class-based mesher.
+    Gmsh state: multiple ``Delaunay2D``/``Delaunay3D`` instances may be active
+    at the same time; they share one Gmsh session. Call ``finalize()`` (or
+    delete the instances) to release the shared session when done.
 
     """
 
@@ -558,9 +551,9 @@ class Delaunay3D(_GmshMesher):
     -----
     .. versionadded:: 0.2.0
 
-    Gmsh uses process-global state, so only one ``Delaunay2D`` or
-    ``Delaunay3D`` instance may be active at a time. Call ``finalize()`` or
-    delete the active instance before creating another class-based mesher.
+    Gmsh state: multiple ``Delaunay2D``/``Delaunay3D`` instances may be active
+    at the same time; they share one Gmsh session. Call ``finalize()`` (or
+    delete the instances) to release the shared session when done.
 
     """
 
